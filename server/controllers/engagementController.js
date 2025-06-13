@@ -1,5 +1,5 @@
-const EngagementData = require('../models/EngagementData');
-const Session = require('../models/Session');
+const EngagementData = require('../models/EngagementData.js');
+const Session = require('../models/Session.js');
 const axios = require('axios');
 
 

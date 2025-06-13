@@ -1,7 +1,7 @@
 // ye below models banane hai sepreate folder banana hai and then will route it with actull routes of the functions 
-const Session = require('../models/Session');
-const EngagementData = require('../models/EngagementData');
-const Intervention = require('../models/Intervention');
+const Session = require('../models/Session.js');
+const EngagementData = require('../models/EngagementData.js');
+const Intervention = require('../models/Intervention.js');
 const axios = require('axios');
 
 
