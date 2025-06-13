@@ -1,25 +1,103 @@
-require('dotenv').config();
 const express = require('express');
-const http = require('http');
+const dotenv = require('dotenv');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const http = require('http');
 const { Server } = require('socket.io');
-const { exec } = require('child_process'); 
-const fs = require('fs-extra');
+const connectDB = require('./db/db.js');
 
+// Load environment variables
+dotenv.config();
+
+// Import all models to register with Mongoose
+require('./models/User.js');
+require('./models/Session.js');
+require('./models/EngagementData.js');
+require('./models/Intervention.js');
+require('./models/Course.js');
+require('./models/LearningResource.js');
+require('./models/EngagementInsight.js');
+
+// Import routes
+//const userRoutes = require('./routes/userRoutes.js');
+const sessionRoutes = require('./routes/sessionRoutes.js');
+const engagementRoutes = require('./routes/engagementRoutes.js');
+const extensionRoutes = require('./routes/extensionRoutes.js');
+
+// Connect to database
+connectDB();
+
+// Initialize Express app
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*', 
+    origin: '*',
     methods: ['GET', 'POST']
   }
 });
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
+// Middleware
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+// Root route
+app.get('/', (req, res) => {
+  res.send('Learning Engagement API is running...');
+});
+
+// Routes
+//app.use('/api/auth', userRoutes);
+app.use('/api/sessions', sessionRoutes);
+app.use('/api/engagement', engagementRoutes);
+app.use('/api/extension', extensionRoutes);
+
+// Socket.io setup
+io.on('connection', (socket) => {
+  console.log('User connected:', socket.id);
+  
+  // Handle real-time engagement data
+  socket.on('engagement_update', (data) => {
+    socket.broadcast.emit('engagement_update', data);
+  });
+  
+  socket.on('intervention_response', (data) => {
+    console.log('Intervention response:', data);
+  });
+  
+  socket.on('disconnect', () => {
+    console.log('User disconnected:', socket.id);
+  });
+});
+
+// 404 handler
+app.use((req, res, next) => {
+  res.status(404).json({ success: false, message: 'Route not found' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    success: false,
+    message: 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
+});
+
+// Start server
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
-  console.log(` Server running on http://localhost:${PORT}`);
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+  console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+  console.error(err);
+  server.close(() => {
+    process.exit(1);
+  });
 });

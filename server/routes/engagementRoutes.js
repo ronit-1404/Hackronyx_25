@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const engagementController = require('../controllers/engagementController.js');
-const authMiddleware = require('../middleware/authMiddleware.js');
+const authMiddleware = require('../middleware/auth.js');
 
 // All engagement routes require authentication
 router.use(authMiddleware);
