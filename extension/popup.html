@@ -1,0 +1,71 @@
+<!-- filepath: c:\Users\HP\Desktop\demo\extension\popup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Engagement Assistant</title>
+</head>
+<body>
+  <div class="container">
+    <h2>Engagement Monitor</h2>
+    
+    <div id="loginSection" style="display:none;">
+      <div class="login-container">
+        <h3>Login to track engagement</h3>
+        <input type="email" id="email" placeholder="Email" />
+        <input type="password" id="password" placeholder="Password" />
+        <button id="loginBtn">Login</button>
+        <p><a href="http://localhost:5000/register" target="_blank">Create account</a></p>
+      </div>
+    </div>
+    
+    <div id="trackingSection" style="display:none;">
+      <div class="status inactive" id="statusIndicator">Not tracking</div>
+      
+      <div class="engagement-metric">
+        <label>Current engagement:</label>
+        <div class="engagement-gauge">
+          <div class="engagement-value" id="engagementValue" style="width: 0%;"></div>
+        </div>
+        <span id="engagementPercent">0%</span>
+      </div>
+      
+      <div class="settings-section">
+        <h3>Settings</h3>
+        <label>
+          <input type="checkbox" id="webcam" /> 
+          Enable webcam analysis
+        </label>
+        <label>
+          <input type="checkbox" id="audio" /> 
+          Enable audio analysis
+        </label>
+        <label>
+          <input type="checkbox" id="activity" checked disabled /> 
+          Activity tracking (required)
+        </label>
+        
+        <h4>Intervention Frequency</h4>
+        <select id="interventionFreq">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+      
+      <div class="button-group">
+        <button id="startTracking">Start Tracking</button>
+        <button id="stopTracking" disabled>Stop Tracking</button>
+      </div>
+      
+      <p><a href="http://localhost:5000/dashboard" target="_blank">View Dashboard</a></p>
+    </div>
+  </div>
+  <script src="scripts/api.js"></script>
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/engagement.js"></script>
+  <script src="scripts/intervention.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

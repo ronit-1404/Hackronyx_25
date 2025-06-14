@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #engagement-overlay {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 9999999;
+    }
+    
+    .overlay-container {
+      background-color: #1e1e2f;
+      border-radius: 8px;
+      padding: 24px;
+      max-width: 500px;
+      width: 80%;
+      color: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+    
+    .overlay-header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+    
+    .overlay-message {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    
+    .overlay-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    
+    .overlay-btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .overlay-btn:hover {
+      background-color: #2563eb;
+    }
+    
+    .overlay-btn.secondary {
+      background-color: transparent;
+      border: 1px solid #94a3b8;
+      color: #94a3b8;
+    }
+    
+    .overlay-btn.secondary:hover {
+      background-color: rgba(148, 163, 184, 0.1);
+    }
+    
+    .timer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .timer-circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: conic-gradient(#3b82f6 0%, #1e293b 0%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .timer-inner {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background-color: #1e1e2f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .timer-text {
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .resource-preview {
+      margin-top: 16px;
+      margin-bottom: 24px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .resource-preview img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="engagement-overlay" style="display: none;">
+    <div class="overlay-container">
+      <div class="overlay-header" id="intervention-title">Time for a Break</div>
+      
+      <div class="overlay-message" id="intervention-message">
+        You've been studying for a while. Taking a short break will help you maintain focus and improve learning retention.
+      </div>
+      
+      <div class="timer" id="timer-container" style="display: none;">
+        <div class="timer-circle" id="timer-circle">
+          <div class="timer-inner">
+            <div class="timer-text" id="timer-text">5:00</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="resource-preview" id="resource-preview" style="display: none;"></div>
+      
+      <div class="overlay-buttons">
+        <button class="overlay-btn secondary" id="intervention-dismiss">Dismiss</button>
+        <button class="overlay-btn" id="intervention-action">Take a Break</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

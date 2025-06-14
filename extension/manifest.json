@@ -4,19 +4,18 @@
   "version": "1.0.0",
   "description": "Track and improve your engagement while learning online",
   "permissions": [
-    "activeTab",
     "storage",
-    "tabs",
+    "activeTab",
     "scripting",
     "webNavigation",
-    "webRequest"
+    "tabs"
   ],
   "host_permissions": [
     "http://localhost:5000/*",
+    "*://*.pw.live/*",
     "*://*.youtube.com/*", 
     "*://*.coursera.org/*",
-    "*://*.udemy.com/*",
-    "*//*.pw.live/*"
+    "*://*.udemy.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -43,7 +42,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["overlay.html", "styles.css"],
+      "resources": ["overlay.html", "style.css"],
       "matches": ["<all_urls>"]
     }
   ]
