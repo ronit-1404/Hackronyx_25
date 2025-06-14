@@ -417,3 +417,37 @@ function sampleEngagementData(data, targetPoints) {
   
   return result;
 }
+
+//added functionality for showing the data of user in the form of graph or report 
+//functionality for the dashboard
+exports.getEngagementAverages = async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+
+    const data = await EngagementData.find({ sessionId });
+
+    if (!data.length) {
+      return res.status(200).json({ success: true, averages: null });
+    }
+
+    const totalEngagement = data.reduce((sum, d) => sum + d.engagementScore, 0);
+    const avgEngagement = totalEngagement / data.length;
+
+    const emotionCounts = {};
+    data.forEach(d => {
+      const emotion = d.emotionData?.primary || 'neutral';
+      emotionCounts[emotion] = (emotionCounts[emotion] || 0) + 1;
+    });
+
+    res.status(200).json({
+      success: true,
+      averages: {
+        engagement: avgEngagement,
+        emotionDistribution: emotionCounts
+      }
+    });
+  } catch (error) {
+    console.error('Get averages error:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+};
