@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Engagement Detector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 300px;
+      padding: 15px;
+      margin: 0;
+    }
+    
+    h1 {
+      font-size: 18px;
+      margin-top: 0;
+    }
+    
+    .engagement-section {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #f5f5f5;
+    }
+    
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    
+    .metric-label {
+      font-weight: bold;
+    }
+    
+    .engagement-high {
+      color: #2e7d32;
+    }
+    
+    .engagement-medium {
+      color: #ff9800;
+    }
+    
+    .engagement-low {
+      color: #d32f2f;
+    }
+    
+    .score-bar {
+      height: 10px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      margin-top: 5px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .score-value {
+      height: 100%;
+      background-color: #4caf50;
+      border-radius: 5px;
+      transition: width 0.5s;
+    }
+    
+    .factors {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #666;
+    }
+    
+    .no-data {
+      color: #999;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>User Engagement Detector</h1>
+  
+  <div id="loading">
+    Loading engagement data...
+  </div>
+  
+  <div id="no-data" style="display:none;" class="no-data">
+    No engagement data available for this tab.
+  </div>
+  
+  <div id="engagement-data" style="display:none;">
+    <div class="engagement-section">
+      <div class="metric">
+        <span class="metric-label">Engagement Score:</span>
+        <span id="engagement-score">--</span>
+      </div>
+      <div class="score-bar">
+        <div id="score-value" class="score-value" style="width:0%"></div>
+      </div>
+      
+      <div class="metric">
+        <span class="metric-label">Engagement State:</span>
+        <span id="engagement-state">--</span>
+      </div>
+      
+      <div class="metric">
+        <span class="metric-label">Confidence:</span>
+        <span id="confidence">--</span>
+      </div>
+      
+      <div class="factors">
+        <strong>Factors:</strong>
+        <ul id="factors-list">
+          <!-- Factors will be inserted here -->
+        </ul>
+      </div>
+    </div>
+    
+    <div class="engagement-section">
+      <h3>Cursor Metrics</h3>
+      <div class="metric">
+        <span class="metric-label">Activity Level:</span>
+        <span id="activity-level">--</span>
+      </div>
+      
+      <div class="metric">
+        <span class="metric-label">Focus Quality:</span>
+        <span id="focus-quality">--</span>
+      </div>
+      
+      <div class="metric">
+        <span class="metric-label">Attention State:</span>
+        <span id="attention-state">--</span>
+      </div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
