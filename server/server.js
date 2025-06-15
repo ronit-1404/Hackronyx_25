@@ -22,7 +22,7 @@ require('./models/EngagementInsight.js');
 const sessionRoutes = require('./routes/sessionRoutes.js');
 const engagementRoutes = require('./routes/engagementRoutes.js');
 const extensionRoutes = require('./routes/extensionRoutes.js');
-
+const authRoutes = require('./routes/authRoutes.js');
 // Connect to database
 connectDB();
 
@@ -52,10 +52,21 @@ app.get('/', (req, res) => {
 
 // Routes
 //app.use('/api/auth', userRoutes);
+
+app.use(express.static('public'));
+
+// Add these routes before your API routes
+app.get('/register', (req, res) => {
+  res.sendFile(__dirname + '/public/register.html');
+});
+
+app.get('/dashboard', (req, res) => {
+  res.sendFile(__dirname + '/public/dashboard.html');
+});
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/engagement', engagementRoutes);
 app.use('/api/extension', extensionRoutes);
-
+app.use('/api/auth', authRoutes);
 // Socket.io setup
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);

@@ -1,4 +1,4 @@
-// Wait for DOM to be ready
+
 document.addEventListener('DOMContentLoaded', async function() {
   // Get UI elements
   const startBtn = document.getElementById('startTracking');
