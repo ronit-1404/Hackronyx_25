@@ -3,15 +3,22 @@ const router = express.Router();
 const sessionController = require('../controllers/sessionController.js');
 const authMiddleware = require('../middleware/auth.js');
 
-// All session routes require authentication
+// Apply auth middleware to ALL routes
 router.use(authMiddleware);
 
-// Session management
-router.post('/start', sessionController.startSession);
-router.post('/:sessionId/end', sessionController.endSession);
-router.get('/active', sessionController.getActiveSession);
-router.get('/:sessionId', sessionController.getSessionDetails);
+// Get user sessions with pagination and filtering
 router.get('/', sessionController.getUserSessions);
-router.get('/stats/summary', sessionController.getSessionStats);
+
+// Start a new session
+router.post('/start', sessionController.startSession);
+
+// End a session
+router.post('/:sessionId/end', sessionController.endSession);
+
+// Get session details
+router.get('/:sessionId', sessionController.getSessionDetails);
+
+// Get session status
+// router.get('/:sessionId/status', sessionController.checkSessionStatus);
 
 module.exports = router;

@@ -10,17 +10,21 @@ class AuthManager {
    */
   async checkAuthStatus() {
     try {
+      console.log('Checking authentication status');
       const token = await this.api.getToken();
       
       if (!token) {
+        console.log('No token found');
         return false;
       }
       
       // Verify token by getting user profile
+      console.log('Token found, verifying with server');
       const user = await this.api.getUserProfile();
       this.user = user;
+      console.log('User profile received:', user ? 'Yes' : 'No');
       
-      return true;
+      return !!user;
     } catch (error) {
       console.error('Auth check failed:', error);
       // Invalid token, clear it
@@ -37,8 +41,11 @@ class AuthManager {
    */
   async login(email, password) {
     try {
+      console.log('Login attempt:', email);
       this.user = await this.api.login(email, password);
-      return !!this.user;
+      const success = !!this.user;
+      console.log('Login success:', success);
+      return success;
     } catch (error) {
       console.error('Login failed:', error);
       return false;

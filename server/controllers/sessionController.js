@@ -7,8 +7,17 @@ const axios = require('axios');
 
 exports.startSession = async (req, res) => {
   try {
+    console.log('Start session request. User ID:', req.userId);
+    if (!req.userId) {
+      console.error('Session creation failed: No user ID found in request');
+      return res.status(401).json({
+        success: false,
+        message: 'Authentication required'
+      });
+    }
     const { courseUrl, courseName, platform, deviceInfo } = req.body;
-    const userId = req.user.userId;
+    //const userId = req.user.userId;
+    const userId = req.userId;
 
     const activeSession = await Session.findOne({ 
       userId, 
@@ -210,67 +219,70 @@ exports.getSessionDetails = async (req, res) => {
 
 exports.getUserSessions = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    // Debug logging
+    console.log('Get user sessions request. Headers:', req.headers);
+    console.log('User ID from request:', req.userId);
     
-    // Pagination
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * limit;
-
-    // Filtering
-    const filter = { userId };
-    if (req.query.platform) {
-      filter.platform = req.query.platform;
+    // Validate userId exists
+    if (!req.userId) {
+      console.error('User ID missing in request');
+      return res.status(401).json({
+        success: false,
+        message: 'Authentication required'
+      });
     }
-    if (req.query.isActive === 'true') {
-      filter.isActive = true;
-    } else if (req.query.isActive === 'false') {
-      filter.isActive = false;
+    
+    // Get query parameters with defaults
+    const { 
+      limit = 10, 
+      page = 1,
+      sortBy = 'startTime',
+      sortDir = 'desc',
+      status
+    } = req.query;
+    
+    // Build query
+    const query = { user: req.userId };
+    
+    // Filter by status if provided
+    if (status === 'active') {
+      query.active = true;
+    } else if (status === 'completed') {
+      query.active = false;
     }
-
-    // Date range
-    if (req.query.startDate) {
-      filter.startTime = { $gte: new Date(req.query.startDate) };
-    }
-    if (req.query.endDate) {
-      filter.endTime = { ...filter.endTime, $lte: new Date(req.query.endDate) };
-    }
-
-    // Get sessions
-    const sessions = await Session.find(filter)
-      .sort({ startTime: -1 })
+    
+    // Calculate pagination
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+    
+    // Determine sort direction
+    const sortDirection = sortDir === 'asc' ? 1 : -1;
+    
+    // Query sessions
+    const sessions = await Session.find(query)
+      .sort({ [sortBy]: sortDirection })
       .skip(skip)
-      .limit(limit);
-
-    // Get total count
-    const totalCount = await Session.countDocuments(filter);
-
-    res.status(200).json({
+      .limit(parseInt(limit))
+      .lean(); // Convert to plain JS objects for better performance
+    
+    // Get total count for pagination
+    const totalSessions = await Session.countDocuments(query);
+    
+    return res.json({
       success: true,
-      sessions: sessions.map(session => ({
-        id: session._id,
-        startTime: session.startTime,
-        endTime: session.endTime,
-        duration: session.duration,
-        courseUrl: session.courseUrl,
-        courseName: session.courseName,
-        platform: session.platform,
-        overallEngagement: session.overallEngagement,
-        isActive: session.isActive
-      })),
-      pagination: {
-        total: totalCount,
-        page,
-        limit,
-        pages: Math.ceil(totalCount / limit)
-      }
+      count: sessions.length,
+      total: totalSessions,
+      page: parseInt(page),
+      totalPages: Math.ceil(totalSessions / parseInt(limit)),
+      sessions: sessions
     });
   } catch (error) {
     console.error('Get user sessions error:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    return res.status(500).json({
+      success: false,
+      message: 'Server error'
+    });
   }
 };
-
 /**
  * Get active session
  */

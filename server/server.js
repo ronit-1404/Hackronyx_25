@@ -4,6 +4,7 @@ const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
 const connectDB = require('./db/db.js');
+const path = require('path');
 
 // Load environment variables
 dotenv.config();
@@ -61,8 +62,17 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/dashboard', (req, res) => {
-  res.sendFile(__dirname + '/public/dashboard.html');
+  res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
+
+// Add this route before your API routes
+app.get('/token-bridge', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'token-bridge.html'));
+});
+
+// Serve static files for the bridge
+app.use('/scripts', express.static(path.join(__dirname, 'public/scripts')));
+
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/engagement', engagementRoutes);
 app.use('/api/extension', extensionRoutes);

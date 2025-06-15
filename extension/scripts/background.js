@@ -77,14 +77,37 @@ async function handleMessage(message, sender) {
       }
       return result;
       
+   // Update the STOP_TRACKING case in handleMessage function
+
     case 'STOP_TRACKING':
-      const stopResult = await engagementTracker.stopTracking();
-      if (stopResult.success) {
-        // Stop intervention checking
+      try {
+        // Add extra logging
+        console.log('Processing STOP_TRACKING message');
+        console.log('Current session state:', engagementTracker.session);
+        
+        const stopResult = await engagementTracker.stopTracking();
+        
+        // Always stop the intervention checker regardless of API success
         interventionManager.stopChecking();
         activeSession = null;
+        
+        // Store the cleared session state
+        await chrome.storage.local.remove('activeSession');
+        
+        console.log('Stop tracking result:', stopResult);
+        return stopResult;
+      } catch (error) {
+        console.error('Error in STOP_TRACKING handler:', error);
+        // Clean up local state even if there's an error
+        interventionManager.stopChecking();
+        activeSession = null;
+        await chrome.storage.local.remove('activeSession');
+        
+        return {
+          success: false,
+          error: error.message || 'Error stopping tracking'
+        };
       }
-      return stopResult;
       
     case 'GET_TRACKING_STATUS':
       return { 

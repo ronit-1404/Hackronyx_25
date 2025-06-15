@@ -1,32 +1,39 @@
 const jwt = require('jsonwebtoken');
 
-const authMiddleware  = (req, res, next) => {
+module.exports = async (req, res, next) => {
   try {
-    //const token = req.header('token');
-
-    //if below did'nt work use the above one
-    const {token} = req.headers    
+    // Get token from header or query parameters
+    const token = req.header('token') || req.query.token;
+    
     if (!token) {
+      console.log('No token provided in request');
       return res.status(401).json({ 
         success: false, 
-        message: 'No authentication token, authorization denied' 
+        message: 'No authentication token, access denied' 
       });
     }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-    // Attach the user ID from the token to the request body
-    //req.body.userId = decodedToken.id;
-
-
-    req.user = decoded;
-    next();
-  } catch (error) {
-    res.status(401).json({ 
+    try {
+      // Verify token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      
+      // Set userId in request object
+      req.userId = decoded.userId;
+      
+      console.log(`Authentication successful for user: ${req.userId}`);
+      next();
+    } catch (err) {
+      console.error('Token verification failed:', err.message);
+      return res.status(401).json({ 
+        success: false, 
+        message: 'Token is not valid' 
+      });
+    }
+  } catch (err) {
+    console.error('Auth middleware error:', err);
+    res.status(500).json({ 
       success: false, 
-      message: 'Token is not valid' 
+      message: 'Server error during authentication' 
     });
   }
 };
-
-module.exports = authMiddleware;

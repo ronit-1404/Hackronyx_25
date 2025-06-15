@@ -9,24 +9,42 @@ class EngagementAPI {
    * Set the auth token for API requests
    * @param {string} token JWT auth token
    */
-  setToken(token) {
-    this.token = token;
-    chrome.storage.local.set({ 'auth_token': token });
+ // Add this method to share tokens between extension and webpage contexts
+async setToken(token) {
+  this.token = token;
+  
+  // Store in chrome.storage for extension use
+  await chrome.storage.local.set({ auth_token: token });
+  
+  // Also try to store in localStorage for dashboard access
+  try {
+    localStorage.setItem('auth_token', token);
+    console.log('Token stored in localStorage for dashboard');
+  } catch (error) {
+    // This might fail in background or service worker context
+    console.log('Could not store in localStorage - likely in extension context');
   }
+}
 
-  /**
-   * Get stored auth token
-   * @returns {Promise<string>} Stored token or null
-   */
-  async getToken() {
-    if (this.token) {
-      return this.token;
-    }
-    
-    const data = await chrome.storage.local.get('auth_token');
-    this.token = data.auth_token || null;
-    return this.token;
+// Add a method to get stored token from localStorage or chrome.storage
+async getStoredToken() {
+  try {
+    // Try localStorage first (for web pages)
+    const localToken = localStorage.getItem('auth_token');
+    if (localToken) return localToken;
+  } catch (e) {
+    // Ignore - might be in extension context
   }
+  
+  // Fall back to chrome.storage (for extension)
+  try {
+    const data = await chrome.storage.local.get('auth_token');
+    return data.auth_token || null;
+  } catch (e) {
+    console.error('Error getting token from storage:', e);
+    return null;
+  }
+}
 
   /**
    * Clear stored auth token
@@ -42,37 +60,40 @@ class EngagementAPI {
    * @param {Object} options - Fetch options
    * @returns {Promise<Object>} Response data
    */
-  async request(endpoint, options = {}) {
-    const token = await this.getToken();
-    
-    const defaultOptions = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    
-    if (token) {
-      defaultOptions.headers.token = token;
+ async request(endpoint, options = {}) {
+  console.log(`API Request: ${endpoint}`, options);
+  const token = await this.getToken();
+  
+  const defaultOptions = {
+    headers: {
+      'Content-Type': 'application/json'
     }
-    
-    const fetchOptions = {
-      ...defaultOptions,
-      ...options,
-      headers: {
-        ...defaultOptions.headers,
-        ...options.headers
-      }
-    };
-    
-    const response = await fetch(`${this.baseUrl}${endpoint}`, fetchOptions);
-    const data = await response.json();
-    
-    if (!response.ok) {
-      throw new Error(data.message || 'API request failed');
-    }
-    
-    return data;
+  };
+  
+  if (token) {
+    defaultOptions.headers.token = token;
   }
+  
+  const fetchOptions = {
+    ...defaultOptions,
+    ...options,
+    headers: {
+      ...defaultOptions.headers,
+      ...options.headers
+    }
+  };
+  
+  const response = await fetch(`${this.baseUrl}${endpoint}`, fetchOptions);
+  const data = await response.json();
+  
+  console.log(`API Response for ${endpoint}:`, data); // FIXED: Moved after data is defined
+  
+  if (!response.ok) {
+    throw new Error(data.message || 'API request failed');
+  }
+  
+  return data;
+}
 
   /**
    * Make a request to the AI service
@@ -110,18 +131,26 @@ class EngagementAPI {
    * @returns {Promise<Object>} User data
    */
   async login(email, password) {
+  try {
+    console.log('Login attempt for:', email);
     const data = await this.request('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password })
     });
     
+    console.log('Login response:', data);
+    
     if (data.success && data.token) {
-      this.setToken(data.token);
+      await this.setToken(data.token);
       return data.user;
     }
     
     return null;
+  } catch (error) {
+    console.error('Login error details:', error);
+    throw error;
   }
+}
 
   /**
    * Get user profile
@@ -131,6 +160,15 @@ class EngagementAPI {
     const data = await this.request('/auth/profile');
     return data.user;
   }
+
+
+  // Add this method
+// Add this method
+  async getToken() {
+    if (this.token) return this.token;
+    return await this.getStoredToken();
+  }
+
 
   /**
    * Start a new learning session

@@ -38,7 +38,7 @@ exports.register = async (req,res) => {
         success: true,
         token,
         user: {
-            id: user._id,
+            _id: user._id,
             name: user.name,
             email: user.email,
             preferences: user.preferences
@@ -80,11 +80,12 @@ exports.login = async (req, res) => {
       { expiresIn: '7d' }
     );
 
+    // FIXED: Changed id to _id to match what the extension expects
     res.status(200).json({
-        success: true,
+      success: true,
       token,
       user: {
-        id: user._id,
+        _id: user._id,  // Changed from id to _id
         name: user.name,
         email: user.email,
         preferences: user.preferences
@@ -98,16 +99,18 @@ exports.login = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId).select('-password');
+    // CORRECT: Using req.userId as set by auth middleware
+    const user = await User.findById(req.userId).select('-password');
     
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
 
+    // FIXED: Change id to _id for consistency
     res.status(200).json({
       success: true,
       user: {
-        id: user._id,
+        _id: user._id,
         name: user.name,
         email: user.email,
         preferences: user.preferences,
@@ -149,7 +152,7 @@ exports.updatePreferences = async (req, res) => {
     }
 
     const user = await User.findByIdAndUpdate(
-      req.user.userId,
+      req.userId,
       { $set: { preferences: { ...req.body.preferences } } },
       { new: true }
     ).select('-password');
