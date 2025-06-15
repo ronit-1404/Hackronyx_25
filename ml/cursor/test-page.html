@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Tracker Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        #cursor-data {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+        
+        #visualization {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            position: relative;
+            background-color: #f9f9f9;
+            overflow: hidden;
+        }
+        
+        .cursor-trail {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(66, 133, 244, 0.7);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        #test-area {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            justify-content: space-between;
+        }
+        
+        .test-card {
+            width: 48%;
+            height: 150px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .test-card:hover {
+            background-color: #e0e0e0;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        #metrics {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+        }
+        
+        .metric {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .metric-label {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .testing-controls {
+            margin-top: 30px;
+            padding: 15px;
+            background: #e9f5ff;
+            border-radius: 5px;
+            border: 1px solid #c0e0ff;
+        }
+        
+        .button {
+            padding: 8px 15px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .button:hover {
+            background-color: #2b6ad9;
+        }
+        
+        .button.danger {
+            background-color: #ea4335;
+        }
+        
+        .button.danger:hover {
+            background-color: #d33426;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .status-active {
+            background-color: #4CAF50;
+        }
+        
+        .status-inactive {
+            background-color: #F44336;
+        }
+        
+        .status-unknown {
+            background-color: #FFC107;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Cursor Tracker Test Page</h1>
+        
+        <div class="testing-controls">
+            <h3>Extension Testing Controls</h3>
+            <p>Use this page to test if your cursor tracking extension is installed and working correctly.</p>
+            
+            <div style="margin-bottom: 10px;">
+                <span id="extension-status-label">Extension Status: </span>
+                <span class="status-indicator status-unknown" id="extension-status"></span>
+                <span id="extension-status-text">Checking...</span>
+            </div>
+            
+            <button id="check-extension" class="button">Check Extension</button>
+            <button id="run-automated-tests" class="button">Run Automated Tests</button>
+            <button id="load-tester" class="button">Load Extension Tester</button>
+        </div>
+        
+        <p>Move your mouse around this page to test the cursor tracking functionality. The extension should be tracking your cursor movements and calculating metrics.</p>
+        
+        <div id="metrics">
+            <div class="metric">
+                <div class="metric-label">Speed</div>
+                <div class="metric-value" id="speed-value">0</div>
+                <div class="metric-label">px/s</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Idle Time</div>
+                <div class="metric-value" id="idle-value">0</div>
+                <div class="metric-label">seconds</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Jitter Score</div>
+                <div class="metric-value" id="jitter-value">0</div>
+                <div class="metric-label">arbitrary units</div>
+            </div>
+        </div>
+        
+        <div id="visualization">
+            <!-- Cursor trail will be visualized here -->
+        </div>
+        
+        <div id="test-area">
+            <div class="test-card">Hover over me slowly</div>
+            <div class="test-card">Click me repeatedly</div>
+            <div class="test-card">Move in circles here</div>
+            <div class="test-card">Make zigzag patterns here</div>
+        </div>
+        
+        <h2>Raw Cursor Data:</h2>
+        <div id="cursor-data">Waiting for cursor data...</div>
+    </div>
+
+    <script>
+        // Counter for message received
+        let messagesReceived = 0;
+        let lastMessageTime = 0;
+        let extensionActive = false;
+        
+        // Listen for messages from the cursor tracker
+        window.addEventListener('message', function(event) {
+            // Verify the message is from our extension
+            if (event.data && event.data.type === 'CURSOR_DATA') {
+                // Update the display with the received data
+                const data = event.data;
+                document.getElementById('cursor-data').textContent = JSON.stringify(data, null, 2);
+                
+                // Update metrics
+                document.getElementById('speed-value').textContent = data.metrics.speed.toFixed(1);
+                document.getElementById('idle-value').textContent = (data.metrics.idle.duration / 1000).toFixed(1);
+                document.getElementById('jitter-value').textContent = data.metrics.jitter.toFixed(2);
+                
+                // Add a point to the visualization
+                addTrailPoint(data.position.x, data.position.y);
+                
+                // Update extension status
+                messagesReceived++;
+                lastMessageTime = Date.now();
+                updateExtensionStatus(true);
+            }
+        });
+        
+        // Check if the extension is active periodically
+        setInterval(() => {
+            if (lastMessageTime > 0 && Date.now() - lastMessageTime > 5000) {
+                // No message received in last 5 seconds
+                updateExtensionStatus(false);
+            }
+        }, 5000);
+        
+        function updateExtensionStatus(active) {
+            const statusIndicator = document.getElementById('extension-status');
+            const statusText = document.getElementById('extension-status-text');
+            
+            extensionActive = active;
+            
+            if (active) {
+                statusIndicator.className = 'status-indicator status-active';
+                statusText.textContent = 'Active (messages received: ' + messagesReceived + ')';
+            } else {
+                if (lastMessageTime > 0) {
+                    statusIndicator.className = 'status-indicator status-inactive';
+                    statusText.textContent = 'Inactive (no messages recently)';
+                } else {
+                    statusIndicator.className = 'status-indicator status-unknown';
+                    statusText.textContent = 'Not detected';
+                }
+            }
+        }
+        
+        // Create a trail effect for cursor visualization
+        function addTrailPoint(x, y) {
+            const viz = document.getElementById('visualization');
+            const point = document.createElement('div');
+            point.className = 'cursor-trail';
+            
+            // Convert coordinates to be relative to the visualization div
+            const rect = viz.getBoundingClientRect();
+            const relX = x - rect.left;
+            const relY = y - rect.top;
+            
+            // Only add the point if it's inside the visualization
+            if (relX >= 0 && relX <= rect.width && relY >= 0 && relY <= rect.height) {
+                point.style.left = relX + 'px';
+                point.style.top = relY + 'px';
+                viz.appendChild(point);
+                
+                // Fade out and remove the point after a delay
+                setTimeout(() => {
+                    point.style.opacity = '0';
+                    setTimeout(() => {
+                        if (point.parentNode === viz) {
+                            viz.removeChild(point);
+                        }
+                    }, 500);
+                }, 1000);
+            }
+        }
+        
+        // Clean old points periodically
+        setInterval(() => {
+            const viz = document.getElementById('visualization');
+            const points = viz.querySelectorAll('.cursor-trail');
+            if (points.length > 100) {  // Keep the DOM from getting too cluttered
+                for (let i = 0; i < points.length - 50; i++) {
+                    if (points[i].parentNode === viz) {
+                        viz.removeChild(points[i]);
+                    }
+                }
+            }
+        }, 5000);
+        
+        // Check if extension test functions are available
+        document.getElementById('check-extension').addEventListener('click', function() {
+            if (window.__cursorTrackerTest) {
+                console.log('Cursor tracker test functions found:', window.__cursorTrackerTest);
+                alert('Extension detected! Cursor tracker is active.');
+                updateExtensionStatus(true);
+            } else {
+                console.log('Cursor tracker test functions not found');
+                alert('Extension not detected or not properly initialized.');
+                updateExtensionStatus(false);
+            }
+        });
+        
+        // Run automated tests
+        document.getElementById('run-automated-tests').addEventListener('click', function() {
+            if (window.__cursorTrackerTest) {
+                // Force a trigger report
+                window.__cursorTrackerTest.triggerTestReport();
+                
+                // Show stats
+                const stats = window.__cursorTrackerTest.getStats();
+                console.log('Cursor tracker stats:', stats);
+                
+                alert(`Extension is working! 
+                  Uptime: ${stats.uptime.seconds}s
+                  Movements tracked: ${stats.movements.total}
+                  Reports sent: ${stats.reports}`);
+            } else {
+                alert('Cannot run tests - extension not detected.');
+            }
+        });
+        
+        // Load full extension tester
+        document.getElementById('load-tester').addEventListener('click', function() {
+            const script = document.createElement('script');
+            script.src = 'extension-tester.js';
+            script.onload = function() {
+                alert('Extension tester loaded successfully!');
+            };
+            script.onerror = function() {
+                alert('Failed to load extension tester. Make sure extension-tester.js exists in the same directory.');
+            };
+            document.head.appendChild(script);
+        });
+        
+        // Check initial status after a delay
+        setTimeout(() => {
+            const statusText = document.getElementById('extension-status-text');
+            if (messagesReceived === 0) {
+                statusText.textContent = 'No messages received - extension might not be active';
+            }
+        }, 3000);
+    </script>
+</body>
+</html>

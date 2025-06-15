@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "User Engagement Detector",
+  "description": "Detects user engagement through cursor movements, audio, and video cues",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["cursor-tracker.js", "engagement-detector.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
