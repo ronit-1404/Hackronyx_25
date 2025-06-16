@@ -5,7 +5,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const connectDB = require('./db/db.js');
 const path = require('path');
-
+const { createProxyMiddleware } = require('http-proxy-middleware');
 // Load environment variables
 dotenv.config();
 
@@ -44,6 +44,13 @@ app.use(cors({
   origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+
+// Proxy for ML service
+app.use('/api/analyze', createProxyMiddleware({
+  target: 'http://localhost:5001',
+  changeOrigin: true
 }));
 
 // Root route
