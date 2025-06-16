@@ -79,7 +79,7 @@ exports.startSession = async (req, res) => {
 exports.endSession = async (req, res) => {
   try {
     const { sessionId } = req.params;
-    const userId = req.user.userId;
+    const userId = req.userId;
 
     // Find the session
     const session = await Session.findOne({ 
@@ -242,7 +242,7 @@ exports.getUserSessions = async (req, res) => {
     } = req.query;
     
     // Build query
-    const query = { user: req.userId };
+    const query = { userId: req.userId };
     
     // Filter by status if provided
     if (status === 'active') {
@@ -288,7 +288,7 @@ exports.getUserSessions = async (req, res) => {
  */
 exports.getActiveSession = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.userId;
 
     // Find active session
     const activeSession = await Session.findOne({ 
@@ -323,7 +323,7 @@ exports.getActiveSession = async (req, res) => {
 
 exports.getSessionStats = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.userId;
     
     // Filter by date range
     const filter = { userId };
@@ -396,5 +396,63 @@ exports.getSessionStats = async (req, res) => {
   } catch (error) {
     console.error('Get session stats error:', error);
     res.status(500).json({ success: false, message: 'Server error' });
+  }
+};
+
+
+// Add this function to your existing file
+exports.checkSessionStatus = async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+    
+    // Validate session ID
+    if (!sessionId || sessionId === 'undefined') {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid session ID',
+        active: false
+      });
+    }
+    
+    // Find the session
+    const session = await Session.findById(sessionId);
+    
+    if (!session) {
+      return res.json({
+        success: true,
+        active: false,
+        message: 'Session not found'
+      });
+    }
+    
+    // Check if session belongs to user
+    if (session.userId.toString() !== req.userId) {
+      return res.status(403).json({
+        success: false,
+        message: 'Not authorized to access this session',
+        active: false
+      });
+    }
+    
+    // Return session status
+    return res.json({
+      success: true,
+      active: session.isActive,
+      session: {
+        id: session._id,
+        startTime: session.startTime,
+        endTime: session.endTime,
+        isActive: session.isActive,
+        courseUrl: session.courseUrl,
+        courseName: session.courseName
+      }
+    });
+  } catch (error) {
+    console.error('Check session status error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Server error',
+      active: false
+    });
   }
 };

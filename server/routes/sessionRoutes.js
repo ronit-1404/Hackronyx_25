@@ -19,6 +19,6 @@ router.post('/:sessionId/end', sessionController.endSession);
 router.get('/:sessionId', sessionController.getSessionDetails);
 
 // Get session status
-// router.get('/:sessionId/status', sessionController.checkSessionStatus);
+router.get('/:sessionId/status', sessionController.checkSessionStatus);
 
 module.exports = router;
