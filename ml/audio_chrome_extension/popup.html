@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Audio Engagement Tracker</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">  <script src="chart.min.js"></script>
+  <script src="js-emotion-detector.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Audio Engagement Tracker</h1>
+      <div class="status-container">
+        <span>Status: </span>
+        <span id="status">Not Recording</span>
+      </div>
+    </div>
+    
+    <div class="engagement-container">
+      <div class="engagement-meter">
+        <div class="meter-label">Current Engagement:</div>
+        <div id="current-engagement" class="meter-value">--</div>
+      </div>
+      <div id="engagement-indicator" class="indicator neutral"></div>
+    </div>
+    
+    <div class="stats-container">
+      <h3>Session Statistics</h3>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-label">Engaged</div>
+          <div id="engaged-percentage" class="stat-value">0%</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Partially</div>
+          <div id="partial-percentage" class="stat-value">0%</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Not Engaged</div>
+          <div id="not-engaged-percentage" class="stat-value">0%</div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="engagement-chart"></canvas>
+      </div>
+    </div>
+    
+    <div class="controls">
+      <button id="start-btn" class="btn start">Start Tracking</button>
+      <button id="stop-btn" class="btn stop" disabled>Stop Tracking</button>
+      <button id="settings-btn" class="btn settings">Settings</button>
+    </div>
+    
+    <div class="help-container">
+      <a href="#" id="help-link" class="help-link">Microphone Permissions Help</a>
+    </div>
+      <div class="settings-panel" id="settings-panel">
+      <h3>Settings</h3>
+      <div class="setting-row">
+        <label for="update-interval">Update Interval (seconds):</label>
+        <input type="number" id="update-interval" min="1" max="10" value="3">
+      </div>
+      <div class="setting-row">
+        <label for="sensitivity">Sensitivity:</label>
+        <input type="range" id="sensitivity" min="0.1" max="1.0" step="0.1" value="0.7">
+        <span id="sensitivity-value">0.7</span>
+      </div>
+      <div class="setting-row">
+        <label for="notification-toggle">Show Notifications:</label>
+        <input type="checkbox" id="notification-toggle" checked>
+      </div>
+      <div class="setting-actions">
+        <button id="save-settings" class="btn save">Save</button>
+        <button id="cancel-settings" class="btn cancel">Cancel</button>
+      </div>
+    </div>  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

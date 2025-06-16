@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3498db" />
+      <stop offset="100%" stop-color="#2ecc71" />
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="60" fill="url(#gradient)" />
+  <circle cx="64" cy="64" r="48" fill="#fff" fill-opacity="0.2" />
+  
+  <!-- Sound waves -->
+  <path d="M64,30 L64,98" stroke="#fff" stroke-width="6" stroke-linecap="round" />
+  <path d="M50,42 C50,42 40,52 40,64 C40,76 50,86 50,86" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" />
+  <path d="M78,42 C78,42 88,52 88,64 C88,76 78,86 78,86" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" />
+  <path d="M36,36 C36,36 20,48 20,64 C20,80 36,92 36,92" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none" />
+  <path d="M92,36 C92,36 108,48 108,64 C108,80 92,92 92,92" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none" />
+</svg>
