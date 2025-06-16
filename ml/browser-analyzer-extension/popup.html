@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Screen Analyzer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h2>🧠 Last Analysis</h2>
+
+    <div class="block">
+      <span class="label">🕒 Timestamp</span>
+      <span class="value" id="timestamp">Loading...</span>
+    </div>
+
+    <div class="block title">
+      <span class="label">📘 Title</span>
+      <span class="value" id="title">Loading...</span>
+    </div>
+
+    <div class="block">
+      <span class="label">🌐 URL</span>
+      <span class="value" id="url">Loading...</span>
+    </div>
+
+    <div class="block context">
+      <span class="label">🔍 Detected Context</span>
+      <span class="value" id="context">Loading...</span>
+    </div>
+
+    <div class="block sample">
+      <span class="label">📝 Text Sample</span>
+      <span class="value" id="text-short">Loading...</span>
+      <span class="value" id="text-full" style="display:none;"></span>
+      <button id="toggle-btn">Expand</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

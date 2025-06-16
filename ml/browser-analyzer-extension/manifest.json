@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Screen Analyzer",
+  "version": "1.0",
+  "description": "Analyzes and detects context of active tab content",
+  "permissions": ["scripting", "tabs", "activeTab"],
+  "action": {
+    "default_popup": "popup.html"
+    
+  },
+  
+  
+  "background": {
+    "service_worker": "background.js"
+  }
+}
