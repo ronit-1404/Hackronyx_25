@@ -60,7 +60,7 @@ async getStoredToken() {
    * @param {Object} options - Fetch options
    * @returns {Promise<Object>} Response data
    */
- async request(endpoint, options = {}) {
+async request(endpoint, options = {}) {
   console.log(`API Request: ${endpoint}`, options);
   const token = await this.getToken();
   
@@ -200,7 +200,7 @@ async getStoredToken() {
    * @returns {Promise<Object>} Response data
    */
   async logEngagementData(sessionId, data) {
-    return this.request('/engagement/log', {
+    return this.request('/engagement/data', {
       method: 'POST',
       body: JSON.stringify({
         sessionId,
@@ -303,7 +303,50 @@ async getStoredToken() {
   async aiGetEngagement(userId) {
     return this.aiRequest(`/analyze/engagement?userId=${userId}`);
   }
+
+  // Add these new methods to your API class
+
+/**
+ * Send audio data to server for analysis
+ * @param {string} sessionId Session ID
+ * @param {FormData} formData Form data containing audio file
+ * @returns {Promise<Object>} Server response
+ */
+  async sendAudioData(sessionId, formData) {
+    const token = await this.getToken();
+    
+    // Create custom fetch options for FormData
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'token': token
+      },
+      body: formData
+    };
+    
+    // Don't add Content-Type header, it will be set automatically with boundary
+    const response = await fetch(`${this.baseUrl}/sessions/${sessionId}/audio`, fetchOptions);
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to send audio data');
+    }
+    
+    return data;
+  }
+
+/**
+ * Get audio engagement metrics for session
+ * @param {string} sessionId Session ID
+ * @returns {Promise<Object>} Audio engagement metrics
+ */
+  async getAudioEngagement(sessionId) {
+    return this.request(`/sessions/${sessionId}/audio/metrics`);
+  }
+
 }
+
+
 
 // Export singleton instance
 const api = new EngagementAPI();

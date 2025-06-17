@@ -9,6 +9,7 @@ class EngagementTracker {
     this.lastDataTime = 0;
     this.intervalIds = [];
     this.batchedActivity = [];
+    this.audioEngagement = null;
   }
 
   /**
@@ -24,7 +25,10 @@ class EngagementTracker {
     try {
       // Get user ID
       this.userId = await auth.getUserId();
-      
+      if (settings.enableAudio) {
+      await this.initializeAudioTracking();
+      await this.audioEngagement.start(this.session);
+    }
       if (!this.userId) {
         throw new Error('User not authenticated');
       }
@@ -82,6 +86,22 @@ class EngagementTracker {
     }
   }
   
+
+  async initializeAudioTracking() {
+    try {
+      if (!this.audioEngagement) {
+        // Dynamically import AudioEngagement
+        const AudioEngagement = (await import('./audioEngagement.js')).default;
+        this.audioEngagement = new AudioEngagement(this.api);
+        await this.audioEngagement.initialize();
+      }
+      return true;
+    } catch (error) {
+      console.error('Failed to initialize audio tracking:', error);
+      return false;
+    }
+}
+
   /**
    * Stop tracking engagement
    * @returns {Promise<boolean>} Success status
@@ -100,7 +120,9 @@ class EngagementTracker {
       if (this.batchedActivity.length > 0) {
         await this.sendBatchedActivity();
       }
-      
+      if (this.audioEngagement) {
+      await this.audioEngagement.stop();
+      }
       // End session in backend
       await this.api.endSession(this.sessionId);
       

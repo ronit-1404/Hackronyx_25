@@ -201,6 +201,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     console.error('Error checking auth status:', error);
   }
   
+  
   if (isLoggedIn) {
     loginSection.style.display = 'none';
     trackingSection.style.display = 'block';
@@ -209,6 +210,19 @@ document.addEventListener('DOMContentLoaded', async function() {
     loginSection.style.display = 'block';
     trackingSection.style.display = 'none';
   }
+
+  const audioHelpBtn = document.getElementById('audio-help');
+  
+  // Add event listener for audio help button
+  if (audioHelpBtn) {
+    audioHelpBtn.addEventListener('click', () => {
+      chrome.tabs.create({
+        url: chrome.runtime.getURL('permissions_help.html')
+      });
+    });
+  }
+
+  
 
   // Check if we're currently tracking
   try {

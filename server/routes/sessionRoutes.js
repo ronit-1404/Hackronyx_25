@@ -21,4 +21,10 @@ router.get('/:sessionId', sessionController.getSessionDetails);
 // Get session status
 router.get('/:sessionId/status', sessionController.checkSessionStatus);
 
+
+// Upload audio recording
+router.post('/:sessionId/audio', sessionController.uploadAudio);
+
+// Get audio metrics
+router.get('/:sessionId/audio/metrics', sessionController.getAudioMetrics);
 module.exports = router;

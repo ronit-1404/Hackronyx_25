@@ -1,0 +1,174 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Audio Permission Help</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .feature {
+      background: #f9f9f9;
+      border-left: 4px solid #4CAF50;
+      padding: 10px 15px;
+      margin: 15px 0;
+    }
+    .security {
+      background: #f9f9f9;
+      border-left: 4px solid #3498db;
+      padding: 10px 15px;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Why This Extension Needs Microphone Access</h1>
+  
+  <p>The Learning Engagement Tracker uses audio analysis to help track your engagement during learning sessions.</p>
+  
+  <div class="feature">
+    <strong>Privacy First:</strong> Your audio is processed locally on your device and is never stored in its raw form.
+  </div>
+  
+  <h2>What We Do With Audio:</h2>
+  <ul>
+    <li>Analyze voice patterns to detect engagement levels</li>
+    <li>Detect periods of silence that might indicate disengagement</li>
+    <li>Help identify when you're actively participating in learning</li>
+  </ul>
+  
+  <div class="security">
+    <strong>Security:</strong> Only statistical data derived from audio analysis is sent to our servers, never the raw audio itself.
+  </div>
+  
+  <p>You can disable audio tracking at any time from the extension settings.</p>
+  
+  <h2>How to Grant Permission:</h2>
+  <p>When prompted by your browser to allow microphone access, select "Allow" to enable the audio engagement tracking features.</p>
+  
+  <button id="back">Back to Extension</button>
+  
+  <script>
+    document.getElementById('back').addEventListener('click', () => {
+      window.history.back();
+    });
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Microphone Permissions Help</title>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      color: #2980b9;
+      margin-bottom: 20px;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .step {
+      margin-bottom: 25px;
+    }
+    .step-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .step-content {
+      line-height: 1.6;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+    .note {
+      background-color: #f9f9c5;
+      padding: 10px;
+      border-left: 4px solid #f1c40f;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>How to Enable Microphone Permissions</h1>
+    <div class="container">
+    <div class="step">
+      <div class="step-title">Step 1: Check the address bar for permission icons</div>
+      <div class="step-content">
+        When you click "Start Tracking" in the extension, Chrome will ask for microphone permission. Look for the microphone icon in the address bar or the extension popup - it indicates the permission status.
+        <div class="note">
+          If Chrome isn't showing the permission dialog at all, this could mean permissions were previously denied.
+        </div>
+      </div>
+    </div>
+    
+    <div class="step">
+      <div class="step-title">Step 2: Grant permissions for the extension popup</div>
+      <div class="step-content">
+        <p><strong>For extension popups:</strong> Click on the lock/site settings icon in the address bar. Look for "Microphone" in the dropdown menu and select "Allow".</p>
+        <p><strong>For Chrome extension:</strong> The URL of the extension popup will look something like "chrome-extension://[extension-id]/popup.html"</p>
+      </div>
+    </div>
+    
+    <div class="step">
+      <div class="step-title">Step 3: Check Chrome's site settings</div>
+      <div class="step-content">
+        <p>If you can't find the permission dialog or the above steps don't work:</p>
+        <ol>
+          <li>Open Chrome Settings (three dots menu → Settings)</li>
+          <li>Go to "Privacy and Security" → "Site Settings" → "Microphone"</li>
+          <li>Look for entries that start with "chrome-extension://" and ensure they're set to Allow</li>
+          <li>If you see any entries set to Block, click on them and change to Allow</li>
+        </ol>
+      </div>
+    </div>
+    
+    <div class="step">
+      <div class="step-title">Step 4: Reset the extension if needed</div>
+      <div class="step-content">
+        <p>Close and reopen the extension popup. Then try clicking "Start Tracking" again.</p>
+      </div>
+    </div>
+      <div class="note">
+      <strong>Note:</strong> If you don't see the permission dialog, you might need to check your Chrome settings by going to:<br>
+      <br>
+      Chrome Settings → Privacy and Security → Site Settings → Microphone
+      <br><br>
+      Look for entries related to the extension popup and make sure they're set to "Allow".
+    </div>
+    
+    <div class="step">
+      <div class="step-title">Common Issues &amp; Solutions</div>
+      <div class="step-content">
+        <p><strong>1. "Permission Denied" message:</strong> You previously denied microphone access. Click the lock/info icon in the address bar to change permission settings.</p>
+        <p><strong>2. No permission dialog appears:</strong> Try reloading the extension completely from chrome://extensions (toggle the extension off and on).</p>
+        <p><strong>3. Extension doesn't work after allowing permissions:</strong> Close and reopen the extension popup.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -5,6 +5,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const connectDB = require('./db/db.js');
 const path = require('path');
+const fs = require('fs');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 // Load environment variables
 dotenv.config();
@@ -27,6 +28,15 @@ const authRoutes = require('./routes/authRoutes.js');
 // Connect to database
 connectDB();
 
+
+const uploadDir = path.join(__dirname, 'uploads');
+const audioDir = path.join(uploadDir, 'audio');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+if (!fs.existsSync(audioDir)) {
+  fs.mkdirSync(audioDir, { recursive: true });
+}
 // Initialize Express app
 const app = express();
 const server = http.createServer(app);

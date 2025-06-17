@@ -3,6 +3,32 @@ const Session = require('../models/Session.js');
 const EngagementData = require('../models/EngagementData.js');
 const Intervention = require('../models/Intervention.js');
 const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
+const FormData = require('form-data');
+
+
+  const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      const dir = path.join(__dirname, '../uploads/audio');
+      // Create directory if it doesn't exist
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname);
+      cb(null, `${uuidv4()}${ext}`);
+    }
+  });
+
+  const upload = multer({
+    storage,
+    limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
+  });
 
 
 exports.startSession = async (req, res) => {
@@ -95,12 +121,13 @@ exports.endSession = async (req, res) => {
     }
 
     // Check if session is already ended
-    if (!session.isActive) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Session is already ended' 
-      });
-    }
+    //will implement it later if the consistancy is obtained
+    // if (!session.isActive) {
+    //   return res.status(400).json({ 
+    //     success: false, 
+    //     message: 'Session is already ended' 
+    //   });
+    // }
 
     // End the session
     session.isActive = false;
@@ -456,3 +483,164 @@ exports.checkSessionStatus = async (req, res) => {
     });
   }
 };
+
+  exports.uploadAudio = [
+    upload.single('audio'),
+    async (req, res) => {
+      try {
+        const { sessionId } = req.params;
+        
+        if (!sessionId) {
+          return res.status(400).json({
+            success: false,
+            message: 'Session ID required'
+          });
+        }
+        
+        // Check if session exists
+        const session = await Session.findById(sessionId);
+        if (!session) {
+          return res.status(404).json({
+            success: false,
+            message: 'Session not found'
+          });
+        }
+        
+        // Verify user owns the session
+        if (session.userId.toString() !== req.userId) {
+          return res.status(403).json({
+            success: false,
+            message: 'Not authorized'
+          });
+        }
+        
+        // Check if file was uploaded
+        if (!req.file) {
+          return res.status(400).json({
+            success: false,
+            message: 'No audio file provided'
+          });
+        }
+        
+        // Save metadata to database
+        const audioData = new EngagementData({
+          sessionId,  // Make sure this matches your schema (sessionId vs session)
+          type: 'audio_file',
+          data: {
+            fileName: req.file.filename,
+            filePath: req.file.path,
+            mimeType: req.file.mimetype,
+            size: req.file.size
+          },
+          timestamp: new Date()
+        });
+        
+        await audioData.save();
+        
+        // Try to send to ML service for analysis if enabled
+        if (process.env.ML_SERVICE_ENABLED === 'true') {
+          try {
+            // Create form data for ML service
+            const formData = new FormData();
+            formData.append('audio', fs.createReadStream(req.file.path));
+            formData.append('sessionId', sessionId);
+            
+            // Send to ML service asynchronously
+            axios.post('http://localhost:5001/api/analyze/audio', formData, {
+              headers: formData.getHeaders()
+            }).catch(err => console.log('ML audio analysis error (non-critical):', err.message));
+          } catch (mlError) {
+            console.log('Failed to send audio to ML service:', mlError);
+            // Continue anyway
+          }
+        }
+        
+        return res.json({
+          success: true,
+          message: 'Audio uploaded successfully',
+          audioId: audioData._id
+        });
+      } catch (error) {
+        console.error('Audio upload error:', error);
+        return res.status(500).json({
+          success: false,
+          message: 'Server error'
+        });
+      }
+    }
+  ];
+
+  exports.getAudioMetrics = async (req, res) => {
+    try {
+      const { sessionId } = req.params;
+      
+      // Validate session ID
+      if (!sessionId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Session ID required'
+        });
+      }
+      
+      // Check if session exists and belongs to user
+      const session = await Session.findById(sessionId);
+      if (!session) {
+        return res.status(404).json({
+          success: false,
+          message: 'Session not found'
+        });
+      }
+      
+      if (session.userId.toString() !== req.userId) {
+        return res.status(403).json({
+          success: false,
+          message: 'Not authorized'
+        });
+      }
+      
+      // Get audio metrics from engagement data
+      const audioData = await EngagementData.find({
+        sessionId,  // Make sure this matches your schema (sessionId vs session)
+        type: 'audio'
+      }).sort('timestamp');
+      
+      // Process metrics
+      const metrics = {
+        average: 0,
+        timeline: [],
+        emotions: {}
+      };
+      
+      let totalScore = 0;
+      
+      audioData.forEach(item => {
+        // Add to timeline
+        metrics.timeline.push({
+          timestamp: item.timestamp,
+          engagementScore: item.data.engagementScore || 0
+        });
+        
+        // Track total for average
+        totalScore += (item.data.engagementScore || 0);
+        
+        // Track emotions
+        if (item.data.emotion && item.data.emotion !== 'unknown') {
+          metrics.emotions[item.data.emotion] = (metrics.emotions[item.data.emotion] || 0) + 1;
+        }
+      });
+      
+      // Calculate average
+      metrics.average = audioData.length > 0 ? totalScore / audioData.length : 0;
+      
+      return res.json({
+        success: true,
+        metrics
+      });
+    } catch (error) {
+      console.error('Get audio metrics error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Server error'
+      });
+    }
+  };

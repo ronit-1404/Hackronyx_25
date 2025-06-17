@@ -7,13 +7,24 @@ const EngagementDataSchema = new mongoose.Schema({
     ref: 'Session',
     required: true
   },
+  // Add new type field for categorizing data sources
+  type: {
+    type: String,
+    required: true,
+    enum: ['webcam', 'audio', 'activity', 'audio_file', 'engagement']
+  },
   timestamp: {
     type: Date,
     default: Date.now
   },
+  // Add generic data field for flexible storage
+  data: {
+    type: mongoose.Schema.Types.Mixed
+  },
+  // Keep existing specific fields for backward compatibility and structured queries
   engagementScore: {
     type: Number, // 0 to 1 score
-    required: true
+    default: null
   },
   attentionScore: {
     type: Number, // 0 to 1 score
@@ -55,7 +66,8 @@ const EngagementDataSchema = new mongoose.Schema({
   }
 });
 
-// Index for efficient queries by session
+// Ensure we have the appropriate indexes
 EngagementDataSchema.index({ sessionId: 1, timestamp: 1 });
+EngagementDataSchema.index({ sessionId: 1, type: 1 });
 
 module.exports = mongoose.model('EngagementData', EngagementDataSchema);

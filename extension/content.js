@@ -9,8 +9,11 @@ class ContentTracker {
     this.activityBatch = [];
     this.batchInterval = null;
     this.webcamPermission = false;
+    this.audioPermission = false;
     this.videoElements = new Set();
     this.overlayInjected = false;
+    this.audioContext = null;
+    this.audioStream = null;
     
     this.setupMessageListener();
   }
@@ -35,15 +38,33 @@ class ContentTracker {
           sendResponse({ success: true });
           break;
           
+        case 'CAPTURE_AUDIO':
+          this.captureAudio();
+          sendResponse({ success: true });
+          break;
+          
         case 'SHOW_INTERVENTION':
           this.showIntervention(message.intervention);
           sendResponse({ success: true });
+          break;
+          
+        case 'ENGAGEMENT_UPDATE':
+          // Update UI or take appropriate action based on engagement score
+          if (message.data.source === 'audio') {
+            console.log('Audio engagement update:', message.data.score);
+          }
+          sendResponse({ received: true });
           break;
           
         default:
           sendResponse({ success: false, message: 'Unknown message type' });
       }
       return true;
+    });
+
+    // Add listener for audio permission request event
+    window.addEventListener('REQUEST_AUDIO_PERMISSION', () => {
+      this.requestAudioPermission();
     });
   }
 
@@ -65,6 +86,14 @@ class ContentTracker {
     // Request webcam permission if needed
     if (this.settings.enableWebcam) {
       this.requestWebcamPermission();
+    }
+    
+    // Request audio permission if needed
+    if (this.settings.enableAudio) {
+      this.requestAudioPermission();
+      
+      // Inject emotion detector script if needed
+      this.injectEmotionDetector();
     }
     
     // Start sending batched activity
@@ -97,6 +126,17 @@ class ContentTracker {
     });
     this.videoElements.clear();
     
+    // Stop audio tracking if active
+    if (this.audioStream) {
+      this.audioStream.getTracks().forEach(track => track.stop());
+      this.audioStream = null;
+    }
+    
+    if (this.audioContext) {
+      this.audioContext.close();
+      this.audioContext = null;
+    }
+    
     // Clear intervals
     if (this.batchInterval) {
       clearInterval(this.batchInterval);
@@ -112,6 +152,7 @@ class ContentTracker {
     this.sessionId = null;
     this.settings = null;
     this.webcamPermission = false;
+    this.audioPermission = false;
   }
 
   setupActivityTrackers() {
@@ -262,9 +303,58 @@ class ContentTracker {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       stream.getTracks().forEach(track => track.stop()); // Stop immediately after permission
       this.webcamPermission = true;
+      console.log('Webcam permission granted');
     } catch (error) {
       console.error('Webcam permission denied:', error);
       this.webcamPermission = false;
+    }
+  }
+
+  async requestAudioPermission() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        audio: { 
+          echoCancellation: true,
+          noiseSuppression: true
+        }
+      });
+      stream.getTracks().forEach(track => track.stop()); // Stop immediately after permission
+      this.audioPermission = true;
+      console.log('Audio permission granted');
+      
+      // Notify extension that permission was granted
+      chrome.runtime.sendMessage({ 
+        type: 'AUDIO_PERMISSION_GRANTED'
+      });
+    } catch (error) {
+      console.error('Audio permission denied:', error);
+      this.audioPermission = false;
+      
+      chrome.runtime.sendMessage({ 
+        type: 'AUDIO_PERMISSION_DENIED',
+        error: error.message
+      });
+    }
+  }
+
+  injectEmotionDetector() {
+    // Check if emotion detector is already injected
+    if (window.EmotionDetector) {
+      console.log('EmotionDetector already available');
+      return;
+    }
+    
+    try {
+      // Create a script element to load the emotion detector
+      const script = document.createElement('script');
+      script.src = chrome.runtime.getURL('lib/js-emotion-detector.js');
+      script.onload = () => {
+        console.log('EmotionDetector script loaded');
+        script.remove();
+      };
+      (document.head || document.documentElement).appendChild(script);
+    } catch (error) {
+      console.error('Failed to inject EmotionDetector:', error);
     }
   }
 
@@ -305,6 +395,83 @@ class ContentTracker {
       });
     } catch (error) {
       console.error('Webcam capture error:', error);
+    }
+  }
+  
+  async captureAudio() {
+    if (!this.isTracking || !this.settings.enableAudio || !this.audioPermission) {
+      return;
+    }
+    
+    try {
+      // If we already have an audio stream, use it
+      if (!this.audioStream) {
+        this.audioStream = await navigator.mediaDevices.getUserMedia({ 
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true
+          }
+        });
+      }
+      
+      // If we don't have an audio context, create one
+      if (!this.audioContext) {
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Create analyzer
+        const analyzer = this.audioContext.createAnalyser();
+        analyzer.fftSize = 256;
+        
+        // Connect stream to analyzer
+        const source = this.audioContext.createMediaStreamSource(this.audioStream);
+        source.connect(analyzer);
+        
+        // Process audio data periodically
+        const dataArray = new Uint8Array(analyzer.frequencyBinCount);
+        
+        const processAudio = () => {
+          if (!this.isTracking || !this.audioPermission) return;
+          
+          analyzer.getByteFrequencyData(dataArray);
+          
+          // Calculate average frequency
+          const average = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
+          const normalized = average / 255; // 0 to 1 scale
+          
+          // Send audio data to background script
+          chrome.runtime.sendMessage({
+            type: 'TRACK_ACTIVITY',
+            activityType: 'audio_level',
+            data: {
+              level: normalized,
+              timestamp: Date.now()
+            }
+          });
+          
+          // Try to use emotion detector if available
+          if (window.EmotionDetector) {
+            try {
+              // This would be more complex in a real implementation
+              // Ideally would buffer audio and analyze chunks
+              console.log('Audio level detected:', normalized);
+            } catch (emotionError) {
+              console.error('Error in emotion detection:', emotionError);
+            }
+          }
+          
+          // Continue processing
+          if (this.isTracking) {
+            setTimeout(processAudio, 2000); // Process every 2 seconds
+          }
+        };
+        
+        // Start processing
+        processAudio();
+      }
+    } catch (error) {
+      console.error('Audio capture error:', error);
+      this.audioPermission = false;
     }
   }
   

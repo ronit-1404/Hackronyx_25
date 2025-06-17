@@ -52,8 +52,16 @@
           <option value="medium" selected>Medium</option>
           <option value="high">High</option>
         </select>
+
       </div>
-      
+        <div class="setting-group">
+          <label>
+            <input type="checkbox" id="audio" />
+            <span>Enable audio analysis</span>
+          </label>
+          <p class="setting-description">Analyze your voice to detect engagement</p>
+        </div>
+
       <div class="button-group">
         <button id="startTracking">Start Tracking</button>
         <button id="stopTracking" disabled>Stop Tracking</button>
@@ -66,5 +74,6 @@
   <script src="scripts/engagement.js"></script>
   <script src="scripts/intervention.js"></script>
   <script src="popup.js"></script>
+  <script src="lib/js-emotion-detector.js"></script>
 </body>
 </html>
