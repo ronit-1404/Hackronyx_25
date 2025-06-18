@@ -18,10 +18,13 @@ import {
   Play,
   Pause,
   RotateCcw,
-  Timer
+  Timer,
+  BarChart2
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedTimeRange, setSelectedTimeRange] = useState('today');
   
@@ -144,9 +147,18 @@ const Dashboard = () => {
                 <p className="text-purple-200">Intelligent Emotion & Productivity Tracker</p>
               </div>
             </div>
-            <div className="text-right">
-              <p className="text-white font-semibold">{currentTime.toLocaleTimeString()}</p>
-              <p className="text-purple-200 text-sm">{currentTime.toLocaleDateString()}</p>
+            <div className="flex items-center space-x-4">
+              <button 
+                onClick={() => navigate('/analysis')}
+                className="flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-2 rounded-lg text-white font-medium hover:from-indigo-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl"
+              >
+                <BarChart2 className="w-5 h-5" />
+                <span>View Analysis</span>
+              </button>
+              <div className="text-right">
+                <p className="text-white font-semibold">{currentTime.toLocaleTimeString()}</p>
+                <p className="text-purple-200 text-sm">{currentTime.toLocaleDateString()}</p>
+              </div>
             </div>
           </div>
         </div>
