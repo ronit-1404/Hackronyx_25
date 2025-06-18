@@ -1,58 +1,78 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Webcam from 'react-webcam';
-import * as tf from '@tensorflow/tfjs';
-import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
+import axios from 'axios'; // Make sure axios is installed
 
 const EngagementAnalyzer = ({ isAnalyzing, onEngagementScore }) => {
   const webcamRef = useRef(null);
-  const modelRef = useRef(null);
-  const animationRef = useRef(null);
+  const intervalRef = useRef(null);
+  const [engagementLevel, setEngagementLevel] = useState(0);
+  const [emotion, setEmotion] = useState('');
+  const [isAttentive, setIsAttentive] = useState(false);
 
   useEffect(() => {
-    const loadModel = async () => {
-      await tf.ready();
-      modelRef.current = await faceLandmarksDetection.load(
-        faceLandmarksDetection.SupportedPackages.mediapipeFacemesh
-      );
-    };
-    loadModel();
+    if (isAnalyzing) {
+      startAnalyzing();
+    } else {
+      stopAnalyzing();
+    }
 
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      stopAnalyzing();
     };
-  }, []);
-
-  useEffect(() => {
-    if (isAnalyzing && modelRef.current) {
-      detectEngagement();
-    } else {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    }
   }, [isAnalyzing]);
 
-  const detectEngagement = async () => {
-    if (webcamRef.current && webcamRef.current.video.readyState === 4) {
-      const predictions = await modelRef.current.estimateFaces({
-        input: webcamRef.current.video,
-        returnTensors: false,
-        flipHorizontal: false,
-      });
-
-      if (predictions.length > 0) {
-        const score = calculateEngagementScore(predictions[0]);
-        onEngagementScore(score);
-      }
+  const startAnalyzing = () => {
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
     }
-    animationRef.current = requestAnimationFrame(detectEngagement);
+    
+    // Start a new interval to analyze webcam frames every 1 second
+    intervalRef.current = setInterval(() => {
+      captureAndAnalyze();
+    }, 1000); // Adjust interval as needed (1000ms = 1 second)
   };
 
-  const calculateEngagementScore = (prediction) => {
-    // Simplified calculation
-    return Math.min(1, 0.7 + Math.random() * 0.3);
+  const stopAnalyzing = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  const captureAndAnalyze = async () => {
+    if (webcamRef.current && webcamRef.current.video.readyState === 4) {
+      // Capture webcam image
+      const imageSrc = webcamRef.current.getScreenshot();
+      
+      try {
+        // Send image to Flask API
+        const response = await axios.post('http://localhost:5000/api/analyze-engagement', {
+          image: imageSrc
+        });
+        
+        // Update states with API response
+        const { engagement_score, emotion: detectedEmotion, attentive } = response.data;
+        setEngagementLevel(engagement_score);
+        setEmotion(detectedEmotion);
+        setIsAttentive(attentive);
+        
+        // Call the parent's callback with the engagement score
+        onEngagementScore(engagement_score);
+      } catch (error) {
+        console.error('Error analyzing engagement:', error);
+      }
+    }
+  };
+
+  // Calculate engagement percentage for display
+  const engagementPercentage = Math.round(engagementLevel * 100);
+  
+  // Determine color class based on engagement level
+  const getColorClass = (level) => {
+    if (level < 0.3) return 'bg-red-500';
+    if (level < 0.7) return 'bg-yellow-500';
+    return 'bg-green-500';
   };
 
   return (
@@ -68,13 +88,22 @@ const EngagementAnalyzer = ({ isAnalyzing, onEngagementScore }) => {
         <div className="mt-4">
           <div className="w-full bg-gray-200 rounded-full h-4">
             <div 
-              className="bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 h-4 rounded-full" 
-              style={{ width: `${isAnalyzing ? 50 : 0}%` }}
+              className={`${getColorClass(engagementLevel)} h-4 rounded-full transition-all duration-300`} 
+              style={{ width: `${isAnalyzing ? engagementPercentage : 0}%` }}
             ></div>
           </div>
-          <p className="text-right mt-1 text-gray-600">
-            {isAnalyzing ? 'Analyzing...' : 'Paused'}
-          </p>
+          <div className="flex justify-between mt-2">
+            <p className="text-gray-600">
+              {isAnalyzing ? (
+                <span>
+                  {isAttentive ? 'Attentive' : 'Not attentive'} - {emotion || 'Analyzing...'}
+                </span>
+              ) : 'Paused'}
+            </p>
+            <p className="text-right text-gray-600">
+              {isAnalyzing ? `${engagementPercentage}%` : ''}
+            </p>
+          </div>
         </div>
       </div>
     </div>
