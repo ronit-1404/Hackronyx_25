@@ -1,0 +1,12 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore model checkpoints
+*.hdf5
+
+# Ignore data files
+/data/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
