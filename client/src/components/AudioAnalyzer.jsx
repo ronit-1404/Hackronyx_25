@@ -33,7 +33,7 @@ const AudioAnalyzer = ({ isAnalyzing, onEmotionDetected }) => {
   const analyzeEmotion = async (blob) => {
     try {
       const base64Audio = await convertToBase64(blob);
-      const response = await axios.post('http://localhost:5000/predict_emotion', {
+      const response = await axios.post('http://127.0.0.1:5002/predict_emotion', {
         audio_data: base64Audio.split(',')[1],
         file_format: 'wav'
       });
