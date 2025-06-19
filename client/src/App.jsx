@@ -4,6 +4,7 @@ import Dashboard from "./Dashboard";
 import Dashboard2 from "./Dashboard2";
 import SignUp from "./SignUp";
 import AnalysisPage from "./pages/AnalysisPage";
+import ScreenAnalyzer from "./components/ScreenAnalyzer";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard2 />} />
         <Route path='/analysis' element={<AnalysisPage />} />
+        <Route path='/screen' element={<ScreenAnalyzer />} />
       </Routes>
     </Router>
   );

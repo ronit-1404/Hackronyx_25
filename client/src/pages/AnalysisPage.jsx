@@ -3,6 +3,7 @@ import DashboardLayout from '../components/DashboardLayout';
 import AudioAnalyzer from '../components/AudioAnalyzer';
 import EngagementAnalyzer from '../components/EngagementAnalyzer';
 import ContextAnalyzer from '../components/ContextAnalyzer';
+import ScreenAnalyzer from '../components/ScreenAnalyzer';
 
 const AnalysisPage = () => {
   const [emotion, setEmotion] = useState('');
@@ -39,26 +40,34 @@ const AnalysisPage = () => {
       </div>
 
       <DashboardLayout>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col">
-            <AudioAnalyzer 
-              isAnalyzing={isAnalyzing} 
-              onEmotionDetected={setEmotion} 
-            />
+        <div className="grid grid-cols-1 gap-8 max-w-6xl mx-auto">
+          {/* First row - 3 small analyzers */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col">
+              <AudioAnalyzer 
+                isAnalyzing={isAnalyzing} 
+                onEmotionDetected={setEmotion} 
+              />
+            </div>
+            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col">
+              <EngagementAnalyzer 
+                isAnalyzing={isAnalyzing} 
+                onEngagementScore={setEngagementScore} 
+              />
+            </div>
+            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col">
+              <ContextAnalyzer 
+                isAnalyzing={isAnalyzing}
+                onContextDetected={setContext}
+                onSentimentDetected={setSentiment}
+                onActiveAppDetected={setActiveApp}
+              />
+            </div>
           </div>
-          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col">
-            <EngagementAnalyzer 
-              isAnalyzing={isAnalyzing} 
-              onEngagementScore={setEngagementScore} 
-            />
-          </div>
-          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col">
-            <ContextAnalyzer 
-              isAnalyzing={isAnalyzing}
-              onContextDetected={setContext}
-              onSentimentDetected={setSentiment}
-              onActiveAppDetected={setActiveApp}
-            />
+          
+          {/* Second row - Screen analyzer */}
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+            <ScreenAnalyzer isAnalyzing={isAnalyzing} />
           </div>
         </div>
       </DashboardLayout>
