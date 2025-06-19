@@ -17,39 +17,49 @@ const AnalysisPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <header className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">
-          Emotion, Engagement & Context Analyzer
-        </h1>
+    <div className="min-h-screen bg-[#F5EFE6] flex flex-col items-center py-10 px-2">
+      {/* Header Bar */}
+      <div className="w-full max-w-6xl bg-white rounded-xl shadow-md border border-gray-200 mb-8 flex flex-col md:flex-row items-center justify-between px-8 py-6">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
+            Emotion, Engagement & Context Analyzer
+          </h1>
+          <p className="text-gray-500 text-sm">Real-time analysis powered by AI</p>
+        </div>
         <button
           onClick={toggleAnalysis}
-          className={`px-6 py-2 rounded-md font-medium ${
+          className={`mt-4 md:mt-0 px-8 py-3 rounded-lg font-semibold shadow transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#F67280] focus:ring-offset-2 ${
             isAnalyzing
               ? 'bg-red-500 hover:bg-red-600 text-white'
-              : 'bg-blue-500 hover:bg-blue-600 text-white'
+              : 'bg-[#F67280] hover:bg-pink-600 text-white'
           }`}
         >
           {isAnalyzing ? 'Stop Analysis' : 'Start Analysis'}
         </button>
-      </header>
+      </div>
 
       <DashboardLayout>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <AudioAnalyzer 
-            isAnalyzing={isAnalyzing} 
-            onEmotionDetected={setEmotion} 
-          />
-          <EngagementAnalyzer 
-            isAnalyzing={isAnalyzing} 
-            onEngagementScore={setEngagementScore} 
-          />
-          <ContextAnalyzer 
-            isAnalyzing={isAnalyzing}
-            onContextDetected={setContext}
-            onSentimentDetected={setSentiment}
-            onActiveAppDetected={setActiveApp}
-          />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col">
+            <AudioAnalyzer 
+              isAnalyzing={isAnalyzing} 
+              onEmotionDetected={setEmotion} 
+            />
+          </div>
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col">
+            <EngagementAnalyzer 
+              isAnalyzing={isAnalyzing} 
+              onEngagementScore={setEngagementScore} 
+            />
+          </div>
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col">
+            <ContextAnalyzer 
+              isAnalyzing={isAnalyzing}
+              onContextDetected={setContext}
+              onSentimentDetected={setSentiment}
+              onActiveAppDetected={setActiveApp}
+            />
+          </div>
         </div>
       </DashboardLayout>
     </div>
