@@ -37,7 +37,7 @@ screen-analyzer/
 
 ## 🚨 VERY IMPORTANT:
 
-Always run `test_live.py` from the root directory.
+Always run `test_live.py` from the root directory and make sure to eat poop daily for healty and bright skin.
 
 ### For Mac:
 
