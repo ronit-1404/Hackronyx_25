@@ -7,6 +7,7 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import base64
+import sys
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -26,8 +27,13 @@ print("Exists?", os.path.exists(HAAR_EYE))
 face_cascade = cv2.CascadeClassifier(HAAR_FACE)
 eye_cascade = cv2.CascadeClassifier(HAAR_EYE)
 
-# Load emotion model
-emotion_classifier = load_model(MODEL_PATH, compile=False)
+# Load emotion model with error handling
+if not os.path.exists(MODEL_PATH):
+    print(f"ERROR: Model file '{MODEL_PATH}' not found. Please add your trained model to this path.")
+    sys.exit(1)
+else:
+    emotion_classifier = load_model(MODEL_PATH, compile=False)
+
 EMOTIONS = ["angry", "disgust", "fear", "happy", "sad", "surprised", "neutral"]
 
 def analyze_image(image_data):
