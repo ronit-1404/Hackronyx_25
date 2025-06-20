@@ -128,6 +128,9 @@ def main():
     print("\nEmotion distribution in the dataset:")
     for emotion, count in zip(unique_emotions, counts):
         print(f"  {emotion}: {count}")
+    # Warn if data is imbalanced
+    if np.min(counts) / np.max(counts) < 0.5:
+        print("[WARNING] Your dataset is imbalanced. Consider adding more samples for underrepresented classes.")
     
     # Split data
     X_train, X_test, y_train, y_test = train_test_split(
@@ -153,11 +156,18 @@ def main():
     y_pred = model.predict(X_test_scaled)
     print(classification_report(y_test, y_pred))
     
-    # Save model
+    # Save model and feature extraction info
+    feature_info = {
+        'n_mfcc': 13,
+        'mel_features': 20,
+        'feature_order': ['mfccs_mean', 'chroma_mean', 'mel_mean']
+    }
     model_data = {
         'model': model,
         'scaler': scaler,
-        'emotion_mapping': EMOTION_MAPPING
+        'emotion_mapping': EMOTION_MAPPING,
+        'feature_info': feature_info,
+        'classes': list(unique_emotions)
     }
     joblib.dump(model_data, 'emotion_detection_model.joblib')
     print("Model saved as 'emotion_detection_model.joblib'")

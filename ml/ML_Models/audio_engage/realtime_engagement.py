@@ -49,43 +49,47 @@ class AudioProcessor:
         """Extract audio features from numpy array"""
         try:
             y = audio_data.astype(np.float32)
-            
+            # Debug: print shape and stats
+            print(f"[DEBUG] Input audio shape: {y.shape}, min: {y.min()}, max: {y.max()}, mean: {y.mean()}")
+            # If the audio is silent (all zeros or near zero), return a special flag
+            if np.allclose(y, 0, atol=1e-4):
+                print("[DEBUG] No audio detected (silent input)")
+                return 'NO_AUDIO'
             # Extract MFCCs
             mfccs = librosa.feature.mfcc(y=y, sr=RATE, n_mfcc=13)
             mfccs_mean = np.mean(mfccs, axis=1)
-            
             # Extract Chroma
             chroma = librosa.feature.chroma_stft(y=y, sr=RATE)
             chroma_mean = np.mean(chroma, axis=1)
-            
             # Extract Mel spectrogram
             mel = librosa.feature.melspectrogram(y=y, sr=RATE)
             mel_mean = np.mean(mel, axis=1)[:20]  # First 20 features
-            
             # Combine features - EXACTLY matching the training features
             features = np.concatenate((mfccs_mean, chroma_mean, mel_mean))
+            print(f"[DEBUG] Feature vector shape: {features.shape}, values: {features[:5]} ...")
             return features
-            
         except Exception as e:
             print(f"Error extracting features: {e}")
             return None
-    
+
     def predict_engagement(self, audio_data):
         """Predict engagement from audio data"""
         features = self.extract_features(audio_data)
+        if isinstance(features, str) and features == 'NO_AUDIO':
+            return "Engaged", "no_audio"
         if features is None:
-            return "Error processing audio"
-            
+            return "Error processing audio", "error"
         # Scale features
         features = features.reshape(1, -1)
+        if features.shape[1] != self.scaler.mean_.shape[0]:
+            print(f"[ERROR] Feature shape mismatch: got {features.shape[1]}, expected {self.scaler.mean_.shape[0]}")
+            return "Feature shape mismatch", "error"
         features = self.scaler.transform(features)
-        
         # Make prediction
         prediction = self.model.predict(features)[0]
-        
+        print(f"[DEBUG] Raw model prediction: {prediction}")
         # Map to engagement status
         engagement = ENGAGEMENT_MAP.get(prediction, "Unknown")
-        
         return engagement, prediction
         
     def audio_callback(self, in_data, frame_count, time_info, status):

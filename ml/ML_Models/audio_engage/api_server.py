@@ -92,4 +92,4 @@ if __name__ == '__main__':
         print("You need to train a model first using train_emotion_model.py")
     
     # Run the Flask app
-    app.run(host='0.0.0.0', port=5002)
+    app.run(host='0.0.0.0', port=5000)

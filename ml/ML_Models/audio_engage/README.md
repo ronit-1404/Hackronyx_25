@@ -7,9 +7,24 @@ This is a Python-based machine learning pipeline for detecting emotions from sho
 - **Boredom**: Includes sad emotion
 - **Neutral**: Includes calm and neutral emotions
 
+## Project Structure
+
+```
+emotion_detection/
+├── train_emotion_model.py     # Script for feature extraction and model training
+├── predict_emotion.py         # Script for making predictions on new audio samples
+├── api_server.py              # Flask API for integrating with browser extension
+├── evaluate_model.py          # Script for evaluating model performance
+├── record_and_predict.py      # Utility for recording audio and making predictions
+├── requirements.txt           # Project dependencies
+└── emotion_detection_model.joblib    # Trained model file (generated after training)
+```
+
 ## Installation
 
-1. Install the required dependencies
+1. Clone the repository
+2. Install the required dependencies:
+
 ```
 pip install -r requirements.txt
 ```
@@ -19,6 +34,19 @@ Note: PyAudio installation might require additional steps depending on your oper
 - On Windows, you might need to install a wheel file from https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio
 - On Linux: `sudo apt-get install portaudio19-dev python-pyaudio`
 - On macOS: `brew install portaudio`
+
+## Usage
+
+### Training the Model
+
+1. Download a dataset like RAVDESS or CREMA-D
+2. Run the training script:
+
+```
+python train_emotion_model.py
+```
+
+Follow the prompts to specify the dataset location and model type (RandomForest or SVM).
 
 ### Making Predictions
 
@@ -33,7 +61,7 @@ python predict_emotion.py path/to/audio_file.wav
 To record audio and immediately predict the emotion:
 
 ```
-python realtime_engagement.py
+python record_and_predict.py --duration 3
 ```
 
 ### Evaluating the Model
