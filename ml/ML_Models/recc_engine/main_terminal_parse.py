@@ -1,7 +1,7 @@
 import sys
 import re
 import json
-from recc_engine.engine import RecommendationEngine
+from attentiveness_engine.engine import RecommendationEngine
 
 def parse_terminal_output(lines):
     # Example parser for the provided sample
@@ -66,7 +66,8 @@ def main():
     print("Paste terminal output, then press Ctrl+D (or Ctrl+Z on Windows) to process:")
     lines = sys.stdin.read().splitlines()
     screen_data = parse_terminal_output(lines)
-    recs = engine.process_screen_data("student_001", screen_data)
+    # Always trigger recommendations, skip attentiveness threshold
+    recs = engine.generate_recommendations("student_001", 0.0)
     if recs:
         engine.display_recommendations("student_001", recs)
     else:
