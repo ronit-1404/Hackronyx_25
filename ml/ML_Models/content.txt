@@ -1,0 +1,18 @@
+Title: Python Loops Tutorial
+URL: https://youtube.com/python-loops
+Type: YouTube Video
+Keywords: ['learn', 'loops', 'variables', 'python', 'programming', 'tutorial']
+Topics: ['Programming']
+Description: A beginner's guide to loops in Python.
+Length (min): 10
+Readability: None
+---
+Title: Understanding Algebraic Equations
+URL: https://blog.com/algebra-equations
+Type: Blog Post
+Keywords: ['blog', 'post', 'discusses', 'algebra', 'equations', 'statistics', 'mathematics']
+Topics: ['Mathematics']
+Description: A blog post on solving algebraic equations.
+Length (min): None
+Readability: 70.0
+---

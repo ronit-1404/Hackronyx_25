@@ -10,7 +10,8 @@ import base64
 import sys
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+#CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Paths (relative to project root)
 HAAR_FACE = os.path.join('haarcascades', 'haarcascade_frontalface_default.xml')

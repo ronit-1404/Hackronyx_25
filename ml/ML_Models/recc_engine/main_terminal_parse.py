@@ -1,7 +1,7 @@
 import sys
 import re
 import json
-from attentiveness_engine.engine import RecommendationEngine
+from recc_engine.engine import RecommendationEngine
 
 def parse_terminal_output(lines):
     # Example parser for the provided sample
