@@ -1,0 +1,240 @@
+
+Live Screen Analyzer - MacOS (Ctrl+C to stop)
+
+=========================================
+[2025-06-20T14:46:45.906514]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 0.00161725 sec
+Text Sample: e
+€5 £ Hackronyx_25 By ee oie |
+| oO EXPLORER s+ jsx & EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @manpyMX Pry YO:
+=========================================
+
+=========================================
+[2025-06-20T14:46:53.609246]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 0.224092125 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| oO EXPLORER se jsx && EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M %@ main_terminal_parse.py M @mainpyMX Drv Y
+=========================================
+
+=========================================
+[2025-06-20T14:47:01.149266]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 0.085499791 sec
+Text Sample: e
+€5 £ Hackronyx_25 By ee oie |
+| oO EXPLORER s+ jsx & EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @manpyMX Pry YO:
+=========================================
+
+=========================================
+[2025-06-20T14:47:08.832285]
+Active App: Electron
+Detected Context: programming
+Sentiment: neutral
+Idle Time: 0.005199917 sec
+Text Sample: e
+€5 £ Hackronyx_25 By ee oie |
+| oO EXPLORER s+ jsx & EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @manpyMX Pry YO:
+=========================================
+
+=========================================
+[2025-06-20T14:47:16.508535]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 0.007896334 sec
+Text Sample: e
+€5 P Hackronyx_25 By ZEow do
+| oO EXPLORER s+ jsx & EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @manpyMX Pry YO: 
+=========================================
+
+=========================================
+[2025-06-20T14:47:23.959381]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 3.560139875 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER “++ agementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M & contenttxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:47:30.831104]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 10.400300792 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER “++ agementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M & contenttxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:47:37.669451]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 17.263878917 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER “++ agementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M & contenttxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:47:44.534482]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 24.106264875 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER “++ agementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M & contenttxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:47:51.377574]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 30.970734667 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER “++ agementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M & contenttxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:47:58.245075]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 4.218105666 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:48:04.840603]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 10.796142875 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:48:11.422672]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 4.738826584 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:48:18.004797]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 11.320298 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:48:24.588392]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 17.885696292 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:48:31.154232]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 24.47093 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:48:37.738422]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 0.456705334 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu 
+=========================================
+
+=========================================
+[2025-06-20T14:48:44.310913]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 5.926714417 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| oO EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu
+=========================================
+
+=========================================
+[2025-06-20T14:48:50.871743]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 12.487254125 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| oO EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu
+=========================================
+
+=========================================
+[2025-06-20T14:48:57.431895]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 0.329960458 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| oO EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu
+=========================================
+
+=========================================
+[2025-06-20T14:49:04.150169]
+Active App: Electron
+Detected Context: programming
+Sentiment: positive
+Idle Time: 0.018083 sec
+Text Sample: e
+€e5 £ Hackronyx_25 By obo ad
+| o EXPLORER +++ EngagementAnalyzer.jsx @ api_server.py @ api.py 7,M @ main_terminal_parse.py M @ main.py M Bousertxtu 
+=========================================
+
+--- Context 'programming' lasted 143.0 seconds ---
+
+=========================================
+[2025-06-20T14:49:10.813133]
+Active App: Google Chrome
+Detected Context: browsing

@@ -1,7 +1,7 @@
 import sys
 import re
 import json
-from engine import RecommendationEngine
+from .engine import RecommendationEngine
 
 def parse_terminal_output(lines):
     screen_data = {
@@ -64,7 +64,7 @@ def main():
     print("Paste terminal output, then press Ctrl+D (or Ctrl+Z on Windows) to process:")
     lines = sys.stdin.read().splitlines()
     screen_data = parse_terminal_output(lines)
-    recs = engine.process_screen_data("student_001", screen_data)
+    recs = engine.generate_recommendations("student_001", 0.0)
     # Write user profile to user.txt
     with open("user.txt", "w", encoding="utf-8") as f:
         user = engine.users["student_001"]

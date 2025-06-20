@@ -1,0 +1,7 @@
+User ID: student_001
+Attentive Topics: {}
+Preferred Content Types: {}
+Average Active Time: 0.0
+Average Idle Time: 0.0
+Engaged Apps: {}
+Historical Attentiveness Scores: []
