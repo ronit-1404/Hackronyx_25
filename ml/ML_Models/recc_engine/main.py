@@ -1,8 +1,8 @@
 import sys
 import re
 import json
-from engine import RecommendationEngine
-from llm_recommender import generate_gemini_recommendations, build_user_profile_string, build_content_list_string
+from .engine import RecommendationEngine
+from .llm_recommender import generate_gemini_recommendations, build_user_profile_string, build_content_list_string
 
 def parse_terminal_output(lines):
     screen_data = {
