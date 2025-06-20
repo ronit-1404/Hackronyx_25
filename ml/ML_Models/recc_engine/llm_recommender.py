@@ -1,7 +1,7 @@
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
-from engine import ContentItem
+from .engine import ContentItem
 
 load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -23,7 +23,7 @@ Instructions:
 - For each, provide the title, URL, and a short reason for recommendation.
 - Be concise and helpful.
 """
-    model = genai.GenerativeModel('gemini-pro')
+    model = genai.GenerativeModel("models/gemini-1.5-pro-latest")
     response = model.generate_content(system_prompt)
     return response.text
 
