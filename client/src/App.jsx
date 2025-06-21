@@ -10,12 +10,21 @@ function App() {
   return (
     <Router>
       <Routes>
-        
         <Route path="/" element={<Navigate to="/signup" />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/dashboard" element={<Dashboard2 />} />
-        <Route path='/analysis' element={<AnalysisPage />} />
-        <Route path='/screen' element={<ScreenAnalyzer />} />
+
+        {/* Learner Routes */}
+        <Route path="/learner/home" element={<LearnerHome />} />
+        <Route path="/learner/analytics" element={<LearnerAnalytics />} />
+        <Route path="/learner/resources" element={<LearnerResources />} />
+        <Route path="/learner/settings" element={<LearnerSettings />} />
+
+        {/* Admin Routes */}
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/students" element={<AdminStudents />} />
+        <Route path="/admin/classes" element={<AdminClasses />} />
+        <Route path="/admin/analytics" element={<AdminAnalytics />} />
+        <Route path="/admin/settings" element={<AdminSettings />} />
       </Routes>
     </Router>
   );
