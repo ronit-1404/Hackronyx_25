@@ -62,8 +62,9 @@ def main():
         transcript_or_text="This blog post discusses algebra, equations, and statistics in mathematics.",
         readability_score=70.0
     )
-    print("Paste terminal output, then press Ctrl+D (or Ctrl+Z on Windows) to process:")
-    lines = sys.stdin.read().splitlines()
+    # Always read from output.txt, clean input by removing empty lines and irrelevant headers
+    with open("ml/ML_Models/screen-analyzer/output.txt", "r", encoding="utf-8") as f:
+        lines = [line.strip() for line in f if line.strip() and not line.startswith("Live Screen Analyzer")]  # skip header and empty lines
     screen_data = parse_terminal_output(lines)
     user = engine.users["student_001"]
     user_profile_str = build_user_profile_string(user)

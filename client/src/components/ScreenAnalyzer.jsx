@@ -68,6 +68,45 @@ const ScreenAnalyzer = ({ isAnalyzing }) => {
     }
   };
 
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+
+  const saveScreenAnalysisToServer = async (screenData) => {
+    try {
+      setIsSaving(true);
+      setSaveSuccess(false);
+      
+      // Send the data to your Node.js backend
+      // No session ID required - the backend will create or find an active session
+      const response = await fetch('/api/analytics/screen-analysis', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
+        },
+        body: JSON.stringify({
+          screenData
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setSaveSuccess(true);
+        // Auto-hide success message after 3 seconds
+        setTimeout(() => setSaveSuccess(false), 3000);
+      } else {
+        console.error('Failed to save screen analysis data', data);
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('Error saving screen analysis data:', error);
+      return null;
+    } finally {
+      setIsSaving(false);
+    }
+  };
   const fetchScreenAnalysis = async () => {
     setLoading(prev => ({ ...prev, screen: true }));
     try {
@@ -260,9 +299,44 @@ const ScreenAnalyzer = ({ isAnalyzing }) => {
                       {screenData.insights.map((insight, index) => (
                         <li key={index} className="text-xs bg-blue-50 px-3 py-1 rounded-md text-gray-700">{insight}</li>
                       ))}
-                    </ul>
-                  </div>
+                    </ul>                  </div>
                 )}
+              </div>
+              
+              {/* Save Analysis Button */}
+              <div className="mt-4 flex justify-center">
+                <button
+                  onClick={() => saveScreenAnalysisToServer(screenData)}
+                  disabled={isSaving || !isAnalyzing}
+                  className={`flex items-center px-4 py-2 rounded-lg text-white text-sm font-medium transition-all
+                    ${isSaving 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : saveSuccess
+                        ? 'bg-green-500 hover:bg-green-600'
+                        : 'bg-blue-600 hover:bg-blue-700'
+                    }`}
+                >
+                  {isSaving ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                      Saving...
+                    </>
+                  ) : saveSuccess ? (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Saved!
+                    </>
+                  ) : (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h1a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h2v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z" />
+                      </svg>
+                      Save Analysis
+                    </>
+                  )}
+                </button>
               </div>
             </>
           ) : (

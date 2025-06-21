@@ -25,6 +25,7 @@ const sessionRoutes = require('./routes/sessionRoutes.js');
 const engagementRoutes = require('./routes/engagementRoutes.js');
 const extensionRoutes = require('./routes/extensionRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
+const screenRoutes = require('./routes/screenRoutes.js')
 // Connect to database
 connectDB();
 
@@ -94,6 +95,7 @@ app.use('/api/sessions', sessionRoutes);
 app.use('/api/engagement', engagementRoutes);
 app.use('/api/extension', extensionRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/screen',screenRoutes)
 // Socket.io setup
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
