@@ -63,7 +63,7 @@ def main():
         readability_score=70.0
     )
     # Always read from output.txt, clean input by removing empty lines and irrelevant headers
-    with open("../screen-analyzer/output.txt", "r", encoding="utf-8") as f:
+    with open("ml/ML_Models/screen-analyzer/output.txt", "r", encoding="utf-8") as f:
         lines = [line.strip() for line in f if line.strip() and not line.startswith("Live Screen Analyzer")]  # skip header and empty lines
     screen_data = parse_terminal_output(lines)
     user = engine.users["student_001"]
