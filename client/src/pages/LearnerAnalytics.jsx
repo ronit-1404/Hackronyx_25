@@ -84,23 +84,33 @@ const LearnerAnalytics = () => {
     { day: 'Sun', focus: 6.1, productivity: 71, mood: 3.8, engagement: 78 }
   ];
 
-  // Learning activity distribution
-  const activityData = [
-    { name: 'Video Lectures', value: 35, color: '#F67280' },
-    { name: 'Interactive Exercises', value: 28, color: '#C06C84' },
-    { name: 'Reading Materials', value: 22, color: '#6C5B7B' },
-    { name: 'Practice Tests', value: 10, color: '#355C7D' },
-    { name: 'Discussion Forums', value: 5, color: '#2A4E6C' }
+  // Weekly Engagement vs Personal Benchmark data
+  const engagementBenchmarkData = [
+    { week: 'Week 1', avgEngagement: 78, personalBenchmark: 85 },
+    { week: 'Week 2', avgEngagement: 82, personalBenchmark: 85 },
+    { week: 'Week 3', avgEngagement: 88, personalBenchmark: 85 },
+    { week: 'Week 4', avgEngagement: 91, personalBenchmark: 85 },
+    { week: 'Week 5', avgEngagement: 85, personalBenchmark: 85 },
+    { week: 'Week 6', avgEngagement: 93, personalBenchmark: 85 },
+    { week: 'Week 7', avgEngagement: 89, personalBenchmark: 85 },
+    { week: 'Week 8', avgEngagement: 95, personalBenchmark: 85 }
   ];
 
-  // Performance radar data
+  // Updated Learning activity distribution
+  const activityData = [
+    { name: 'Social Media', value: 35, color: '#F67280' },
+    { name: 'Course Platform', value: 45, color: '#C06C84' },
+    { name: 'Video Lecture', value: 20, color: '#6C5B7B' }
+  ];
+
+  // Updated Performance radar data - Your Focus vs Peer Median
   const performanceData = [
-    { subject: 'Mathematics', score: 85, fullMark: 100 },
-    { subject: 'Science', score: 92, fullMark: 100 },
-    { subject: 'Literature', score: 78, fullMark: 100 },
-    { subject: 'History', score: 88, fullMark: 100 },
-    { subject: 'Languages', score: 94, fullMark: 100 },
-    { subject: 'Arts', score: 76, fullMark: 100 }
+    { subject: 'Mathematics', yourFocus: 85, peerMedian: 78, fullMark: 100 },
+    { subject: 'Science', yourFocus: 92, peerMedian: 84, fullMark: 100 },
+    { subject: 'Literature', yourFocus: 78, peerMedian: 82, fullMark: 100 },
+    { subject: 'History', yourFocus: 88, peerMedian: 79, fullMark: 100 },
+    { subject: 'Languages', yourFocus: 94, peerMedian: 87, fullMark: 100 },
+    { subject: 'Arts', yourFocus: 76, peerMedian: 81, fullMark: 100 }
   ];
 
   // Key metrics
@@ -256,7 +266,6 @@ const LearnerAnalytics = () => {
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="flex-1 p-8 overflow-y-auto">
           {/* Focus Heatmap - Full Width */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
@@ -283,14 +292,14 @@ const LearnerAnalytics = () => {
               </div>
             </div>
             
-            {/* Custom Heatmap */}
+            {/* Custom Heatmap - Horizontal Layout */}
             <div className="overflow-x-auto">
               <div className="min-w-full">
                 {/* Days header */}
                 <div className="flex mb-2">
-                  <div className="w-16"></div>
+                  <div className="w-20"></div>
                   {days.map(day => (
-                    <div key={day} className="w-12 text-center text-xs font-medium text-gray-600 px-1">
+                    <div key={day} className="w-20 text-center text-sm font-medium text-gray-600 px-1">
                       {day}
                     </div>
                   ))}
@@ -300,18 +309,18 @@ const LearnerAnalytics = () => {
                 <div className="space-y-1">
                   {heatmapData.map((hourData, hourIndex) => (
                     <div key={hourIndex} className="flex items-center">
-                      <div className="w-16 text-xs text-gray-600 text-right pr-2">
+                      <div className="w-20 text-xs text-gray-600 text-right pr-3 font-medium">
                         {hourData.hour}
                       </div>
                       {days.map(day => (
                         <div
                           key={`${hourIndex}-${day}`}
-                          className="w-12 px-1"
+                          className="w-20 px-1"
                           onMouseEnter={() => setHoveredCell({ hour: hourData.hour, day, value: hourData[day] })}
                           onMouseLeave={() => setHoveredCell(null)}
                         >
                           <div
-                            className="w-10 h-6 rounded-sm cursor-pointer transition-all duration-200 hover:scale-110 hover:shadow-lg flex items-center justify-center text-xs font-medium"
+                            className="w-18 h-8 rounded-sm cursor-pointer transition-all duration-200 hover:scale-110 hover:shadow-lg flex items-center justify-center text-xs font-medium"
                             style={{
                               backgroundColor: getHeatmapColor(hourData[day]),
                               opacity: 0.3 + (getHeatmapIntensity(hourData[day]) * 0.7),
@@ -336,6 +345,48 @@ const LearnerAnalytics = () => {
                 </p>
               </div>
             )}
+          </div>
+          {/* New Engagement vs Benchmark Line Chart - Full Width */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+            <div className="flex items-center mb-6">
+              <Activity className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900">Weekly Engagement vs Personal Benchmark</h2>
+                <p className="text-sm text-gray-600">Track your engagement scores against your personal targets</p>
+              </div>
+            </div>
+            <ResponsiveContainer width="100%" height={350}>
+              <LineChart data={engagementBenchmarkData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="week" stroke="#64748b" fontSize={12} />
+                <YAxis stroke="#64748b" fontSize={12} domain={[70, 100]} />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: 'white', 
+                    border: '1px solid #e2e8f0', 
+                    borderRadius: '12px', 
+                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' 
+                  }} 
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="avgEngagement" 
+                  stroke="#F67280" 
+                  strokeWidth={3}
+                  dot={{ fill: '#F67280', strokeWidth: 2, r: 6 }}
+                  name="Avg Engagement"
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="personalBenchmark" 
+                  stroke="#10B981" 
+                  strokeWidth={2}
+                  strokeDasharray="5 5"
+                  dot={{ fill: '#10B981', strokeWidth: 2, r: 4 }}
+                  name="Personal Benchmark"
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
 
           {/* Charts Grid */}
@@ -368,13 +419,13 @@ const LearnerAnalytics = () => {
               </ResponsiveContainer>
             </div>
 
-            {/* Learning Activity Distribution */}
+            {/* Updated Learning Activity Distribution */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center mb-6">
                 <Grid3X3 className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900">Activity Distribution</h2>
-                  <p className="text-sm text-gray-600">How you spend your learning time</p>
+                  <p className="text-sm text-gray-600">How you spend your digital learning time</p>
                 </div>
               </div>
               <ResponsiveContainer width="100%" height={300}>
@@ -406,13 +457,13 @@ const LearnerAnalytics = () => {
             </div>
           </div>
 
-          {/* Performance Radar Chart */}
+          {/* Updated Performance Radar Chart - Your Focus vs Peer Median */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
             <div className="flex items-center mb-6">
               <Target className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
               <div>
-                <h2 className="text-xl font-semibold text-gray-900">Subject Performance Radar</h2>
-                <p className="text-sm text-gray-600">Comprehensive view of your academic strengths</p>
+                <h2 className="text-xl font-semibold text-gray-900">Your Focus vs Peer Median</h2>
+                <p className="text-sm text-gray-600">Compare your focus scores with peer performance across subjects</p>
               </div>
             </div>
             <ResponsiveContainer width="100%" height={400}>
@@ -421,12 +472,21 @@ const LearnerAnalytics = () => {
                 <PolarAngleAxis dataKey="subject" tick={{ fontSize: 12, fill: '#64748b' }} />
                 <PolarRadiusAxis tick={{ fontSize: 10, fill: '#64748b' }} />
                 <Radar
-                  name="Performance"
-                  dataKey="score"
+                  name="Your Focus"
+                  dataKey="yourFocus"
                   stroke="#F67280"
                   fill="#F67280"
                   fillOpacity={0.3}
                   strokeWidth={2}
+                />
+                <Radar
+                  name="Peer Median"
+                  dataKey="peerMedian"
+                  stroke="#10B981"
+                  fill="#10B981"
+                  fillOpacity={0.2}
+                  strokeWidth={2}
+                  strokeDasharray="5 5"
                 />
                 <Tooltip 
                   contentStyle={{ 
@@ -440,48 +500,141 @@ const LearnerAnalytics = () => {
             </ResponsiveContainer>
           </div>
 
-          {/* Insights and Recommendations */}
+          {/* Content Analysis */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center mb-6">
-              <Brain className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+              <Eye className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
               <div>
-                <h2 className="text-xl font-semibold text-gray-900">AI-Powered Insights</h2>
-                <p className="text-sm text-gray-600">Personalized recommendations based on your learning patterns</p>
+                <h2 className="text-xl font-semibold text-gray-900">Content Analysis</h2>
+                <p className="text-sm text-gray-600">Deep dive into learning patterns and resource effectiveness</p>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 rounded-xl bg-blue-100">
-                    <Clock className="w-6 h-6 text-blue-600" />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Struggle Zones */}
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2 mb-4">
+                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                  <h3 className="text-lg font-semibold text-gray-900">Struggle Zones</h3>
+                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Video timestamps</span>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-red-800">Calculus: Derivatives</span>
+                      <span className="text-xs text-red-600 bg-red-100 px-2 py-1 rounded-full">3 pauses</span>
+                    </div>
+                    <div className="text-xs text-red-700 space-y-1">
+                      <div className="flex justify-between">
+                        <span>• Paused at 4:23 (15 seconds)</span>
+                        <span className="text-red-500">Rewatched 2x</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>• Paused at 7:41 (8 seconds)</span>
+                        <span className="text-red-500">Rewatched 1x</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>• Paused at 12:15 (22 seconds)</span>
+                        <span className="text-red-500">Rewatched 3x</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-blue-800 text-lg mb-2">Peak Focus Time</h3>
-                    <p className="text-blue-700 text-sm">Your optimal learning window is 10-11 AM on weekdays. Schedule challenging topics during this time.</p>
+                  
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-yellow-800">Physics: Quantum Mechanics</span>
+                      <span className="text-xs text-yellow-600 bg-yellow-100 px-2 py-1 rounded-full">2 pauses</span>
+                    </div>
+                    <div className="text-xs text-yellow-700 space-y-1">
+                      <div className="flex justify-between">
+                        <span>• Paused at 9:12 (12 seconds)</span>
+                        <span className="text-yellow-600">Rewatched 1x</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>• Paused at 15:30 (6 seconds)</span>
+                        <span className="text-yellow-600">Rewatched 2x</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-orange-800">Chemistry: Organic Reactions</span>
+                      <span className="text-xs text-orange-600 bg-orange-100 px-2 py-1 rounded-full">1 pause</span>
+                    </div>
+                    <div className="text-xs text-orange-700">
+                      <div className="flex justify-between">
+                        <span>• Paused at 6:45 (9 seconds)</span>
+                        <span className="text-orange-600">Rewatched 1x</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 rounded-xl bg-green-100">
-                    <TrendingUp className="w-6 h-6 text-green-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-green-800 text-lg mb-2">Improvement Area</h3>
-                    <p className="text-green-700 text-sm">Focus on Literature and Arts subjects. Consider interactive exercises to boost engagement.</p>
-                  </div>
+              {/* Resource Effectiveness */}
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2 mb-4">
+                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  <h3 className="text-lg font-semibold text-gray-900">Resource Effectiveness</h3>
+                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Engagement rates</span>
                 </div>
-              </div>
-              
-              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 border border-purple-200">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 rounded-xl bg-purple-100">
-                    <Award className="w-6 h-6 text-purple-600" />
+                
+                <div className="space-y-4">
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-gray-700">Videos</span>
+                      <span className="text-lg font-bold text-gray-900">70%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-blue-500 h-2 rounded-full" style={{ width: '70%' }}></div>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-2">Good retention, consider interactive elements</p>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-purple-800 text-lg mb-2">Streak Opportunity</h3>
-                    <p className="text-purple-700 text-sm">You're 3 days away from a 30-day learning streak! Keep up the momentum.</p>
+                  
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-gray-700">Articles</span>
+                      <span className="text-lg font-bold text-gray-900">60%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-yellow-500 h-2 rounded-full" style={{ width: '60%' }}></div>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-2">Moderate engagement, try shorter formats</p>
+                  </div>
+                  
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-gray-700">Quizzes</span>
+                      <span className="text-lg font-bold text-gray-900">80%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-green-500 h-2 rounded-full" style={{ width: '80%' }}></div>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-2">Excellent performance, increase frequency</p>
+                  </div>
+                  
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-gray-700">Interactive Labs</span>
+                      <span className="text-lg font-bold text-gray-900">85%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-green-600 h-2 rounded-full" style={{ width: '85%' }}></div>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-2">Outstanding results, preferred learning method</p>
+                  </div>
+                  
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-gray-700">Flashcards</span>
+                      <span className="text-lg font-bold text-gray-900">45%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-red-500 h-2 rounded-full" style={{ width: '45%' }}></div>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-2">Low effectiveness, consider alternatives</p>
                   </div>
                 </div>
               </div>
@@ -494,13 +647,3 @@ const LearnerAnalytics = () => {
 };
 
 export default LearnerAnalytics;
-
-// import React from "react";
-
-// const LearnerAnalytics = () => (
-//   <div>
-//     <h1>Hello Analytics</h1>
-//   </div>
-// );
-
-// export default LearnerAnalytics;
