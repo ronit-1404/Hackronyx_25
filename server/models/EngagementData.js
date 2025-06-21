@@ -11,7 +11,7 @@ const EngagementDataSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['webcam', 'audio', 'activity', 'audio_file', 'engagement']
+    enum: ['webcam', 'audio', 'activity', 'audio_file', 'engagement','screen_analyzer']
   },
   timestamp: {
     type: Date,
