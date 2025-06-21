@@ -1,17 +1,30 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Dashboard from "./Dashboard";
-import Dashboard2 from "./Dashboard2";
 import SignUp from "./SignUp";
-import AnalysisPage from "./pages/AnalysisPage";
-import ScreenAnalyzer from "./components/ScreenAnalyzer";
+
+// Learner Pages
+import LearnerHome from "./pages/LearnerHome";
+import LearnerAnalytics from "./pages/LearnerAnalytics";
+import LearnerResources from "./pages/LearnerResources";
+import LearnerSettings from "./pages/LearnerSettings";
+
+// Admin Pages
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminStudents from "./pages/AdminStudents";
+import AdminClasses from "./pages/AdminClasses";
+import AdminAnalytics from "./pages/AdminAnalytics";
+import AdminSettings from "./pages/AdminSettings";
+
+// Parent Pages
+import ParentDashboard from "./pages/ParentDashboard";
+import ParentSettings from "./pages/ParentSettings";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/signup" />} />
-        <Route path="/signup" element={<SignUp />} />
+        {/* Default route: redirect to learner home */}
+        <Route path="/" element={<Navigate to="/learner/home" />} />
 
         {/* Learner Routes */}
         <Route path="/learner/home" element={<LearnerHome />} />
@@ -25,10 +38,13 @@ function App() {
         <Route path="/admin/classes" element={<AdminClasses />} />
         <Route path="/admin/analytics" element={<AdminAnalytics />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
+
+        {/* Parent Routes */}
+        <Route path="/parent/dashboard" element={<ParentDashboard />} />
+        <Route path="/parent/settings" element={<ParentSettings />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
- 
