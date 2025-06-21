@@ -1,0 +1,68 @@
+export const fakeAdminData = {
+  students: [
+    {
+      id: 1,
+      name: "Aniket Sharma",
+      photo: "/images/john_doe.jpg",
+      engagementScore: 85,
+      lastSessionTags: ["Math", "Algebra"],
+      parentLinked: true,
+    },
+    {
+      id: 2,
+      name: "Ayan Singh",
+      photo: "/images/jane_smith.jpg",
+      engagementScore: 90,
+      lastSessionTags: ["Science", "Biology"],
+      parentLinked: false,
+    },
+    {
+      id: 3,
+      name: "Siya Qureshi",
+      photo: "/images/emily_johnson.jpg",
+      engagementScore: 78,
+      lastSessionTags: ["History", "World War II"],
+      parentLinked: true,
+    },
+  ],
+  classes: [
+    {
+      id: 1,
+      name: "Algebra 101",
+      code: "MATH101",
+      enrolledCount: 25,
+      avgEngagementScore: 82,
+      activeAlerts: 2,
+    },
+    {
+      id: 2,
+      name: "Biology Basics",
+      code: "BIO101",
+      enrolledCount: 30,
+      avgEngagementScore: 88,
+      activeAlerts: 1,
+    },
+    {
+      id: 3,
+      name: "World History",
+      code: "HIST101",
+      enrolledCount: 20,
+      avgEngagementScore: 75,
+      activeAlerts: 0,
+    },
+  ],
+  quickStats: {
+    totalStudents: 75,
+    avgConfusionRate: 15,
+    mostUsedAIIntervention: "Take a break",
+  },
+  engagementHeatmap: [
+    { day: "Monday", score: 80 },
+    { day: "Tuesday", score: 85 },
+    { day: "Wednesday", score: 90 },
+    { day: "Thursday", score: 70 },
+    { day: "Friday", score: 75 },
+    { day: "Saturday", score: 60 },
+    { day: "Sunday", score: 65 },
+  ],
+};
