@@ -15,37 +15,27 @@ const ScreenAnalyzer = ({ isAnalyzing }) => {
 
   const API_URL = 'http://127.0.0.1:5001/api';
 
-  // Fetch initial status and session stats
   useEffect(() => {
     fetchStatus();
     fetchSessionStats();
   }, []);
 
-  // Set up interval for continuous analysis
   useEffect(() => {
     if (isAnalyzing) {
       startAnalysis();
     } else {
       stopAnalysis();
     }
-
     return () => stopAnalysis();
   }, [isAnalyzing]);
 
   const startAnalysis = () => {
-    // Clear any existing interval
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-
-    // Start a new analysis interval (every 5 seconds)
+    if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       fetchScreenAnalysis();
       fetchStatus();
       fetchSessionStats();
     }, 5000);
-
-    // Run once immediately
     fetchScreenAnalysis();
   };
 
@@ -75,30 +65,21 @@ const ScreenAnalyzer = ({ isAnalyzing }) => {
     try {
       setIsSaving(true);
       setSaveSuccess(false);
-      
-      // Send the data to your Node.js backend
-      // No session ID required - the backend will create or find an active session
       const response = await fetch('/api/analytics/screen-analysis', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
         },
-        body: JSON.stringify({
-          screenData
-        })
+        body: JSON.stringify({ screenData })
       });
-      
       const data = await response.json();
-      
       if (data.success) {
         setSaveSuccess(true);
-        // Auto-hide success message after 3 seconds
         setTimeout(() => setSaveSuccess(false), 3000);
       } else {
         console.error('Failed to save screen analysis data', data);
       }
-      
       return data;
     } catch (error) {
       console.error('Error saving screen analysis data:', error);
@@ -107,6 +88,7 @@ const ScreenAnalyzer = ({ isAnalyzing }) => {
       setIsSaving(false);
     }
   };
+
   const fetchScreenAnalysis = async () => {
     setLoading(prev => ({ ...prev, screen: true }));
     try {
@@ -143,17 +125,14 @@ const ScreenAnalyzer = ({ isAnalyzing }) => {
     }
   };
 
-  // Format seconds to a readable duration
   const formatDuration = (seconds) => {
     if (!seconds) return '0s';
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
-    
     return `${hrs > 0 ? `${hrs}h ` : ''}${mins > 0 ? `${mins}m ` : ''}${secs}s`;
   };
 
-  // Get sentiment color
   const getSentimentColor = (sentiment) => {
     if (!sentiment) return 'bg-gray-500';
     sentiment = sentiment.toLowerCase();
@@ -161,6 +140,13 @@ const ScreenAnalyzer = ({ isAnalyzing }) => {
     if (sentiment.includes('negative')) return 'bg-red-500';
     if (sentiment.includes('neutral')) return 'bg-blue-500';
     return 'bg-gray-500';
+  };
+
+  // Format ISO timestamp to readable string
+  const formatTimestamp = (iso) => {
+    if (!iso) return '';
+    const d = new Date(iso);
+    return d.toLocaleString();
   };
 
   return (
@@ -262,6 +248,33 @@ const ScreenAnalyzer = ({ isAnalyzing }) => {
           <h3 className="font-semibold text-gray-800 mb-3 text-lg">Screen Analysis</h3>
           {screenData ? (
             <>
+              {/* Timestamp */}
+              {screenData.timestamp && (
+                <div className="mb-2 text-xs text-gray-500">
+                  <span className="font-semibold">Timestamp:</span> {formatTimestamp(screenData.timestamp)}
+                </div>
+              )}
+
+              {/* Chrome Tab Info */}
+              {(screenData.chrome_title || screenData.chrome_url) && (
+                <div className="mb-2 text-xs text-gray-700">
+                  <span className="font-semibold">Chrome Tab:</span>{' '}
+                  {screenData.chrome_title && <span>{screenData.chrome_title} </span>}
+                  {screenData.chrome_url && (
+                    <a href={screenData.chrome_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                      {screenData.chrome_url}
+                    </a>
+                  )}
+                </div>
+              )}
+
+              {/* Context Change Duration */}
+              {screenData.context_change_duration && (
+                <div className="mb-2 text-xs text-purple-700">
+                  <span className="font-semibold">Previous Context Duration:</span> {formatDuration(screenData.context_change_duration)}
+                </div>
+              )}
+
               {screenData.screenshot && (
                 <div className="mb-4 rounded-lg overflow-hidden shadow-sm border border-gray-300">
                   <img 
@@ -289,6 +302,12 @@ const ScreenAnalyzer = ({ isAnalyzing }) => {
                   </span>
                 </div>
                 
+                <div className="flex items-center">
+                  <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+                  <span className="text-sm text-gray-500 mr-2">Idle Time:</span>
+                  <span className="font-medium">{screenData.idle_time ? `${Math.round(screenData.idle_time)}s` : 'Unknown'}</span>
+                </div>
+
                 {screenData.insights && screenData.insights.length > 0 && (
                   <div>
                     <div className="flex items-center mb-1">
@@ -299,7 +318,25 @@ const ScreenAnalyzer = ({ isAnalyzing }) => {
                       {screenData.insights.map((insight, index) => (
                         <li key={index} className="text-xs bg-blue-50 px-3 py-1 rounded-md text-gray-700">{insight}</li>
                       ))}
-                    </ul>                  </div>
+                    </ul>
+                  </div>
+                )}
+
+                {/* Context Change Log */}
+                {screenData.context_log && screenData.context_log.length > 0 && (
+                  <div>
+                    <div className="flex items-center mb-1">
+                      <div className="w-2 h-2 rounded-full bg-purple-500 mr-2"></div>
+                      <span className="text-sm text-gray-500">Recent Context Changes:</span>
+                    </div>
+                    <ul className="space-y-1 pl-4">
+                      {screenData.context_log.slice(-5).reverse().map((item, idx) => (
+                        <li key={idx} className="text-xs text-gray-700">
+                          <span className="font-semibold">{item.context}</span> for {formatDuration(item.duration)} at {formatTimestamp(item.timestamp)}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </div>
               
