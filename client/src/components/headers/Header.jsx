@@ -30,7 +30,8 @@ import {
   Zap,
   Activity,
   BarChart2,
-  LucideHome
+  LucideHome,
+  FileChartPie
 } from "lucide-react";
 
 const Header = () => {
@@ -70,7 +71,7 @@ const Header = () => {
               onClick={() => navigate('/ana')}
               title="Analytics Home"
             >
-              <LucideHome className="w-5 h-5 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
+              <FileChartPie className="w-5 h-5 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
             </button>
 
             <button 
