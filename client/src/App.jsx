@@ -14,6 +14,7 @@ import AdminStudents from "./pages/AdminStudents";
 import AdminClasses from "./pages/AdminClasses";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminSettings from "./pages/AdminSettings";
+import AnalysisPage from "./pages/AnalysisPage";
 
 import SignOut from "./SignOut";
 
@@ -41,6 +42,9 @@ function App() {
         <Route path="/admin/classes" element={<AdminClasses />} />
         <Route path="/admin/analytics" element={<AdminAnalytics />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
+
+        {/* Analysis Page */}
+        <Route path="/analysis" element={<AnalysisPage />} />
 
         <Route path="/signout" element={<SignOut/>} />
 

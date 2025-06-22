@@ -67,6 +67,14 @@ const Header = () => {
 
             <button 
               className="p-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200 hover:border-blue-300 transition-all duration-300 group relative transform hover:scale-110 hover:rotate-3 shadow-sm hover:shadow-lg"
+              onClick={() => navigate('/analysis')}
+              title="Analytics Home"
+            >
+              <LucideHome className="w-5 h-5 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
+            </button>
+
+            <button 
+              className="p-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200 hover:border-blue-300 transition-all duration-300 group relative transform hover:scale-110 hover:rotate-3 shadow-sm hover:shadow-lg"
               onClick={() => navigate('/learner/home')}
               title="Home"
             >
