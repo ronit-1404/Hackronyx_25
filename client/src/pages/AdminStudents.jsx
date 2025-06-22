@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { User, Search, BarChart2, AlertCircle, CheckCircle, XCircle } from "lucide-react";
+import AdminHeader from "../components/headers/AdminHeader";
 
 const students = [
   {
@@ -37,32 +38,8 @@ const AdminStudents = () => {
 
   return (
     <div className="min-h-screen bg-[#F5EFE6] p-8">
-      <div className="bg-white rounded-xl shadow border border-gray-200 p-6 mb-6">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center space-x-3">
-            <User className="w-6 h-6 text-[#F67280]" />
-            <h2 className="text-xl font-semibold text-gray-900">Student Engagement Dashboard</h2>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <Search className="w-4 h-4 text-gray-500 absolute top-2.5 left-3" />
-              <input
-                type="text"
-                placeholder="Search students..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#F67280] focus:outline-none text-sm"
-              />
-            </div>
-            <button
-              onClick={() => setSortByEngagement(!sortByEngagement)}
-              className="flex items-center px-3 py-2 bg-[#F67280] hover:bg-[#e55b6d] text-white text-sm rounded-lg transition"
-            >
-              <BarChart2 className="w-4 h-4 mr-2" />
-              {sortByEngagement ? "Unsort" : "Sort by Engagement"}
-            </button>
-          </div>
-        </div>
+      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6 sticky top-0 z-10 shadow-sm">
+        <AdminHeader/>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
