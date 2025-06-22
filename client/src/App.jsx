@@ -19,6 +19,7 @@ import AdminSettings from "./pages/AdminSettings";
 
 import SignOut from "./SignOut";
 import AnalysisPage from "./pages/AnalysisPage";
+import AdminAuth from "./pages/adminauth/AdminAuth";
 
 // Protected Route component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -116,6 +117,7 @@ function AppContent() {
             <AdminDashboard />
         } 
       />
+      <Route path='/admin/login' element={<AdminAuth />} />
       <Route 
         path="/admin/students" 
         element={
