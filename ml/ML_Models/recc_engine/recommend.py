@@ -2,6 +2,8 @@ import os
 import json
 import requests
 from dotenv import load_dotenv
+from youtube_transcript_api import YouTubeTranscriptApi
+import re
 
 # Load environment variables
 env_path = os.path.join(os.path.dirname(__file__), '.env')
@@ -220,6 +222,39 @@ def find_alternative_blog(contents, current_url):
             return {'title': item.get('Title'), 'url': item.get('URL')}
     return None
 
+def get_youtube_video_id(url):
+    """Extract the video ID from a YouTube URL."""
+    match = re.search(r'(?:v=|youtu.be/)([\w-]{11})', url)
+    if match:
+        return match.group(1)
+    return None
+
+def fetch_youtube_transcript(video_url):
+    video_id = get_youtube_video_id(video_url)
+    if not video_id:
+        return None
+    try:
+        transcript = YouTubeTranscriptApi.get_transcript(video_id)
+        # Join all text segments
+        return ' '.join([seg['text'] for seg in transcript])
+    except Exception as e:
+        print(f"Could not fetch transcript: {e}")
+        return None
+
+def gemini_summarize(text):
+    prompt = f"Summarize the following transcript in 5-7 sentences, focusing on the main points:\n\n{text}"
+    data = {"contents": [{"parts": [{"text": prompt}]}]}
+    resp = requests.post(GEMINI_API_URL, json=data)
+    if resp.status_code == 200:
+        try:
+            summary = resp.json()['candidates'][0]['content']['parts'][0]['text']
+            return summary.strip()
+        except Exception as ex:
+            print('Error parsing Gemini summary response:', ex)
+    else:
+        print('Gemini API error (summary):', resp.status_code)
+    return None
+
 def main():
     output_txt = read_file(OUTPUT_PATH)
     content_txt = read_file(CONTENT_PATH)
@@ -237,6 +272,20 @@ def main():
         print(f"Chrome Title: {chrome_title}")
         print(f"Chrome URL: {chrome_url}")
         rec = gemini_context_recommendation(chrome_title, chrome_url, context, contents, user)
+        transcript_summary = None
+        # If Chrome URL is a YouTube video, fetch transcript and print summary
+        if 'youtube.com/watch' in chrome_url or 'youtu.be/' in chrome_url:
+            transcript = fetch_youtube_transcript(chrome_url)
+            if transcript:
+                summary = gemini_summarize(transcript)
+                if summary:
+                    transcript_summary = summary
+                    print("\n--- Video Transcript Summary ---")
+                    print(summary)
+                else:
+                    print("\n--- Could not generate summary for transcript ---")
+            else:
+                print("\n--- No transcript available for this video ---")
         if rec:
             print(f"1. Fun Fact: {rec.get('fun_fact', 'None')}")
             video = rec.get('alternative_video', {})
@@ -246,6 +295,8 @@ def main():
             # Append to content.txt
             with open(CONTENT_PATH, 'a', encoding='utf-8') as f:
                 f.write(f"\n---\nContext: {context}\nChrome Title: {chrome_title}\nChrome URL: {chrome_url}\nFun Fact: {rec.get('fun_fact', '')}\nRecommended Video Title: {video.get('title', '')}\nRecommended Video URL: {video.get('url', '')}\nRecommended Blog Title: {blog.get('title', '')}\nRecommended Blog URL: {blog.get('url', '')}\n")
+                if transcript_summary:
+                    f.write(f"Transcript Summary: {transcript_summary}\n")
             # Update user.txt with last recommended URLs and context
             user['Last Recommended Context'] = context
             user['Last Recommended Video URL'] = video.get('url', '')
@@ -253,6 +304,18 @@ def main():
             write_file(USER_PATH, '\n'.join([f"{k}: {v}" for k, v in user.items()]))
         else:
             print("No LLM recommendation generated.")
+        # If Chrome URL is a YouTube video, fetch transcript and print summary
+        if 'youtube.com/watch' in chrome_url or 'youtu.be/' in chrome_url:
+            transcript = fetch_youtube_transcript(chrome_url)
+            if transcript:
+                summary = gemini_summarize(transcript)
+                if summary:
+                    print("\n--- Video Transcript Summary ---")
+                    print(summary)
+                else:
+                    print("\n--- Could not generate summary for transcript ---")
+            else:
+                print("\n--- No transcript available for this video ---")
 
 if __name__ == '__main__':
     main()
