@@ -50,6 +50,15 @@ def extract_features(file_path, n_mfcc=13, n_chroma=12, n_mel=128):
         print(f"Error extracting features from {file_path}: {e}")
         return None
 
+# Map model output to 'Engaged' or 'Distracted'
+ENGAGED_EMOTIONS = {'neutral', 'happy', 'surprised'}  # adjust as needed
+
+def map_to_engagement(emotion):
+    if emotion.lower() in ENGAGED_EMOTIONS:
+        return 'Engaged'
+    else:
+        return 'Distracted'
+
 def predict_emotion_from_audio(audio_file_path, model_path='emotion_detection_model.joblib'):
     """
     Predict emotion from an audio file using the trained model
@@ -78,8 +87,9 @@ def predict_emotion_from_audio(audio_file_path, model_path='emotion_detection_mo
     
     # Make prediction
     prediction = model.predict(features)[0]
-    
-    return prediction
+    # Map to engagement
+    engagement = map_to_engagement(prediction)
+    return engagement
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Predict emotion from audio file')
@@ -98,4 +108,4 @@ if __name__ == "__main__":
         exit(1)
     
     emotion = predict_emotion_from_audio(args.audio_file, args.model)
-    print(f"Detected emotion: {emotion}")
+    print(f"Detected engagement: {emotion}")

@@ -22,13 +22,14 @@ WINDOW_DURATION = 3  # Duration of each analysis window in seconds
 WINDOW_SIZE = int(RATE * WINDOW_DURATION)  # Window size in samples
 MODEL_PATH = 'emotion_detection_model.joblib'  # Path to the model
 
-# Engagement mapping
-ENGAGEMENT_MAP = {
-    'neutral': 'Engaged',
-    'confusion': 'Not Fully Engaged',
-    'boredom': 'Not Engaged',
-    'distress': 'Not Engaged'
-}
+# Engagement mapping for binary output
+ENGAGED_EMOTIONS = {'neutral', 'happy', 'surprised'}  # adjust as needed
+
+def map_to_engagement(emotion):
+    if emotion.lower() in ENGAGED_EMOTIONS:
+        return 'Engaged'
+    else:
+        return 'Distracted'
 
 class AudioProcessor:
     def __init__(self, model_path=MODEL_PATH):
@@ -88,8 +89,8 @@ class AudioProcessor:
         # Make prediction
         prediction = self.model.predict(features)[0]
         print(f"[DEBUG] Raw model prediction: {prediction}")
-        # Map to engagement status
-        engagement = ENGAGEMENT_MAP.get(prediction, "Unknown")
+        # Map to binary engagement status
+        engagement = map_to_engagement(prediction)
         return engagement, prediction
         
     def audio_callback(self, in_data, frame_count, time_info, status):

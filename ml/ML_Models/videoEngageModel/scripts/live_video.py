@@ -30,6 +30,18 @@ eye_cascade = cv2.CascadeClassifier(HAAR_EYE)
 emotion_classifier = load_model(MODEL_PATH, compile=False)
 EMOTIONS = ["angry", "disgust", "fear", "happy", "sad", "surprised", "neutral"]
 
+# Map model emotions to 4 target emotions
+EMOTION_MAP = {
+    "angry": "distress",
+    "disgust": "distress",
+    "fear": "distress",
+    "happy": "focussed",
+    "sad": "bored",
+    "surprised": "confused",
+    "neutral": "focussed"
+}
+TARGET_EMOTIONS = ["bored", "confused", "distress", "focussed"]
+
 # Video source: set to 0 for webcam, or use SAMPLE_VIDEO for file
 USE_LIVE_VIDEO = True
 VIDEO_SOURCE = 0 if USE_LIVE_VIDEO else SAMPLE_VIDEO
@@ -63,11 +75,19 @@ while True:
             roi_resized = img_to_array(roi_resized)
             roi_resized = np.expand_dims(roi_resized, axis=0)
             preds = emotion_classifier.predict(roi_resized)[0]
-            label = EMOTIONS[preds.argmax()]
+            # Map probabilities to 4 target emotions
+            mapped_probs = {e: 0.0 for e in TARGET_EMOTIONS}
+            for i, prob in enumerate(preds):
+                mapped_emotion = EMOTION_MAP[EMOTIONS[i]]
+                mapped_probs[mapped_emotion] += prob
+            # Get the max mapped emotion
+            label = max(mapped_probs, key=mapped_probs.get)
             attentive = len(eyes) >= 1
             label_text = f"{'Attentive' if attentive else 'Not-Attentive'} ({label})"
             cv2.putText(frame, label_text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
-            for i, (emotion, prob) in enumerate(zip(EMOTIONS, preds)):
+            # Show mapped probabilities
+            for i, emotion in enumerate(TARGET_EMOTIONS):
+                prob = mapped_probs[emotion]
                 text = f"{emotion}: {prob * 100:.2f}%"
                 w_bar = int(prob * 300)
                 cv2.rectangle(canvas, (7, (i * 35) + 5), (w_bar, (i * 35) + 35), (0, 0, 255), -1)

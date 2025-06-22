@@ -37,6 +37,18 @@ else:
 
 EMOTIONS = ["angry", "disgust", "fear", "happy", "sad", "surprised", "neutral"]
 
+# Map model emotions to 4 target emotions
+EMOTION_MAP = {
+    "angry": "distress",
+    "disgust": "distress",
+    "fear": "distress",
+    "happy": "focussed",
+    "sad": "bored",
+    "surprised": "confused",
+    "neutral": "focussed"
+}
+TARGET_EMOTIONS = ["bored", "confused", "distress", "focussed"]
+
 def analyze_image(image_data):
     """Analyze a single image and return engagement metrics"""
     # Decode base64 image
@@ -55,7 +67,7 @@ def analyze_image(image_data):
             "attentive": False,
             "emotion": "unknown",
             "engagement_score": 0.0,
-            "emotions_data": {emotion: 0.0 for emotion in EMOTIONS}
+            "emotions_data": {emotion: 0.0 for emotion in TARGET_EMOTIONS}
         }
     
     # Process detected face
@@ -69,21 +81,22 @@ def analyze_image(image_data):
         roi_resized = img_to_array(roi_resized)
         roi_resized = np.expand_dims(roi_resized, axis=0)
         preds = emotion_classifier.predict(roi_resized)[0]
-        
-        dominant_emotion = EMOTIONS[preds.argmax()]
+        # Map probabilities to 4 target emotions
+        mapped_probs = {e: 0.0 for e in TARGET_EMOTIONS}
+        for i, prob in enumerate(preds):
+            mapped_emotion = EMOTION_MAP[EMOTIONS[i]]
+            mapped_probs[mapped_emotion] += prob
+        dominant_emotion = max(mapped_probs, key=mapped_probs.get)
         is_attentive = len(eyes) >= 1
         
-        # Calculate engagement score based on attention and emotion
+        # Calculate engagement score based on attention and mapped emotion
         # Higher score for attentive and positive emotions like happy or neutral
         base_score = 0.5 if is_attentive else 0.2
         emotion_multiplier = {
-            "happy": 1.5, 
-            "neutral": 1.2, 
-            "surprised": 1.1, 
-            "sad": 0.8, 
-            "fear": 0.7, 
-            "angry": 0.6, 
-            "disgust": 0.5
+            "focussed": 1.5,
+            "confused": 1.1,
+            "bored": 0.8,
+            "distress": 0.6
         }
         engagement_score = min(1.0, base_score * emotion_multiplier.get(dominant_emotion, 1.0))
         
@@ -92,7 +105,7 @@ def analyze_image(image_data):
             "attentive": is_attentive,
             "emotion": dominant_emotion,
             "engagement_score": float(engagement_score),
-            "emotions_data": {emotion: float(prob) for emotion, prob in zip(EMOTIONS, preds)}
+            "emotions_data": {emotion: float(mapped_probs[emotion]) for emotion in TARGET_EMOTIONS}
         }
 
 @app.route('/api/analyze-engagement', methods=['POST'])
