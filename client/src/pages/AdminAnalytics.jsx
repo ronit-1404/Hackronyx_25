@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
+  AreaChart,
+  Area,
   BarChart, 
   Bar, 
   XAxis, 
@@ -44,9 +46,10 @@ import {
   User,
   GraduationCap,
   Lightbulb,
+  XCircle,
   Shield,
   Zap,
-  BarChart2
+  BarChart2,
 } from 'lucide-react';
 
 const AdminAnalytics = () => {
@@ -226,6 +229,67 @@ const AdminAnalytics = () => {
     setAnimationKey(prev => prev + 1);
   };
 
+  const mlModelData = [
+    { month: 'Jan', successRate: 82, falsePositives: 8, interventions: 45 },
+    { month: 'Feb', successRate: 84, falsePositives: 6, interventions: 52 },
+    { month: 'Mar', successRate: 87, falsePositives: 5, interventions: 48 },
+    { month: 'Apr', successRate: 89, falsePositives: 4, interventions: 61 },
+    { month: 'May', successRate: 91, falsePositives: 3, interventions: 58 },
+    { month: 'Jun', successRate: 93, falsePositives: 2, interventions: 67 }
+  ];
+
+  // Intervention Categories
+  const interventionTypes = [
+    { name: 'Learning Difficulty', value: 35, color: '#EF4444' },
+    { name: 'Engagement Drop', value: 28, color: '#F59E0B' },
+    { name: 'Performance Decline', value: 22, color: '#8B5CF6' },
+    { name: 'Attendance Issues', value: 15, color: '#06B6D4' }
+  ];
+
+
+  // Real-time Intervention Success
+  const interventionSuccess = [
+    { time: '00:00', successful: 85, failed: 15 },
+    { time: '04:00', successful: 88, failed: 12 },
+    { time: '08:00', successful: 92, failed: 8 },
+    { time: '12:00', successful: 89, failed: 11 },
+    { time: '16:00', successful: 94, failed: 6 },
+    { time: '20:00', successful: 91, failed: 9 }
+  ];
+
+    // False Positive Analysis
+
+   const falsePositiveData = [
+    { 
+      category: 'Temporary Absence', 
+      count: 12, 
+      percentage: 40,
+      description: 'Student was absent due to illness/family emergency',
+      examples: ['Medical appointments', 'Family functions', 'Weather conditions']
+    },
+    { 
+      category: 'Technical Issues', 
+      count: 8, 
+      percentage: 27,
+      description: 'System or device connectivity problems',
+      examples: ['Internet outage', 'Device malfunction', 'App crashes']
+    },
+    { 
+      category: 'External Factors', 
+      count: 6, 
+      percentage: 20,
+      description: 'Non-academic reasons affecting performance',
+      examples: ['Home environment', 'Personal stress', 'Time zone changes']
+    },
+    { 
+      category: 'Data Anomalies', 
+      count: 4, 
+      percentage: 13,
+      description: 'Irregular data patterns or system errors',
+      examples: ['Duplicate submissions', 'Timestamp errors', 'Cache issues']
+    }
+  ];
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F5EFE6' }}>
       {/* Header */}
@@ -246,31 +310,46 @@ const AdminAnalytics = () => {
               <option value="quarter">This Quarter</option>
               <option value="year">This Year</option>
             </select>
+            
             <button 
               onClick={() => navigate('/admin/dashboard')}
-              className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
+              className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
               style={{ backgroundColor: '#F67280' }}
             >
               <BarChart2 className="w-5 h-5" />
               <span>Admin Dashboard</span>
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+            
+            {/* Enhanced attractive buttons */}
+            <button 
+              className="p-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200 hover:border-blue-300 transition-all duration-300 group relative transform hover:scale-110 hover:rotate-3 shadow-sm hover:shadow-lg"
               onClick={() => navigate('/admin/classes')}
+              title="Manage Classes & Curriculum"
             >
-              <GraduationCap className="w-4 h-4 text-gray-600" />
+              <GraduationCap className="w-5 h-5 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+            
+            <button 
+              className="p-3 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 border border-green-200 hover:border-green-300 transition-all duration-300 group relative transform hover:scale-110 hover:-rotate-3 shadow-sm hover:shadow-lg"
               onClick={() => navigate('/admin/students')}
+              title="Student Management & Analytics"
             >
-              <User className="w-4 h-4 text-gray-600" />
+              <User className="w-5 h-5 text-green-600 group-hover:text-green-700 transition-colors duration-300" />
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Download className="w-4 h-4 text-gray-600" />
+            
+            <button 
+              className="p-3 rounded-xl bg-gradient-to-r from-purple-50 to-violet-50 hover:from-purple-100 hover:to-violet-100 border border-purple-200 hover:border-purple-300 transition-all duration-300 group relative transform hover:scale-110 hover:rotate-3 shadow-sm hover:shadow-lg"
+              title="Download Reports & Export Data"
+            >
+              <Download className="w-5 h-5 text-purple-600 group-hover:text-purple-700 transition-colors duration-300" />
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+            
+            <button 
+              className="p-3 rounded-xl bg-gradient-to-r from-orange-50 to-red-50 hover:from-orange-100 hover:to-red-100 border border-orange-200 hover:border-orange-300 transition-all duration-300 group relative transform hover:scale-110 hover:-rotate-3 shadow-sm hover:shadow-lg"
               onClick={() => navigate('/admin/settings')}
+              title="System Settings & Configuration"
             >
-              <Settings className="w-4 h-4 text-gray-600" />
+              <Settings className="w-5 h-5 text-orange-600 group-hover:text-orange-700 transition-colors duration-300" />
             </button>
           </div>
         </div>
@@ -543,27 +622,236 @@ const AdminAnalytics = () => {
           {/* Subject Performance Radar */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center space-x-3 mb-6">
-              <Target className="w-6 h-6 text-purple-600" />
-              <h2 className="text-xl font-semibold text-gray-900">Subject Performance</h2>
+              <Brain className="w-6 h-6 text-purple-600" />
+              <h2 className="text-xl font-semibold text-gray-900">System Intervention Analysis</h2>
             </div>
-            <ResponsiveContainer width="100%" height={300}>
-              <RadarChart data={radarData}>
-                <PolarGrid />
-                <PolarAngleAxis dataKey="subject" />
-                <PolarRadiusAxis angle={45} domain={[0, 100]} />
-                <Radar name="Top Performers" dataKey="A" stroke="#10B981" fill="#10B981" fillOpacity={0.3} strokeWidth={2} />
-                <Radar name="Bottom Performers" dataKey="B" stroke="#EF4444" fill="#EF4444" fillOpacity={0.3} strokeWidth={2} />
-                <Tooltip />
-              </RadarChart>
-            </ResponsiveContainer>
-            <div className="flex justify-center space-x-6 mt-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span className="text-sm text-gray-600">Top Performers</span>
+
+            {/* Key Metrics Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+                <div className="flex items-center justify-between mb-2">
+                  <CheckCircle className="w-8 h-8 text-green-600" />
+                  <span className="text-xs text-green-600 bg-green-100 px-2 py-1 rounded-full">Current</span>
+                </div>
+                <p className="text-2xl font-bold text-green-700">93%</p>
+                <p className="text-sm text-green-600">ML Success Rate</p>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <span className="text-sm text-gray-600">Bottom Performers</span>
+
+              <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-lg p-4 border border-red-200">
+                <div className="flex items-center justify-between mb-2">
+                  <XCircle className="w-8 h-8 text-red-600" />
+                  <span className="text-xs text-red-600 bg-red-100 px-2 py-1 rounded-full">Low</span>
+                </div>
+                <p className="text-2xl font-bold text-red-700">2%</p>
+                <p className="text-sm text-red-600">False Positives</p>
+              </div>
+
+              <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-4 border border-purple-200">
+                <div className="flex items-center justify-between mb-2">
+                  <Zap className="w-8 h-8 text-purple-600" />
+                  <span className="text-xs text-purple-600 bg-purple-100 px-2 py-1 rounded-full">Active</span>
+                </div>
+                <p className="text-2xl font-bold text-purple-700">67</p>
+                <p className="text-sm text-purple-600">Interventions</p>
+              </div>
+
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-4 border border-blue-200">
+                <div className="flex items-center justify-between mb-2">
+                  <Activity className="w-8 h-8 text-blue-600" />
+                  <span className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded-full">Avg</span>
+                </div>
+                <p className="text-2xl font-bold text-blue-700">2.1s</p>
+                <p className="text-sm text-blue-600">Response Time</p>
+              </div>
+            </div>
+
+            {/* Charts Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* ML Model Performance Trend */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <TrendingUp className="w-5 h-5 mr-2 text-green-600" />
+                  ML Model Performance Trend
+                </h3>
+                <ResponsiveContainer width="100%" height={200}>
+                  <AreaChart data={mlModelData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                    <XAxis dataKey="month" stroke="#64748b" fontSize={12} />
+                    <YAxis stroke="#64748b" fontSize={12} />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'white', 
+                        border: '1px solid #e2e8f0', 
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                      }} 
+                    />
+                    <Area 
+                      type="monotone" 
+                      dataKey="successRate" 
+                      stroke="#10B981" 
+                      fill="#10B981" 
+                      fillOpacity={0.3}
+                      strokeWidth={3}
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Intervention Types Distribution */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <Shield className="w-5 h-5 mr-2 text-purple-600" />
+                  Intervention Categories
+                </h3>
+                <ResponsiveContainer width="100%" height={200}>
+                  <PieChart>
+                    <Pie 
+                      data={interventionTypes} 
+                      cx="50%" 
+                      cy="50%" 
+                      innerRadius={40}
+                      outerRadius={80} 
+                      paddingAngle={2}
+                      dataKey="value"
+                    >
+                      {interventionTypes.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="grid grid-cols-2 gap-2 mt-4">
+                  {interventionTypes.map((type) => (
+                    <div key={type.name} className="flex items-center space-x-2">
+                      <div 
+                        className="w-3 h-3 rounded-full" 
+                        style={{ backgroundColor: type.color }}
+                      ></div>
+                      <span className="text-xs text-gray-600">{type.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* False Positive Analysis */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <AlertTriangle className="w-5 h-5 mr-2 text-amber-600" />
+                  False Positive Analysis
+                </h3>
+                <ResponsiveContainer width="100%" height={200}>
+                  <BarChart data={falsePositiveData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                    <XAxis 
+                      dataKey="category" 
+                      stroke="#64748b" 
+                      fontSize={10} 
+                      angle={-45}
+                      textAnchor="end"
+                      height={60}
+                    />
+                    <YAxis stroke="#64748b" fontSize={12} />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'white', 
+                        border: '1px solid #e2e8f0', 
+                        borderRadius: '8px'
+                      }}
+                      formatter={(value, name) => [value, 'Cases']}
+                      labelFormatter={(label) => `Category: ${label}`}
+                    />
+                    <Bar 
+                      dataKey="count" 
+                      fill="#F59E0B" 
+                      radius={[4, 4, 0, 0]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+                <div className="grid grid-cols-2 gap-2 mt-2">
+                  {falsePositiveData.map((item) => (
+                    <div key={item.category} className="flex items-center justify-between text-xs">
+                      <span className="text-gray-600">{item.category}</span>
+                      <span className="font-bold text-amber-600">{item.count} ({item.percentage}%)</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Real-time Success Rate */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <Activity className="w-5 h-5 mr-2 text-blue-600" />
+                  24-Hour Success Pattern
+                </h3>
+                <ResponsiveContainer width="100%" height={200}>
+                  <LineChart data={interventionSuccess}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                    <XAxis dataKey="time" stroke="#64748b" fontSize={12} />
+                    <YAxis stroke="#64748b" fontSize={12} />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'white', 
+                        border: '1px solid #e2e8f0', 
+                        borderRadius: '8px'
+                      }} 
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="successful" 
+                      stroke="#10B981" 
+                      strokeWidth={3}
+                      dot={{ fill: '#10B981', strokeWidth: 2, r: 4 }}
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="failed" 
+                      stroke="#EF4444" 
+                      strokeWidth={3}
+                      dot={{ fill: '#EF4444', strokeWidth: 2, r: 4 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* Summary Stats */}
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-4 border border-indigo-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-indigo-600 font-medium">Model Accuracy</p>
+                    <p className="text-2xl font-bold text-indigo-700">94.2%</p>
+                  </div>
+                  <div className="text-indigo-600">
+                    <Brain className="w-8 h-8" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-teal-50 to-green-50 rounded-lg p-4 border border-teal-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-teal-600 font-medium">Intervention Efficiency</p>
+                    <p className="text-2xl font-bold text-teal-700">87.5%</p>
+                  </div>
+                  <div className="text-teal-600">
+                    <Zap className="w-8 h-8" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-4 border border-orange-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-orange-600 font-medium">Error Reduction</p>
+                    <p className="text-2xl font-bold text-orange-700">78%</p>
+                  </div>
+                  <div className="text-orange-600">
+                    <Shield className="w-8 h-8" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

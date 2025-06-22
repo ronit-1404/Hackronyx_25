@@ -30,6 +30,8 @@ import {
   Home,
   LogOut
 } from 'lucide-react';
+import Header from '../components/headers/Header';
+import SideBar from '../components/sideBar/SideBar';
 
 const LearnerAnalytics = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -140,156 +142,12 @@ const LearnerAnalytics = () => {
   return (
     <div className="min-h-screen flex" style={{ backgroundColor: '#F5EFE6' }}>
       {/* Sidebar */}
-      <div className="w-80 h-screen fixed left-0 top-0 bg-white shadow-xl border-r border-gray-200 flex flex-col" style={{ zIndex: 20 }}>
-        {/* Sidebar Header */}
-        <div className="p-6 border-b border-gray-100 shrink-0">
-          <div className="flex items-center space-x-3 mb-4">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg" style={{ backgroundColor: '#F67280' }}>
-              <BarChart2 className="w-7 h-7 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">Analytics Hub</h1>
-              <p className="text-xs text-gray-500">Advanced Learning Insights</p>
-            </div>
-          </div>
-          
-          {/* Live Clock Widget */}
-          <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4">
-            <div className="text-center">
-              <p className="text-lg font-bold text-gray-900">{currentTime.toLocaleTimeString()}</p>
-              <p className="text-sm text-gray-600">{currentTime.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Sidebar Content */}
-        <div className="flex-1 p-6 space-y-6 overflow-y-auto">
-          {/* Quick Filters */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Quick Filters</h3>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Time Range</label>
-              <select 
-                value={selectedTimeRange}
-                onChange={(e) => setSelectedTimeRange(e.target.value)}
-                className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#F67280] focus:border-transparent"
-              >
-                <option value="today">Today</option>
-                <option value="week">This Week</option>
-                <option value="month">This Month</option>
-                <option value="quarter">This Quarter</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Metric</label>
-              <select 
-                value={selectedMetric}
-                onChange={(e) => setSelectedMetric(e.target.value)}
-                className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#F67280] focus:border-transparent"
-              >
-                <option value="focus">Focus Score</option>
-                <option value="productivity">Productivity</option>
-                <option value="engagement">Engagement</option>
-                <option value="mood">Mood</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Key Metrics Summary */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Key Metrics</h3>
-            {keyMetrics.map((metric, index) => (
-              <div key={index} className="bg-white rounded-lg p-4 border border-gray-100 shadow-sm">
-                <div className="flex items-center justify-between mb-2">
-                  <metric.icon className={`w-5 h-5 text-${metric.color}-600`} />
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    metric.trend === 'up' ? 'text-green-600 bg-green-50' : 
-                    metric.trend === 'down' ? 'text-red-600 bg-red-50' : 
-                    'text-gray-600 bg-gray-50'
-                  }`}>
-                    {metric.trend === 'up' && <ArrowUp className="w-3 h-3 inline mr-1" />}
-                    {metric.trend === 'down' && <ArrowDown className="w-3 h-3 inline mr-1" />}
-                    {metric.trend === 'stable' && <Minus className="w-3 h-3 inline mr-1" />}
-                    {metric.change}
-                  </span>
-                </div>
-                <div className="text-right">
-                  <p className="text-2xl font-bold text-gray-900">{metric.value}</p>
-                  <p className="text-xs text-gray-600">{metric.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Action Buttons */}
-          <div className="space-y-3">
-            <button className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all shadow-lg">
-              <Download className="w-4 h-4" />
-              <span>Export Report</span>
-            </button>
-            <button className="w-full flex items-center justify-center space-x-2 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-all">
-              <Share2 className="w-4 h-4" />
-              <span>Share Insights</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Sidebar Footer */}
-        <div className="p-6 border-t border-gray-100 shrink-0">
-          <div className="flex space-x-2">
-            <button className="flex-1 p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Home className="w-4 h-4 text-gray-600 mx-auto" />
-            </button>
-            <button className="flex-1 p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Settings className="w-4 h-4 text-gray-600 mx-auto" />
-            </button>
-            <button className="flex-1 p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <User className="w-4 h-4 text-gray-600 mx-auto" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <SideBar />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col ml-80 h-screen overflow-y-auto">
         {/* Top Navigation Bar */}
-        <div className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900">Advanced Learning Analytics</h2>
-            <p className="text-sm text-gray-600">Deep insights into your learning patterns and performance</p>
-          </div>
-          <div className="flex items-center space-x-4">
-            {/* <button className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg transition-colors">
-              <RefreshCw className="w-4 h-4 text-gray-600" />
-              <span className="text-sm text-gray-700">Refresh</span>
-            </button> */}
-            <button 
-              onClick={() => navigate('/learner/analytics')}
-              className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
-              style={{ backgroundColor: '#F67280' }}
-            >
-              <BarChart2 className="w-5 h-5" />
-              <span>Detailed Analysis</span>
-            </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-              onClick={() => navigate('/learner/resources')}
-            >
-              <FileText className="w-4 h-4 text-gray-600" />
-            </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-              onClick={() => navigate('/learner/settings')}
-            >
-              <Settings className="w-4 h-4 text-gray-600" />
-            </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-              onClick={() => navigate('/signout')}
-            >
-              <LogOut className="w-4 h-4 text-gray-600" />
-            </button>
-          </div>
-        </div>
+        <Header/>
 
         <div className="flex-1 p-8 overflow-y-auto">
           {/* Focus Heatmap - Full Width */}
