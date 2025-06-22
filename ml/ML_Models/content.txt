@@ -20,3 +20,7 @@ Readability: 70.0
 ---
 Recommended Title: None
 Recommended URL: None
+
+---
+Recommended Title: Python Loops Tutorial
+Recommended URL: https://youtube.com/python-loops
