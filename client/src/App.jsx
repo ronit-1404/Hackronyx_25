@@ -36,7 +36,9 @@ const ProtectedRoute = ({ children, requiredRole }) => {
     return <Navigate to="/" replace />;
   }
 
+  // If a specific role is required, check it
   if (requiredRole && user?.role !== requiredRole) {
+    // Redirect to appropriate dashboard based on actual role
     if (user?.role === 'admin') {
       return <Navigate to="/admin/dashboard" replace />;
     }
@@ -74,6 +76,7 @@ function AppContent() {
 
   return (
     <Routes>
+      {/* Default route */}
       <Route path="/" element={<LoginSelection onSelect={handleRoleSelection} />} />
       <Route path="/fds" element={<Navigate to="/signup" />} />
       <Route path="/signup" element={<SignUp />} />
@@ -91,8 +94,13 @@ function AppContent() {
       <Route path="/admin/analytics" element={<AdminAnalytics />} />
       <Route path="/admin/settings" element={<AdminSettings />} />
 
+      {/* Shared */}
       <Route path="/analysis" element={<AnalysisPage />} />
       <Route path="/signout" element={<SignOut />} />
+
+      {/* Future Parent Routes */}
+      {/* <Route path="/parent/dashboard" element={<ParentDashboard />} /> */}
+      {/* <Route path="/parent/settings" element={<ParentSettings />} /> */}
     </Routes>
   );
 }
