@@ -16,9 +16,9 @@ import AdminStudents from "./pages/AdminStudents";
 import AdminClasses from "./pages/AdminClasses";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminSettings from "./pages/AdminSettings";
-import AnalysisPage from "./pages/AnalysisPage";
 
 import SignOut from "./SignOut";
+import AnalysisPage from "./pages/AnalysisPage";
 
 // Protected Route component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -58,7 +58,8 @@ function AppContent() {
 
     if (stoken) {
       setRole('student');
-    } else if (aToken) {
+    }
+    else if (aToken) {
       setRole('admin');
     }
   }, []);
@@ -76,31 +77,75 @@ function AppContent() {
 
   return (
     <Routes>
-      {/* Default route */}
+      {/* Default route: redirect to signup */}
       <Route path="/" element={<LoginSelection onSelect={handleRoleSelection} />} />
       <Route path="/fds" element={<Navigate to="/signup" />} />
       <Route path="/signup" element={<SignUp />} />
 
       {/* Learner Routes */}
-      <Route path="/learner/home" element={<LearnerHome />} />
-      <Route path="/learner/analytics" element={<LearnerAnalytics />} />
-      <Route path="/learner/resources" element={<LearnerResources />} />
-      <Route path="/learner/settings" element={<LearnerSettings />} />
+      <Route 
+        path="/learner/home" 
+        element={
+            <LearnerHome />
+        } 
+      />
+      <Route path='/ana' element={<AnalysisPage />} />
+      <Route 
+        path="/learner/analytics" 
+        element={
+            <LearnerAnalytics />
+        } 
+      />
+      <Route 
+        path="/learner/resources" 
+        element={
+            <LearnerResources />
+        } 
+      />
+      <Route 
+        path="/learner/settings" 
+        element={
+            <LearnerSettings />
+        } 
+      />
 
       {/* Admin Routes */}
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      <Route path="/admin/students" element={<AdminStudents />} />
-      <Route path="/admin/classes" element={<AdminClasses />} />
-      <Route path="/admin/analytics" element={<AdminAnalytics />} />
-      <Route path="/admin/settings" element={<AdminSettings />} />
+      <Route 
+        path="/admin/dashboard" 
+        element={
+            <AdminDashboard />
+        } 
+      />
+      <Route 
+        path="/admin/students" 
+        element={
+            <AdminStudents />
+        } 
+      />
+      <Route 
+        path="/admin/classes" 
+        element={
+            <AdminClasses />
+        } 
+      />
+      <Route 
+        path="/admin/analytics" 
+        element={
+            <AdminAnalytics />
+        } 
+      />
+      <Route 
+        path="/admin/settings" 
+        element={
+            <AdminSettings />
+        } 
+      />
 
-      {/* Shared */}
-      <Route path="/analysis" element={<AnalysisPage />} />
-      <Route path="/signout" element={<SignOut />} />
+      <Route path="/signout" element={<SignOut/>} />
 
-      {/* Future Parent Routes */}
-      {/* <Route path="/parent/dashboard" element={<ParentDashboard />} /> */}
-      {/* <Route path="/parent/settings" element={<ParentSettings />} /> */}
+      {/* Parent Routes */}
+      {/* <Route path="/parent/dashboard" element={<ParentDashboard />} />
+      <Route path="/parent/settings" element={<ParentSettings />} /> */}
     </Routes>
   );
 }
