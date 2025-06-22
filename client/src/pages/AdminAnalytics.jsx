@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   BarChart, 
   Bar, 
@@ -52,6 +53,8 @@ const AdminAnalytics = () => {
   const [selectedTimeRange, setSelectedTimeRange] = useState('month');
   const [selectedView, setSelectedView] = useState('overview');
   const [animationKey, setAnimationKey] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -242,8 +245,8 @@ const AdminAnalytics = () => {
               <option value="quarter">This Quarter</option>
               <option value="year">This Year</option>
             </select>
-            <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg px-4 py-2">
-              <div className="text-sm font-medium text-gray-900">
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg px-4 py-2 w-[220px]">
+              <div className="text-sm font-medium text-gray-900 whitespace-nowrap text-center">
                 {currentTime.toLocaleTimeString()} • {currentTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
               </div>
             </div>
@@ -256,7 +259,9 @@ const AdminAnalytics = () => {
             <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
               <Download className="w-4 h-4 text-gray-600" />
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/admin/settings')}
+            >
               <Settings className="w-4 h-4 text-gray-600" />
             </button>
           </div>

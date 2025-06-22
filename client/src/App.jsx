@@ -16,15 +16,16 @@ import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminSettings from "./pages/AdminSettings";
 
 // Parent Pages
-import ParentDashboard from "./pages/ParentDashboard";
-import ParentSettings from "./pages/ParentSettings";
+// import ParentDashboard from "./pages/ParentDashboard";
+// import ParentSettings from "./pages/ParentSettings";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Default route: redirect to learner home */}
-        <Route path="/" element={<Navigate to="/learner/home" />} />
+        {/* Default route: redirect to signup */}
+        <Route path="/" element={<Navigate to="/signup" />} />
+        <Route path="/signup" element={<SignUp />} />
 
         {/* Learner Routes */}
         <Route path="/learner/home" element={<LearnerHome />} />
@@ -40,8 +41,8 @@ function App() {
         <Route path="/admin/settings" element={<AdminSettings />} />
 
         {/* Parent Routes */}
-        <Route path="/parent/dashboard" element={<ParentDashboard />} />
-        <Route path="/parent/settings" element={<ParentSettings />} />
+        {/* <Route path="/parent/dashboard" element={<ParentDashboard />} />
+        <Route path="/parent/settings" element={<ParentSettings />} /> */}
       </Routes>
     </Router>
   );

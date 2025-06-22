@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
 import { 
   Brain, 
-  Eye, 
+  Eye,
+  GraduationCap,
+  FileText, 
   TrendingUp, 
   Clock, 
   Target, 
@@ -297,18 +299,20 @@ const Dashboard2 = () => {
               <option value="month">This Month</option>
             </select>
             <button 
-              onClick={() => navigate('/analysis')}
+              onClick={() => navigate('/learner/analytics')}
               className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
               style={{ backgroundColor: '#F67280' }}
             >
               <BarChart2 className="w-5 h-5" />
               <span>Detailed Analysis</span>
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Bell className="w-4 h-4 text-gray-600" />
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/learner/resources')}
+            >
+              <FileText className="w-4 h-4 text-gray-600" />
             </button>
             <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Settings className="w-4 h-4 text-gray-600" />
+              <Settings onClick={() => navigate('/learner/settings')} className="w-4 h-4 text-gray-600" />
             </button>
             <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
               <User className="w-4 h-4 text-gray-600" />

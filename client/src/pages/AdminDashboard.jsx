@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
 import { 
-  Users, 
+  Users,
+  GraduationCap, 
   BookOpen, 
   TrendingUp, 
   Clock, 
@@ -39,6 +41,7 @@ const AdminDashboard = () => {
   const [selectedTimeRange, setSelectedTimeRange] = useState('today');
   const [activeTab, setActiveTab] = useState('overview');
   const [refreshing, setRefreshing] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -259,18 +262,27 @@ const AdminDashboard = () => {
               <option value="month">This Month</option>
               <option value="semester">This Semester</option>
             </select>
-            <button className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
-              style={{ backgroundColor: '#F67280' }}>
+            <button 
+              className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
+              style={{ backgroundColor: '#F67280' }}
+              onClick={() => navigate('/admin/analytics')}
+            >
               <BarChart2 className="w-5 h-5" />
-              <span>Export Report</span>
+              <span>Detailed Analysis</span>
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Bell className="w-4 h-4 text-gray-600" />
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/admin/classes')}
+            >
+              <GraduationCap className="w-4 h-4 text-gray-600" />
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/admin/settings')}
+            >
               <Settings className="w-4 h-4 text-gray-600" />
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/admin/students')}
+            >
               <User className="w-4 h-4 text-gray-600" />
             </button>
           </div>

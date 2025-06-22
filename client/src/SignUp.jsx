@@ -78,7 +78,7 @@ const SignUp = () => {
       console.log('Form submitted:', formData);
       // Later: send data to backend here
 
-      navigate('/dashboard'); // ⬅️ Redirect to dashboard
+      navigate('/learner/home'); // ⬅️ Redirect to dashboard
     }
   };
 
