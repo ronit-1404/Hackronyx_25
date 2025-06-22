@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const sessionController = require('../controllers/sessionController.js');
-const authMiddleware = require('../middleware/auth.js');
 
-// Apply auth middleware to ALL routes
-router.use(authMiddleware);
 
 // Get user sessions with pagination and filtering
 router.get('/', sessionController.getUserSessions);
