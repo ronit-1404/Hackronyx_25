@@ -1,7 +1,8 @@
 User ID: student_001
-Attentive Topics: {}
+Attentive Topics: {'browsing': 5}
 Preferred Content Types: {}
 Average Active Time: 0.0
 Average Idle Time: 0.0
-Engaged Apps: {}
+Engaged Apps: {'WhatsApp': 5}
 Historical Attentiveness Scores: []
+Last Sentiment: positive
