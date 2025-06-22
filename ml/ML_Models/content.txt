@@ -37,3 +37,23 @@ Recommended Video Title: Machine Learning A-Z™: Hands-On Python & R In Data Sc
 Recommended Video URL: https://www.youtube.com/watch?v=J4Wdy0Wc_xQ
 Recommended Blog Title: What is Machine Learning? A Simple Explanation
 Recommended Blog URL: https://www.simplilearn.com/tutorials/machine-learning-tutorial/what-is-machine-learning
+
+---
+Context: video_lecture
+Chrome Title: Satellite Images Reveal Unusual Activity At Iran's Fordow Nuclear Facility Before US Strikes - YouTube
+Chrome URL: https://www.youtube.com/watch?v=gFc39iX4y-I
+Fun Fact: Did you know that analyzing satellite images of nuclear facilities often involves comparing images taken over time to detect even subtle changes? It's like a high-stakes game of 'Spot the Difference', but the stakes are geopolitical!
+Recommended Video Title: Iran's Nuclear Ambitions: Understanding the Geopolitical Landscape | Al Jazeera English
+Recommended Video URL: https://www.youtube.com/results?search_query=iran+nuclear+program+al+jazeera
+Recommended Blog Title: The Fordow Enrichment Plant: A Key Element in Iran's Nuclear Program
+Recommended Blog URL: https://www.atlanticcouncil.org/blogs/iransource/iran-nuclear-program-fordow/
+
+---
+Context: programming
+Chrome Title: Introduction to Machine Learning with Python
+Chrome URL: https://www.nrigroupindia.com/e-book/Introduction%20to%20Machine%20Learning%20with%20Python%20(%20PDFDrive.com%20)-min.pdf
+Fun Fact: Did you know that the humble Python programming language, used extensively in machine learning, boasts a vast and supportive community, constantly creating new libraries and resources to make your learning journey smoother and more fun?
+Recommended Video Title: Machine Learning Crash Course - Google AI
+Recommended Video URL: https://www.youtube.com/watch?v=cKxRv-98Rj0
+Recommended Blog Title: Understanding Machine Learning: A Beginner's Guide
+Recommended Blog URL: https://builtin.com/artificial-intelligence/machine-learning-guide

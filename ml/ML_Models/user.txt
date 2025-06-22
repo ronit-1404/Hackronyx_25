@@ -7,5 +7,5 @@ Engaged Apps: {'WhatsApp': 5, 'Google Chrome': 4}
 Historical Attentiveness Scores: []
 Last Sentiment: positive
 Last Recommended Context: programming
-Last Recommended Video URL: https://www.youtube.com/watch?v=J4Wdy0Wc_xQ
-Last Recommended Blog URL: https://www.simplilearn.com/tutorials/machine-learning-tutorial/what-is-machine-learning
+Last Recommended Video URL: https://www.youtube.com/watch?v=cKxRv-98Rj0
+Last Recommended Blog URL: https://builtin.com/artificial-intelligence/machine-learning-guide
