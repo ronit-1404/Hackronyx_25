@@ -7,6 +7,7 @@ import {
   FileText, 
   TrendingUp, 
   Clock, 
+  LogOut,
   Target, 
   Activity,
   Smile,
@@ -304,7 +305,7 @@ const Dashboard2 = () => {
               style={{ backgroundColor: '#F67280' }}
             >
               <BarChart2 className="w-5 h-5" />
-              <span>Detailed Analysis</span>
+              <span>Advance Analysis</span>
             </button>
             <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
               onClick={() => navigate('/learner/resources')}
@@ -314,8 +315,10 @@ const Dashboard2 = () => {
             <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
               <Settings onClick={() => navigate('/learner/settings')} className="w-4 h-4 text-gray-600" />
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <User className="w-4 h-4 text-gray-600" />
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/signout')}
+            >
+              <LogOut className="w-4 h-4 text-gray-600" />
             </button>
           </div>
         </div>

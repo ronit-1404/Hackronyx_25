@@ -15,6 +15,8 @@ import AdminClasses from "./pages/AdminClasses";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminSettings from "./pages/AdminSettings";
 
+import SignOut from "./SignOut";
+
 // Parent Pages
 // import ParentDashboard from "./pages/ParentDashboard";
 // import ParentSettings from "./pages/ParentSettings";
@@ -39,6 +41,8 @@ function App() {
         <Route path="/admin/classes" element={<AdminClasses />} />
         <Route path="/admin/analytics" element={<AdminAnalytics />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
+
+        <Route path="/signout" element={<SignOut/>} />
 
         {/* Parent Routes */}
         {/* <Route path="/parent/dashboard" element={<ParentDashboard />} />
