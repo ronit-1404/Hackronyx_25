@@ -16,3 +16,7 @@ Description: A blog post on solving algebraic equations.
 Length (min): None
 Readability: 70.0
 ---
+
+---
+Recommended Title: None
+Recommended URL: None
