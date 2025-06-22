@@ -64,11 +64,18 @@ def predict_emotion():
         try:
             # Predict emotion
             emotion = predict_emotion_from_audio(temp_path, MODEL_PATH)
-            
+
+            # Map emotion to 'engaged' or 'distracted'
+            engaged_emotions = {'happy', 'neutral', 'surprised'}  # adjust as needed
+            if emotion.lower() in engaged_emotions:
+                engagement = 'engaged'
+            else:
+                engagement = 'distracted'
+
             return jsonify({
                 'success': True,
                 'message': 'Emotion predicted successfully',
-                'emotion': emotion
+                'emotion': engagement
             })
         finally:
             # Always clean up the temporary file
