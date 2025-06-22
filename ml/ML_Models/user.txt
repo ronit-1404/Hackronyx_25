@@ -1,8 +1,11 @@
 User ID: student_001
-Attentive Topics: {'browsing': 5, 'programming': 1}
+Attentive Topics: {'browsing': 5, 'programming': 4}
 Preferred Content Types: {}
 Average Active Time: 0.0
 Average Idle Time: 0.0
-Engaged Apps: {'WhatsApp': 5, 'Google Chrome': 1}
+Engaged Apps: {'WhatsApp': 5, 'Google Chrome': 4}
 Historical Attentiveness Scores: []
 Last Sentiment: positive
+Last Recommended Context: programming
+Last Recommended Video URL: https://www.youtube.com/watch?v=J4Wdy0Wc_xQ
+Last Recommended Blog URL: https://www.simplilearn.com/tutorials/machine-learning-tutorial/what-is-machine-learning

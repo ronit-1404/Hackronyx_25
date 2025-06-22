@@ -32,15 +32,15 @@ EMOTIONS = ["angry", "disgust", "fear", "happy", "sad", "surprised", "neutral"]
 
 # Map model emotions to 4 target emotions
 EMOTION_MAP = {
-    "angry": "distress",
-    "disgust": "distress",
-    "fear": "distress",
-    "happy": "focussed",
+    "angry": "frustrated",
+    "disgust": "frustrated",
+    "fear": "confused",
+    "happy": "focused",
     "sad": "bored",
-    "surprised": "confused",
-    "neutral": "focussed"
+    "surprised": "focused",
+    "neutral": "focused"
 }
-TARGET_EMOTIONS = ["bored", "confused", "distress", "focussed"]
+TARGET_EMOTIONS = ["bored", "confused", "frustrated", "focused"]
 
 # Video source: set to 0 for webcam, or use SAMPLE_VIDEO for file
 USE_LIVE_VIDEO = True

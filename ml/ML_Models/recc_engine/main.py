@@ -46,22 +46,6 @@ def parse_terminal_output(lines):
 def main():
     engine = RecommendationEngine()
     engine.add_user("student_001")
-    engine.add_content(
-        title="Python Loops Tutorial",
-        url="https://youtube.com/python-loops",
-        content_type="YouTube Video",
-        description="A beginner's guide to loops in Python.",
-        transcript_or_text="Learn about loops, variables, and Python programming in this tutorial.",
-        length_minutes=10
-    )
-    engine.add_content(
-        title="Understanding Algebraic Equations",
-        url="https://blog.com/algebra-equations",
-        content_type="Blog Post",
-        description="A blog post on solving algebraic equations.",
-        transcript_or_text="This blog post discusses algebra, equations, and statistics in mathematics.",
-        readability_score=70.0
-    )
     # Always read from output.txt, clean input by removing empty lines and irrelevant headers
     with open("ml/ML_Models/screen-analyzer/output.txt", "r", encoding="utf-8") as f:
         lines = [line.strip() for line in f if line.strip() and not line.startswith("Live Screen Analyzer")]  # skip header and empty lines
