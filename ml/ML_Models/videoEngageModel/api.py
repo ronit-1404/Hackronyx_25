@@ -39,15 +39,15 @@ EMOTIONS = ["angry", "disgust", "fear", "happy", "sad", "surprised", "neutral"]
 
 # Map model emotions to 4 target emotions
 EMOTION_MAP = {
-    "angry": "distress",
-    "disgust": "distress",
-    "fear": "distress",
-    "happy": "focussed",
+    "angry": "frustrated",
+    "disgust": "frustrated",
+    "fear": "confused",
+    "happy": "focused",
     "sad": "bored",
-    "surprised": "confused",
-    "neutral": "focussed"
+    "surprised": "focused",
+    "neutral": "focused"
 }
-TARGET_EMOTIONS = ["bored", "confused", "distress", "focussed"]
+TARGET_EMOTIONS = ["bored", "confused", "frustrated", "focused"]
 
 def analyze_image(image_data):
     """Analyze a single image and return engagement metrics"""
@@ -93,10 +93,10 @@ def analyze_image(image_data):
         # Higher score for attentive and positive emotions like happy or neutral
         base_score = 0.5 if is_attentive else 0.2
         emotion_multiplier = {
-            "focussed": 1.5,
+            "focused": 1.5,
             "confused": 1.1,
             "bored": 0.8,
-            "distress": 0.6
+            "frustrated": 0.6
         }
         engagement_score = min(1.0, base_score * emotion_multiplier.get(dominant_emotion, 1.0))
         
