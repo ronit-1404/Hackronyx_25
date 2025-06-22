@@ -2,78 +2,57 @@
 Live Screen Analyzer - MacOS (Ctrl+C to stop)
 
 =========================================
-[2025-06-21T13:24:40.523716]
+[2025-06-22T14:54:46.139525]
 Active App: Electron
 Detected Context: programming
 Sentiment: positive
-Idle Time: 0.109207667 sec
+Idle Time: 0.064088209 sec
 Text Sample: e
 €e5 £ Hackronyx_25 By obo ad
-| im EXPLORER ++ 5erver.py @ api.py @ main_terminal_parse.py @ main.py @ |Ilm_recommender.py env MX README.md ym O CHAT
+| oo EXPLORER oe cHAaT 9 C+ Qe X
+\v HACKRONYX_25 change your code in main. py
+P V ‘@i client from:
+® eslint.config.js
+l
 =========================================
 
+--- Context 'programming' lasted 6.9 seconds ---
+
 =========================================
-[2025-06-21T13:24:47.668210]
-Active App: WhatsApp
+[2025-06-22T14:54:52.723778]
+Active App: Google Chrome
+Detected Context: video_lecture
+Sentiment: positive
+Idle Time: 0.0033945 sec
+Chrome Title: Satellite Images Reveal Unusual Activity At Iran's Fordow Nuclear Facility Before US Strikes - YouTube
+Chrome URL: https://www.youtube.com/watch?v=gFc39iX4y-I
+Text Sample: e@ oO QO SiyaDadpe/Hackronyx_25 x La Meet - cid-xqim-mif @ x @ Introduction to Machine Lea x @& Satellite Images Reveall 4) xX + v
+€ Cc 2% youtube.com
+=========================================
+
+--- Context 'video_lecture' lasted 6.2 seconds ---
+
+=========================================
+[2025-06-22T14:54:59.635251]
+Active App: Google Chrome
 Detected Context: programming
 Sentiment: positive
-Idle Time: 0.000537416 sec
-Text Sample: @ = WhatsApp File Chat Edit Call View Window Help C2 @) fF Q ®_ SatJun21 6:54PM
-ece Gayatri
-7H ayatri
-Chats 4 © . Click here for contact info CK & Q
-(
+Idle Time: 0.968553416 sec
+Chrome Title: Introduction to Machine Learning with Python
+Chrome URL: https://www.nrigroupindia.com/e-book/Introduction%20to%20Machine%20Learning%20with%20Python%20(%20PDFDrive.com%20)-min.pdf
+Text Sample: oO O QO SiyaDadpe/Hackronyx_25 x LA Meet - cid-xqim-mif @® x @ Introduction to Machine Lea x @ Satellite Images Reveal Unu x + v
+€ Cc 3 nrigroupindia.
 =========================================
 
 =========================================
-[2025-06-21T13:24:53.688804]
-Active App: WhatsApp
+[2025-06-22T14:55:05.817462]
+Active App: Google Chrome
 Detected Context: programming
 Sentiment: positive
-Idle Time: 0.001978959 sec
-Text Sample: @ = WhatsApp File Chat Edit Call View Window Help C2 @) fF Q ®_ SatJun21 6:54PM
-@ece .
-Chats G% © Gayatri "wy & Q
-(@)) Q Ask Meta Al or Search 1:11AM
-
-=========================================
-
-=========================================
-[2025-06-21T13:24:59.717246]
-Active App: WhatsApp
-Detected Context: programming
-Sentiment: positive
-Idle Time: 0.0607825 sec
-Text Sample: @ = WhatsApp File Chat Edit Call View Window Help C2 @) fF Q ®_ SatJun21 6:54PM
-ece NoN
-7 loName
-Chats 4 © 23] Animesh Bhaiyya, AYA, Ronit, You ey & Q
-=========================================
-
-=========================================
-[2025-06-21T13:25:05.743429]
-Active App: WhatsApp
-Detected Context: programming
-Sentiment: positive
-Idle Time: 0.001794708 sec
-Text Sample: @ = WhatsApp File Chat Edit Call View Window Help C2 @) @F Q ®_ SatJun21 6:55PM
-@ce A VJ Si
-7 ir
-Chats 4 © Click here for contact info CK & Q
-.@)) Q A
-=========================================
-
---- Context 'programming' lasted 30.1 seconds ---
-
-=========================================
-[2025-06-21T13:25:11.700322]
-Active App: WhatsApp
-Detected Context: browsing
-Sentiment: positive
-Idle Time: 0.004179709 sec
-Text Sample: @ WhatsApp File Chat Edit Call View Window Help Ch @ + FP Q S  SatJun21 6:55PM
-eee @ C-Cub i
-Fi -Cube Website
-Chats 4) © g Aditya, AYA, ~Mangesh, ~Vis
+Idle Time: 3.624694125 sec
+Chrome Title: Introduction to Machine Learning with Python
+Chrome URL: https://www.nrigroupindia.com/e-book/Introduction%20to%20Machine%20Learning%20with%20Python%20(%20PDFDrive.com%20)-min.pdf
+Text Sample: oO O QO SiyaDadpe/Hackronyx_25 x LA Meet - cid-xqim-mif @® x @ Introduction to Machine Lea x @ Satellite Images Reveal Unu x + v
+€ Cc 3 nrigroupindia.
 =========================================
 
