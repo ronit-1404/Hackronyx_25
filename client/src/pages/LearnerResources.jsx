@@ -6,6 +6,8 @@ import {
   BookOpen, 
   Target,
   Clock,
+  BarChart2,
+  LucideHome,
   TrendingUp,
   AlertCircle,
   CheckCircle,
@@ -17,7 +19,8 @@ import {
   Settings,
   Bell,
   User,
-  Monitor
+  Monitor,
+  LogOut
 } from 'lucide-react';
 
 const LearnerResources = () => {
@@ -296,16 +299,28 @@ const LearnerResources = () => {
               <option value="week">This Week</option>
               <option value="month">This Month</option>
             </select>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Bell className="w-4 h-4 text-gray-600" />
+            <button 
+              onClick={() => navigate('/learner/analytics')}
+              className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
+              style={{ backgroundColor: '#F67280' }}
+            >
+              <BarChart2 className="w-5 h-5" />
+              <span>Detailed Analysis</span>
+            </button>
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/learner/home')}
+            >
+              <LucideHome className="w-4 h-4 text-gray-600" />
             </button>
             <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
               onClick={() => navigate('/learner/settings')}
             >
               <Settings className="w-4 h-4 text-gray-600" />
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <User className="w-4 h-4 text-gray-600" />
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/signout')}
+            >
+              <LogOut className="w-4 h-4 text-gray-600" />
             </button>
           </div>
         </div>

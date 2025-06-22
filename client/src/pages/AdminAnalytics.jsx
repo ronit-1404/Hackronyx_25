@@ -45,7 +45,8 @@ import {
   GraduationCap,
   Lightbulb,
   Shield,
-  Zap
+  Zap,
+  BarChart2
 } from 'lucide-react';
 
 const AdminAnalytics = () => {
@@ -245,16 +246,23 @@ const AdminAnalytics = () => {
               <option value="quarter">This Quarter</option>
               <option value="year">This Year</option>
             </select>
-            <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg px-4 py-2 w-[220px]">
-              <div className="text-sm font-medium text-gray-900 whitespace-nowrap text-center">
-                {currentTime.toLocaleTimeString()} • {currentTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
-              </div>
-            </div>
             <button 
-              onClick={refreshData}
-              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/admin/dashboard')}
+              className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
+              style={{ backgroundColor: '#F67280' }}
             >
-              <RefreshCw className="w-4 h-4 text-gray-600" />
+              <BarChart2 className="w-5 h-5" />
+              <span>Admin Dashboard</span>
+            </button>
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/admin/classes')}
+            >
+              <GraduationCap className="w-4 h-4 text-gray-600" />
+            </button>
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/admin/students')}
+            >
+              <User className="w-4 h-4 text-gray-600" />
             </button>
             <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
               <Download className="w-4 h-4 text-gray-600" />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Users, 
   BookOpen, 
@@ -19,6 +20,10 @@ import {
   Calendar,
   Award,
   Brain,
+  BarChart2,
+  GraduationCap,
+  User,
+  Download,
   BarChart3
 } from 'lucide-react';
 
@@ -27,6 +32,8 @@ const AdminClasses = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedClass, setSelectedClass] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -141,10 +148,25 @@ const AdminClasses = () => {
                 {currentTime.toLocaleTimeString()} • {currentTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
               </div>
             </div>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Bell className="w-4 h-4 text-gray-600" />
+            <button 
+              onClick={() => navigate('/admin/dashboard')}
+              className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
+              style={{ backgroundColor: '#F67280' }}
+            >
+              <BarChart2 className="w-5 h-5" />
+              <span>Admin Dashboard</span>
+            </button>
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/admin/students')}
+            >
+              <User className="w-4 h-4 text-gray-600" />
             </button>
             <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+              <Download className="w-4 h-4 text-gray-600" />
+            </button>
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/admin/settings')}
+            >
               <Settings className="w-4 h-4 text-gray-600" />
             </button>
           </div>

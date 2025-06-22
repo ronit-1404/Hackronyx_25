@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { 
   Brain, 
   Eye, 
   TrendingUp, 
   Clock, 
+  FileText,
   Target, 
   Activity,
   BarChart2,
@@ -25,7 +27,8 @@ import {
   Settings,
   User,
   Bell,
-  Home
+  Home,
+  LogOut
 } from 'lucide-react';
 
 const LearnerAnalytics = () => {
@@ -33,6 +36,8 @@ const LearnerAnalytics = () => {
   const [selectedTimeRange, setSelectedTimeRange] = useState('week');
   const [selectedMetric, setSelectedMetric] = useState('focus');
   const [hoveredCell, setHoveredCell] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -256,12 +261,32 @@ const LearnerAnalytics = () => {
             <p className="text-sm text-gray-600">Deep insights into your learning patterns and performance</p>
           </div>
           <div className="flex items-center space-x-4">
-            <button className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg transition-colors">
+            {/* <button className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg transition-colors">
               <RefreshCw className="w-4 h-4 text-gray-600" />
               <span className="text-sm text-gray-700">Refresh</span>
+            </button> */}
+            <button 
+              onClick={() => navigate('/learner/analytics')}
+              className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
+              style={{ backgroundColor: '#F67280' }}
+            >
+              <BarChart2 className="w-5 h-5" />
+              <span>Detailed Analysis</span>
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Bell className="w-4 h-4 text-gray-600" />
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/learner/resources')}
+            >
+              <FileText className="w-4 h-4 text-gray-600" />
+            </button>
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/learner/settings')}
+            >
+              <Settings className="w-4 h-4 text-gray-600" />
+            </button>
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/signout')}
+            >
+              <LogOut className="w-4 h-4 text-gray-600" />
             </button>
           </div>
         </div>
