@@ -30,6 +30,7 @@ import {
   Zap,
   Activity,
   BarChart2,
+  LucideHome
 } from "lucide-react";
 
 const Header = () => {
@@ -55,32 +56,44 @@ const Header = () => {
           <option value="week">This Week</option>
           <option value="month">This Month</option>
         </select>
-        <button
-          onClick={() => navigate("/learner/analytics")}
-          className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
-          style={{ backgroundColor: "#F67280" }}
-        >
-          <BarChart2 className="w-5 h-5" />
-          <span>Advance Analysis</span>
-        </button>
-        <button
-          className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-          onClick={() => navigate("/learner/resources")}
-        >
-          <FileText className="w-4 h-4 text-gray-600" />
-        </button>
-        <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-          <Settings
-            onClick={() => navigate("/learner/settings")}
-            className="w-4 h-4 text-gray-600"
-          />
-        </button>
-        <button
-          className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-          onClick={() => navigate("/signout")}
-        >
-          <LogOut className="w-4 h-4 text-gray-600" />
-        </button>
+        <button 
+              onClick={() => navigate('/learner/analytics')}
+              className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
+              style={{ backgroundColor: '#F67280' }}
+            >
+              <BarChart2 className="w-5 h-5" />
+              <span>Advance Analytics</span>
+            </button>
+
+            <button 
+              className="p-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200 hover:border-blue-300 transition-all duration-300 group relative transform hover:scale-110 hover:rotate-3 shadow-sm hover:shadow-lg"
+              onClick={() => navigate('/learner/home')}
+              title="Home"
+            >
+              <LucideHome className="w-5 h-5 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
+            </button>
+
+            <button 
+              className="p-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200 hover:border-blue-300 transition-all duration-300 group relative transform hover:scale-110 hover:rotate-3 shadow-sm hover:shadow-lg"
+              onClick={() => navigate('/learner/resources')}
+              title="Learning Resources"
+            >
+              <FileText className="w-5 h-5 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
+            </button>
+            <button 
+              className="p-3 rounded-xl bg-gradient-to-r from-orange-50 to-red-50 hover:from-orange-100 hover:to-red-100 border border-orange-200 hover:border-orange-300 transition-all duration-300 group relative transform hover:scale-110 hover:-rotate-3 shadow-sm hover:shadow-lg"
+              onClick={() => navigate('/learner/settings')}
+              title="System Settings & Configuration"
+            >
+              <Settings className="w-5 h-5 text-orange-600 group-hover:text-orange-700 transition-colors duration-300" />
+            </button>
+            <button 
+              className="p-3 rounded-xl bg-gradient-to-r from-orange-50 to-red-50 hover:from-orange-100 hover:to-red-100 border border-orange-200 hover:border-orange-300 transition-all duration-300 group relative transform hover:scale-110 hover:-rotate-3 shadow-sm hover:shadow-lg"
+              onClick={() => navigate('/signout')}
+              title="Sign Out"
+            >
+              <LogOut className="w-5 h-5 text-orange-600 group-hover:text-orange-700 transition-colors duration-300" />
+            </button>
       </div>
     </div>
   );

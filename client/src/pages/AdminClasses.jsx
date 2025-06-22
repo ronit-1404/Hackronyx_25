@@ -26,6 +26,7 @@ import {
   Download,
   BarChart3
 } from 'lucide-react';
+import AdminHeader from '../components/headers/AdminHeader';
 
 const AdminClasses = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -136,42 +137,7 @@ const AdminClasses = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F5EFE6' }}>
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-8 py-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Classes Dashboard</h1>
-            <p className="text-sm text-gray-600 mt-1">Manage and monitor all your classes in real-time</p>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg px-4 py-2">
-              <div className="text-sm font-medium text-gray-900">
-                {currentTime.toLocaleTimeString()} • {currentTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
-              </div>
-            </div>
-            <button 
-              onClick={() => navigate('/admin/dashboard')}
-              className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
-              style={{ backgroundColor: '#F67280' }}
-            >
-              <BarChart2 className="w-5 h-5" />
-              <span>Admin Dashboard</span>
-            </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-              onClick={() => navigate('/admin/students')}
-            >
-              <User className="w-4 h-4 text-gray-600" />
-            </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
-              <Download className="w-4 h-4 text-gray-600" />
-            </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-              onClick={() => navigate('/admin/settings')}
-            >
-              <Settings className="w-4 h-4 text-gray-600" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <AdminHeader/>
 
       <div className="p-8">
         {/* Summary Cards */}
