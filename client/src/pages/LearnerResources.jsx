@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import { 
   Brain, 
   Coffee, 
@@ -28,6 +29,8 @@ const LearnerResources = () => {
   const [isActive, setIsActive] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
   const [pomodoroCount, setPomodoroCount] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -296,7 +299,9 @@ const LearnerResources = () => {
             <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
               <Bell className="w-4 h-4 text-gray-600" />
             </button>
-            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+            <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/learner/settings')}
+            >
               <Settings className="w-4 h-4 text-gray-600" />
             </button>
             <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
