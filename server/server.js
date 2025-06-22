@@ -43,7 +43,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: 'http://localhost:5173', 
+    credentials: true,
     methods: ['GET', 'POST']
   }
 });
@@ -96,6 +97,7 @@ app.use('/api/engagement', engagementRoutes);
 app.use('/api/extension', extensionRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/screen',screenRoutes)
+
 // Socket.io setup
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);

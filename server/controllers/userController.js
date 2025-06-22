@@ -2,10 +2,18 @@ const User = require('../models/User.js')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+// Common function to generate token for users
+const generateUserToken = (user) => {
+  return jwt.sign(
+    { userId: user._id, role: 'student' },
+    process.env.JWT_SECRET,
+    { expiresIn: '7d' }
+  );
+};
 
-exports.register = async (req,res) => {
+exports.register = async (req, res) => {
     try {
-        const {name,email,password} = req.body;
+        const {name, email, password} = req.body;
 
         const exist = await User.findOne({email});
         if(exist){
@@ -16,7 +24,7 @@ exports.register = async (req,res) => {
         }
 
         const user = new User({
-            name,email,password,
+            name, email, password,
             preferences: {
                 allowWebcam: true,
                 allowAudio: true,
@@ -27,29 +35,25 @@ exports.register = async (req,res) => {
 
         await user.save();
         
-        const token = jwt.sign(
-            {userId: user._id},
-            process.env.JWT_SECRET,
-            {expiresIn: '2d'}
-        
-        )
+        // Generate sToken for students
+        const sToken = generateUserToken(user);
 
         res.status(201).json({
-        success: true,
-        token,
-        user: {
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            preferences: user.preferences
-        }
+          success: true,
+          sToken, // Using sToken instead of token
+          user: {
+              _id: user._id,
+              name: user.name,
+              email: user.email,
+              role: 'student', // Adding role for consistency
+              preferences: user.preferences
+          }
         });
     } catch (error) {
         console.error('Registration error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 }
-
 
 exports.login = async (req, res) => {
   try {
@@ -73,21 +77,17 @@ exports.login = async (req, res) => {
       });
     }
 
-    // Create JWT token
-    const token = jwt.sign(
-      { userId: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
+    // Generate sToken for students
+    const sToken = generateUserToken(user);
 
-    // FIXED: Changed id to _id to match what the extension expects
     res.status(200).json({
       success: true,
-      token,
+      sToken, // Using sToken instead of token
       user: {
-        _id: user._id,  // Changed from id to _id
+        _id: user._id,
         name: user.name,
         email: user.email,
+        role: 'student', // Adding role for consistency
         preferences: user.preferences
       }
     });
@@ -106,13 +106,13 @@ exports.getProfile = async (req, res) => {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
 
-    // FIXED: Change id to _id for consistency
     res.status(200).json({
       success: true,
       user: {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: 'student', // Adding role for consistency
         preferences: user.preferences,
         createdAt: user.createdAt
       }
@@ -122,7 +122,6 @@ exports.getProfile = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
-
 
 exports.updatePreferences = async (req, res) => {
   try {

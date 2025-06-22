@@ -8,19 +8,21 @@ import {
   Lock, 
   User, 
   ArrowRight,
-  CheckCircle,
   AlertCircle,
   Github,
   Chrome,
-  Sparkles,
+  Loader,
   Shield,
   Zap,
   Target
 } from 'lucide-react';
+import axios from 'axios';
 
 const SignUp = () => {
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false); // Default to signin view
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,7 +31,7 @@ const SignUp = () => {
   });
   const [errors, setErrors] = useState({});
 
-  const navigate = useNavigate(); // ⬅️ for navigation
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,16 +45,18 @@ const SignUp = () => {
         [name]: ''
       }));
     }
+    // Clear API error when user starts typing again
+    if (apiError) setApiError(null);
   };
 
   const validateForm = () => {
     const newErrors = {};
     
-    if (isSignUp && !formData.name.trim()) {
+    if (isSignUp && !formData.name?.trim()) {
       newErrors.name = 'Name is required';
     }
     
-    if (!formData.email.trim()) {
+    if (!formData.email?.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
@@ -72,19 +76,61 @@ const SignUp = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log('Form submitted:', formData);
-      // Later: send data to backend here
-
-      navigate('/learner/home'); // ⬅️ Redirect to dashboard
+    if (!validateForm()) return;
+    
+    setIsLoading(true);
+    setApiError(null);
+    
+    try {
+      let response;
+      
+      if (isSignUp) {
+        // Direct API call for registration
+        response = await axios.post('http://localhost:5000/api/auth/user/register', {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password
+        });
+      } else {
+        // Direct API call for login
+        response = await axios.post('http://localhost:5000/api/auth/user/login', {
+          email: formData.email,
+          password: formData.password
+        });
+      }
+      
+      console.log('API Response:', response.data);
+      
+      if (response.data.success) {
+        // Save sToken and user data to localStorage
+        localStorage.setItem('sToken', response.data.sToken);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        
+        // Redirect to dashboard
+        navigate('/learner/home');
+      } else {
+        setApiError(response.data.message || 'Authentication failed');
+      }
+    } catch (error) {
+      console.error('Authentication error:', error);
+      
+      // Handle error messages from API
+      if (error.response && error.response.data) {
+        setApiError(error.response.data.message || 'Authentication failed');
+      } else {
+        setApiError('Network error. Please try again later.');
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const toggleAuthMode = () => {
     setIsSignUp(!isSignUp);
     setErrors({});
+    setApiError(null);
     setFormData({
       name: '',
       email: '',
@@ -183,12 +229,28 @@ const SignUp = () => {
               </p>
             </div>
 
+            {/* API Error Message */}
+            {apiError && (
+              <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-3 mb-6 text-center">
+                <div className="flex items-center justify-center">
+                  <AlertCircle className="w-5 h-5 text-red-400 mr-2" />
+                  <span className="text-red-300">{apiError}</span>
+                </div>
+              </div>
+            )}
+
             <div className="space-y-3 mb-6">
-              <button className="w-full bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl py-3 px-4 flex items-center justify-center space-x-3 text-white transition-all duration-300 hover:scale-105">
+              <button 
+                className="w-full bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl py-3 px-4 flex items-center justify-center space-x-3 text-white transition-all duration-300 hover:scale-105"
+                disabled={isLoading}
+              >
                 <Chrome className="w-5 h-5" />
                 <span>Continue with Google</span>
               </button>
-              <button className="w-full bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl py-3 px-4 flex items-center justify-center space-x-3 text-white transition-all duration-300 hover:scale-105">
+              <button 
+                className="w-full bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl py-3 px-4 flex items-center justify-center space-x-3 text-white transition-all duration-300 hover:scale-105"
+                disabled={isLoading}
+              >
                 <Github className="w-5 h-5" />
                 <span>Continue with GitHub</span>
               </button>
@@ -211,6 +273,7 @@ const SignUp = () => {
                       placeholder="Full Name"
                       value={formData.name}
                       onChange={handleInputChange}
+                      disabled={isLoading}
                       className={`w-full bg-white/10 border ${errors.name ? 'border-red-500' : 'border-white/20'} rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300`}
                     />
                   </div>
@@ -232,6 +295,7 @@ const SignUp = () => {
                     placeholder="Email Address"
                     value={formData.email}
                     onChange={handleInputChange}
+                    disabled={isLoading}
                     className={`w-full bg-white/10 border ${errors.email ? 'border-red-500' : 'border-white/20'} rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300`}
                   />
                 </div>
@@ -252,11 +316,13 @@ const SignUp = () => {
                     placeholder="Password"
                     value={formData.password}
                     onChange={handleInputChange}
+                    disabled={isLoading}
                     className={`w-full bg-white/10 border ${errors.password ? 'border-red-500' : 'border-white/20'} rounded-xl py-3 pl-12 pr-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
+                    disabled={isLoading}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -280,6 +346,7 @@ const SignUp = () => {
                       placeholder="Confirm Password"
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
+                      disabled={isLoading}
                       className={`w-full bg-white/10 border ${errors.confirmPassword ? 'border-red-500' : 'border-white/20'} rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300`}
                     />
                   </div>
@@ -306,10 +373,20 @@ const SignUp = () => {
 
               <button
                 type="submit"
+                disabled={isLoading}
                 className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 shadow-lg hover:shadow-purple-500/25"
               >
-                <span>{isSignUp ? 'Create Account' : 'Sign In'}</span>
-                <ArrowRight className="w-5 h-5" />
+                {isLoading ? (
+                  <>
+                    <Loader className="w-5 h-5 animate-spin" />
+                    <span>{isSignUp ? 'Creating Account...' : 'Signing In...'}</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{isSignUp ? 'Create Account' : 'Sign In'}</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </>
+                )}
               </button>
             </form>
 
@@ -318,6 +395,7 @@ const SignUp = () => {
                 {isSignUp ? 'Already have an account?' : "Don't have an account?"}
                 <button
                   onClick={toggleAuthMode}
+                  disabled={isLoading}
                   className="text-purple-400 hover:text-purple-300 font-semibold ml-2 transition-colors duration-200"
                 >
                   {isSignUp ? 'Sign In' : 'Sign Up'}
