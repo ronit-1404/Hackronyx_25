@@ -12,13 +12,14 @@ GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 # Use latest Gemini API endpoint and supported model name
 GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=' + GEMINI_API_KEY
 
-# File paths
-# Fix: Use correct ML_MODELS_DIR path
+# File paths (point to ml/data, not ML_Models/data)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ML_MODELS_DIR = os.path.dirname(BASE_DIR)
-OUTPUT_PATH = os.path.join(ML_MODELS_DIR, 'screen-analyzer', 'output.txt')
-CONTENT_PATH = os.path.join(ML_MODELS_DIR, 'content.txt')
-USER_PATH = os.path.join(ML_MODELS_DIR, 'user.txt')
+ML_DIR = os.path.abspath(os.path.join(BASE_DIR, '..', '..'))
+DATA_DIR = os.path.join(ML_DIR, 'data')
+USER_JSON_PATH = os.path.join(DATA_DIR, 'user.txt')
+SCREEN_JSON_PATH = os.path.join(DATA_DIR, 'screen.json')
+CONTENT_JSON_PATH = os.path.join(DATA_DIR, 'content.json')
+TRIGGERS_PATH = os.path.join(DATA_DIR, 'triggers.json')
 
 # Read files
 def read_file(path):
@@ -135,28 +136,72 @@ Recommend the most relevant content (Title and URL) for the user. Respond in JSO
             print('Error parsing Gemini response:', ex)
     return None
 
+def read_json_file(path):
+    if not os.path.exists(path) or os.stat(path).st_size == 0:
+        return []
+    with open(path, 'r', encoding='utf-8') as f:
+        try:
+            return json.load(f)
+        except Exception:
+            return []
+
+def write_json_file(path, data):
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2)
+
 def main():
-    output_txt = read_file(OUTPUT_PATH)
-    content_txt = read_file(CONTENT_PATH)
-    user_txt = read_file(USER_PATH)
-    
-    output_info = parse_output_txt(output_txt)
-    contents = parse_content_txt(content_txt)
+    # Load user profile (old key-value format)
+    user_txt = read_file(USER_JSON_PATH)
     user = parse_user_txt(user_txt)
-    
-    # Update user profile
-    user = update_user_profile(user, output_info['context'], output_info['sentiment'], output_info['app'])
-    write_file(USER_PATH, '\n'.join([f"{k}: {v}" for k, v in user.items()]))
-    
-    # Get recommendation
-    rec = gemini_recommendation(output_info['context'], output_info['sentiment'], output_info['app'], contents, user)
-    if rec:
-        # Append recommendation to content.txt
-        with open(CONTENT_PATH, 'a', encoding='utf-8') as f:
-            f.write(f"\n---\nRecommended Title: {rec['Title']}\nRecommended URL: {rec['URL']}\n")
-        print(f"Recommended: {rec['Title']} ({rec['URL']})")
-    else:
-        print("No recommendation generated.")
+    # Load available content (may be empty)
+    contents = read_json_file(CONTENT_JSON_PATH)
+    # Load triggers
+    triggers = read_json_file(TRIGGERS_PATH)
+    # For each actionable trigger, generate a popup using the LLM
+    for trig in triggers:
+        trigger = trig.get('trigger', {})
+        if trigger.get('type') and trigger['type'] != 'none':
+            # Compose prompt for LLM
+            outputs = trig.get('outputs', {})
+            prompt = f"""
+You are a smart popup and content recommender. Given the following trigger:
+- Trigger Type: {trigger['type']}
+- Trigger Message: {trigger['message']}
+
+User context:
+{json.dumps(outputs, indent=2)}
+
+User profile:
+{json.dumps(user, indent=2)}
+
+Available content:
+{json.dumps(contents, indent=2)}
+
+Generate a JSON object for a popup with a motivational message, a fun fact, and a recommended article or video, based on the trigger and user context.
+"""
+            # Call LLM (Gemini)
+            data = {"contents": [{"parts": [{"text": prompt}]}]}
+            resp = requests.post(GEMINI_API_URL, json=data)
+            print('Gemini API status:', resp.status_code)
+            try:
+                print('Gemini API response:', resp.json())
+            except Exception as e:
+                print('Error reading Gemini API response:', e)
+            if resp.status_code == 200:
+                try:
+                    text = resp.json()['candidates'][0]['content']['parts'][0]['text']
+                    import re
+                    import json as pyjson
+                    match = re.search(r'\{.*\}', text, re.DOTALL)
+                    if match:
+                        popup_obj = pyjson.loads(match.group(0))
+                        # Append to content.json as a valid array
+                        contents.append(popup_obj)
+                        write_json_file(CONTENT_JSON_PATH, contents)
+                        print('Popup appended to content.json')
+                except Exception as ex:
+                    print('Error parsing Gemini response:', ex)
+    print('All actionable triggers processed.')
 
 if __name__ == '__main__':
     main()

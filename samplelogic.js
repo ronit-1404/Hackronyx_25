@@ -41,30 +41,30 @@ function getTriggerAction(outputs) {
   // Video model triggers
   if (outputs.video) {
     if (outputs.video.emotion === "frustrated") {
-      return { type: "chatbot", message: "Feeling frustrated? Chat with our study assistant or try a quick break!" };
+      return { type: "chatbot", message: "Feeling frustrated? Give a motivational quote or try a quick break!" };
     }
     if (outputs.video.emotion === "bored") {
-      return { type: "mini-game", message: "Bored? Try a quick mini-game or take a short break!" };
+      return { type: "mini-game", message: "Bored? Give a link to a fun game(like globle,wordle,strands etc) or a fun fact" };
     }
     if (outputs.video.emotion === "confused") {
-      return { type: "help", message: "Confused? Would you like a summary or a helpful article?" };
+      return { type: "help", message: "Confused? Give summary or a helpful article?" };
     }
     if (outputs.video.attentive === false || outputs.video.engagement_score < 0.3) {
-      return { type: "break", message: "You seem inattentive. Take a short break or try a mini-game!" };
+      return { type: "break", message: "You seem inattentive. Take a short break or give a game recommendation" };
     }
   }
 
   // Audio model triggers
   if (outputs.audio) {
     if (outputs.audio.emotion === "distracted") {
-      return { type: "break", message: "You sound distracted. Take a break or watch a motivational video!" };
+      return { type: "break", message: "You sound distracted. Take a break or read this fun fact" };
     }
   }
 
   // Screen analyzer triggers
   if (outputs.screen) {
     if (outputs.screen.sentiment === "negative") {
-      return { type: "motivation", message: "Screen content seems negative. Watch a motivational video or chat with our assistant!" };
+      return { type: "motivation", message: "Screen content seems negative. Watch a motivational video or read this fun fact" };
     }
     if (outputs.screen.idle_time > 90) {
       return { type: "break", message: "You've been inactive for a while. Take a break or stretch!" };
