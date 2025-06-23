@@ -2,8 +2,6 @@ import os
 import json
 import requests
 from dotenv import load_dotenv
-from youtube_transcript_api import YouTubeTranscriptApi
-import re
 
 # Load environment variables
 env_path = os.path.join(os.path.dirname(__file__), '.env')
@@ -137,185 +135,28 @@ Recommend the most relevant content (Title and URL) for the user. Respond in JSO
             print('Error parsing Gemini response:', ex)
     return None
 
-def gemini_context_recommendation(chrome_title, chrome_url, context, contents, user):
-    """
-    Ask Gemini to generate a fun fact, an alternative video, and an alternative blog for the given Chrome context.
-    The video/blog must not duplicate the current URL or each other.
-    Always provide real, existing resources with real URLs. If the provided content is not satisfactory, generate new recommendations from your own knowledge.
-    """
-    prompt = f"""
-You are a smart content recommender. For the following user context:
-- Chrome Title: {chrome_title}
-- Chrome URL: {chrome_url}
-- Context: {context}
-
-User profile:
-{json.dumps(user, indent=2)}
-
-Available content (you may use these, but you can also generate new recommendations if these are not satisfactory):
-{json.dumps(contents, indent=2)}
-
-Instructions:
-- For each recommendation, always provide real, existing resources with real, accessible URLs (no placeholders, no dummy data).
-- If the provided content is not satisfactory, generate new, relevant recommendations from your own knowledge.
-- Do not repeat or duplicate the Chrome URL or any other recommendation in the same response.
-- The alternative video should be a real YouTube (or similar) video, and the blog should be a real, accessible blog post.
-- The fun fact should be creative and based on the Chrome Title.
-
-Generate:
-1. A fun fact based on the Chrome Title (be creative and relevant).
-2. An alternative resource video (YouTube or similar) with a real title and real URL, that is NOT the current Chrome URL and is not a duplicate of the fun fact or blog.
-3. An alternative blog (with real title and real URL), that is NOT the current Chrome URL and is not a duplicate of the fun fact or video.
-
-Respond in JSON as:
-{{"fun_fact": ..., "alternative_video": {{"title": ..., "url": ...}}, "alternative_blog": {{"title": ..., "url": ...}}}}
-"""
-    data = {
-        "contents": [{"parts": [{"text": prompt}]}]
-    }
-    resp = requests.post(GEMINI_API_URL, json=data)
-    if resp.status_code == 200:
-        try:
-            text = resp.json()['candidates'][0]['content']['parts'][0]['text']
-            import re
-            import json as pyjson
-            match = re.search(r'\{.*\}', text, re.DOTALL)
-            if match:
-                return pyjson.loads(match.group(0))
-        except Exception as ex:
-            print('Error parsing Gemini context response:', ex)
-    else:
-        print('Gemini API error:', resp.status_code)
-    return None
-
-def extract_chrome_sessions(output_txt):
-    """Extract Chrome sessions with title and URL, detecting context changes by URL."""
-    sessions = []
-    last_url = None
-    current = {}
-    for block in output_txt.split('========================================='):
-        lines = block.strip().splitlines()
-        chrome_title, chrome_url, context = None, None, None
-        for line in lines:
-            if line.startswith('Chrome Title:'):
-                chrome_title = line.split(':', 1)[1].strip()
-            if line.startswith('Chrome URL:'):
-                chrome_url = line.split(':', 1)[1].strip()
-            if 'Detected Context:' in line:
-                context = line.split(':', 1)[1].strip()
-        if chrome_url and chrome_url != last_url:
-            sessions.append({'title': chrome_title, 'url': chrome_url, 'context': context})
-            last_url = chrome_url
-    return sessions
-
-def find_alternative(contents, current_url, content_type):
-    """Find an alternative resource of a given type, not matching the current URL."""
-    for item in contents:
-        if item.get('Type', '').lower() == content_type.lower() and item.get('URL') != current_url:
-            return {'title': item.get('Title'), 'url': item.get('URL')}
-    return None
-
-def find_alternative_blog(contents, current_url):
-    """Find an alternative blog post, not matching the current URL."""
-    for item in contents:
-        if 'blog' in item.get('Type', '').lower() and item.get('URL') != current_url:
-            return {'title': item.get('Title'), 'url': item.get('URL')}
-    return None
-
-def get_youtube_video_id(url):
-    """Extract the video ID from a YouTube URL."""
-    match = re.search(r'(?:v=|youtu.be/)([\w-]{11})', url)
-    if match:
-        return match.group(1)
-    return None
-
-def fetch_youtube_transcript(video_url):
-    video_id = get_youtube_video_id(video_url)
-    if not video_id:
-        return None
-    try:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id)
-        # Join all text segments
-        return ' '.join([seg['text'] for seg in transcript])
-    except Exception as e:
-        print(f"Could not fetch transcript: {e}")
-        return None
-
-def gemini_summarize(text):
-    prompt = f"Summarize the following transcript in 5-7 sentences, focusing on the main points:\n\n{text}"
-    data = {"contents": [{"parts": [{"text": prompt}]}]}
-    resp = requests.post(GEMINI_API_URL, json=data)
-    if resp.status_code == 200:
-        try:
-            summary = resp.json()['candidates'][0]['content']['parts'][0]['text']
-            return summary.strip()
-        except Exception as ex:
-            print('Error parsing Gemini summary response:', ex)
-    else:
-        print('Gemini API error (summary):', resp.status_code)
-    return None
-
 def main():
     output_txt = read_file(OUTPUT_PATH)
     content_txt = read_file(CONTENT_PATH)
     user_txt = read_file(USER_PATH)
     
+    output_info = parse_output_txt(output_txt)
     contents = parse_content_txt(content_txt)
     user = parse_user_txt(user_txt)
-    sessions = extract_chrome_sessions(output_txt)
     
-    for session in sessions:
-        chrome_title = session['title']
-        chrome_url = session['url']
-        context = session['context']
-        print(f"\n=== LLM Recommendations for context: {context} ===")
-        print(f"Chrome Title: {chrome_title}")
-        print(f"Chrome URL: {chrome_url}")
-        rec = gemini_context_recommendation(chrome_title, chrome_url, context, contents, user)
-        transcript_summary = None
-        # If Chrome URL is a YouTube video, fetch transcript and print summary
-        if 'youtube.com/watch' in chrome_url or 'youtu.be/' in chrome_url:
-            transcript = fetch_youtube_transcript(chrome_url)
-            if transcript:
-                summary = gemini_summarize(transcript)
-                if summary:
-                    transcript_summary = summary
-                    print("\n--- Video Transcript Summary ---")
-                    print(summary)
-                else:
-                    print("\n--- Could not generate summary for transcript ---")
-            else:
-                print("\n--- No transcript available for this video ---")
-        if rec:
-            print(f"1. Fun Fact: {rec.get('fun_fact', 'None')}")
-            video = rec.get('alternative_video', {})
-            print(f"2. Alternative Video: {video.get('title', 'None')} ({video.get('url', 'None')})")
-            blog = rec.get('alternative_blog', {})
-            print(f"3. Alternative Blog: {blog.get('title', 'None')} ({blog.get('url', 'None')})")
-            # Append to content.txt
-            with open(CONTENT_PATH, 'a', encoding='utf-8') as f:
-                f.write(f"\n---\nContext: {context}\nChrome Title: {chrome_title}\nChrome URL: {chrome_url}\nFun Fact: {rec.get('fun_fact', '')}\nRecommended Video Title: {video.get('title', '')}\nRecommended Video URL: {video.get('url', '')}\nRecommended Blog Title: {blog.get('title', '')}\nRecommended Blog URL: {blog.get('url', '')}\n")
-                if transcript_summary:
-                    f.write(f"Transcript Summary: {transcript_summary}\n")
-            # Update user.txt with last recommended URLs and context
-            user['Last Recommended Context'] = context
-            user['Last Recommended Video URL'] = video.get('url', '')
-            user['Last Recommended Blog URL'] = blog.get('url', '')
-            write_file(USER_PATH, '\n'.join([f"{k}: {v}" for k, v in user.items()]))
-        else:
-            print("No LLM recommendation generated.")
-        # If Chrome URL is a YouTube video, fetch transcript and print summary
-        if 'youtube.com/watch' in chrome_url or 'youtu.be/' in chrome_url:
-            transcript = fetch_youtube_transcript(chrome_url)
-            if transcript:
-                summary = gemini_summarize(transcript)
-                if summary:
-                    print("\n--- Video Transcript Summary ---")
-                    print(summary)
-                else:
-                    print("\n--- Could not generate summary for transcript ---")
-            else:
-                print("\n--- No transcript available for this video ---")
+    # Update user profile
+    user = update_user_profile(user, output_info['context'], output_info['sentiment'], output_info['app'])
+    write_file(USER_PATH, '\n'.join([f"{k}: {v}" for k, v in user.items()]))
+    
+    # Get recommendation
+    rec = gemini_recommendation(output_info['context'], output_info['sentiment'], output_info['app'], contents, user)
+    if rec:
+        # Append recommendation to content.txt
+        with open(CONTENT_PATH, 'a', encoding='utf-8') as f:
+            f.write(f"\n---\nRecommended Title: {rec['Title']}\nRecommended URL: {rec['URL']}\n")
+        print(f"Recommended: {rec['Title']} ({rec['URL']})")
+    else:
+        print("No recommendation generated.")
 
 if __name__ == '__main__':
     main()
