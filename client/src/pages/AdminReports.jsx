@@ -19,7 +19,7 @@ import {
   Building,
   Video,
 } from 'lucide-react';
-import Header from '../components/headers/Header';
+import AdminHeader from '../components/headers/AdminHeader';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import AdminReportPDF from './AdminReportPDF';
 
@@ -141,7 +141,7 @@ const AdminReports = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F5EFE6' }}>
-      <Header />
+      <AdminHeader/>
       <div className="max-w-7xl mx-auto p-8" id="admin-report-container">
         {/* Organization Details */}
         <div className="bg-white p-6 rounded-xl shadow-md mb-8">
