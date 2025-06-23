@@ -52,11 +52,11 @@ const AdminStudents = () => {
               <img
                 src={student.photo}
                 alt={student.name}
-                className="w-20 h-20 rounded-full border-2 border-[#F67280] mb-3 object-cover"
+                className="w-20 h-20 rounded-full border-2 border-[#000000] mb-3 object-cover"
               />
               <h3 className="text-lg font-semibold text-gray-900">{student.name}</h3>
               <p className="text-sm text-gray-500 mb-2">Engagement Score: 
-                <span className="text-[#F67280] font-bold"> {student.engagement}</span>
+                <span className="text-[#000000] font-bold"> {student.engagement}</span>
               </p>
               <div className="mb-2">
                 <p className="text-sm font-medium text-gray-600 text-center mb-1">Last Session Tags:</p>
@@ -83,7 +83,7 @@ const AdminStudents = () => {
               </div>
               <button
                 onClick={() => alert(`Redirecting to analytics for ${student.name}`)}
-                className="bg-[#F67280] hover:bg-[#e55b6d] text-white px-3 py-1.5 text-sm rounded-full transition"
+                className="bg-[#000000] hover:bg-[#e55b6d] text-white px-3 py-1.5 text-sm rounded-full transition"
               >
                 View Detailed Analytics
               </button>

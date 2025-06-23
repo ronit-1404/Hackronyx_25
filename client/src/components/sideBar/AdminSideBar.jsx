@@ -133,7 +133,7 @@ const AdminSideBar = () => {
           <div className="flex items-center space-x-3 mb-4">
             <div
               className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
-              style={{ backgroundColor: "#F67280" }}
+              style={{ backgroundColor: "#000000" }}
             >
               <School className="w-7 h-7 text-white" />
             </div>
@@ -269,7 +269,7 @@ const AdminSideBar = () => {
               onClick={handleRefresh}
               disabled={refreshing}
               className="w-full flex items-center justify-center space-x-2 py-3 px-4 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md disabled:opacity-50"
-              style={{ backgroundColor: '#F67280' }}
+              style={{ backgroundColor: '#000000' }}
             >
               <RotateCcw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
               <span>{refreshing ? 'Refreshing...' : 'Refresh Data'}</span>

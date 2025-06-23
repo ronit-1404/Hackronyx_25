@@ -58,7 +58,7 @@ const AdminClasses = () => {
       totalTopics: 16,
       averageScore: 78,
       status: "active",
-      color: "#F67280"
+      color: "#000000"
     },
     {
       id: 2,
@@ -145,7 +145,7 @@ const AdminClasses = () => {
           {/* Total Students */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#F67280' }}>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#000000' }}>
                 <Users className="w-6 h-6 text-white" />
               </div>
               <span className="text-xs text-green-600 bg-green-50 px-2 py-1 rounded-full">+12%</span>
@@ -216,7 +216,7 @@ const AdminClasses = () => {
                   placeholder="Search classes, teachers, or codes..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F67280] focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000000] focus:border-transparent"
                 />
               </div>
             </div>
@@ -226,7 +226,7 @@ const AdminClasses = () => {
                 <select
                   value={selectedFilter}
                   onChange={(e) => setSelectedFilter(e.target.value)}
-                  className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F67280] focus:border-transparent"
+                  className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#000000] focus:border-transparent"
                 >
                   <option value="all">All Classes</option>
                   <option value="alerts">With Alerts</option>
@@ -235,7 +235,7 @@ const AdminClasses = () => {
               </div>
               <button 
                 className="flex items-center space-x-2 px-4 py-2 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md"
-                style={{ backgroundColor: '#F67280' }}
+                style={{ backgroundColor: '#000000' }}
               >
                 <BarChart3 className="w-4 h-4" />
                 <span>Export Report</span>
@@ -403,7 +403,7 @@ const AdminClasses = () => {
                 setSelectedFilter('all');
               }}
               className="px-4 py-2 rounded-lg text-white font-medium transition-all"
-              style={{ backgroundColor: '#F67280' }}
+              style={{ backgroundColor: '#000000' }}
             >
               Clear Filters
             </button>
