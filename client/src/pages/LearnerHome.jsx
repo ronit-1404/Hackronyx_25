@@ -30,6 +30,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/headers/Header';
 import SideBar from '../components/sideBar/SideBar';
+import Recommendation from '../components/learnerHome/Recommendation';
+import ProductivityCharts from '../components/learnerHome/ProductivityCharts';
+import EmotionTimelineAnalysis from '../components/learnerHome/EmotionTimeline';
 
 const Dashboard2 = () => {
   const navigate = useNavigate();
@@ -139,123 +142,13 @@ const Dashboard2 = () => {
         <Header/>
         <div className="flex-1 p-8 overflow-y-auto">
           {/* Emotion Timeline - Full Width */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-            <div className="flex items-center mb-6">
-              <Activity className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
-              <h2 className="text-xl font-semibold text-gray-900">Emotion Timeline Analysis</h2>
-            </div>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={emotionTimelineData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis dataKey="time" stroke="#64748b" fontSize={12} />
-                <YAxis stroke="#64748b" fontSize={12} />
-                <Tooltip contentStyle={{ backgroundColor: 'white', border: '1px solid #e2e8f0', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }} />
-                <Line type="monotone" dataKey="focused" stroke="#10B981" strokeWidth={3} dot={{ fill: '#10B981', strokeWidth: 2, r: 5 }} activeDot={{ r: 7, stroke: '#10B981', strokeWidth: 2 }} />
-                <Line type="monotone" dataKey="confused" stroke="#F59E0B" strokeWidth={3} dot={{ fill: '#F59E0B', strokeWidth: 2, r: 5 }} activeDot={{ r: 7, stroke: '#F59E0B', strokeWidth: 2 }} />
-                <Line type="monotone" dataKey="bored" stroke="#6B7280" strokeWidth={3} dot={{ fill: '#6B7280', strokeWidth: 2, r: 5 }} activeDot={{ r: 7, stroke: '#6B7280', strokeWidth: 2 }} />
-                <Line type="monotone" dataKey="frustrated" stroke="#EF4444" strokeWidth={3} dot={{ fill: '#EF4444', strokeWidth: 2, r: 5 }} activeDot={{ r: 7, stroke: '#EF4444', strokeWidth: 2 }} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <EmotionTimelineAnalysis />
 
           {/* Split Layout for Pie Chart and Bar Chart */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            {/* App Usage Distribution */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center mb-6">
-                <Monitor className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
-                <h2 className="text-xl font-semibold text-gray-900">App Distribution</h2>
-              </div>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie data={productivityData} cx="50%" cy="50%" labelLine={false} label={({ name, time }) => `${name}: ${time}m`} outerRadius={100} fill="#8884d8" dataKey="time">
-                    {productivityData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={pieColors[index % pieColors.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip contentStyle={{ backgroundColor: 'white', border: '1px solid #e2e8f0', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }} />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-
-            {/* Productivity Metrics */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center mb-6">
-                <BookOpen className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
-                <h2 className="text-xl font-semibold text-gray-900">Productivity Metrics</h2>
-              </div>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={productivityData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                  <XAxis dataKey="name" stroke="#64748b" fontSize={11} angle={-35} textAnchor="end" height={80} />
-                  <YAxis stroke="#64748b" fontSize={12} />
-                  <Tooltip contentStyle={{ backgroundColor: 'white', border: '1px solid #e2e8f0', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }} />
-                  <Bar dataKey="productivity" fill="#F67280" radius={[6, 6, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
+          <ProductivityCharts />
 
           {/* AI Recommendations - Horizontal Cards */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center mb-6">
-              <Brain className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
-              <h2 className="text-xl font-semibold text-gray-900">AI-Powered Recommendations</h2>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="relative bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200 hover:shadow-lg transition-all">
-                <div className="absolute top-4 right-4">
-                  <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 rounded-xl bg-green-100">
-                    <Coffee className="w-6 h-6 text-green-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-green-800 text-lg mb-2">Take a Break</h3>
-                    <p className="text-green-700 text-sm leading-relaxed">You've been focused for 2 hours. A 15-minute break will help maintain your productivity momentum.</p>
-                    <div className="mt-4">
-                      <span className="text-xs text-green-600 bg-green-100 px-3 py-1 rounded-full">High Priority</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="relative bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200 hover:shadow-lg transition-all">
-                <div className="absolute top-4 right-4">
-                  <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 rounded-xl bg-blue-100">
-                    <BookOpen className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-blue-800 text-lg mb-2">Review Session</h3>
-                    <p className="text-blue-700 text-sm leading-relaxed">Confusion patterns suggest reviewing Chapter 3 concepts before proceeding to new material.</p>
-                    <div className="mt-4">
-                      <span className="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">Medium Priority</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="relative bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 border border-purple-200 hover:shadow-lg transition-all">
-                <div className="absolute top-4 right-4">
-                  <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 rounded-xl bg-purple-100">
-                    <Headphones className="w-6 h-6 text-purple-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-purple-800 text-lg mb-2">Focus Enhancement</h3>
-                    <p className="text-purple-700 text-sm leading-relaxed">Try ambient soundscapes to improve concentration during complex problem-solving tasks.</p>
-                    <div className="mt-4">
-                      <span className="text-xs text-purple-600 bg-purple-100 px-3 py-1 rounded-full">Suggestion</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Recommendation />
         </div>
       </div>
     </div>
