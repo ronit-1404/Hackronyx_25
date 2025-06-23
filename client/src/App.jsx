@@ -17,6 +17,7 @@ import AdminStudents from "./pages/AdminStudents";
 import AdminClasses from "./pages/AdminClasses";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminSettings from "./pages/AdminSettings";
+import AdminReports from "./pages/AdminReports";
 
 import SignOut from "./SignOut";
 import AnalysisPage from "./pages/AnalysisPage";
@@ -96,6 +97,7 @@ function AppContent() {
           <Route path="/admin/students" element={<Navigate to="/" replace />} />
           <Route path="/admin/classes" element={<Navigate to="/" replace />} />
           <Route path="/admin/analytics" element={<Navigate to="/" replace />} />
+          <Route path="/admin/reports" element={<Navigate to="/" replace />} />
           <Route path="/admin/settings" element={<Navigate to="/" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </>
@@ -124,6 +126,9 @@ function AppContent() {
           <Route path="/admin/classes" element={<AdminClasses />} />
           <Route path="/admin/analytics" element={<AdminAnalytics />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
+          <Route path="/admin/reports" element={<AdminReports />} />
+
+          {/* Protected Routes */}
 
           <Route path="/signout" element={<SignOut/>} />
 
