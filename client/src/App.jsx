@@ -9,7 +9,6 @@ import LearnerHome from "./pages/LearnerHome";
 import LearnerAnalytics from "./pages/LearnerAnalytics";
 import LearnerResources from "./pages/LearnerResources";
 import LearnerSettings from "./pages/LearnerSettings";
-import LearnerReports from "./pages/LearnerReports";  
 
 // Admin Pages
 import AdminDashboard from "./pages/AdminDashboard";
@@ -17,7 +16,6 @@ import AdminStudents from "./pages/AdminStudents";
 import AdminClasses from "./pages/AdminClasses";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminSettings from "./pages/AdminSettings";
-import AdminReports from "./pages/AdminReports";
 
 import SignOut from "./SignOut";
 import AnalysisPage from "./pages/AnalysisPage";
@@ -78,78 +76,91 @@ function AppContent() {
     }
   };
 
-  // Check for authentication tokens
-  const hasToken = localStorage.getItem('sToken') || localStorage.getItem('aToken');
+
+
 
   return (
     <Routes>
-      {!hasToken ? (
-        <>
-          {/* Public routes - only accessible when not authenticated */}
-          <Route path="/" element={<LoginSelection onSelect={handleRoleSelection} />} />
-          <Route path="/fds" element={<Navigate to="/signup" />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/admin/login" element={<AdminAuth />} />
-          
-          {/* Redirect authenticated paths to login if no token */}
-          <Route path="/learner/*" element={<Navigate to="/" replace />} />
-          <Route path="/admin/dashboard" element={<Navigate to="/" replace />} />
-          <Route path="/admin/students" element={<Navigate to="/" replace />} />
-          <Route path="/admin/classes" element={<Navigate to="/" replace />} />
-          <Route path="/admin/analytics" element={<Navigate to="/" replace />} />
-          <Route path="/admin/reports" element={<Navigate to="/" replace />} />
-          <Route path="/admin/settings" element={<Navigate to="/" replace />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </>
-      ) : (
-        <>
-          {/* Authenticated routes */}
-          <Route path="/" element={
-            localStorage.getItem('sToken') 
-              ? <Navigate to="/learner/home" replace /> 
-              : <Navigate to="/admin/dashboard" replace />
-          } />
-          <Route path="/signup" element={<Navigate to="/" replace />} />
-          <Route path="/admin/login" element={<Navigate to="/admin/dashboard" replace />} />
+      {/* Default route: redirect to signup */}
+      <Route path="/" element={<LoginSelection onSelect={handleRoleSelection} />} />
+      <Route path="/fds" element={<Navigate to="/signup" />} />
+      <Route path="/signup" element={<SignUp />} />
 
-          {/* Learner Routes */}
-          <Route path="/learner/home" element={<LearnerHome />} />
-          <Route path="/ana" element={<AnalysisPage />} />
-          <Route path="/learner/analytics" element={<LearnerAnalytics />} />
-          <Route path="/learner/resources" element={<LearnerResources />} />
-          <Route path="/learner/reports" element={<LearnerReports />} />
-          <Route path="/learner/settings" element={<LearnerSettings />} />
+      {/* Learner Routes */}
+      <Route 
+        path="/learner/home" 
+        element={
+            <LearnerHome />
+        } 
+      />
+      <Route path='/ana' element={<AnalysisPage />} />
+      <Route 
+        path="/learner/analytics" 
+        element={
+            <LearnerAnalytics />
+        } 
+      />
+      <Route 
+        path="/learner/resources" 
+        element={
+            <LearnerResources />
+        } 
+      />
+      <Route 
+        path="/learner/settings" 
+        element={
+            <LearnerSettings />
+        } 
+      />
 
-          {/* Admin Routes */}
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/students" element={<AdminStudents />} />
-          <Route path="/admin/classes" element={<AdminClasses />} />
-          <Route path="/admin/analytics" element={<AdminAnalytics />} />
-          <Route path="/admin/settings" element={<AdminSettings />} />
-          <Route path="/admin/reports" element={<AdminReports />} />
+      {/* Admin Routes */}
+      <Route 
+        path="/admin/dashboard" 
+        element={
+            <AdminDashboard />
+        } 
+      />
+      <Route path='/admin/login' element={<AdminAuth />} />
+      <Route 
+        path="/admin/students" 
+        element={
+            <AdminStudents />
+        } 
+      />
+      <Route 
+        path="/admin/classes" 
+        element={
+            <AdminClasses />
+        } 
+      />
+      <Route 
+        path="/admin/analytics" 
+        element={
+            <AdminAnalytics />
+        } 
+      />
+      <Route 
+        path="/admin/settings" 
+        element={
+            <AdminSettings />
+        } 
+      />
 
-          {/* Protected Routes */}
+      <Route path="/signout" element={<SignOut/>} />
 
-          <Route path="/signout" element={<SignOut/>} />
-
-          {/* Catch-all redirect */}
-          <Route path="*" element={
-            localStorage.getItem('sToken')
-              ? <Navigate to="/learner/home" replace />
-              : <Navigate to="/admin/dashboard" replace />
-          } />
-        </>
-      )}
+      {/* Parent Routes */}
+      {/* <Route path="/parent/dashboard" element={<ParentDashboard />} />
+      <Route path="/parent/settings" element={<ParentSettings />} /> */}Add commentMore actions
     </Routes>
   );
 }
 
-function App() {
+const App = () => {
   return (
     <Router>
       <AppContent />
     </Router>
   );
-}
+};
 
 export default App;
