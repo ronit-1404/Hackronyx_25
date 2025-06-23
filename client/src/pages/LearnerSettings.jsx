@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { 
   Settings, 
   User, 
@@ -35,7 +35,8 @@ const UserSettings = () => {
   const [phone, setPhone] = useState("(555) 123-4567");
   const [dateOfBirth, setDateOfBirth] = useState("1995-03-15");
   const [address, setAddress] = useState("123 Main St, City, State 12345");
-  
+  const [emailError, setEmailError] = useState("");
+
   // Security Settings
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -43,7 +44,9 @@ const UserSettings = () => {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState(0);
+
   // Notification Settings
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [pushNotifications, setPushNotifications] = useState(true);
@@ -52,91 +55,64 @@ const UserSettings = () => {
   const [gradeNotifications, setGradeNotifications] = useState(true);
   const [eventReminders, setEventReminders] = useState(true);
   const [soundNotifications, setSoundNotifications] = useState(true);
-  
+
   // Appearance Settings
   const [darkMode, setDarkMode] = useState(false);
   const [theme, setTheme] = useState('blue');
   const [fontSize, setFontSize] = useState('medium');
-  
-  // Preferences
   const [language, setLanguage] = useState('english');
-  const [timezone, setTimezone] = useState('UTC-5');
-  const [startWeek, setStartWeek] = useState('monday');
-  
+  const [startWeek, setStartWeek] = useState('sunday');
+
   // Privacy Settings
-  const [profileVisibility, setProfileVisibility] = useState('friends');
-  const [showEmail, setShowEmail] = useState(false);
+  const [profileVisibility, setProfileVisibility] = useState('public');
+  const [showEmail, setShowEmail] = useState(true);
   const [showPhone, setShowPhone] = useState(false);
-  
-  // Form validation states
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false);
+
+  // Save/Reset
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
-  const [passwordStrength, setPasswordStrength] = useState(0);
+  const [isFormValid, setIsFormValid] = useState(true);
 
-  useEffect(() => {
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email && !emailRegex.test(email)) {
-      setEmailError('Please enter a valid email address');
+  // Password strength calculation
+  React.useEffect(() => {
+    let strength = 0;
+    if (newPassword.length > 5) strength += 30;
+    if (/[A-Z]/.test(newPassword)) strength += 20;
+    if (/[0-9]/.test(newPassword)) strength += 20;
+    if (/[^A-Za-z0-9]/.test(newPassword)) strength += 30;
+    setPasswordStrength(strength);
+  }, [newPassword]);
+
+  // Email validation
+  React.useEffect(() => {
+    if (email && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      setEmailError("Invalid email address");
+      setIsFormValid(false);
     } else {
-      setEmailError('');
+      setEmailError("");
+      setIsFormValid(true);
     }
+  }, [email]);
 
-    // Password validation
-    if (newPassword && newPassword.length < 8) {
-      setPasswordError('Password must be at least 8 characters');
-    } else if (newPassword && confirmPassword && newPassword !== confirmPassword) {
-      setPasswordError('Passwords do not match');
+  // Password match validation
+  React.useEffect(() => {
+    if (confirmPassword && newPassword !== confirmPassword) {
+      setPasswordError("Passwords do not match");
+      setIsFormValid(false);
     } else {
-      setPasswordError('');
+      setPasswordError("");
+      setIsFormValid(true);
     }
+  }, [newPassword, confirmPassword]);
 
-    // Calculate password strength
-    if (newPassword) {
-      let strength = 0;
-      if (newPassword.length >= 8) strength += 25;
-      if (/[A-Z]/.test(newPassword)) strength += 25;
-      if (/[0-9]/.test(newPassword)) strength += 25;
-      if (/[^A-Za-z0-9]/.test(newPassword)) strength += 25;
-      setPasswordStrength(strength);
-    } else {
-      setPasswordStrength(0);
-    }
-
-    // Form validation
-    setIsFormValid(!emailError && !passwordError && email && firstName && lastName);
-  }, [email, newPassword, confirmPassword, emailError, passwordError, firstName, lastName]);
-
-  const getPasswordStrengthColor = () => {
-    if (passwordStrength < 50) return '#EF4444';
-    if (passwordStrength < 75) return '#F59E0B';
-    return '#10B981';
-  };
-
-  const getPasswordStrengthText = () => {
-    if (passwordStrength < 25) return 'Very Weak';
-    if (passwordStrength < 50) return 'Weak';
-    if (passwordStrength < 75) return 'Good';
-    return 'Strong';
-  };
-
-  const handleSave = async (e) => {
+  const handleSave = (e) => {
     e.preventDefault();
-    if (!isFormValid) return;
-    
     setIsSaving(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSaving(false);
-    setSaveSuccess(true);
-    
-    // Hide success message after 3 seconds
-    setTimeout(() => setSaveSuccess(false), 3000);
+    setTimeout(() => {
+      setIsSaving(false);
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 2000);
+    }, 1000);
   };
 
   const handleReset = () => {
@@ -149,6 +125,14 @@ const UserSettings = () => {
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
+    setTheme('blue');
+    setFontSize('medium');
+    setLanguage('english');
+    setStartWeek('sunday');
+    setDarkMode(false);
+    setProfileVisibility('public');
+    setShowEmail(true);
+    setShowPhone(false);
     setEmailNotifications(true);
     setPushNotifications(true);
     setSmsNotifications(false);
@@ -156,24 +140,26 @@ const UserSettings = () => {
     setGradeNotifications(true);
     setEventReminders(true);
     setSoundNotifications(true);
-    setDarkMode(false);
-    setTheme('blue');
-    setFontSize('medium');
-    setLanguage('english');
-    setTimezone('UTC-5');
-    setStartWeek('monday');
-    setProfileVisibility('friends');
-    setShowEmail(false);
-    setShowPhone(false);
-    setSaveSuccess(false);
+  };
+
+  const getPasswordStrengthColor = () => {
+    if (passwordStrength < 40) return '#EF4444';
+    if (passwordStrength < 70) return '#F59E0B';
+    return '#10B981';
+  };
+
+  const getPasswordStrengthText = () => {
+    if (passwordStrength < 40) return 'Weak';
+    if (passwordStrength < 70) return 'Moderate';
+    return 'Strong';
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F8FAFC' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#F5EFE6' }}>
       <Header />
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-8" id="settings-container">
         {/* Header */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 mb-8">
           <div className="flex items-center space-x-4">
             <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-blue-500 to-purple-600">
               <User className="w-8 h-8 text-white" />
@@ -198,14 +184,13 @@ const UserSettings = () => {
           </div>
         )}
 
-        <form className="space-y-6" onSubmit={handleSave}>
+        <form className="space-y-8" onSubmit={handleSave}>
           {/* Personal Information */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div className="flex items-center mb-6">
               <User className="w-6 h-6 mr-3 text-blue-600" />
               <h2 className="text-xl font-semibold text-gray-900">Personal Information</h2>
             </div>
-            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="block font-semibold text-gray-700">First Name</label>
@@ -217,7 +202,6 @@ const UserSettings = () => {
                   placeholder="Enter your first name"
                 />
               </div>
-
               <div className="space-y-2">
                 <label className="block font-semibold text-gray-700">Last Name</label>
                 <input
@@ -228,7 +212,6 @@ const UserSettings = () => {
                   placeholder="Enter your last name"
                 />
               </div>
-
               <div className="space-y-2">
                 <label className="block font-semibold text-gray-700">Email Address</label>
                 <div className="relative">
@@ -245,7 +228,6 @@ const UserSettings = () => {
                 </div>
                 {emailError && <p className="text-red-500 text-sm flex items-center"><X className="w-4 h-4 mr-1" />{emailError}</p>}
               </div>
-
               <div className="space-y-2">
                 <label className="block font-semibold text-gray-700">Phone Number</label>
                 <div className="relative">
@@ -259,7 +241,6 @@ const UserSettings = () => {
                   />
                 </div>
               </div>
-
               <div className="space-y-2">
                 <label className="block font-semibold text-gray-700">Date of Birth</label>
                 <div className="relative">
@@ -272,7 +253,6 @@ const UserSettings = () => {
                   />
                 </div>
               </div>
-
               <div className="space-y-2">
                 <label className="block font-semibold text-gray-700">Address</label>
                 <div className="relative">
@@ -290,12 +270,11 @@ const UserSettings = () => {
           </div>
 
           {/* Security Settings */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div className="flex items-center mb-6">
               <Shield className="w-6 h-6 mr-3 text-green-600" />
               <h2 className="text-xl font-semibold text-gray-900">Security Settings</h2>
             </div>
-            
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="space-y-2">
                 <label className="block font-semibold text-gray-700">Current Password</label>
@@ -317,7 +296,6 @@ const UserSettings = () => {
                   </button>
                 </div>
               </div>
-
               <div className="space-y-2">
                 <label className="block font-semibold text-gray-700">New Password</label>
                 <div className="relative">
@@ -359,7 +337,6 @@ const UserSettings = () => {
                   </div>
                 )}
               </div>
-
               <div className="space-y-2">
                 <label className="block font-semibold text-gray-700">Confirm New Password</label>
                 <div className="relative">
@@ -389,12 +366,11 @@ const UserSettings = () => {
           </div>
 
           {/* Notification Settings */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div className="flex items-center mb-6">
               <Bell className="w-6 h-6 mr-3 text-purple-600" />
               <h2 className="text-xl font-semibold text-gray-900">Notification Preferences</h2>
             </div>
-            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 { key: 'emailNotifications', label: 'Email Notifications', desc: 'Receive updates via email', icon: Mail, state: emailNotifications, setState: setEmailNotifications },
@@ -430,14 +406,12 @@ const UserSettings = () => {
           </div>
 
           {/* Appearance & Preferences */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div className="flex items-center mb-6">
               <Palette className="w-6 h-6 mr-3 text-orange-600" />
               <h2 className="text-xl font-semibold text-gray-900">Appearance & Preferences</h2>
             </div>
-            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Theme Selection */}
               <div className="space-y-4">
                 <label className="block font-semibold text-gray-700">Color Theme</label>
                 <div className="grid grid-cols-4 gap-3">
@@ -463,8 +437,6 @@ const UserSettings = () => {
                   ))}
                 </div>
               </div>
-
-              {/* Other Preferences */}
               <div className="space-y-4">
                 <div className="space-y-2">
                   <label className="block font-semibold text-gray-700">Font Size</label>
@@ -478,7 +450,6 @@ const UserSettings = () => {
                     <option value="large">Large</option>
                   </select>
                 </div>
-
                 <div className="space-y-2">
                   <label className="block font-semibold text-gray-700">Language</label>
                   <select
@@ -492,7 +463,6 @@ const UserSettings = () => {
                     <option value="german">German</option>
                   </select>
                 </div>
-
                 <div className="space-y-2">
                   <label className="block font-semibold text-gray-700">Week Starts On</label>
                   <select
@@ -506,7 +476,6 @@ const UserSettings = () => {
                 </div>
               </div>
             </div>
-
             {/* Dark Mode Toggle */}
             <div className="mt-6 flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors">
               <div className="flex items-center space-x-3">
@@ -531,12 +500,11 @@ const UserSettings = () => {
           </div>
 
           {/* Privacy Settings */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
             <div className="flex items-center mb-6">
               <Shield className="w-6 h-6 mr-3 text-red-600" />
               <h2 className="text-xl font-semibold text-gray-900">Privacy Settings</h2>
             </div>
-            
             <div className="space-y-4">
               <div className="space-y-2">
                 <label className="block font-semibold text-gray-700">Profile Visibility</label>
@@ -550,7 +518,6 @@ const UserSettings = () => {
                   <option value="private">Private - Only me</option>
                 </select>
               </div>
-
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors">
                   <div>
@@ -569,7 +536,6 @@ const UserSettings = () => {
                     }`}></div>
                   </button>
                 </div>
-
                 <div className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors">
                   <div>
                     <h3 className="font-semibold text-gray-900">Show Phone in Profile</h3>
@@ -590,10 +556,42 @@ const UserSettings = () => {
               </div>
             </div>
           </div>
+
+          {/* Save/Reset Buttons */}
+          <div className="flex justify-end gap-4 mt-8">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold flex items-center gap-2 hover:bg-gray-300 transition"
+              disabled={isSaving}
+            >
+              <RefreshCw size={18} />
+              Reset
+            </button>
+            <button
+              type="submit"
+              className={`px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-700 transition ${
+                !isFormValid || isSaving ? 'opacity-60 cursor-not-allowed' : ''
+              }`}
+              disabled={!isFormValid || isSaving}
+            >
+              {isSaving ? (
+                <>
+                  <Save size={18} className="animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Save size={18} />
+                  Save Settings
+                </>
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>
-  );      
-}
+  );
+};
 
 export default UserSettings;
