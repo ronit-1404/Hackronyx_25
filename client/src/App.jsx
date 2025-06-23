@@ -76,78 +76,63 @@ function AppContent() {
     }
   };
 
+  // Check for authentication tokens
+  const hasToken = localStorage.getItem('sToken') || localStorage.getItem('aToken');
+
   return (
     <Routes>
-      {/* Default route: redirect to signup */}
-      <Route path="/" element={<LoginSelection onSelect={handleRoleSelection} />} />
-      <Route path="/fds" element={<Navigate to="/signup" />} />
-      <Route path="/signup" element={<SignUp />} />
+      {!hasToken ? (
+        <>
+          {/* Public routes - only accessible when not authenticated */}
+          <Route path="/" element={<LoginSelection onSelect={handleRoleSelection} />} />
+          <Route path="/fds" element={<Navigate to="/signup" />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/admin/login" element={<AdminAuth />} />
+          
+          {/* Redirect authenticated paths to login if no token */}
+          <Route path="/learner/*" element={<Navigate to="/" replace />} />
+          <Route path="/admin/dashboard" element={<Navigate to="/" replace />} />
+          <Route path="/admin/students" element={<Navigate to="/" replace />} />
+          <Route path="/admin/classes" element={<Navigate to="/" replace />} />
+          <Route path="/admin/analytics" element={<Navigate to="/" replace />} />
+          <Route path="/admin/settings" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </>
+      ) : (
+        <>
+          {/* Authenticated routes */}
+          <Route path="/" element={
+            localStorage.getItem('sToken') 
+              ? <Navigate to="/learner/home" replace /> 
+              : <Navigate to="/admin/dashboard" replace />
+          } />
+          <Route path="/signup" element={<Navigate to="/" replace />} />
+          <Route path="/admin/login" element={<Navigate to="/admin/dashboard" replace />} />
 
-      {/* Learner Routes */}
-      <Route 
-        path="/learner/home" 
-        element={
-            <LearnerHome />
-        } 
-      />
-      <Route path='/ana' element={<AnalysisPage />} />
-      <Route 
-        path="/learner/analytics" 
-        element={
-            <LearnerAnalytics />
-        } 
-      />
-      <Route 
-        path="/learner/resources" 
-        element={
-            <LearnerResources />
-        } 
-      />
-      <Route 
-        path="/learner/settings" 
-        element={
-            <LearnerSettings />
-        } 
-      />
+          {/* Learner Routes */}
+          <Route path="/learner/home" element={<LearnerHome />} />
+          <Route path="/ana" element={<AnalysisPage />} />
+          <Route path="/learner/analytics" element={<LearnerAnalytics />} />
+          <Route path="/learner/resources" element={<LearnerResources />} />
+          <Route path="/learner/settings" element={<LearnerSettings />} />
 
-      {/* Admin Routes */}
-      <Route 
-        path="/admin/dashboard" 
-        element={
-            <AdminDashboard />
-        } 
-      />
-      <Route path='/admin/login' element={<AdminAuth />} />
-      <Route 
-        path="/admin/students" 
-        element={
-            <AdminStudents />
-        } 
-      />
-      <Route 
-        path="/admin/classes" 
-        element={
-            <AdminClasses />
-        } 
-      />
-      <Route 
-        path="/admin/analytics" 
-        element={
-            <AdminAnalytics />
-        } 
-      />
-      <Route 
-        path="/admin/settings" 
-        element={
-            <AdminSettings />
-        } 
-      />
+          {/* Admin Routes */}
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/students" element={<AdminStudents />} />
+          <Route path="/admin/classes" element={<AdminClasses />} />
+          <Route path="/admin/analytics" element={<AdminAnalytics />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
 
-      <Route path="/signout" element={<SignOut/>} />
+          <Route path="/signout" element={<SignOut/>} />
 
-      {/* Parent Routes */}
-      {/* <Route path="/parent/dashboard" element={<ParentDashboard />} />
-      <Route path="/parent/settings" element={<ParentSettings />} /> */}
+          {/* Catch-all redirect */}
+          <Route path="*" element={
+            localStorage.getItem('sToken')
+              ? <Navigate to="/learner/home" replace />
+              : <Navigate to="/admin/dashboard" replace />
+          } />
+        </>
+      )}
     </Routes>
   );
 }
