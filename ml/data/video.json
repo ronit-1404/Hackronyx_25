@@ -1,0 +1,210 @@
+[
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.14868514239788055,
+      "confused": 0.18513953685760498,
+      "frustrated": 0.023857735097408295,
+      "focused": 0.6423175930976868
+    },
+    "timestamp": "2025-06-24T00:13:17.384432"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.17348894476890564,
+      "confused": 0.2522851228713989,
+      "frustrated": 0.0324152447283268,
+      "focused": 0.5418106317520142
+    },
+    "timestamp": "2025-06-24T00:13:18.287013"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.11316464841365814,
+      "confused": 0.38932177424430847,
+      "frustrated": 0.055403269827365875,
+      "focused": 0.4421103000640869
+    },
+    "timestamp": "2025-06-24T00:13:19.286435"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.14315977692604065,
+      "confused": 0.38836321234703064,
+      "frustrated": 0.0509134866297245,
+      "focused": 0.41756361722946167
+    },
+    "timestamp": "2025-06-24T00:13:20.287066"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.12984946370124817,
+      "confused": 0.4041941463947296,
+      "frustrated": 0.04633478447794914,
+      "focused": 0.41962161660194397
+    },
+    "timestamp": "2025-06-24T00:13:21.285586"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.17544899880886078,
+      "confused": 0.30083167552948,
+      "frustrated": 0.0485893152654171,
+      "focused": 0.4751300811767578
+    },
+    "timestamp": "2025-06-24T00:13:22.292485"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.16880522668361664,
+      "confused": 0.2739485204219818,
+      "frustrated": 0.04686563089489937,
+      "focused": 0.5103806257247925
+    },
+    "timestamp": "2025-06-24T00:13:23.287432"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-24T00:13:24.244909"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-24T00:13:25.244570"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "confused",
+    "engagement_score": 0.55,
+    "emotions_data": {
+      "bored": 0.14113540947437286,
+      "confused": 0.42923322319984436,
+      "frustrated": 0.04601896181702614,
+      "focused": 0.3836123049259186
+    },
+    "timestamp": "2025-06-24T00:13:26.290080"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.14895202219486237,
+      "confused": 0.33762699365615845,
+      "frustrated": 0.0326237827539444,
+      "focused": 0.4807971715927124
+    },
+    "timestamp": "2025-06-24T00:13:27.273843"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.21457062661647797,
+      "confused": 0.2934311032295227,
+      "frustrated": 0.09161238372325897,
+      "focused": 0.40038591623306274
+    },
+    "timestamp": "2025-06-24T00:13:28.286654"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.12331394106149673,
+      "confused": 0.34739506244659424,
+      "frustrated": 0.07319395989179611,
+      "focused": 0.4560970067977905
+    },
+    "timestamp": "2025-06-24T00:13:29.285983"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.158534973859787,
+      "confused": 0.22564342617988586,
+      "frustrated": 0.060125384479761124,
+      "focused": 0.5556962490081787
+    },
+    "timestamp": "2025-06-24T00:13:30.288900"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.17680566012859344,
+      "confused": 0.281518816947937,
+      "frustrated": 0.054185546934604645,
+      "focused": 0.4874899983406067
+    },
+    "timestamp": "2025-06-24T00:13:31.287819"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.22317621111869812,
+      "confused": 0.31836459040641785,
+      "frustrated": 0.07960564643144608,
+      "focused": 0.3788534700870514
+    },
+    "timestamp": "2025-06-24T00:13:32.288764"
+  }
+]
