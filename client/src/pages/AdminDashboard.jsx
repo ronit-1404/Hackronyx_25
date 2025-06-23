@@ -140,19 +140,17 @@ const AdminDashboard = () => {
         <div className="flex-1 p-8 overflow-y-auto">
           {/* Real-time Performance Chart */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center">
-                <Activity className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+            <div className="flex items-center justify-between mb-6">            <div className="flex items-center">
+                <Activity className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
                 <h2 className="text-xl font-semibold text-gray-900">Real-time Performance Metrics</h2>
               </div>
               <div className="flex space-x-2">
                 {['overview', 'engagement', 'interventions'].map((tab) => (
                   <button
                     key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    onClick={() => setActiveTab(tab)}                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       activeTab === tab 
-                        ? 'bg-[#F67280] text-white' 
+                        ? 'bg-black text-white' 
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                   >
@@ -175,9 +173,8 @@ const AdminDashboard = () => {
           </div>
 
           {/* Enhanced Engagement Heatmap */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-            <div className="flex items-center mb-6">
-              <Calendar className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">            <div className="flex items-center mb-6">
+              <Calendar className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
               <h2 className="text-xl font-semibold text-gray-900">Weekly Engagement Heatmap</h2>
             </div>
             <div className="grid grid-cols-7 gap-4">
@@ -211,9 +208,8 @@ const AdminDashboard = () => {
           {/* Split Layout for Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             {/* Emotion Distribution */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center mb-6">
-                <Brain className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">              <div className="flex items-center mb-6">
+                <Brain className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
                 <h2 className="text-xl font-semibold text-gray-900">Student Emotion Distribution</h2>
               </div>
               <ResponsiveContainer width="100%" height={300}>
@@ -238,9 +234,8 @@ const AdminDashboard = () => {
             </div>
 
             {/* AI Intervention Performance */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center mb-6">
-                <Zap className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">              <div className="flex items-center mb-6">
+                <Zap className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
                 <h2 className="text-xl font-semibold text-gray-900">AI Intervention Success Rate</h2>
               </div>
               <ResponsiveContainer width="100%" height={300}>
@@ -249,16 +244,15 @@ const AdminDashboard = () => {
                   <XAxis type="number" domain={[0, 100]} stroke="#64748b" fontSize={12} />
                   <YAxis type="category" dataKey="name" stroke="#64748b" fontSize={11} width={80} />
                   <Tooltip contentStyle={{ backgroundColor: 'white', border: '1px solid #e2e8f0', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }} />
-                  <Bar dataKey="success" fill="#F67280" radius={[0, 6, 6, 0]} />
+                  <Bar dataKey="success" fill="#000000" radius={[0, 6, 6, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
 
           {/* AI Recommendations */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center mb-6">
-              <Brain className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">            <div className="flex items-center mb-6">
+              <Brain className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
               <h2 className="text-xl font-semibold text-gray-900">System Recommendations</h2>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -129,7 +129,7 @@ const AdminSettings = () => {
         {/* Header */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg" style={{ backgroundColor: '#F67280' }}>
+            <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg" style={{ backgroundColor: '#000000' }}>
               <Settings className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -156,7 +156,7 @@ const AdminSettings = () => {
           {/* Account Settings */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center mb-6">
-              <User className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+              <User className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
               <h2 className="text-xl font-semibold text-gray-900">Account Settings</h2>
             </div>
             
@@ -168,7 +168,7 @@ const AdminSettings = () => {
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="email"
-                    className={`w-full pl-10 pr-4 py-3 border rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-[#F67280] ${
+                    className={`w-full pl-10 pr-4 py-3 border rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-[#000000] ${
                       emailError ? 'border-red-500 bg-red-50' : 'border-gray-200 focus:border-transparent'
                     }`}
                     value={email}
@@ -191,7 +191,7 @@ const AdminSettings = () => {
                   <select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
-                    className="border border-gray-200 rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-[#F67280] focus:border-transparent"
+                    className="border border-gray-200 rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-[#000000] focus:border-transparent"
                   >
                     <option value="english">English</option>
                     <option value="spanish">Spanish</option>
@@ -201,7 +201,7 @@ const AdminSettings = () => {
                   <select
                     value={timezone}
                     onChange={(e) => setTimezone(e.target.value)}
-                    className="border border-gray-200 rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-[#F67280] focus:border-transparent"
+                    className="border border-gray-200 rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-[#000000] focus:border-transparent"
                   >
                     <option value="UTC-5">EST (UTC-5)</option>
                     <option value="UTC-8">PST (UTC-8)</option>
@@ -216,7 +216,7 @@ const AdminSettings = () => {
           {/* Security Settings */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center mb-6">
-              <Shield className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+              <Shield className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
               <h2 className="text-xl font-semibold text-gray-900">Security Settings</h2>
             </div>
             
@@ -228,7 +228,7 @@ const AdminSettings = () => {
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type={showPassword ? "text" : "password"}
-                    className={`w-full pl-10 pr-12 py-3 border rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-[#F67280] ${
+                    className={`w-full pl-10 pr-12 py-3 border rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-[#000000] ${
                       passwordError ? 'border-red-500 bg-red-50' : 'border-gray-200 focus:border-transparent'
                     }`}
                     value={password}
@@ -271,7 +271,7 @@ const AdminSettings = () => {
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type={showConfirmPassword ? "text" : "password"}
-                    className={`w-full pl-10 pr-12 py-3 border rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-[#F67280] ${
+                    className={`w-full pl-10 pr-12 py-3 border rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-[#000000] ${
                       passwordError && confirmPassword ? 'border-red-500 bg-red-50' : 'border-gray-200 focus:border-transparent'
                     }`}
                     value={confirmPassword}
@@ -296,7 +296,7 @@ const AdminSettings = () => {
           {/* Notification Settings */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center mb-6">
-              <Bell className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+              <Bell className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
               <h2 className="text-xl font-semibold text-gray-900">Notification Preferences</h2>
             </div>
             
@@ -314,7 +314,7 @@ const AdminSettings = () => {
                   type="button"
                   onClick={() => setEmailNotifications(!emailNotifications)}
                   className={`relative w-12 h-6 rounded-full transition-colors ${
-                    emailNotifications ? 'bg-[#F67280]' : 'bg-gray-300'
+                    emailNotifications ? 'bg-[#000000]' : 'bg-gray-300'
                   }`}
                 >
                   <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
@@ -336,7 +336,7 @@ const AdminSettings = () => {
                   type="button"
                   onClick={() => setPushNotifications(!pushNotifications)}
                   className={`relative w-12 h-6 rounded-full transition-colors ${
-                    pushNotifications ? 'bg-[#F67280]' : 'bg-gray-300'
+                    pushNotifications ? 'bg-[#000000]' : 'bg-gray-300'
                   }`}
                 >
                   <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
@@ -350,7 +350,7 @@ const AdminSettings = () => {
           {/* Appearance Settings */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center mb-6">
-              <Palette className="w-6 h-6 mr-3" style={{ color: '#F67280' }} />
+              <Palette className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
               <h2 className="text-xl font-semibold text-gray-900">Appearance & Theme</h2>
             </div>
             
@@ -366,12 +366,12 @@ const AdminSettings = () => {
                       onClick={() => setTheme(themeOption)}
                       className={`p-3 rounded-lg border-2 transition-all ${
                         theme === themeOption 
-                          ? 'border-[#F67280] bg-pink-50' 
+                          ? 'border-[#000000] bg-pink-50' 
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
                       <div className={`w-full h-6 rounded mb-2 ${
-                        themeOption === 'default' ? 'bg-[#F67280]' :
+                        themeOption === 'default' ? 'bg-[#000000]' :
                         themeOption === 'blue' ? 'bg-blue-500' : 'bg-green-500'
                       }`}></div>
                       <span className="text-sm font-medium capitalize">{themeOption}</span>
@@ -395,7 +395,7 @@ const AdminSettings = () => {
                     type="button"
                     onClick={() => setDarkMode(!darkMode)}
                     className={`relative w-12 h-6 rounded-full transition-colors ${
-                      darkMode ? 'bg-[#F67280]' : 'bg-gray-300'
+                      darkMode ? 'bg-[#000000]' : 'bg-gray-300'
                     }`}
                   >
                     <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
@@ -422,7 +422,7 @@ const AdminSettings = () => {
               disabled={!isFormValid || isSaving}
               className={`flex items-center justify-center space-x-2 px-8 py-3 rounded-lg text-white font-medium transition-all shadow-sm hover:shadow-md ${
                 isFormValid && !isSaving 
-                  ? 'bg-[#F67280] hover:bg-[#e55a73]' 
+                  ? 'bg-[#000000] hover:bg-[#e55a73]' 
                   : 'bg-gray-400 cursor-not-allowed'
               }`}
             >

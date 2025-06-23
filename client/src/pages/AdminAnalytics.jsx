@@ -155,7 +155,7 @@ const AdminAnalytics = () => {
   ];
 
   const demographics = [
-    { group: "Grade 10", count: 40, color: "#F67280", engagement: 78 },
+    { group: "Grade 10", count: 40, color: "#000000", engagement: 78 },
     { group: "Grade 11", count: 35, color: "#10B981", engagement: 82 },
     { group: "Grade 12", count: 25, color: "#F59E0B", engagement: 85 },
   ];
@@ -228,7 +228,7 @@ const AdminAnalytics = () => {
     { subject: "Biology", A: 90, B: 62, fullMark: 100 },
   ];
 
-  const pieColors = ["#F67280", "#10B981", "#F59E0B", "#8B5CF6", "#06B6D4"];
+  const pieColors = ["#000000", "#10B981", "#F59E0B", "#8B5CF6", "#06B6D4"];
 
   const refreshData = () => {
     setAnimationKey((prev) => prev + 1);
