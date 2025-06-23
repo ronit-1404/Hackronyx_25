@@ -29,9 +29,9 @@ import Header from "../components/headers/Header";
 
 const UserSettings = () => {
   // Personal Information
-  const [firstName, setFirstName] = useState("Imran");
-  const [lastName, setLastName] = useState("Khan");
-  const [email, setEmail] = useState("jailkasitara@student.edu");
+  const [firstName, setFirstName] = useState("Ishan");
+  const [lastName, setLastName] = useState("Jha");
+  const [email, setEmail] = useState("ishanjha@student.edu");
   const [phone, setPhone] = useState("(555) 123-4567");
   const [dateOfBirth, setDateOfBirth] = useState("1995-03-15");
   const [address, setAddress] = useState("123 Main St, City, State 12345");
