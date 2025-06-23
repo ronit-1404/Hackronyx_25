@@ -9,6 +9,7 @@ import LearnerHome from "./pages/LearnerHome";
 import LearnerAnalytics from "./pages/LearnerAnalytics";
 import LearnerResources from "./pages/LearnerResources";
 import LearnerSettings from "./pages/LearnerSettings";
+import LearnerReports from "./pages/LearnerReports";  
 
 // Admin Pages
 import AdminDashboard from "./pages/AdminDashboard";
@@ -16,6 +17,7 @@ import AdminStudents from "./pages/AdminStudents";
 import AdminClasses from "./pages/AdminClasses";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminSettings from "./pages/AdminSettings";
+import AdminReports from "./pages/AdminReports";
 
 import SignOut from "./SignOut";
 import AnalysisPage from "./pages/AnalysisPage";
@@ -112,6 +114,12 @@ function AppContent() {
             <LearnerSettings />
         } 
       />
+      <Route 
+        path="/learner/reports" 
+        element={
+             <LearnerReports />
+        } 
+      />
 
       {/* Admin Routes */}
       <Route 
@@ -137,6 +145,12 @@ function AppContent() {
         path="/admin/analytics" 
         element={
             <AdminAnalytics />
+        } 
+      />
+      <Route 
+        path="/admin/reports" 
+        element={
+            <AdminReports />
         } 
       />
       <Route 
