@@ -66,7 +66,7 @@ const Header = () => {
   // Navigation links for the sidebar
   const navLinks = [
     { 
-      title: "Analytics Home", 
+      title: "Analytics Panel", 
       path: "/ana", 
       icon: <FileChartPie className="w-5 h-5 text-blue-600 group-hover:text-blue-700" />, 
       color: "from-blue-50 to-indigo-50" 
@@ -84,7 +84,7 @@ const Header = () => {
       color: "from-blue-50 to-indigo-50" 
     },
     { 
-      title: "System Settings", 
+      title: "User Settings", 
       path: "/learner/settings", 
       icon: <Settings className="w-5 h-5 text-orange-600 group-hover:text-orange-700" />, 
       color: "from-orange-50 to-red-50" 
