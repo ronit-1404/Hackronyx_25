@@ -337,9 +337,113 @@ def get_status():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# @app.route('/api/analyze-screen', methods=['GET'])
+# def analyze_screen():
+#     try:
+#         # Capture screen
+#         screen = capture_screen()
+#         text = extract_text(screen)
+#         context = detect_context(text)
+#         sentiment = analyze_sentiment(text)
+#         img_display = Image.fromarray(cv2.cvtColor(screen, cv2.COLOR_BGR2RGB))
+#         buffered = BytesIO()
+#         img_display.save(buffered, format="JPEG", quality=30)
+#         img_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+#         # Get active app and Chrome tab info
+#         app_name = get_active_app()
+#         chrome_title, chrome_url = None, None
+#         if "chrome" in app_name.lower():
+#             chrome_title, chrome_url = get_chrome_tab_info()
+
+#         # Get idle time
+#         idle_seconds = get_idle_time()
+
+#         # Track context changes and log
+#         context_change_duration = 0
+#         if session_data["current_context"] != context:
+#             if session_data["current_context"]:
+#                 duration = time.time() - session_data["current_context_start"]
+#                 # Add to context durations
+#                 if session_data["current_context"] in session_data["contexts"]:
+#                     session_data["contexts"][session_data["current_context"]] += duration
+#                 else:
+#                     session_data["contexts"][session_data["current_context"]] = duration
+#                 session_data["last_context_duration"] = duration
+#                 context_change_duration = duration
+#                 # Log the context switch
+#                 session_data["context_log"].append({
+#                     "context": session_data["current_context"],
+#                     "duration": duration,
+#                     "timestamp": datetime.utcnow().isoformat()
+#                 })
+#                 # Limit log size
+#                 if len(session_data["context_log"]) > 10:
+#                     session_data["context_log"].pop(0)
+#             # Update current context
+#             session_data["current_context"] = context
+#             session_data["current_context_start"] = time.time()
+#         else:
+#             context_change_duration = session_data.get("last_context_duration", 0)
+
+#         # Store screenshot (limited to last 5)
+#         timestamp = datetime.utcnow().isoformat()
+#         session_data["screenshots"].append({
+#             "timestamp": timestamp,
+#             "context": context,
+#             "app": app_name
+#         })
+#         if len(session_data["screenshots"]) > 5:
+#             session_data["screenshots"].pop(0)
+
+#         # Generate insights
+#         insights = []
+#         if idle_seconds > 90:
+#             insights.append("Long period of inactivity detected")
+#         if sentiment == "negative":
+#             insights.append("Negative sentiment detected in screen content")
+#         if "youtube.com/watch" in text.lower():
+#             insights.append("Video lecture or educational content detected")
+            
+#         response_data = {
+#             "timestamp": timestamp,
+#             "screenshot": f"data:image/jpeg;base64,{img_base64}",
+#             "text_sample": text[:500] + ("..." if len(text) > 500 else ""),
+#             "context": context,
+#             "sentiment": sentiment,
+#             "active_app": app_name,
+#             "idle_time": idle_seconds,
+#             "insights": insights,
+#             "chrome_title": chrome_title,
+#             "chrome_url": chrome_url,
+#             "context_change_duration": context_change_duration,
+#             "context_log": session_data.get("context_log", [])
+#         }
+
+#         # Save to JSON file if userId is provided
+#         user_id = request.args.get('userId')
+#         if user_id:
+#             screen_data = {
+#                 'userId': user_id,
+#                 'context': context,
+#                 'sentiment': sentiment,
+#                 'active_app': app_name,
+#                 'idle_time': idle_seconds,
+#                 'insights': insights,
+#                 'chrome_title': chrome_title,
+#                 'chrome_url': chrome_url
+#             }
+#             write_to_json_file('screen', screen_data)
+            
+#         return jsonify(response_data)
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
 @app.route('/api/analyze-screen', methods=['GET'])
 def analyze_screen():
     try:
+        # Get user_id from request args with a default value
+        user_id = request.args.get('userId', 'unknown')
+        
         # Capture screen
         screen = capture_screen()
         text = extract_text(screen)
@@ -420,23 +524,22 @@ def analyze_screen():
             "context_log": session_data.get("context_log", [])
         }
 
-        # Save to JSON file if userId is provided
-        user_id = request.args.get('userId')
-        if user_id:
-            screen_data = {
-                'userId': user_id,
-                'context': context,
-                'sentiment': sentiment,
-                'active_app': app_name,
-                'idle_time': idle_seconds,
-                'insights': insights,
-                'chrome_title': chrome_title,
-                'chrome_url': chrome_url
-            }
-            write_to_json_file('screen', screen_data)
+        # Always save to screen.json file (not conditional on userId being provided)
+        screen_data = {
+            'userId': user_id,
+            'context': context,
+            'sentiment': sentiment,
+            'active_app': app_name,
+            'idle_time': idle_seconds,
+            'insights': insights,
+            'chrome_title': chrome_title,
+            'chrome_url': chrome_url
+        }
+        write_to_json_file('screen', screen_data)
             
         return jsonify(response_data)
     except Exception as e:
+        print(f"Error in analyze_screen: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/session-stats', methods=['GET'])
