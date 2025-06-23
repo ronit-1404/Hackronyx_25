@@ -209,15 +209,15 @@ engine = RecommendationEngine()
 engine.add_user("student_001")
 
 # Directory to save data
-data = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'data')
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'data')
 
 # Create data directory if it doesn't exist
-os.makedirs(data, exist_ok=True)
+os.makedirs(DATA_DIR, exist_ok=True)
 
 def write_to_json_file(data_type, data):
     """Write data to a JSON file in the data directory"""
     try:
-        file_path = os.path.join(data, f"{data_type}.json")
+        file_path = os.path.join(DATA_DIR, f"{data_type}.json")
         
         # Read existing data if available
         existing_data = []
