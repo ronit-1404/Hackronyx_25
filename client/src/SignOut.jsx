@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   LogOut, 
@@ -14,9 +14,29 @@ import {
 export default function SignoutButton() {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   const navigation = useNavigate();
-
+  
+  // Get user data from localStorage on component mount
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      try {
+        const parsedUser = JSON.parse(user);
+        setUserData(parsedUser);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+      }
+    }
+    
+    // Check if user is actually signed in
+    const hasToken = localStorage.getItem('sToken') || localStorage.getItem('aToken');
+    if (!hasToken) {
+      // If no token exists, redirect to home page
+      navigation('/');
+    }
+  }, [navigation]);
   const handleSignout = async () => {
     setIsLoading(true);
     
@@ -24,21 +44,18 @@ export default function SignoutButton() {
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Clear user session data (simulated)
-      // In a real app, you would:
-      // - Call your authentication API endpoint
-      // - Clear tokens from memory/state
-      // - Redirect to login page
-      // - Clear any user data from state management
+      // Clear actual user session data
+      localStorage.removeItem('sToken');
+      localStorage.removeItem('aToken');
+      localStorage.removeItem('user');
       
       setIsSignedIn(false);
       console.log('User signed out successfully');
       
-      // Simulate redirect or state change
+      // Redirect to home/role selection after showing success message
       setTimeout(() => {
-        // Reset for demo purposes
-        setIsSignedIn(true);
-      }, 3000);
+        navigation('/');
+      }, 2000);
       
     } catch (error) {
       console.error('Signout failed:', error);
@@ -46,8 +63,7 @@ export default function SignoutButton() {
     } finally {
       setIsLoading(false);
     }
-  };
-  if (!isSignedIn) {
+  };  if (!isSignedIn) {
     return (
       <div className="min-h-screen flex items-center justify-center px-8" style={{ backgroundColor: '#F5EFE6' }}>
         <div className="relative z-10 text-center">
@@ -62,7 +78,7 @@ export default function SignoutButton() {
             <div className="bg-green-50 rounded-xl p-3 border border-green-100">
               <p className="text-green-700 text-sm flex items-center justify-center">
                 <Sparkles className="w-4 h-4 inline mr-2" />
-                Thank you for using AI Learning Coach
+                Redirecting you to the home page...
               </p>
             </div>
           </div>
@@ -92,12 +108,15 @@ export default function SignoutButton() {
               <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
                 <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
               </div>
-            </div>
-            <h2 className="text-lg font-semibold text-gray-800 mb-1">Arman Singh</h2>
-            <p className="text-gray-500 text-sm">arman.singh@example.com</p>
+            </div>            <h2 className="text-lg font-semibold text-gray-800 mb-1">
+              {userData?.name || 'User'}
+            </h2>
+            <p className="text-gray-500 text-sm">
+              {userData?.email || 'user@example.com'}
+            </p>
             <div className="mt-2 inline-flex items-center px-2.5 py-1 bg-pink-50 rounded-full text-pink-600 text-xs">
               <Sparkles className="w-3 h-3 mr-1" />
-              Premium Member
+              {userData?.role === 'admin' ? 'Administrator' : 'Student Member'}
             </div>
           </div>
 
