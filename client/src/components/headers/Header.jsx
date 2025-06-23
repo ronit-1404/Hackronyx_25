@@ -87,6 +87,12 @@ const Header = () => {
       icon: <FileText className="w-5 h-5 text-blue-600 group-hover:text-blue-700" />, 
       color: "from-blue-50 to-indigo-50" 
     },
+    {
+      title:"Reports",
+      path:"/learner/reports",
+      icon: <FileText className="w-5 h-5 text-blue-600 group-hover:text-blue-700" />,
+      color: "from-blue-50 to-indigo-50"
+    },
     { 
       title: "User Settings", 
       path: "/learner/settings", 

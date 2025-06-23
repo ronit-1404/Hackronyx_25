@@ -95,7 +95,7 @@ const AdminAuth = () => {
       
       if (isSignUp) {
         // Direct API call for admin registration
-        response = await axios.post('http://localhost:5000/api/auth/admin/register', {
+        response = await axios.post('http://localhost:5001/api/auth/admin/register', {
           name: formData.name,
           email: formData.email,
           password: formData.password,
@@ -103,7 +103,7 @@ const AdminAuth = () => {
         });
       } else {
         // Direct API call for admin login
-        response = await axios.post('http://localhost:5000/api/auth/admin/signup', {
+        response = await axios.post('http://localhost:5001/api/auth/admin/signup', {
           email: formData.email,
           password: formData.password
         });
