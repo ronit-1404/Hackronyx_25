@@ -16,7 +16,11 @@ import {
   Zap,
   Target,
   BookOpen,
-  Activity
+  Activity,
+  BookOpen as Book,
+  Music,
+  Edit3,
+  UserCircle
 } from 'lucide-react';
 import axios from 'axios';
 
@@ -29,11 +33,19 @@ const SignUp = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    preferredWayOfLearning: ''
   });
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
+
+  const learningStyles = [
+    { id: 'Visual', name: 'Visual', icon: <Eye className="w-5 h-5" />, description: 'Learn best through images, diagrams, and spatial understanding' },
+    { id: 'Auditory', name: 'Auditory', icon: <Music className="w-5 h-5" />, description: 'Learn best through listening and speaking' },
+    { id: 'Read/Write', name: 'Read/Write', icon: <Edit3 className="w-5 h-5" />, description: 'Learn best through reading and writing text' },
+    { id: 'Kinaesthetic', name: 'Kinaesthetic', icon: <UserCircle className="w-5 h-5" />, description: 'Learn best through physical activities and hands-on experiences' }
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -74,6 +86,10 @@ const SignUp = () => {
       newErrors.confirmPassword = 'Passwords do not match';
     }
     
+    if (isSignUp && !formData.preferredWayOfLearning) {
+      newErrors.preferredWayOfLearning = 'Please select your preferred learning style';
+    }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -93,7 +109,8 @@ const SignUp = () => {
         response = await axios.post('http://localhost:5001/api/auth/user/register', {
           name: formData.name,
           email: formData.email,
-          password: formData.password
+          password: formData.password,
+          preferredWayOfLearning: formData.preferredWayOfLearning
         });
       } else {
         // Direct API call for login
@@ -137,7 +154,8 @@ const SignUp = () => {
       name: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      preferredWayOfLearning: ''
     });
   };
 
@@ -163,6 +181,7 @@ const SignUp = () => {
       description: "Your data stays secure with end-to-end encryption"
     }
   ];
+  
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F5EFE6' }}>
       <div className="flex justify-center items-center min-h-screen py-10 px-6">
@@ -354,6 +373,50 @@ const SignUp = () => {
                         <div className="flex items-center mt-2 text-red-500 text-sm">
                           <AlertCircle className="w-4 h-4 mr-1" />
                           {errors.confirmPassword}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Learning Style Selection */}
+                  {isSignUp && (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Preferred Learning Style
+                      </label>
+                      <div className="grid grid-cols-2 gap-3">
+                        {learningStyles.map((style) => (
+                          <div key={style.id}>
+                            <input
+                              type="radio"
+                              id={style.id}
+                              name="preferredWayOfLearning"
+                              value={style.id}
+                              checked={formData.preferredWayOfLearning === style.id}
+                              onChange={handleInputChange}
+                              className="sr-only peer"
+                            />
+                            <label
+                              htmlFor={style.id}
+                              className={`w-full flex flex-col items-center justify-center p-3 text-gray-600 
+                                         border rounded-xl cursor-pointer transition-all duration-200 peer-checked:border-transparent 
+                                         ${formData.preferredWayOfLearning === style.id 
+                                           ? 'bg-pink-50 peer-checked:border-pink-300 shadow-sm' 
+                                           : 'bg-white hover:bg-gray-50 border-gray-200'}`}
+                            >
+                              <div className={`p-2 rounded-lg mb-2 ${formData.preferredWayOfLearning === style.id ? 'text-pink-500' : 'text-gray-400'}`}>
+                                {style.icon}
+                              </div>
+                              <span className="text-sm font-medium">{style.name}</span>
+                              <span className="text-xs text-center mt-1 text-gray-500">{style.description}</span>
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                      {errors.preferredWayOfLearning && (
+                        <div className="flex items-center mt-2 text-red-500 text-sm">
+                          <AlertCircle className="w-4 h-4 mr-1" />
+                          {errors.preferredWayOfLearning}
                         </div>
                       )}
                     </div>

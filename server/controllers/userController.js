@@ -13,7 +13,7 @@ const generateUserToken = (user) => {
 
 exports.register = async (req, res) => {
     try {
-        const {name, email, password} = req.body;
+        const {name, email, password, preferredWayOfLearning} = req.body;
 
         const exist = await User.findOne({email});
         if(exist){
@@ -23,8 +23,19 @@ exports.register = async (req, res) => {
             })
         }
 
+        const validLearningStyles = ['Visual', 'Auditory', 'Read/Write', 'Kinaesthetic'];
+        if (!preferredWayOfLearning || !validLearningStyles.includes(preferredWayOfLearning)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please select a valid learning style'
+            });
+        }
+
         const user = new User({
-            name, email, password,
+            name, 
+            email, 
+            password,
+            preferredWayOfLearning,
             preferences: {
                 allowWebcam: true,
                 allowAudio: true,
@@ -38,7 +49,7 @@ exports.register = async (req, res) => {
         // Generate sToken for students
         const sToken = generateUserToken(user);
 
-        res.status(201).json({
+         res.status(201).json({
           success: true,
           sToken, // Using sToken instead of token
           user: {
@@ -46,6 +57,7 @@ exports.register = async (req, res) => {
               name: user.name,
               email: user.email,
               role: 'student', // Adding role for consistency
+              preferredWayOfLearning: user.preferredWayOfLearning,
               preferences: user.preferences
           }
         });
