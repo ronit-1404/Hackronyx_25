@@ -90,14 +90,14 @@ const SignUp = () => {
       
       if (isSignUp) {
         // Direct API call for registration
-        response = await axios.post('http://localhost:5000/api/auth/user/register', {
+        response = await axios.post('http://localhost:5001/api/auth/user/register', {
           name: formData.name,
           email: formData.email,
           password: formData.password
         });
       } else {
         // Direct API call for login
-        response = await axios.post('http://localhost:5000/api/auth/user/login', {
+        response = await axios.post('http://localhost:5001/api/auth/user/login', {
           email: formData.email,
           password: formData.password
         });
