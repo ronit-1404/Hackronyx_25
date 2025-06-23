@@ -65,18 +65,22 @@ const Header = () => {
 
   // Navigation links for the sidebar
   const navLinks = [
-    { 
-      title: "Analytics Panel", 
-      path: "/ana", 
-      icon: <FileChartPie className="w-5 h-5 text-blue-600 group-hover:text-blue-700" />, 
-      color: "from-blue-50 to-indigo-50" 
-    },
+
     { 
       title: "Home", 
       path: "/learner/home", 
       icon: <LucideHome className="w-5 h-5 text-blue-600 group-hover:text-blue-700" />, 
       color: "from-blue-50 to-indigo-50" 
     },
+  
+
+    { 
+      title: "Analytics Panel", 
+      path: "/ana", 
+      icon: <FileChartPie className="w-5 h-5 text-blue-600 group-hover:text-blue-700" />, 
+      color: "from-blue-50 to-indigo-50" 
+    },
+    
     { 
       title: "Learning Resources", 
       path: "/learner/resources", 
