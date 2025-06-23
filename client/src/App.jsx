@@ -9,6 +9,7 @@ import LearnerHome from "./pages/LearnerHome";
 import LearnerAnalytics from "./pages/LearnerAnalytics";
 import LearnerResources from "./pages/LearnerResources";
 import LearnerSettings from "./pages/LearnerSettings";
+import LearnerReports from "./pages/LearnerReports";  
 
 // Admin Pages
 import AdminDashboard from "./pages/AdminDashboard";
@@ -114,6 +115,7 @@ function AppContent() {
           <Route path="/ana" element={<AnalysisPage />} />
           <Route path="/learner/analytics" element={<LearnerAnalytics />} />
           <Route path="/learner/resources" element={<LearnerResources />} />
+          <Route path="/learner/reports" element={<LearnerReports />} />
           <Route path="/learner/settings" element={<LearnerSettings />} />
 
           {/* Admin Routes */}

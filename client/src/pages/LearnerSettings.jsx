@@ -25,6 +25,7 @@ import {
   Volume2,
   VolumeX
 } from 'lucide-react';
+import Header from "../components/headers/Header";
 
 const UserSettings = () => {
   // Personal Information
@@ -169,6 +170,7 @@ const UserSettings = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F8FAFC' }}>
+      <Header />
       <div className="max-w-4xl mx-auto p-6">
         {/* Header */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
