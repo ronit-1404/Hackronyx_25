@@ -1,0 +1,74 @@
+[
+  {
+    "popup": {
+      "title": "Feeling a little distracted?",
+      "message": "It's okay to take a short break!  Let's get you back on track.  Here's a fun fact to refresh your mind:",
+      "fun_fact": "Did you know that the population of Canada is roughly equal to the population of California?",
+      "recommendation": {
+        "type": "video",
+        "title": "Motivational Video: Short & Sweet",
+        "description": "A quick video to boost your motivation and help refocus. (Placeholder -  replace with actual video URL based on available content)",
+        "url": "https://www.example.com/motivational_video"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Interesting Article (Placeholder)",
+        "description": "An engaging article related to your recent browsing history or a related topic. (Placeholder - replace with actual article URL based on available content)",
+        "url": "https://www.example.com/interesting_article"
+      }
+    },
+    "context": {
+      "trigger": "focus",
+      "user_id": "student_001",
+      "idle_time": 9
+    }
+  },
+  {
+    "popup": {
+      "title": "Feeling a little distracted?",
+      "message": "Taking a short break is good! Let's refocus. Here's a fun fact to refresh your mind:",
+      "fun_fact": "Did you know that the population of Canada is roughly equal to the population of California?",
+      "recommendation": {
+        "type": "video",
+        "title": "Motivational Video: Short & Sweet",
+        "description": "A quick video to boost your motivation and help refocus.",
+        "url": "https://www.example.com/motivational_video"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Interesting Programming Article",
+        "description": "An engaging article related to programming, considering your recent browsing and interests.",
+        "url": "https://www.example.com/interesting_article"
+      }
+    },
+    "context": {
+      "trigger": "focus",
+      "user_id": "student_001",
+      "idle_time": 0
+    }
+  },
+  {
+    "popup": {
+      "title": "Feeling a little distracted?",
+      "message": "Taking a short break is good! Let's refocus. Here's a fun fact to refresh your mind:",
+      "fun_fact": "Did you know that the population of Canada is roughly equal to the population of California?",
+      "recommendation": {
+        "type": "video",
+        "title": "Motivational Video: Short & Sweet",
+        "description": "A quick video to boost your motivation and help refocus.",
+        "url": "https://www.example.com/motivational_video"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Interesting Programming Article",
+        "description": "An engaging article related to programming, considering your recent interests.",
+        "url": "https://www.example.com/interesting_article"
+      }
+    },
+    "context": {
+      "trigger": "focus",
+      "user_id": "student_001",
+      "idle_time": 3
+    }
+  }
+]

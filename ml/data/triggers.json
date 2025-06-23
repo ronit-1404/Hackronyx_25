@@ -1,0 +1,177 @@
+[
+  {
+    "outputs": {
+      "video": {
+        "emotion": "focused",
+        "attentive": true,
+        "engagement_score": 0.75
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "programming",
+        "chrome_title": "Vite + React",
+        "chrome_url": "http://localhost:5173/ana",
+        "sentiment": "positive",
+        "idle_time": 18
+      }
+    },
+    "user_id": "student_001",
+    "timestamp": "2025-06-24T00:13:17.384432",
+    "trigger": {
+      "type": "none",
+      "message": "No action needed at this time. No intervention required."
+    }
+  },
+  {
+    "outputs": {
+      "video": {
+        "emotion": "focused",
+        "attentive": true,
+        "engagement_score": 0.75
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "browsing",
+        "chrome_title": "",
+        "chrome_url": "https://youtube.com/",
+        "sentiment": "neutral",
+        "idle_time": 9
+      }
+    },
+    "user_id": "student_001",
+    "timestamp": "2025-06-24T00:13:18.287013",
+    "trigger": {
+      "type": "focus",
+      "message": "The user is off-task. Suggest a resource to help refocus. Also, suggest a motivational or alternative video."
+    }
+  },
+  {
+    "outputs": {
+      "video": {
+        "emotion": "focused",
+        "attentive": true,
+        "engagement_score": 0.75
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "browsing",
+        "chrome_title": "YouTube",
+        "chrome_url": "https://www.youtube.com/",
+        "sentiment": "positive",
+        "idle_time": 0
+      }
+    },
+    "user_id": "student_001",
+    "timestamp": "2025-06-24T00:13:19.286435",
+    "trigger": {
+      "type": "focus",
+      "message": "The user is off-task. Suggest a resource to help refocus. Also, suggest a motivational or alternative video."
+    }
+  },
+  {
+    "outputs": {
+      "video": {
+        "emotion": "focused",
+        "attentive": true,
+        "engagement_score": 0.75
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "browsing",
+        "chrome_title": "New Tab",
+        "chrome_url": "chrome://newtab/",
+        "sentiment": "positive",
+        "idle_time": 3
+      }
+    },
+    "user_id": "student_001",
+    "timestamp": "2025-06-24T00:13:20.287066",
+    "trigger": {
+      "type": "focus",
+      "message": "The user is off-task. Suggest a resource to help refocus. Also, suggest a motivational or alternative video."
+    }
+  },
+  {
+    "outputs": {
+      "video": {
+        "emotion": "focused",
+        "attentive": true,
+        "engagement_score": 0.75
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "programming",
+        "chrome_title": "GitHub",
+        "chrome_url": "https://github.com/",
+        "sentiment": "positive",
+        "idle_time": 1
+      }
+    },
+    "user_id": "student_001",
+    "timestamp": "2025-06-24T00:13:21.285586",
+    "trigger": {
+      "type": "none",
+      "message": "No action needed at this time. No intervention required."
+    }
+  },
+  {
+    "outputs": {
+      "video": {
+        "emotion": "focused",
+        "attentive": true,
+        "engagement_score": 0.75
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "video_lecture",
+        "chrome_title": "Vite + React",
+        "chrome_url": "http://localhost:5173/ana",
+        "sentiment": "positive",
+        "idle_time": 9
+      }
+    },
+    "user_id": "student_001",
+    "timestamp": "2025-06-24T00:13:22.292485",
+    "trigger": {
+      "type": "none",
+      "message": "No action needed at this time. No intervention required."
+    }
+  },
+  {
+    "outputs": {
+      "video": {
+        "emotion": "focused",
+        "attentive": true,
+        "engagement_score": 0.75
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "programming",
+        "chrome_title": null,
+        "chrome_url": null,
+        "sentiment": "positive",
+        "idle_time": 0
+      }
+    },
+    "user_id": "student_001",
+    "timestamp": "2025-06-24T00:13:23.287432",
+    "trigger": {
+      "type": "none",
+      "message": "No action needed at this time. No intervention required."
+    }
+  }
+]
