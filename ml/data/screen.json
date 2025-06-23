@@ -1,0 +1,81 @@
+[
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.300843167,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T00:26:03.220002"
+  },
+  {
+    "userId": "unknown",
+    "context": "browsing",
+    "sentiment": "neutral",
+    "active_app": "Google Chrome",
+    "idle_time": 0.159399542,
+    "insights": [],
+    "chrome_title": "",
+    "chrome_url": "https://youtube.com/",
+    "timestamp": "2025-06-24T00:26:08.899223"
+  },
+  {
+    "userId": "unknown",
+    "context": "browsing",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.002842792,
+    "insights": [],
+    "chrome_title": "YouTube",
+    "chrome_url": "https://www.youtube.com/",
+    "timestamp": "2025-06-24T00:26:14.636113"
+  },
+  {
+    "userId": "unknown",
+    "context": "browsing",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.052769209,
+    "insights": [
+      "Video lecture or educational content detected"
+    ],
+    "chrome_title": "New Tab",
+    "chrome_url": "chrome://newtab/",
+    "timestamp": "2025-06-24T00:26:19.475743"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.020183375,
+    "insights": [],
+    "chrome_title": "GitHub",
+    "chrome_url": "https://github.com/",
+    "timestamp": "2025-06-24T00:26:24.595432"
+  },
+  {
+    "userId": "unknown",
+    "context": "video_lecture",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.164166375,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T00:26:28.354349"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.000889459,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T00:26:34.696157"
+  }
+]
