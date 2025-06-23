@@ -19,6 +19,7 @@ import {
   AlertCircle,
   CheckCircle2
 } from 'lucide-react';
+import AdminHeader from "../components/headers/AdminHeader";
 
 const AdminSettings = () => {
   const [email, setEmail] = useState("admin@school.edu");
@@ -125,7 +126,8 @@ const AdminSettings = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F5EFE6' }}>
-      <div className="max-w-4xl mx-auto p-8">
+      <AdminHeader />
+      <div className="max-w-7xl mx-auto p-8">
         {/* Header */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
           <div className="flex items-center space-x-4">
@@ -154,7 +156,7 @@ const AdminSettings = () => {
 
         <form className="space-y-8">
           {/* Account Settings */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
             <div className="flex items-center mb-6">
               <User className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
               <h2 className="text-xl font-semibold text-gray-900">Account Settings</h2>
@@ -214,7 +216,7 @@ const AdminSettings = () => {
           </div>
 
           {/* Security Settings */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
             <div className="flex items-center mb-6">
               <Shield className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
               <h2 className="text-xl font-semibold text-gray-900">Security Settings</h2>
@@ -294,7 +296,7 @@ const AdminSettings = () => {
           </div>
 
           {/* Notification Settings */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
             <div className="flex items-center mb-6">
               <Bell className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
               <h2 className="text-xl font-semibold text-gray-900">Notification Preferences</h2>
@@ -348,7 +350,7 @@ const AdminSettings = () => {
           </div>
 
           {/* Appearance Settings */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
             <div className="flex items-center mb-6">
               <Palette className="w-6 h-6 mr-3" style={{ color: '#000000' }} />
               <h2 className="text-xl font-semibold text-gray-900">Appearance & Theme</h2>
@@ -425,6 +427,7 @@ const AdminSettings = () => {
                   ? 'bg-[#000000] hover:bg-[#e55a73]' 
                   : 'bg-gray-400 cursor-not-allowed'
               }`}
+              onClick={handleSave}
             >
               {isSaving ? (
                 <>
