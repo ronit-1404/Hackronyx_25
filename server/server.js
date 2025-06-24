@@ -26,6 +26,8 @@ const engagementRoutes = require('./routes/engagementRoutes.js');
 const extensionRoutes = require('./routes/extensionRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
 const screenRoutes = require('./routes/screenRoutes.js')
+const adminRoutes = require('./routes/adminRoutes.js');
+
 // Connect to database
 connectDB();
 
@@ -97,6 +99,7 @@ app.use('/api/engagement', engagementRoutes);
 app.use('/api/extension', extensionRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/screen',screenRoutes)
+app.use('/api/admin', adminRoutes);
 
 // Socket.io setup
 io.on('connection', (socket) => {
