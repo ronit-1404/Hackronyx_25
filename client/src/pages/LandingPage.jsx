@@ -18,7 +18,9 @@ import {
   Globe,
   Shield,
   Zap,
-  BookOpen
+  BookOpen,
+  Linkedin,
+  Github
 } from "lucide-react";
 
 function OptikkaLanding ({onSelectPortal}) {
@@ -226,7 +228,7 @@ function OptikkaLanding ({onSelectPortal}) {
         {isMenuOpen && (
           <div className="md:hidden bg-white/70 backdrop-blur-xl border-t border-orange-100/50 shadow-xl animate-fadeIn">
             <div className="px-6 py-6 space-y-4">
-              {['Home', 'Features', 'About', 'Contact'].map((item, index) => (
+              {['Home', 'Features', 'Portal', 'Team'].map((item, index) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
@@ -455,14 +457,14 @@ function OptikkaLanding ({onSelectPortal}) {
                     className="w-8 h-8 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white text-sm transition-all duration-300 hover:scale-110"
                     title={`${member.name} LinkedIn`}
                   >
-                    in
+                    <Linkedin />
                   </a>
                   <a
                     href={member.github}
                     className="w-8 h-8 bg-gray-800 hover:bg-gray-900 rounded-full flex items-center justify-center text-white text-sm transition-all duration-300 hover:scale-110"
                     title={`${member.name} GitHub`}
                   >
-                    git
+                    <Github/>
                   </a>
                 </div>
               </div>

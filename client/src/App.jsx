@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import SignUp from "./pages/studentauth/SignUp";
-import LoginSelection from "./pages/LoginSelction"; 
 import { useAuth } from "./context/AuthContext";
 
 //Landing  Page
