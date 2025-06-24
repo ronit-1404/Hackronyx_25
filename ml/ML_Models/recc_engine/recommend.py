@@ -215,7 +215,6 @@ Generate a JSON object for a popup with:
 - A fun fact related to the user's context or interests
 - A recommended {pref_type} (with title, description, and a real, relevant, and currently accessible URL. Only use {pref_type}s that are available online and not behind a paywall or deleted/private. The recommendation must be relevant to the topic the student is currently studying, as indicated by the screen analyzer context.)
 - An alternative recommendation of the other type (video if main is article, article if main is video)
-
 Base your recommendations on the user's context, preferences, the trigger, and the topic from the screen analyzer. Do not use placeholders. Respond in JSON with keys: popup.title, popup.message, popup.fun_fact, popup.recommendation (type, title, description, url), popup.alternative (type, title, description, url), and context (trigger, user_id, idle_time if available).
 """
             data = {"contents": [{"parts": [{"text": prompt}]}]}
