@@ -103,7 +103,6 @@
 #     # Run the Flask app
 #     app.run(host='0.0.0.0', port=5002)
 
-
 from flask import Flask, request, jsonify 
 from flask_cors import CORS
 import tempfile
@@ -113,6 +112,7 @@ import joblib
 import numpy as np
 import json
 import datetime
+import librosa
 from predict_emotion import predict_emotion_from_audio
 
 app = Flask(__name__)
@@ -221,6 +221,65 @@ def predict_emotion():
             'success': False,
             'message': f'Error processing request: {str(e)}',
             'emotion': 'unknown'
+        }), 500
+
+@app.route('/predict_engagement_spike', methods=['POST'])
+def predict_engagement_spike():
+    if not request.json or 'audio_data' not in request.json:
+        return jsonify({
+            'success': False,
+            'message': 'Missing audio_data in request',
+            'engagement': 'unknown'
+        }), 400
+    try:
+        audio_data = request.json['audio_data']
+        file_format = request.json.get('file_format', 'wav')
+        try:
+            audio_bytes = base64.b64decode(audio_data)
+        except:
+            return jsonify({
+                'success': False,
+                'message': 'Invalid audio data encoding',
+                'engagement': 'unknown'
+            }), 400
+        with tempfile.NamedTemporaryFile(suffix=f'.{file_format}', delete=False) as temp_file:
+            temp_path = temp_file.name
+            temp_file.write(audio_bytes)
+        try:
+            # Load audio and calculate amplitude
+            y, sr = librosa.load(temp_path, sr=None)
+            rms = np.sqrt(np.mean(y**2))
+            max_amp = np.max(np.abs(y))
+            # Thresholds (tune as needed)
+            RMS_THRESHOLD = 0.1
+            MAX_AMP_THRESHOLD = 0.3
+            if rms > RMS_THRESHOLD or max_amp > MAX_AMP_THRESHOLD:
+                engagement = 'distracted'
+            else:
+                engagement = 'engaged'
+            # Save to JSON file
+            audio_data_obj = {
+                'rms': float(rms),
+                'max_amplitude': float(max_amp),
+                'engagement': engagement,
+                'userId': request.json.get('userId', 'unknown')
+            }
+            write_to_json_file('audio', audio_data_obj)
+            return jsonify({
+                'success': True,
+                'message': 'Engagement predicted by spike logic',
+                'engagement': engagement,
+                'rms': float(rms),
+                'max_amplitude': float(max_amp)
+            })
+        finally:
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error processing request: {str(e)}',
+            'engagement': 'unknown'
         }), 500
 
 @app.route('/health', methods=['GET'])
