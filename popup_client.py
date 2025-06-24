@@ -1,0 +1,218 @@
+import json
+import os
+import time
+import tkinter as tk
+from tkinter import ttk
+import webbrowser
+from threading import Thread
+import schedule
+
+class PopupClient:
+    def __init__(self):
+        self.content_path = os.path.join(os.path.dirname(__file__), 'ml', 'data', 'content.json')
+        self.shown_recommendations = set()
+        self.current_popup = None
+        self.check_interval = 30  # seconds
+        
+        # Start the scheduler in a background thread
+        self.scheduler_thread = Thread(target=self.run_scheduler, daemon=True)
+        self.scheduler_thread.start()
+        
+    def run_scheduler(self):
+        schedule.every(self.check_interval).seconds.do(self.check_for_recommendations)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+    
+    def load_content(self):
+        try:
+            if os.path.exists(self.content_path):
+                with open(self.content_path, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            return []
+        except Exception as e:
+            print(f"Error loading content: {e}")
+            return []
+    
+    def check_for_recommendations(self):
+        content_data = self.load_content()
+        
+        # Check if we have new recommendations
+        if content_data and content_data:
+            for recommendation in reversed(content_data):  # Start with most recent
+                # Create a unique ID for this recommendation to avoid showing duplicates
+                rec_id = recommendation.get('context', {}).get('user_id', '') + '_' + \
+                         recommendation.get('popup', {}).get('title', '') + '_' + \
+                         str(recommendation.get('context', {}).get('trigger', {}).get('type', ''))
+                
+                if rec_id not in self.shown_recommendations:
+                    # New recommendation found
+                    self.shown_recommendations.add(rec_id)
+                    self.display_popup(recommendation)
+                    break
+    
+    def display_popup(self, recommendation):
+        # If there's already a popup, close it
+        if self.current_popup and self.current_popup.winfo_exists():
+            self.current_popup.destroy()
+        
+        # Create new popup window
+        popup = tk.Tk()
+        popup.title("Study Assistant")
+        popup.geometry("400x550")
+        popup.configure(bg='white')
+        
+        # Make window appear on top
+        popup.attributes('-topmost', True)
+        
+        # Place window in bottom right corner
+        screen_width = popup.winfo_screenwidth()
+        screen_height = popup.winfo_screenheight()
+        popup.geometry(f"+{screen_width - 420}+{screen_height - 600}")
+        
+        # Get recommendation data
+        popup_data = recommendation.get('popup', {})
+        title = popup_data.get('title', 'Study Assistant')
+        message = popup_data.get('message', '')
+        fun_fact = popup_data.get('fun_fact', '')
+        
+        # Primary recommendation
+        primary_rec = popup_data.get('recommendation', {})
+        primary_type = primary_rec.get('type', 'RESOURCE')
+        primary_title = primary_rec.get('title', '')
+        primary_desc = primary_rec.get('description', '')
+        primary_url = primary_rec.get('url', '')
+        
+        # Alternative recommendation
+        alt_rec = popup_data.get('alternative', {})
+        alt_type = alt_rec.get('type', 'RESOURCE')
+        alt_title = alt_rec.get('title', '')
+        alt_desc = alt_rec.get('description', '')
+        alt_url = alt_rec.get('url', '')
+        
+        # Create the UI elements
+        # Title
+        title_label = tk.Label(popup, text=title, font=("Segoe UI", 16, "bold"), bg='white')
+        title_label.pack(pady=(15, 10), padx=20, anchor='w')
+        
+        # Separator
+        ttk.Separator(popup, orient='horizontal').pack(fill='x', padx=20)
+        
+        # Message
+        if message:
+            message_label = tk.Label(popup, text=message, font=("Segoe UI", 11), 
+                                    bg='white', wraplength=360, justify='left')
+            message_label.pack(pady=(10, 5), padx=20, anchor='w')
+        
+        # Fun Fact
+        if fun_fact:
+            fun_fact_frame = tk.Frame(popup, bg='#f8f9fa', padx=10, pady=10)
+            fun_fact_frame.pack(pady=10, padx=20, fill='x')
+            
+            fun_fact_label = tk.Label(fun_fact_frame, text=f"🔍 {fun_fact}", 
+                                    font=("Segoe UI", 10, "italic"), bg='#f8f9fa',
+                                    wraplength=340, justify='left', fg='#555')
+            fun_fact_label.pack()
+        
+        # Primary Recommendation
+        rec_frame = tk.Frame(popup, bg='#e8f4fd', padx=10, pady=10)
+        rec_frame.pack(pady=10, padx=20, fill='x')
+        
+        rec_type_label = tk.Label(rec_frame, text=primary_type.upper(), 
+                                font=("Segoe UI", 8), bg='#e8f4fd', fg='#3498db')
+        rec_type_label.pack(anchor='w')
+        
+        rec_title_label = tk.Label(rec_frame, text=primary_title, 
+                                font=("Segoe UI", 12, "bold"), bg='#e8f4fd')
+        rec_title_label.pack(anchor='w')
+        
+        if primary_desc:
+            rec_desc_label = tk.Label(rec_frame, text=primary_desc, 
+                                    font=("Segoe UI", 10), bg='#e8f4fd',
+                                    wraplength=340, justify='left')
+            rec_desc_label.pack(anchor='w', pady=(5, 0))
+        
+        def open_primary_url():
+            if primary_url and primary_url != '#':
+                webbrowser.open(primary_url)
+        
+        rec_url_btn = tk.Button(rec_frame, text="Open Resource", 
+                            command=open_primary_url, bg='#3498db', fg='white',
+                            font=("Segoe UI", 9), cursor="hand2", bd=0, padx=10, pady=5)
+        rec_url_btn.pack(anchor='w', pady=(10, 0))
+        
+        # Alternative Recommendation
+        alt_frame = tk.Frame(popup, bg='#fef9e7', padx=10, pady=10)
+        alt_frame.pack(pady=10, padx=20, fill='x')
+        
+        alt_type_label = tk.Label(alt_frame, text=alt_type.upper(), 
+                                font=("Segoe UI", 8), bg='#fef9e7', fg='#f1c40f')
+        alt_type_label.pack(anchor='w')
+        
+        alt_title_label = tk.Label(alt_frame, text=alt_title, 
+                                font=("Segoe UI", 12, "bold"), bg='#fef9e7')
+        alt_title_label.pack(anchor='w')
+        
+        if alt_desc:
+            alt_desc_label = tk.Label(alt_frame, text=alt_desc, 
+                                    font=("Segoe UI", 10), bg='#fef9e7',
+                                    wraplength=340, justify='left')
+            alt_desc_label.pack(anchor='w', pady=(5, 0))
+        
+        def open_alt_url():
+            if alt_url and alt_url != '#':
+                webbrowser.open(alt_url)
+        
+        alt_url_btn = tk.Button(alt_frame, text="Open Alternative", 
+                            command=open_alt_url, bg='#f1c40f', fg='white',
+                            font=("Segoe UI", 9), cursor="hand2", bd=0, padx=10, pady=5)
+        alt_url_btn.pack(anchor='w', pady=(10, 0))
+        
+        # Action buttons
+        button_frame = tk.Frame(popup, bg='white')
+        button_frame.pack(pady=15, padx=20, fill='x')
+        
+        dismiss_btn = tk.Button(button_frame, text="Dismiss", 
+                            command=popup.destroy, bg='#ecf0f1', 
+                            font=("Segoe UI", 10), cursor="hand2", bd=0, padx=15, pady=8)
+        dismiss_btn.pack(side='right', padx=(10, 0))
+        
+        apply_btn = tk.Button(button_frame, text="Try Recommendation", 
+                            command=open_primary_url, bg='#3498db', fg='white',
+                            font=("Segoe UI", 10), cursor="hand2", bd=0, padx=15, pady=8)
+        apply_btn.pack(side='right')
+        
+        # Store reference to current popup
+        self.current_popup = popup
+        
+        # Auto-close after 5 minutes if not interacted with
+        popup.after(300000, lambda: popup.destroy() if popup.winfo_exists() else None)
+        
+        # Start the popup's event loop
+        popup.mainloop()
+
+if __name__ == "__main__":
+    client = PopupClient()
+    
+    # Create a simple control interface
+    root = tk.Tk()
+    root.title("Study Assistant Control")
+    root.geometry("300x200")
+    
+    frame = tk.Frame(root, padx=20, pady=20)
+    frame.pack(fill='both', expand=True)
+    
+    label = tk.Label(frame, text="Study Assistant Running", font=("Segoe UI", 14, "bold"))
+    label.pack(pady=(0, 20))
+    
+    check_btn = tk.Button(frame, text="Check for Recommendations Now", 
+                      command=client.check_for_recommendations,
+                      bg='#2ecc71', fg='white', font=("Segoe UI", 10),
+                      cursor="hand2", bd=0, padx=15, pady=8)
+    check_btn.pack(fill='x')
+    
+    status_label = tk.Label(frame, text="Checking automatically every 30 seconds", 
+                        font=("Segoe UI", 9), fg='#7f8c8d')
+    status_label.pack(pady=(10, 0))
+    
+    root.mainloop()
