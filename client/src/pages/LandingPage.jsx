@@ -49,6 +49,20 @@ function OptikkaLanding ({onSelectPortal}) {
     }
   };
 
+  // Function to scroll to portal section
+  const scrollToPortal = () => {
+    const portalSection = document.getElementById('portal');
+    if (portalSection) {
+      portalSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToFeatures = () => {
+    const feat = document.getElementById('features');
+    if(feat){
+      feat.scrollIntoView({behavior: 'smooth'})
+    }
+  }
   const features = [
     {
       icon: BarChart3,
@@ -169,6 +183,12 @@ function OptikkaLanding ({onSelectPortal}) {
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
+                  onClick={(e) => {
+                    if(item === 'Features') {
+                      e.preventDefault();
+                      scrollToFeatures();
+                    }
+                  }}
                   className={`relative font-semibold group transition-all duration-200 hover:scale-105 ${
                     item === 'Home' 
                       ? 'text-orange-600' 
@@ -184,7 +204,10 @@ function OptikkaLanding ({onSelectPortal}) {
                   )}
                 </a>
               ))}
-              <button className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2 rounded-lg font-medium hover:from-orange-600 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-orange-200/50 hover:shadow-orange-300/60 hover:scale-105 hover:-translate-y-1 animate-pulse">
+              <button 
+                onClick={scrollToPortal} 
+                className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2 rounded-lg font-medium hover:from-orange-600 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-orange-200/50 hover:shadow-orange-300/60 hover:scale-105 hover:-translate-y-1 animate-pulse"
+              >
                 Get Started
               </button>
             </div>
@@ -207,6 +230,13 @@ function OptikkaLanding ({onSelectPortal}) {
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
+                  onClick={(e) => {
+                    if(item === 'Features') {
+                      e.preventDefault();
+                      scrollToFeatures();
+                      setIsMenuOpen(false); // Close mobile menu after clicking
+                    }
+                  }}
                   className={`block font-semibold py-2 px-4 rounded-lg transition-all duration-200 hover:scale-105 ${
                     item === 'Home'
                       ? 'text-orange-600 bg-orange-50/50 border-l-4 border-orange-400'
@@ -279,7 +309,7 @@ function OptikkaLanding ({onSelectPortal}) {
                 className="bg-white/70 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-orange-100/50 hover:shadow-xl hover:shadow-orange-200/30 transition-all duration-300 group hover:scale-105 hover:-translate-y-2 animate-fadeInUp"
                 style={{ animationDelay: `${0.4 + index * 0.1}s` }}
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-pink-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-lg shadow-orange-200/50">
+                <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-pink-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-lg shadow-orange-200/50">
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-orange-600 transition-colors duration-300">
