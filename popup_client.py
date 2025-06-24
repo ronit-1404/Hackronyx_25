@@ -28,17 +28,38 @@ class PopupClient:
         try:
             if os.path.exists(self.content_path):
                 with open(self.content_path, 'r', encoding='utf-8') as f:
-                    return json.load(f)
+                    content = f.read().strip()
+                    if not content:
+                        print("Content file is empty")
+                        return []
+                    return json.loads(content)
+            else:
+                print(f"Content file does not exist at: {self.content_path}")
+                # Create directory if it doesn't exist
+                os.makedirs(os.path.dirname(self.content_path), exist_ok=True)
+                # Create empty content file
+                with open(self.content_path, 'w', encoding='utf-8') as f:
+                    f.write('[]')
+                return []
+        except json.JSONDecodeError as e:
+            print(f"Error parsing JSON content: {e}")
+            print(f"Content starts with: {open(self.content_path, 'r').read(100)}...")
             return []
         except Exception as e:
             print(f"Error loading content: {e}")
             return []
     
     def check_for_recommendations(self):
+        print(f"Checking for recommendations at {time.strftime('%H:%M:%S')}")
+        print(f"Checking file: {self.content_path}")
+        print(f"File exists: {os.path.exists(self.content_path)}")
+        
         content_data = self.load_content()
+        print(f"Found {len(content_data)} entries in content.json")
         
         # Check if we have new recommendations
-        if content_data and content_data:
+        found_new = False
+        if content_data and len(content_data) > 0:
             for recommendation in reversed(content_data):  # Start with most recent
                 # Create a unique ID for this recommendation to avoid showing duplicates
                 rec_id = recommendation.get('context', {}).get('user_id', '') + '_' + \
@@ -47,9 +68,47 @@ class PopupClient:
                 
                 if rec_id not in self.shown_recommendations:
                     # New recommendation found
+                    print(f"Found new recommendation: {rec_id}")
                     self.shown_recommendations.add(rec_id)
                     self.display_popup(recommendation)
+                    found_new = True
                     break
+        
+        # If no new recommendations were found, show a message popup
+        if not found_new:
+            print("No new recommendations found")
+            self.show_info_popup("No New Recommendations", 
+                               "No new recommendations are available at this time.\n\n" +
+                               "The system will continue checking automatically.")
+    
+    def show_info_popup(self, title, message):
+        # Create a simple info popup
+        popup = tk.Toplevel()
+        popup.title(title)
+        popup.geometry("350x200")
+        popup.configure(bg='white')
+        
+        # Make window appear on top
+        popup.attributes('-topmost', True)
+        
+        # Place window in center of screen
+        screen_width = popup.winfo_screenwidth()
+        screen_height = popup.winfo_screenheight()
+        popup.geometry(f"+{int(screen_width/2 - 175)}+{int(screen_height/2 - 100)}")
+        
+        # Add message
+        message_label = tk.Label(popup, text=message, font=("Segoe UI", 11), 
+                              bg='white', wraplength=300, justify='center')
+        message_label.pack(pady=30, padx=20, expand=True)
+        
+        # Add OK button
+        ok_btn = tk.Button(popup, text="OK", command=popup.destroy,
+                        bg='#3498db', fg='white', font=("Segoe UI", 10),
+                        cursor="hand2", bd=0, padx=20, pady=5)
+        ok_btn.pack(pady=20)
+        
+        # Auto-close after 10 seconds
+        popup.after(10000, lambda: popup.destroy() if popup.winfo_exists() else None)
     
     def display_popup(self, recommendation):
         # If there's already a popup, close it
@@ -57,7 +116,7 @@ class PopupClient:
             self.current_popup.destroy()
         
         # Create new popup window
-        popup = tk.Tk()
+        popup = tk.Toplevel()  # Changed from Tk() to Toplevel() to avoid multiple root windows
         popup.title("Study Assistant")
         popup.geometry("400x550")
         popup.configure(bg='white')
@@ -187,9 +246,6 @@ class PopupClient:
         
         # Auto-close after 5 minutes if not interacted with
         popup.after(300000, lambda: popup.destroy() if popup.winfo_exists() else None)
-        
-        # Start the popup's event loop
-        popup.mainloop()
 
 if __name__ == "__main__":
     client = PopupClient()
@@ -197,7 +253,7 @@ if __name__ == "__main__":
     # Create a simple control interface
     root = tk.Tk()
     root.title("Study Assistant Control")
-    root.geometry("300x200")
+    root.geometry("300x300")  # Increased height for new button
     
     frame = tk.Frame(root, padx=20, pady=20)
     frame.pack(fill='both', expand=True)
@@ -214,5 +270,41 @@ if __name__ == "__main__":
     status_label = tk.Label(frame, text="Checking automatically every 30 seconds", 
                         font=("Segoe UI", 9), fg='#7f8c8d')
     status_label.pack(pady=(10, 0))
+    
+    # Add a separator
+    ttk.Separator(frame, orient='horizontal').pack(fill='x', pady=15)
+    
+    # Add a button to show a test popup
+    def show_test_popup():
+        test_recommendation = {
+            "context": {
+                "user_id": "test_user",
+                "trigger": {"type": "test"}
+            },
+            "popup": {
+                "title": "Test Recommendation",
+                "message": "This is a test recommendation to verify the popup system is working correctly.",
+                "fun_fact": "Regular breaks can increase productivity by up to 20%!",
+                "recommendation": {
+                    "type": "article",
+                    "title": "Effective Study Techniques",
+                    "description": "Learn science-backed methods to improve your study sessions.",
+                    "url": "https://www.google.com/search?q=effective+study+techniques"
+                },
+                "alternative": {
+                    "type": "video",
+                    "title": "5-Minute Study Break Exercise",
+                    "description": "A quick routine to refresh your mind between study sessions.",
+                    "url": "https://www.youtube.com/results?search_query=5+minute+study+break+exercise"
+                }
+            }
+        }
+        client.display_popup(test_recommendation)
+    
+    test_btn = tk.Button(frame, text="Show Test Popup", 
+                      command=show_test_popup,
+                      bg='#9b59b6', fg='white', font=("Segoe UI", 10),
+                      cursor="hand2", bd=0, padx=15, pady=8)
+    test_btn.pack(fill='x', pady=(0, 15))
     
     root.mainloop()
