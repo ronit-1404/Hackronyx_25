@@ -92,7 +92,7 @@ export default function StudentCards() {
     if (usingApiData) {
       console.log(`Redirecting to analytics for student ID: ${studentId}`);
       // This would typically use React Router navigation
-      // navigate(`/admin/students/${studentId}/analytics`);
+      //navigate(`/admin/students/${studentId}/learner/analytics`);
     } else {
       alert(`Viewing analytics for ${studentName} (sample data)`);
     }

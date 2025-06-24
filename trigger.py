@@ -1,10 +1,16 @@
 import json
 from datetime import datetime
+import os
 
 # Helper to load all entries from a list of dicts in a JSON file
 def load_all_entries(filepath):
+    if not os.path.exists(filepath):
+        return []
     with open(filepath, 'r', encoding='utf-8') as f:
-        data = json.load(f)
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError:
+            return []
         if isinstance(data, list):
             # Sort by timestamp if available
             if data and 'timestamp' in data[0]:
@@ -51,10 +57,25 @@ def get_trigger_action(outputs, user_preference):
 video_entries = load_all_entries('ml/data/video.json')
 audio_entries = load_all_entries('ml/data/audio.json')
 screen_entries = load_all_entries('ml/data/screen.json')
-with open('ml/data/user.json', 'r', encoding='utf-8') as f:
-    user = json.load(f)
 
-# Find the minimum length to avoid index errors
+# Try to load user data from user.json, then user.txt, else fallback to empty dict
+user = {}
+user_file = None
+if os.path.exists('ml/data/user.json'):
+    user_file = 'ml/data/user.json'
+elif os.path.exists('ml/data/user.txt'):
+    user_file = 'ml/data/user.txt'
+
+if user_file:
+    with open(user_file, 'r', encoding='utf-8') as f:
+        try:
+            user = json.load(f)
+        except json.JSONDecodeError:
+            user = {}
+else:
+    user = {}
+
+# Find minimum length to avoid index errors
 min_len = min(len(video_entries), len(audio_entries), len(screen_entries))
 
 triggers = []
@@ -65,6 +86,7 @@ if 'preferred_content_types' in user:
     user_preference = max(prefs, key=prefs.get)
 else:
     user_preference = 'article'  # fallback
+
 for i in range(min_len):
     # Map audio fields
     audio = audio_entries[i]

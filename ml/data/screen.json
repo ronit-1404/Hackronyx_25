@@ -77,5 +77,1284 @@
     "chrome_title": null,
     "chrome_url": null,
     "timestamp": "2025-06-24T00:26:34.696157"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.807534292,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:51:14.354385"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.027044209,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:51:19.310055"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.753367792,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:51:27.033902"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.468662625,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:51:32.063644"
+  },
+  {
+    "userId": "unknown",
+    "context": "video_lecture",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.004337292,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:51:37.014882"
+  },
+  {
+    "userId": "unknown",
+    "context": "video_lecture",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.056469416,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:51:42.185885"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.007048875,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:51:49.085574"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.542158958,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:51:54.124227"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.002657,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:51:58.823106"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.976765292,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:03.812914"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 5.981300208,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:08.817457"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.002062667,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:13.786361"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.264237917,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:19.180287"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 2.122109625,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:24.333983"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 7.130101292,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:29.341517"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.000614,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:34.329396"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.235816458,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:39.388004"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.005590375,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:44.338443"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.004628708,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:49.211070"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.2278015,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:54.364504"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.8761375,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:52:59.842420"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 5.2555815,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:04.222219"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.003394417,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:09.209481"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.33040625,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:14.335579"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.002536917,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:19.370979"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.00706225,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:24.523610"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.015897917,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:29.502971"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.020003125,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:34.558487"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.003226417,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:39.552528"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.000899,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:44.560787"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.002364042,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:49.460561"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.210904417,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:54.739289"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.080377625,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:53:59.739582"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.304594916,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:04.743710"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 5.221384416,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:09.660091"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 10.519190916,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:14.957896"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.032676208,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:19.967723"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.005673959,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:25.056459"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 1.141891,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:30.091281"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.151970458,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:35.183893"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.002200875,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:40.246377"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.005026417,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:45.305635"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 1.601216,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:50.174021"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 3.800700542,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:54.648692"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 8.777230125,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:54:59.625301"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 13.797712584,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:04.645820"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 4.223831542,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:09.517414"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.073165667,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:14.464819"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.002117708,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:19.744458"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.002154708,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:24.687203"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.0002705,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:29.543945"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 1.463806,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:34.577074"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.004787542,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:39.628897"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.000248958,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:44.515512"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.000941291,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:49.499660"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.004419292,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:54.646201"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 2.332173834,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:55:59.536403"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.005689,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:04.573150"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 1.378978375,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:09.604543"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.332627958,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:14.584351"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.022974375,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:19.567515"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.062867333,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:56:24.312247"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.019211416,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:29.505784"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 1.255471292,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:34.044873"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.003487416,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:39.447108"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.074281375,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:44.929531"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.002174708,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:49.862923"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.426689792,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:54.896926"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.214407667,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:56:59.802292"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.312591667,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:04.790472"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.359505625,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:09.816517"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.108024458,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:14.936082"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.136965042,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:19.597446"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.123312959,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:24.595310"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.663587791,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:29.552643"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.156813667,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:34.646096"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 2.07289575,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:39.636513"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.283160416,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:44.645928"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.63752575,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:49.643006"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.2217895,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:55.011364"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.036057916,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:57:59.945863"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.003742834,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:04.890678"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.063188667,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:09.878197"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 3.279979042,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:14.878384"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 1.877385209,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:19.964596"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 6.901352584,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:24.988602"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 11.89729325,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:29.984581"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "neutral",
+    "active_app": "Electron",
+    "idle_time": 0.007672667,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:34.804620"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.647703291,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:39.899143"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.0057695,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:44.919769"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.008218083,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:49.772183"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.019633292,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:54.955984"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.005339208,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:58:59.960691"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 4.644861083,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:59:04.793804"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Electron",
+    "idle_time": 0.300313083,
+    "insights": [],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:59:09.833920"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 5.214585042,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:59:14.748143"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.003652833,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:59:19.755788"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.006020416,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:59:24.753224"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.003214917,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:59:29.737434"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Electron",
+    "idle_time": 0.410176166,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": null,
+    "chrome_url": null,
+    "timestamp": "2025-06-24T15:59:34.811898"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "negative",
+    "active_app": "Google Chrome",
+    "idle_time": 0.061267583,
+    "insights": [
+      "Negative sentiment detected in screen content"
+    ],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:59:39.845984"
+  },
+  {
+    "userId": "unknown",
+    "context": "video_lecture",
+    "sentiment": "neutral",
+    "active_app": "Google Chrome",
+    "idle_time": 0.001976208,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:59:42.154321"
+  },
+  {
+    "userId": "unknown",
+    "context": "video_lecture",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.002019083,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:59:47.245666"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.004100583,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:59:52.218381"
+  },
+  {
+    "userId": "unknown",
+    "context": "programming",
+    "sentiment": "positive",
+    "active_app": "Google Chrome",
+    "idle_time": 0.001752,
+    "insights": [],
+    "chrome_title": "Vite + React",
+    "chrome_url": "http://localhost:5173/ana",
+    "timestamp": "2025-06-24T15:59:54.343099"
   }
 ]
