@@ -442,34 +442,7 @@ function OptikkaLanding ({onSelectPortal}) {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-20 relative">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="bg-gradient-to-r from-orange-500 to-pink-500 rounded-2xl p-12 shadow-2xl animate-fadeInUp hover:scale-105 transition-transform duration-300">
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Stay Updated with Latest Features
-            </h2>
-            <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
-              Get notified about new features, educational insights, and platform updates.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="flex-1 px-6 py-4 rounded-xl border-0 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-white/30 text-lg transition-all duration-300 focus:scale-105"
-              />
-              <button
-                onClick={handleSubmit}
-                className="bg-white text-orange-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-1"
-              >
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       {/* Footer */}
       <footer className="py-16 px-6 bg-white/50 backdrop-blur-sm border-t border-orange-100/50 relative">
         <div className="max-w-7xl mx-auto">
