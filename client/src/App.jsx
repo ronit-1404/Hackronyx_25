@@ -4,6 +4,9 @@ import SignUp from "./pages/studentauth/SignUp";
 import LoginSelection from "./pages/LoginSelction"; 
 import { useAuth } from "./context/AuthContext";
 
+//Landing  Page
+import OptikkaLanding from "./pages/LandingPage";
+
 // Learner Pages
 import LearnerHome from "./pages/LearnerHome";
 import LearnerAnalytics from "./pages/LearnerAnalytics";
@@ -84,9 +87,15 @@ function AppContent() {
   return (
     <Routes>
       {/* Default route: redirect to signup */}
-      <Route path="/" element={<LoginSelection onSelect={handleRoleSelection} />} />
+      <Route
+        path="/"
+        element={<OptikkaLanding onSelectPortal={handleRoleSelection} />}
+      />
       <Route path="/fds" element={<Navigate to="/signup" />} />
       <Route path="/signup" element={<SignUp />} />
+
+      {/* Landing Page */}
+      <Route path="/landing" element={<OptikkaLanding onSelectPortal={handleRoleSelection} />} />
 
       {/* Learner Routes */}
       <Route 
