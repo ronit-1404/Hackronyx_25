@@ -110,38 +110,38 @@ function OptikkaLanding ({onSelectPortal}) {
     {
       name: "Siya Dadpe",
       role: "Lead Developer",
-      bio: "Full-stack developer with 8+ years of experience in EdTech. Passionate about creating scalable learning platforms.",
+      bio: "Siya is a dynamic and driven leader whose strategic thinking and guidance have been instrumental in our growth and success.",
       skills: ["React", "Node.js", "Python", "AWS", "Machine Learning"],
       image: "👨‍💻",
-      linkedin: "#",
-      github: "#"
+      linkedin: "https://www.linkedin.com/in/siyadadpe/",
+      github: "https://github.com/SiyaDadpe"
     },
     {
       name: "Animesh Yadav",
       role: "Frontend Developer",
-      bio: "Design specialist focused on creating intuitive and accessible learning experiences for students of all ages.",
+      bio: "Animesh is a passionate and innovative contributor whose technical expertise and dedication consistently elevate the team's performance.",
       skills: ["React", "User Research", "Prototyping", "Design Systems"],
       image: "👩‍🎨",
-      linkedin: "#",
-      github: "#"
+      linkedin: "https://www.linkedin.com/in/animesh-yadav-111947256/",
+      github: "https://github.com/animesh-94"
     },
     {
       name: "Ronit Dhase",
       role: "Backend Developer & Integration Specialist",
-      bio: "Data engineer specializing in analytics and real-time processing systems for educational platforms.",
+      bio: "Ronit is a focused and reliable team member who brings creative problem-solving and strong execution to every project.",
       skills: ["Node.js", "PostgreSQL", "Docker", "Kubernetes"],
       image: "👨‍🔧",
-      linkedin: "#",
-      github: "#"
+      linkedin: "https://www.linkedin.com/in/ronit-rahul-dhase-396190297/",
+      github: "https://github.com/ronit-1404"
     },
     {
       name: "Ayan Farooque",
       role: "ML Developer",
-      bio: "Former educator turned product manager, bridging the gap between technology and educational needs.",
+      bio: "Ayan is an enthusiastic and versatile contributor, consistently bringing fresh ideas and positive energy to the team.",
       skills: ["Machine Learning", "Agile", "User Analytics", "Product Strategy"],
       image: "👩‍💼",
-      linkedin: "#",
-      github: "#"
+      linkedin: "https://www.linkedin.com/in/ayfarooque/",
+      github: "https://github.com/ayanfarooque"
     }
   ];
 
@@ -581,6 +581,8 @@ function OptikkaLanding ({onSelectPortal}) {
                 <div className="flex justify-center space-x-3">
                   <a
                     href={member.linkedin}
+                    target="_blank"
+                rel="noopener noreferrer"
                     className="w-8 h-8 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white text-sm transition-all duration-300 hover:scale-110"
                     title={`${member.name} LinkedIn`}
                   >
@@ -588,6 +590,8 @@ function OptikkaLanding ({onSelectPortal}) {
                   </a>
                   <a
                     href={member.github}
+                    target="_blank"
+                rel="noopener noreferrer"
                     className="w-8 h-8 bg-gray-800 hover:bg-gray-900 rounded-full flex items-center justify-center text-white text-sm transition-all duration-300 hover:scale-110"
                     title={`${member.name} GitHub`}
                   >
@@ -631,7 +635,7 @@ function OptikkaLanding ({onSelectPortal}) {
                 className="w-9 h-9 rounded-full bg-blue-500 hover:bg-blue-600 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
                 title="LinkedIn"
               >
-                <Linkedin size={20} />
+                <Linkedin size={10} />
               </a>
               <a
                 href="https://github.com/"
