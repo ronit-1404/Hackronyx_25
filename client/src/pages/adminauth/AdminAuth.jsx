@@ -450,6 +450,14 @@ const AdminAuth = () => {
                     </p>
                   </div>
                 )}
+
+                <button
+                    style={{ backgroundColor: '#3B82F6' }}
+                    className="w-full hover:bg-pink-500 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 hover:shadow-lg flex items-center justify-center space-x-2 mt-[23px]"
+                    onClick={() => navigate('/')}
+                > 
+                  <span>Home Page</span>
+                </button>
               </div>
             </div>
           </div>

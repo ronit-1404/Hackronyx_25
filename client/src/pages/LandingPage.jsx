@@ -179,7 +179,7 @@ function OptikkaLanding ({onSelectPortal}) {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
-              {['Home', 'Features', 'About', 'Contact'].map((item, index) => (
+              {['Home', 'Features', 'Portal', 'Team'].map((item, index) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
