@@ -94,9 +94,6 @@ function AppContent() {
       <Route path="/fds" element={<Navigate to="/signup" />} />
       <Route path="/signup" element={<SignUp />} />
 
-      {/* Landing Page */}
-      <Route path="/landing" element={<OptikkaLanding onSelectPortal={handleRoleSelection} />} />
-
       {/* Learner Routes */}
       <Route 
         path="/learner/home" 
