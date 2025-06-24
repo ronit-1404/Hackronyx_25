@@ -1,74 +1,74 @@
 [
   {
     "popup": {
-      "title": "Feeling a little distracted?",
-      "message": "It's okay to take a short break!  Let's get you back on track.  Here's a fun fact to refresh your mind:",
-      "fun_fact": "Did you know that the population of Canada is roughly equal to the population of California?",
+      "title": "Refocus and Recharge!",
+      "message": "Hey there! It looks like you've been browsing for a bit.  Let's get you back on track with your coding!  Take a short break and then dive back into building amazing things.",
+      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?",
       "recommendation": {
         "type": "video",
-        "title": "Motivational Video: Short & Sweet",
-        "description": "A quick video to boost your motivation and help refocus. (Placeholder -  replace with actual video URL based on available content)",
-        "url": "https://www.example.com/motivational_video"
+        "title": "React 18 Fundamentals",
+        "description": "Learn the basics of React 18, including new features and best practices. This video provides a comprehensive overview of the framework for beginners and those looking to refresh their skills.",
+        "url": "https://www.youtube.com/watch?v=L72xhS1Q-wA"
       },
       "alternative": {
         "type": "article",
-        "title": "Interesting Article (Placeholder)",
-        "description": "An engaging article related to your recent browsing history or a related topic. (Placeholder - replace with actual article URL based on available content)",
-        "url": "https://www.example.com/interesting_article"
+        "title": "Understanding React Components",
+        "description": "A helpful article explaining the fundamental building blocks of React applications\u2014components. Learn about functional and class components, props, and state.",
+        "url": "https://reactjs.org/docs/components-and-props.html"
       }
     },
     "context": {
       "trigger": "focus",
       "user_id": "student_001",
-      "idle_time": 9
+      "idle_time": 0.300843167
     }
   },
   {
     "popup": {
-      "title": "Feeling a little distracted?",
-      "message": "Taking a short break is good! Let's refocus. Here's a fun fact to refresh your mind:",
-      "fun_fact": "Did you know that the population of Canada is roughly equal to the population of California?",
+      "title": "Refocus and Recharge!",
+      "message": "Hey there!  It seems like you've been working hard on your Vite + React project.  Take a quick break to refocus and then dive back in!",
+      "fun_fact": "Did you know that the name 'React' comes from the fact that the library updates the user interface by reacting to changes in data?",
       "recommendation": {
         "type": "video",
-        "title": "Motivational Video: Short & Sweet",
-        "description": "A quick video to boost your motivation and help refocus.",
-        "url": "https://www.example.com/motivational_video"
+        "title": "React Tutorial for Beginners - Full Course",
+        "description": "Learn React from scratch in this comprehensive tutorial.  Covers components, JSX, state, and more.",
+        "url": "https://www.youtube.com/watch?v=Ke90Tje7VS0"
       },
       "alternative": {
         "type": "article",
-        "title": "Interesting Programming Article",
-        "description": "An engaging article related to programming, considering your recent browsing and interests.",
-        "url": "https://www.example.com/interesting_article"
+        "title": "Understanding React's Virtual DOM",
+        "description": "A deep dive into the Virtual DOM, a key concept that makes React so efficient and performant.",
+        "url": "https://reactjs.org/docs/rendering-elements.html"
       }
     },
     "context": {
       "trigger": "focus",
       "user_id": "student_001",
-      "idle_time": 0
+      "idle_time": 0.300843167
     }
   },
   {
     "popup": {
-      "title": "Feeling a little distracted?",
-      "message": "Taking a short break is good! Let's refocus. Here's a fun fact to refresh your mind:",
-      "fun_fact": "Did you know that the population of Canada is roughly equal to the population of California?",
+      "title": "Refocus and Recharge!",
+      "message": "Hey there!  It looks like you've been browsing for a bit. Let's get you back on track with your React coding!  Take a quick break to refocus, then dive back in.",
+      "fun_fact": "Did you know that React, the JavaScript library you're using, was initially created by a single engineer at Facebook and later open-sourced?",
       "recommendation": {
         "type": "video",
-        "title": "Motivational Video: Short & Sweet",
-        "description": "A quick video to boost your motivation and help refocus.",
-        "url": "https://www.example.com/motivational_video"
+        "title": "React Fundamentals: A Beginner's Guide (2024)",
+        "description": "This comprehensive tutorial covers the essential concepts of React, from components and JSX to state management and hooks. Perfect for solidifying your understanding.",
+        "url": "https://www.youtube.com/watch?v=nLn_a4m4t2A"
       },
       "alternative": {
         "type": "article",
-        "title": "Interesting Programming Article",
-        "description": "An engaging article related to programming, considering your recent interests.",
-        "url": "https://www.example.com/interesting_article"
+        "title": "Understanding React Hooks",
+        "description": "Dive deeper into React Hooks, a powerful feature that simplifies state management and side effects in functional components.",
+        "url": "https://reactjs.org/docs/hooks-intro.html"
       }
     },
     "context": {
       "trigger": "focus",
       "user_id": "student_001",
-      "idle_time": 3
+      "idle_time": 0.300843167
     }
   }
 ]

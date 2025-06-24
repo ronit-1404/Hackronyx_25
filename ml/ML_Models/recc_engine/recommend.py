@@ -153,16 +153,47 @@ def main():
     # Load user profile (old key-value format)
     user_txt = read_file(USER_JSON_PATH)
     user = parse_user_txt(user_txt)
-    # Load available content (may be empty)
-    contents = read_json_file(CONTENT_JSON_PATH)
+    # Determine user preference (video or article)
+    pref_type = 'article'
+    if 'Preferred Content Types' in user:
+        import ast
+        try:
+            prefs = ast.literal_eval(user['Preferred Content Types'])
+            if isinstance(prefs, dict):
+                pref_type = max(prefs, key=prefs.get)
+        except Exception:
+            pass
     # Load triggers
     triggers = read_json_file(TRIGGERS_PATH)
+    # Load screen context for each trigger
+    screens = read_json_file(SCREEN_JSON_PATH)
     # For each actionable trigger, generate a popup using the LLM
+    contents = []
     for trig in triggers:
         trigger = trig.get('trigger', {})
         if trigger.get('type') and trigger['type'] != 'none':
-            # Compose prompt for LLM
             outputs = trig.get('outputs', {})
+            # Find the closest screen context by timestamp if available
+            screen_context = {}
+            trig_time = trig.get('timestamp')
+            if trig_time and screens:
+                from datetime import datetime
+                def parse_time(t):
+                    try:
+                        return datetime.fromisoformat(t)
+                    except Exception:
+                        return None
+                trig_dt = parse_time(trig_time)
+                min_diff = None
+                for s in screens:
+                    s_time = s.get('timestamp')
+                    s_dt = parse_time(s_time) if s_time else None
+                    if trig_dt and s_dt:
+                        diff = abs((trig_dt - s_dt).total_seconds())
+                        if min_diff is None or diff < min_diff:
+                            min_diff = diff
+                            screen_context = s
+            # Compose prompt for LLM
             prompt = f"""
 You are a smart popup and content recommender. Given the following trigger:
 - Trigger Type: {trigger['type']}
@@ -171,15 +202,22 @@ You are a smart popup and content recommender. Given the following trigger:
 User context:
 {json.dumps(outputs, indent=2)}
 
+Screen analyzer data (most relevant to this event):
+{json.dumps(screen_context, indent=2)}
+
 User profile:
 {json.dumps(user, indent=2)}
 
-Available content:
-{json.dumps(contents, indent=2)}
+The user's preferred content type is: {pref_type.upper()}
 
-Generate a JSON object for a popup with a motivational message, a fun fact, and a recommended article or video, based on the trigger and user context.
+Generate a JSON object for a popup with:
+- A motivational message for the user
+- A fun fact related to the user's context or interests
+- A recommended {pref_type} (with title, description, and a real, relevant, and currently accessible URL. Only use {pref_type}s that are available online and not behind a paywall or deleted/private. The recommendation must be relevant to the topic the student is currently studying, as indicated by the screen analyzer context.)
+- An alternative recommendation of the other type (video if main is article, article if main is video)
+
+Base your recommendations on the user's context, preferences, the trigger, and the topic from the screen analyzer. Do not use placeholders. Respond in JSON with keys: popup.title, popup.message, popup.fun_fact, popup.recommendation (type, title, description, url), popup.alternative (type, title, description, url), and context (trigger, user_id, idle_time if available).
 """
-            # Call LLM (Gemini)
             data = {"contents": [{"parts": [{"text": prompt}]}]}
             resp = requests.post(GEMINI_API_URL, json=data)
             print('Gemini API status:', resp.status_code)
@@ -195,7 +233,6 @@ Generate a JSON object for a popup with a motivational message, a fun fact, and 
                     match = re.search(r'\{.*\}', text, re.DOTALL)
                     if match:
                         popup_obj = pyjson.loads(match.group(0))
-                        # Append to content.json as a valid array
                         contents.append(popup_obj)
                         write_json_file(CONTENT_JSON_PATH, contents)
                         print('Popup appended to content.json')
