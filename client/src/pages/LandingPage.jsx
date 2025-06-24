@@ -21,10 +21,10 @@ import {
   Zap,
   BookOpen,
   Linkedin,
-  Github
+  Github,
 } from "lucide-react";
 
-function OptikkaLanding ({onSelectPortal}) {
+function OptikkaLanding({ onSelectPortal }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
@@ -32,8 +32,8 @@ function OptikkaLanding ({onSelectPortal}) {
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleSubmit = (e) => {
@@ -45,7 +45,7 @@ function OptikkaLanding ({onSelectPortal}) {
   const handlePortalSelection = (portalType) => {
     setSelectedCard(portalType);
     console.log(`${portalType} portal selected`);
-    
+
     // Call the parent component's function to handle the portal selection
     if (onSelectPortal) {
       onSelectPortal(portalType);
@@ -54,95 +54,106 @@ function OptikkaLanding ({onSelectPortal}) {
 
   // Function to scroll to portal section
   const scrollToPortal = () => {
-    const portalSection = document.getElementById('portal');
+    const portalSection = document.getElementById("portal");
     if (portalSection) {
-      portalSection.scrollIntoView({ behavior: 'smooth' });
+      portalSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const scrollToFeatures = () => {
-    const feat = document.getElementById('features');
-    if(feat){
-      feat.scrollIntoView({behavior: 'smooth'})
+    const feat = document.getElementById("features");
+    if (feat) {
+      feat.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
   const features = [
     {
       icon: BarChart3,
       title: "Real-time Analytics",
-      description: "Monitor student engagement and performance with live data visualization and comprehensive reporting tools."
+      description:
+        "Monitor student engagement and performance with live data visualization and comprehensive reporting tools.",
     },
     {
       icon: Activity,
       title: "Progress Tracking",
-      description: "Track individual and group progress with detailed insights into learning patterns and achievements."
+      description:
+        "Track individual and group progress with detailed insights into learning patterns and achievements.",
     },
     {
       icon: Users,
       title: "Collaborative Learning",
-      description: "Foster collaboration with interactive group projects, discussions, and peer-to-peer learning experiences."
+      description:
+        "Foster collaboration with interactive group projects, discussions, and peer-to-peer learning experiences.",
     },
     {
       icon: Award,
       title: "Achievement System",
-      description: "Motivate learners with badges, certificates, and milestone rewards that recognize their accomplishments."
+      description:
+        "Motivate learners with badges, certificates, and milestone rewards that recognize their accomplishments.",
     },
     {
       icon: Globe,
       title: "Global Accessibility",
-      description: "Access your learning platform from anywhere with multi-language support and mobile optimization."
+      description:
+        "Access your learning platform from anywhere with multi-language support and mobile optimization.",
     },
     {
       icon: Shield,
       title: "Secure & Private",
-      description: "Enterprise-grade security ensures your data is protected with advanced encryption and privacy controls."
-    }
+      description:
+        "Enterprise-grade security ensures your data is protected with advanced encryption and privacy controls.",
+    },
   ];
 
   const stats = [
     { number: "10K+", label: "Active Students", icon: Users },
     { number: "95%", label: "Completion Rate", icon: TrendingUp },
     { number: "500+", label: "Courses Available", icon: PlayCircle },
-    { number: "24/7", label: "Support Available", icon: Shield }
+    { number: "24/7", label: "Support Available", icon: Shield },
   ];
 
   const teamMembers = [
     {
       name: "Siya Dadpe",
       role: "Lead Developer",
-      bio: "Full-stack developer with 8+ years of experience in EdTech. Passionate about creating scalable learning platforms.",
+      bio: "Siya is a dynamic and driven leader whose strategic thinking and guidance have been instrumental in our growth and success.",
       skills: ["React", "Node.js", "Python", "AWS", "Machine Learning"],
       image: "👨‍💻",
-      linkedin: "#",
-      github: "#"
+      linkedin: "https://www.linkedin.com/in/siyadadpe/",
+      github: "https://github.com/SiyaDadpe",
     },
     {
       name: "Animesh Yadav",
       role: "Frontend Developer",
-      bio: "Design specialist focused on creating intuitive and accessible learning experiences for students of all ages.",
+      bio: "Animesh is a passionate and innovative contributor whose technical expertise and dedication consistently elevate the team's performance.",
       skills: ["React", "User Research", "Prototyping", "Design Systems"],
       image: "👩‍🎨",
-      linkedin: "#",
-      github: "#"
+      linkedin: "https://www.linkedin.com/in/animesh-yadav-111947256/",
+      github: "https://github.com/animesh-94",
     },
     {
       name: "Ronit Dhase",
       role: "Backend Developer & Integration Specialist",
-      bio: "Data engineer specializing in analytics and real-time processing systems for educational platforms.",
+      bio: "Ronit is a focused and reliable team member who brings creative problem-solving and strong execution to every project.",
       skills: ["Node.js", "PostgreSQL", "Docker", "Kubernetes"],
       image: "👨‍🔧",
-      linkedin: "#",
-      github: "#"
+      linkedin: "https://www.linkedin.com/in/ronit-rahul-dhase-396190297/",
+      github: "https://github.com/ronit-1404",
     },
     {
       name: "Ayan Farooque",
       role: "ML Developer",
-      bio: "Former educator turned product manager, bridging the gap between technology and educational needs.",
-      skills: ["Machine Learning", "Agile", "User Analytics", "Product Strategy"],
+      bio: "Ayan is an enthusiastic and versatile contributor, consistently bringing fresh ideas and positive energy to the team.",
+      skills: [
+        "Machine Learning",
+        "Agile",
+        "User Analytics",
+        "Product Strategy",
+      ],
       image: "👩‍💼",
-      linkedin: "#",
-      github: "#"
-    }
+      linkedin: "https://www.linkedin.com/in/ayfarooque/",
+      github: "https://github.com/ayanfarooque",
+    },
   ];
 
   const fadeInUp = {
@@ -150,42 +161,56 @@ function OptikkaLanding ({onSelectPortal}) {
     visible: (i = 0) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.1, duration: 0.6, ease: "easeOut" }
-    })
+      transition: { delay: i * 0.1, duration: 0.6, ease: "easeOut" },
+    }),
   };
 
   const fadeIn = {
     hidden: { opacity: 0 },
     visible: (i = 0) => ({
       opacity: 1,
-      transition: { delay: i * 0.1, duration: 0.3, ease: "easeOut" }
-    })
+      transition: { delay: i * 0.1, duration: 0.3, ease: "easeOut" },
+    }),
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-orange-100 to-pink-100 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
-        <motion.div 
+        <motion.div
           className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-200/30 to-pink-200/30 rounded-full blur-3xl animate-pulse"
           style={{ transform: `translateY(${scrollY * 0.1}px)` }}
           initial={{ scale: 0.8, opacity: 0.7 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.2, repeat: Infinity, repeatType: "reverse" }}
+          transition={{
+            duration: 1.2,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
         />
-        <motion.div 
+        <motion.div
           className="absolute top-96 right-20 w-96 h-96 bg-gradient-to-r from-pink-200/20 to-purple-200/20 rounded-full blur-3xl animate-pulse"
           style={{ transform: `translateY(${scrollY * -0.05}px)` }}
           initial={{ scale: 0.7, opacity: 0.6 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            repeatType: "reverse",
+            delay: 0.5,
+          }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-r from-orange-200/25 to-yellow-200/25 rounded-full blur-3xl animate-pulse"
           style={{ transform: `translateY(${scrollY * 0.08}px)` }}
           initial={{ scale: 0.9, opacity: 0.5 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.8, repeat: Infinity, repeatType: "reverse", delay: 1 }}
+          transition={{
+            duration: 1.8,
+            repeat: Infinity,
+            repeatType: "reverse",
+            delay: 1,
+          }}
         />
       </div>
 
@@ -208,33 +233,33 @@ function OptikkaLanding ({onSelectPortal}) {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
-              {['Home', 'Features', 'Portal', 'Team'].map((item, index) => (
+              {["Home", "Features", "Portal", "Team"].map((item, index) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={(e) => {
-                    if(item === 'Features') {
+                    if (item === "Features") {
                       e.preventDefault();
                       scrollToFeatures();
                     }
                   }}
                   className={`relative font-semibold group transition-all duration-200 hover:scale-105 ${
-                    item === 'Home' 
-                      ? 'text-orange-600' 
-                      : 'text-slate-600 hover:text-orange-600'
+                    item === "Home"
+                      ? "text-orange-600"
+                      : "text-slate-600 hover:text-orange-600"
                   }`}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <span className="group-hover:text-orange-700 transition-colors duration-200">
                     {item}
                   </span>
-                  {item === 'Home' && (
+                  {item === "Home" && (
                     <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-orange-400 to-pink-400 transform scale-x-100 group-hover:scale-x-110 transition-transform duration-200"></div>
                   )}
                 </a>
               ))}
-              <button 
-                onClick={scrollToPortal} 
+              <button
+                onClick={scrollToPortal}
                 className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2 rounded-lg font-medium hover:from-orange-600 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-orange-200/50 hover:shadow-orange-300/60 hover:scale-105 hover:-translate-y-1 animate-pulse"
               >
                 Get Started
@@ -246,7 +271,11 @@ function OptikkaLanding ({onSelectPortal}) {
               className="md:hidden text-orange-600 hover:text-orange-700 transition-all duration-200 hover:scale-110"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
@@ -255,21 +284,21 @@ function OptikkaLanding ({onSelectPortal}) {
         {isMenuOpen && (
           <div className="md:hidden bg-white/70 backdrop-blur-xl border-t border-orange-100/50 shadow-xl animate-fadeIn">
             <div className="px-6 py-6 space-y-4">
-              {['Home', 'Features', 'Portal', 'Team'].map((item, index) => (
+              {["Home", "Features", "Portal", "Team"].map((item, index) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={(e) => {
-                    if(item === 'Features') {
+                    if (item === "Features") {
                       e.preventDefault();
                       scrollToFeatures();
                       setIsMenuOpen(false); // Close mobile menu after clicking
                     }
                   }}
                   className={`block font-semibold py-2 px-4 rounded-lg transition-all duration-200 hover:scale-105 ${
-                    item === 'Home'
-                      ? 'text-orange-600 bg-orange-50/50 border-l-4 border-orange-400'
-                      : 'text-slate-600 hover:bg-orange-50/50 hover:text-orange-600'
+                    item === "Home"
+                      ? "text-orange-600 bg-orange-50/50 border-l-4 border-orange-400"
+                      : "text-slate-600 hover:bg-orange-50/50 hover:text-orange-600"
                   }`}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
@@ -309,8 +338,8 @@ function OptikkaLanding ({onSelectPortal}) {
               custom={1}
             >
               Unlock the power of student analytics with our comprehensive
-              dashboard. Track engagement, monitor progress, and optimize learning
-              outcomes with real-time insights.
+              dashboard. Track engagement, monitor progress, and optimize
+              learning outcomes with real-time insights.
             </motion.p>
           </motion.div>
 
@@ -325,10 +354,16 @@ function OptikkaLanding ({onSelectPortal}) {
                 viewport={{ once: true }}
                 variants={fadeInUp}
                 custom={index + 2}
-                whileHover={{ scale: 1.08, y: -8, boxShadow: "0 8px 32px 0 rgba(255, 186, 120, 0.15)" }}
+                whileHover={{
+                  scale: 1.08,
+                  y: -8,
+                  boxShadow: "0 8px 32px 0 rgba(255, 186, 120, 0.15)",
+                }}
               >
                 <stat.icon className="w-8 h-8 mx-auto mb-3 text-orange-500 group-hover:text-orange-600 transition-colors duration-300 group-hover:scale-110 group-hover:rotate-6" />
-                <div className="text-3xl font-bold text-gray-800 mb-1 group-hover:scale-110 transition-transform duration-300">{stat.number}</div>
+                <div className="text-3xl font-bold text-gray-800 mb-1 group-hover:scale-110 transition-transform duration-300">
+                  {stat.number}
+                </div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
               </motion.div>
             ))}
@@ -361,7 +396,8 @@ function OptikkaLanding ({onSelectPortal}) {
               variants={fadeInUp}
               custom={1}
             >
-              Discover the tools and insights that make learning more effective, engaging, and measurable.
+              Discover the tools and insights that make learning more effective,
+              engaging, and measurable.
             </motion.p>
           </motion.div>
 
@@ -375,7 +411,11 @@ function OptikkaLanding ({onSelectPortal}) {
                 viewport={{ once: true }}
                 variants={fadeInUp}
                 custom={index}
-                whileHover={{ scale: 1.07, y: -8, boxShadow: "0 8px 32px 0 rgba(255, 186, 120, 0.15)" }}
+                whileHover={{
+                  scale: 1.07,
+                  y: -8,
+                  boxShadow: "0 8px 32px 0 rgba(255, 186, 120, 0.15)",
+                }}
               >
                 <motion.div
                   className="w-16 h-16 bg-gradient-to-br from-orange-400 to-pink-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-lg shadow-orange-200/50"
@@ -420,7 +460,8 @@ function OptikkaLanding ({onSelectPortal}) {
               variants={fadeInUp}
               custom={1}
             >
-              Access tailored experiences designed for your specific role and needs.
+              Access tailored experiences designed for your specific role and
+              needs.
             </motion.p>
           </motion.div>
 
@@ -428,7 +469,9 @@ function OptikkaLanding ({onSelectPortal}) {
             {/* Student Card */}
             <motion.div
               className={`bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-orange-100/50 p-10 cursor-pointer transition-all duration-300 group hover:shadow-2xl hover:shadow-orange-200/40 ${
-                selectedCard === 'student' ? 'ring-4 ring-orange-300 scale-105' : 'hover:scale-105 hover:-translate-y-2'
+                selectedCard === "student"
+                  ? "ring-4 ring-orange-300 scale-105"
+                  : "hover:scale-105 hover:-translate-y-2"
               }`}
               onClick={() => handlePortalSelection("student")}
               initial="hidden"
@@ -436,7 +479,11 @@ function OptikkaLanding ({onSelectPortal}) {
               viewport={{ once: true }}
               variants={fadeInUp}
               custom={0}
-              whileHover={{ scale: 1.06, y: -8, boxShadow: "0 8px 32px 0 rgba(255, 186, 120, 0.18)" }}
+              whileHover={{
+                scale: 1.06,
+                y: -8,
+                boxShadow: "0 8px 32px 0 rgba(255, 186, 120, 0.18)",
+              }}
             >
               <div className="text-center">
                 <motion.div
@@ -466,7 +513,9 @@ function OptikkaLanding ({onSelectPortal}) {
             {/* Admin Card */}
             <motion.div
               className={`bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100/50 p-10 cursor-pointer transition-all duration-300 group hover:shadow-2xl hover:shadow-gray-200/40 ${
-                selectedCard === 'admin' ? 'ring-4 ring-gray-300 scale-105' : 'hover:scale-105 hover:-translate-y-2'
+                selectedCard === "admin"
+                  ? "ring-4 ring-gray-300 scale-105"
+                  : "hover:scale-105 hover:-translate-y-2"
               }`}
               onClick={() => handlePortalSelection("admin")}
               initial="hidden"
@@ -474,7 +523,11 @@ function OptikkaLanding ({onSelectPortal}) {
               viewport={{ once: true }}
               variants={fadeInUp}
               custom={1}
-              whileHover={{ scale: 1.06, y: -8, boxShadow: "0 8px 32px 0 rgba(120, 120, 120, 0.18)" }}
+              whileHover={{
+                scale: 1.06,
+                y: -8,
+                boxShadow: "0 8px 32px 0 rgba(120, 120, 120, 0.18)",
+              }}
             >
               <div className="text-center">
                 <motion.div
@@ -528,7 +581,8 @@ function OptikkaLanding ({onSelectPortal}) {
               variants={fadeInUp}
               custom={1}
             >
-              The passionate individuals behind Learning Lane, dedicated to revolutionizing online education.
+              The passionate individuals behind Learning Lane, dedicated to
+              revolutionizing online education.
             </motion.p>
           </motion.div>
 
@@ -542,7 +596,11 @@ function OptikkaLanding ({onSelectPortal}) {
                 viewport={{ once: true }}
                 variants={fadeInUp}
                 custom={index}
-                whileHover={{ scale: 1.07, y: -8, boxShadow: "0 8px 32px 0 rgba(255, 186, 120, 0.15)" }}
+                whileHover={{
+                  scale: 1.07,
+                  y: -8,
+                  boxShadow: "0 8px 32px 0 rgba(255, 186, 120, 0.15)",
+                }}
               >
                 {/* Profile Image/Avatar */}
                 <motion.div
@@ -551,7 +609,7 @@ function OptikkaLanding ({onSelectPortal}) {
                 >
                   {member.image}
                 </motion.div>
-                
+
                 {/* Name and Role */}
                 <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-orange-600 transition-colors duration-300">
                   {member.name}
@@ -559,12 +617,12 @@ function OptikkaLanding ({onSelectPortal}) {
                 <p className="text-orange-600 font-semibold mb-3 text-sm">
                   {member.role}
                 </p>
-                
+
                 {/* Bio */}
                 <p className="text-gray-600 text-sm leading-relaxed mb-4">
                   {member.bio}
                 </p>
-                
+
                 {/* Skills */}
                 <div className="flex flex-wrap gap-1 justify-center mb-4">
                   {member.skills.map((skill, skillIndex) => (
@@ -576,22 +634,26 @@ function OptikkaLanding ({onSelectPortal}) {
                     </span>
                   ))}
                 </div>
-                
+
                 {/* Social Links */}
                 <div className="flex justify-center space-x-3">
                   <a
                     href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-8 h-8 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white text-sm transition-all duration-300 hover:scale-110"
                     title={`${member.name} LinkedIn`}
                   >
-                    <Linkedin />
+                    <Linkedin size={17} />
                   </a>
                   <a
                     href={member.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-8 h-8 bg-gray-800 hover:bg-gray-900 rounded-full flex items-center justify-center text-white text-sm transition-all duration-300 hover:scale-110"
                     title={`${member.name} GitHub`}
                   >
-                    <Github/>
+                    <Github size={17} />
                   </a>
                 </div>
               </motion.div>
@@ -601,52 +663,58 @@ function OptikkaLanding ({onSelectPortal}) {
       </section>
 
       {/* Newsletter Section */}
-      
+
       {/* Footer */}
       <footer className="py-16 px-6 bg-white/50 backdrop-blur-sm border-t border-orange-100/50 relative">
-          <div className="border-t border-orange-100/50 pt-8 text-center">
-            <motion.p
-              className="text-gray-600 flex items-center justify-center gap-2 text-lg font-semibold"
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
+        <div className="border-t border-orange-100/50 pt-8 text-center">
+          <motion.p
+            className="text-gray-600 flex items-center justify-center gap-2 text-lg font-semibold"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <span className="inline-block animate-bounce text-orange-500 text-2xl">
+              🎓
+            </span>
+            <span>
+              © 2025{" "}
+              <span className="font-bold text-orange-600">Learning Lane</span>.
+              All rights reserved.
+            </span>
+            <span className="inline-block animate-pulse text-pink-500 text-xl">
+              ❤️
+            </span>
+            <span className="hidden sm:inline">for better education.</span>
+          </motion.p>
+          <motion.div
+            className="flex justify-center gap-4 mt-4"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full bg-blue-500 hover:bg-blue-600 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
+              title="LinkedIn"
             >
-              <span className="inline-block animate-bounce text-orange-500 text-2xl">🎓</span>
-              <span>
-                © 2025 <span className="font-bold text-orange-600">Learning Lane</span>. All rights reserved.
-              </span>
-              <span className="inline-block animate-pulse text-pink-500 text-xl">❤️</span>
-              <span className="hidden sm:inline">for better education.</span>
-            </motion.p>
-            <motion.div
-              className="flex justify-center gap-4 mt-4"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              <Linkedin size={17} />
+            </a>
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-900 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
+              title="GitHub"
             >
-              <a
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-blue-500 hover:bg-blue-600 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
-                title="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="https://github.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-900 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
-                title="GitHub"
-              >
-                <Github size={20} />
-              </a>
-            </motion.div>
-          </div>
+              <Github size={17} />
+            </a>
+          </motion.div>
+        </div>
       </footer>
     </div>
   );
-};
+}
 
 export default OptikkaLanding;
