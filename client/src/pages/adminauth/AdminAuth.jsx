@@ -85,6 +85,7 @@ const AdminAuth = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+<<<<<<< Updated upstream:client/src/pages/adminauth/AdminAuth.jsx
     if (!validateForm()) return;
     
     setIsLoading(true);
@@ -132,6 +133,13 @@ const AdminAuth = () => {
       }
     } finally {
       setIsLoading(false);
+=======
+    if (validateForm()) {
+      console.log('Form submitted:', formData);
+      // Later: send data to backend here
+
+      navigate('/learner/home'); // ⬅️ Redirect to dashboard
+>>>>>>> Stashed changes:client/src/SignUp.jsx
     }
   };
 

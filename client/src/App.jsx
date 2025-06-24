@@ -17,7 +17,6 @@ import LearnerResources from "./pages/LearnerResources";
 import LearnerSettings from "./pages/LearnerSettings";
 import LearnerReports from "./pages/LearnerReports";
 
-
 // Admin Pages
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminStudents from "./pages/AdminStudents";
@@ -47,9 +46,7 @@ const ProtectedRoute = ({ children, requiredRole }) => {
     return <Navigate to="/" replace />;
   }
 
-  // If a specific role is required, check it
   if (requiredRole && user?.role !== requiredRole) {
-    // Redirect to appropriate dashboard based on actual role
     if (user?.role === "admin") {
       return <Navigate to="/admin/dashboard" replace />;
     }
@@ -87,11 +84,8 @@ function AppContent() {
 
   return (
     <Routes>
-      {/* Default route: redirect to landing page */}
-      <Route
-        path="/"
-        element={<OptikkaLanding onSelectPortal={handleRoleSelection} />}
-      />
+      {/* Landing / Auth */}
+      <Route path="/" element={<OptikkaLanding onSelectPortal={handleRoleSelection} />} />
       <Route path="/fds" element={<Navigate to="/signup" />} />
       <Route path="/signup" element={<SignUp />} />
 
@@ -101,11 +95,7 @@ function AppContent() {
       <Route path="/learner/analytics" element={<LearnerAnalytics />} />
       <Route path="/learner/resources" element={<LearnerResources />} />
       <Route path="/learner/settings" element={<LearnerSettings />} />
-
-      <Route path="/landing" element={<OptikkaLanding onSelectPortal={handleRoleSelection} />} />
       <Route path="/learner/reports" element={<LearnerReports />} />
-      <Route path="/admin/reports" element={<AdminReports />} />
-
 
       {/* Admin Routes */}
       <Route path="/admin/dashboard" element={<AdminDashboard />} />
@@ -114,12 +104,14 @@ function AppContent() {
       <Route path="/admin/classes" element={<AdminClasses />} />
       <Route path="/admin/analytics" element={<AdminAnalytics />} />
       <Route path="/admin/settings" element={<AdminSettings />} />
+      <Route path="/admin/reports" element={<AdminReports />} />
 
+      <Route path="/landing" element={<OptikkaLanding onSelectPortal={handleRoleSelection} />} />
       <Route path="/signout" element={<SignOut />} />
 
-      {/* Parent Routes */}
-      {/* <Route path="/parent/dashboard" element={<ParentDashboard />} />
-      <Route path="/parent/settings" element={<ParentSettings />} /> */}
+      {/* Parent Routes (optional) */}
+      {/* <Route path="/parent/dashboard" element={<ParentDashboard />} /> */}
+      {/* <Route path="/parent/settings" element={<ParentSettings />} /> */}
     </Routes>
   );
 }
