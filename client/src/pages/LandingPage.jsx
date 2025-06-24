@@ -644,7 +644,7 @@ function OptikkaLanding({ onSelectPortal }) {
                     className="w-8 h-8 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white text-sm transition-all duration-300 hover:scale-110"
                     title={`${member.name} LinkedIn`}
                   >
-                    <Linkedin />
+                    <Linkedin size={17} />
                   </a>
                   <a
                     href={member.github}
@@ -653,7 +653,7 @@ function OptikkaLanding({ onSelectPortal }) {
                     className="w-8 h-8 bg-gray-800 hover:bg-gray-900 rounded-full flex items-center justify-center text-white text-sm transition-all duration-300 hover:scale-110"
                     title={`${member.name} GitHub`}
                   >
-                    <Github />
+                    <Github size={17} />
                   </a>
                 </div>
               </motion.div>
@@ -699,7 +699,7 @@ function OptikkaLanding({ onSelectPortal }) {
               className="w-9 h-9 rounded-full bg-blue-500 hover:bg-blue-600 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
               title="LinkedIn"
             >
-              <Linkedin size={10} />
+              <Linkedin size={17} />
             </a>
             <a
               href="https://github.com/"
@@ -708,7 +708,7 @@ function OptikkaLanding({ onSelectPortal }) {
               className="w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-900 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
               title="GitHub"
             >
-              <Github size={20} />
+              <Github size={17} />
             </a>
           </motion.div>
         </div>

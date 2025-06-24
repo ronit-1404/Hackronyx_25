@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   AreaChart,
   Area,
@@ -69,6 +70,102 @@ const AdminAnalytics = () => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  // Animation variants
+  const pageVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { y: -50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      scale: 0.95
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const statsGridVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const mainGridVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.4
+      }
+    }
+  };
+
+  const chartVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.9,
+      y: 40
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const hoverEffect = {
+    scale: 1.02,
+    y: -2,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut"
+    }
+  };
+
+  const tapEffect = {
+    scale: 0.98,
+    transition: {
+      duration: 0.1
+    }
+  };
 
   // Enhanced data with more details
   const topPerformers = [
@@ -262,7 +359,6 @@ const AdminAnalytics = () => {
   ];
 
   // False Positive Analysis
-
   const falsePositiveData = [
     {
       category: "Temporary Absence",
@@ -299,14 +395,30 @@ const AdminAnalytics = () => {
   ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#F5EFE6" }}>
+    <motion.div 
+      className="min-h-screen" 
+      style={{ backgroundColor: "#F5EFE6" }}
+      initial="hidden"
+      animate="visible"
+      variants={pageVariants}
+    >
       {/* Header */}
-      <AdminHeader />
+      <motion.div variants={headerVariants}>
+        <AdminHeader />
+      </motion.div>
 
-      <div className="p-8">
+      <motion.div className="p-8" variants={pageVariants}>
         {/* System Performance Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-8">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-8"
+          variants={statsGridVariants}
+        >
+          <motion.div 
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all"
+            variants={cardVariants}
+            whileHover={hoverEffect}
+            whileTap={tapEffect}
+          >
             <div className="flex items-center justify-between mb-3">
               <Shield className="w-8 h-8 text-emerald-600" />
               <span className="text-xs text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
@@ -317,9 +429,14 @@ const AdminAnalytics = () => {
               {systemStats.interventionSuccess}%
             </p>
             <p className="text-sm text-gray-600">Success Rate</p>
-          </div>
+          </motion.div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all">
+          <motion.div 
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all"
+            variants={cardVariants}
+            whileHover={hoverEffect}
+            whileTap={tapEffect}
+          >
             <div className="flex items-center justify-between mb-3">
               <AlertTriangle className="w-8 h-8 text-amber-600" />
               <span className="text-xs text-green-600 bg-green-50 px-2 py-1 rounded-full">
@@ -330,9 +447,14 @@ const AdminAnalytics = () => {
               {systemStats.falsePositives}%
             </p>
             <p className="text-sm text-gray-600">False Positives</p>
-          </div>
+          </motion.div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all">
+          <motion.div 
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all"
+            variants={cardVariants}
+            whileHover={hoverEffect}
+            whileTap={tapEffect}
+          >
             <div className="flex items-center justify-between mb-3">
               <Zap className="w-8 h-8 text-blue-600" />
               <span className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
@@ -343,9 +465,14 @@ const AdminAnalytics = () => {
               {systemStats.totalInterventions}
             </p>
             <p className="text-sm text-gray-600">Interventions</p>
-          </div>
+          </motion.div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all">
+          <motion.div 
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all"
+            variants={cardVariants}
+            whileHover={hoverEffect}
+            whileTap={tapEffect}
+          >
             <div className="flex items-center justify-between mb-3">
               <Clock className="w-8 h-8 text-purple-600" />
               <span className="text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full">
@@ -356,9 +483,14 @@ const AdminAnalytics = () => {
               {systemStats.avgResponseTime}
             </p>
             <p className="text-sm text-gray-600">Response Time</p>
-          </div>
+          </motion.div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all">
+          <motion.div 
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all"
+            variants={cardVariants}
+            whileHover={hoverEffect}
+            whileTap={tapEffect}
+          >
             <div className="flex items-center justify-between mb-3">
               <Award className="w-8 h-8 text-orange-600" />
               <span className="text-xs text-orange-600 bg-orange-50 px-2 py-1 rounded-full">
@@ -369,9 +501,14 @@ const AdminAnalytics = () => {
               {systemStats.userSatisfaction}/5
             </p>
             <p className="text-sm text-gray-600">Satisfaction</p>
-          </div>
+          </motion.div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all">
+          <motion.div 
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-all"
+            variants={cardVariants}
+            whileHover={hoverEffect}
+            whileTap={tapEffect}
+          >
             <div className="flex items-center justify-between mb-3">
               <Activity className="w-8 h-8 text-red-600" />
               <span className="text-xs text-green-600 bg-green-50 px-2 py-1 rounded-full">
@@ -382,33 +519,56 @@ const AdminAnalytics = () => {
               {systemStats.systemUptime}%
             </p>
             <p className="text-sm text-gray-600">Uptime</p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8"
+          variants={mainGridVariants}
+        >
           {/* Top Performers */}
-          <TopPerformer />
+          <motion.div variants={chartVariants} whileHover={hoverEffect}>
+            <TopPerformer />
+          </motion.div>
 
           {/* Bottom Performers */}
-          <BottomPerformer />
+          <motion.div variants={chartVariants} whileHover={hoverEffect}>
+            <BottomPerformer />
+          </motion.div>
 
           {/* Demographics */}
-          <Demograpghy />
-        </div>
+          <motion.div variants={chartVariants} whileHover={hoverEffect}>
+            <Demograpghy />
+          </motion.div>
+        </motion.div>
+
         {/* Performance Trend Chart */}
-        <PerformanceGraph/>
+        <motion.div 
+          variants={chartVariants} 
+          whileHover={hoverEffect}
+          className="mb-8"
+        >
+          <PerformanceGraph />
+        </motion.div>
 
         {/* Content Insights and Subject Performance */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+          variants={mainGridVariants}
+        >
           {/* Content Insights */}
-          <ContentInsight/>
+          <motion.div variants={chartVariants} whileHover={hoverEffect}>
+            <ContentInsight />
+          </motion.div>
 
           {/* Subject Performance Radar */}
-          <SystemIntervention />
-        </div>
-      </div>
-    </div>
+          <motion.div variants={chartVariants} whileHover={hoverEffect}>
+            <SystemIntervention />
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 
