@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Settings, 
   User, 
@@ -124,10 +125,136 @@ const AdminSettings = () => {
     setSaveSuccess(false);
   };
 
+  // Animation variants
+  const pageVariants = {
+    hidden: { 
+      opacity: 0,
+      y: 20
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { 
+      y: -60, 
+      opacity: 0 
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const sectionVariants = {
+    hidden: { 
+      opacity: 0,
+      scale: 0.95,
+      y: 20
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      scale: 0.9
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      scale: 1.02,
+      y: -5,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const iconVariants = {
+    hidden: { scale: 0, rotate: -180 },
+    visible: {
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        delay: 0.2
+      }
+    },
+    hover: {
+      scale: 1.1,
+      rotate: 5,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
+  // Hover effects
+  const hoverEffect = {
+    scale: 1.01,
+    y: -2,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut"
+    }
+  };
+
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F5EFE6' }}>
-      <AdminHeader />
-      <div className="max-w-7xl mx-auto p-8">
+    <motion.div 
+      className="min-h-screen" 
+      style={{ backgroundColor: '#F5EFE6' }}
+      initial="hidden"
+      animate="visible"
+      variants={pageVariants}
+    >
+      <motion.div variants={headerVariants}>
+        <AdminHeader />
+      </motion.div>
+      <motion.div 
+        className="max-w-7xl mx-auto p-8"
+        variants={containerVariants}
+      >
         {/* Header */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
           <div className="flex items-center space-x-4">
@@ -443,8 +570,8 @@ const AdminSettings = () => {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
