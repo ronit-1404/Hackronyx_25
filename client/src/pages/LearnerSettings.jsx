@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Settings, 
   User, 
@@ -154,41 +155,198 @@ const UserSettings = () => {
     return 'Strong';
   };
 
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 20,
+      scale: 0.95
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      scale: 0.9
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      scale: 1.02,
+      y: -5,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { y: -50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const iconVariants = {
+    hidden: { scale: 0, rotate: -180 },
+    visible: {
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        delay: 0.2
+      }
+    },
+    hover: {
+      scale: 1.1,
+      rotate: 5,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F5EFE6' }}>
-      <Header />
-      <div className="max-w-7xl mx-auto p-8" id="settings-container">
+    <motion.div 
+      className="min-h-screen" 
+      style={{ backgroundColor: '#F5EFE6' }}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.div variants={headerVariants}>
+        <Header />
+      </motion.div>
+      <motion.div 
+        className="max-w-7xl mx-auto p-8" 
+        id="settings-container"
+        variants={containerVariants}
+      >
         {/* Header */}
-        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 mb-8">
+        <motion.div 
+          className="bg-white rounded-xl shadow-md border border-gray-200 p-6 mb-8"
+          variants={itemVariants}
+        >
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-blue-500 to-purple-600">
+            <motion.div 
+              className="w-16 h-16 rounded-xl flex items-center justify-center shadow-lg bg-gradient-to-br from-blue-500 to-purple-600"
+              variants={iconVariants}
+              whileHover="hover"
+            >
               <User className="w-8 h-8 text-white" />
-            </div>
+            </motion.div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">User Settings</h1>
-              <p className="text-gray-600 mt-1">Manage your personal preferences and account settings</p>
+              <motion.h1 
+                className="text-3xl font-bold text-gray-900"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                User Settings
+              </motion.h1>
+              <motion.p 
+                className="text-gray-600 mt-1"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                Manage your personal preferences and account settings
+              </motion.p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Success Banner */}
-        {saveSuccess && (
-          <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-6 animate-pulse">
-            <div className="flex items-center space-x-3">
-              <CheckCircle2 className="w-6 h-6 text-green-600" />
-              <div>
-                <h3 className="font-semibold text-green-800">Settings Saved Successfully!</h3>
-                <p className="text-green-700 text-sm">Your preferences have been updated.</p>
+        <AnimatePresence>
+          {saveSuccess && (
+            <motion.div 
+              className="bg-green-50 border border-green-200 rounded-xl p-4 mb-6"
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="flex items-center space-x-3">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                >
+                  <CheckCircle2 className="w-6 h-6 text-green-600" />
+                </motion.div>
+                <div>
+                  <motion.h3 
+                    className="font-semibold text-green-800"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    Settings Saved Successfully!
+                  </motion.h3>
+                  <motion.p 
+                    className="text-green-700 text-sm"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    Your preferences have been updated.
+                  </motion.p>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        <form className="space-y-8" onSubmit={handleSave}>
+        <motion.form 
+          className="space-y-8" 
+          onSubmit={handleSave}
+          variants={containerVariants}
+        >
           {/* Personal Information */}
-          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+          <motion.div 
+            className="bg-white rounded-xl shadow-md border border-gray-200 p-6"
+            variants={cardVariants}
+            whileHover="hover"
+          >
             <div className="flex items-center mb-6">
-              <User className="w-6 h-6 mr-3 text-blue-600" />
+              <motion.div variants={iconVariants} whileHover="hover">
+                <User className="w-6 h-6 mr-3 text-blue-600" />
+              </motion.div>
               <h2 className="text-xl font-semibold text-gray-900">Personal Information</h2>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -267,12 +425,18 @@ const UserSettings = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Security Settings */}
-          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+          <motion.div 
+            className="bg-white rounded-xl shadow-md border border-gray-200 p-6"
+            variants={cardVariants}
+            whileHover="hover"
+          >
             <div className="flex items-center mb-6">
-              <Shield className="w-6 h-6 mr-3 text-green-600" />
+              <motion.div variants={iconVariants} whileHover="hover">
+                <Shield className="w-6 h-6 mr-3 text-green-600" />
+              </motion.div>
               <h2 className="text-xl font-semibold text-gray-900">Security Settings</h2>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -363,12 +527,18 @@ const UserSettings = () => {
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Notification Settings */}
-          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+          <motion.div 
+            className="bg-white rounded-xl shadow-md border border-gray-200 p-6"
+            variants={cardVariants}
+            whileHover="hover"
+          >
             <div className="flex items-center mb-6">
-              <Bell className="w-6 h-6 mr-3 text-purple-600" />
+              <motion.div variants={iconVariants} whileHover="hover">
+                <Bell className="w-6 h-6 mr-3 text-purple-600" />
+              </motion.div>
               <h2 className="text-xl font-semibold text-gray-900">Notification Preferences</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -403,12 +573,18 @@ const UserSettings = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Appearance & Preferences */}
-          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+          <motion.div 
+            className="bg-white rounded-xl shadow-md border border-gray-200 p-6"
+            variants={cardVariants}
+            whileHover="hover"
+          >
             <div className="flex items-center mb-6">
-              <Palette className="w-6 h-6 mr-3 text-orange-600" />
+              <motion.div variants={iconVariants} whileHover="hover">
+                <Palette className="w-6 h-6 mr-3 text-orange-600" />
+              </motion.div>
               <h2 className="text-xl font-semibold text-gray-900">Appearance & Preferences</h2>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -497,12 +673,18 @@ const UserSettings = () => {
                 }`}></div>
               </button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Privacy Settings */}
-          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+          <motion.div 
+            className="bg-white rounded-xl shadow-md border border-gray-200 p-6"
+            variants={cardVariants}
+            whileHover="hover"
+          >
             <div className="flex items-center mb-6">
-              <Shield className="w-6 h-6 mr-3 text-red-600" />
+              <motion.div variants={iconVariants} whileHover="hover">
+                <Shield className="w-6 h-6 mr-3 text-red-600" />
+              </motion.div>
               <h2 className="text-xl font-semibold text-gray-900">Privacy Settings</h2>
             </div>
             <div className="space-y-4">
@@ -555,10 +737,13 @@ const UserSettings = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Save/Reset Buttons */}
-          <div className="flex justify-end gap-4 mt-8">
+          <motion.div 
+            className="flex justify-end gap-4 mt-8"
+            variants={itemVariants}
+          >
             <button
               type="button"
               onClick={handleReset}
@@ -587,10 +772,10 @@ const UserSettings = () => {
                 </>
               )}
             </button>
-          </div>
-        </form>
-      </div>
-    </div>
+          </motion.div>
+        </motion.form>
+      </motion.div>
+    </motion.div>
   );
 };
 

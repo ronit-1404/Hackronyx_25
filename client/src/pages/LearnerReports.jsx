@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Download,
   Mail,
@@ -134,17 +135,123 @@ const LearnerReports = () => {
     link.click();
   };
 
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 20,
+      scale: 0.95
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      scale: 0.9
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      scale: 1.02,
+      y: -5,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { y: -50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const iconVariants = {
+    hidden: { scale: 0, rotate: -180 },
+    visible: {
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        delay: 0.2
+      }
+    },
+    hover: {
+      scale: 1.1,
+      rotate: 5,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F5EFE6' }}>
-      <Header />
+    <motion.div 
+      className="min-h-screen" 
+      style={{ backgroundColor: '#F5EFE6' }}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.div variants={headerVariants}>
+        <Header />
+      </motion.div>
       
-      <div className="max-w-7xl mx-auto p-8" id="report-container">
+      <motion.div 
+        className="max-w-7xl mx-auto p-8" 
+        id="report-container"
+        variants={containerVariants}
+      >
         {/* User Details Section */}
-        <div className="bg-white p-6 rounded-xl shadow-md mb-8">
+        <motion.div 
+          className="bg-white p-6 rounded-xl shadow-md mb-8"
+          variants={cardVariants}
+          whileHover="hover"
+        >
           <div className="flex items-center gap-4 mb-4">
-            <div className="bg-blue-100 p-3 rounded-full">
+            <motion.div 
+              className="bg-blue-100 p-3 rounded-full"
+              variants={iconVariants}
+              whileHover="hover"
+            >
               <User size={24} className="text-blue-600" />
-            </div>
+            </motion.div>
             <div>
               <h2 className="text-xl font-bold">
                 {editMode.name ? (
@@ -227,10 +334,13 @@ const LearnerReports = () => {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Report Controls */}
-        <div className="flex justify-between items-center mb-8">
+        <motion.div 
+          className="flex justify-between items-center mb-8"
+          variants={itemVariants}
+        >
           <h1 className="text-2xl font-bold">Learning Progress Report</h1>
           
           <div className="flex gap-4">
@@ -276,12 +386,19 @@ const LearnerReports = () => {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Main Dashboard Grid */}
-        <div className="grid grid-cols-3 gap-6 mb-8">
+        <motion.div 
+          className="grid grid-cols-3 gap-6 mb-8"
+          variants={containerVariants}
+        >
           {/* Focus Metrics Card */}
-          <div className="bg-white p-6 rounded-xl shadow-md">
+          <motion.div 
+            className="bg-white p-6 rounded-xl shadow-md"
+            variants={cardVariants}
+            whileHover="hover"
+          >
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Focus Score</h2>
             </div>
@@ -298,10 +415,14 @@ const LearnerReports = () => {
             <p className="text-center text-green-600 font-medium">
               15% more focused than peers
             </p>
-          </div>
+          </motion.div>
 
           {/* Struggle Points Card */}
-          <div className="bg-white p-6 rounded-xl shadow-md">
+          <motion.div 
+            className="bg-white p-6 rounded-xl shadow-md"
+            variants={cardVariants}
+            whileHover="hover"
+          >
             <h2 className="text-lg font-semibold mb-4">Struggle Points</h2>
             {strugglePoints.map((point, index) => (
               <div key={index} className="mb-4">
@@ -330,10 +451,14 @@ const LearnerReports = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Intervention History Card */}
-          <div className="bg-white p-6 rounded-xl shadow-md">
+          <motion.div 
+            className="bg-white p-6 rounded-xl shadow-md"
+            variants={cardVariants}
+            whileHover="hover"
+          >
             <h2 className="text-lg font-semibold mb-4">Intervention History</h2>
             {interventions.map((intervention, index) => (
               <div key={index} className="mb-4">
@@ -352,11 +477,15 @@ const LearnerReports = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Export Panel */}
-        <div className="bg-white p-6 rounded-xl shadow-md mt-8">
+        <motion.div 
+          className="bg-white p-6 rounded-xl shadow-md mt-8"
+          variants={cardVariants}
+          whileHover="hover"
+        >
           <h2 className="text-lg font-semibold mb-4">Email Report</h2>
           <div className="flex items-center gap-6">
             <PDFDownloadLink
@@ -393,9 +522,9 @@ const LearnerReports = () => {
               </span>
             </label>
           </div>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Download,
   FileText,
@@ -20,6 +21,8 @@ import {
   Video,
 } from 'lucide-react';
 import AdminHeader from '../components/headers/AdminHeader';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import AdminReportPDF from './AdminReportPDF';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import AdminReportPDF from './AdminReportPDF';
 
@@ -139,15 +142,153 @@ const AdminReports = () => {
     return 0;
   });
 
+  // Animation variants
+  const pageVariants = {
+    hidden: { 
+      opacity: 0,
+      y: 20
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { 
+      y: -60, 
+      opacity: 0 
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const sectionVariants = {
+    hidden: { 
+      opacity: 0,
+      scale: 0.95,
+      y: 20
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      scale: 0.9
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      scale: 1.02,
+      y: -5,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const iconVariants = {
+    hidden: { scale: 0, rotate: -180 },
+    visible: {
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        delay: 0.2
+      }
+    },
+    hover: {
+      scale: 1.1,
+      rotate: 5,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
+  // Hover effects
+  const hoverEffect = {
+    scale: 1.01,
+    y: -2,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut"
+    }
+  };
+
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F5EFE6' }}>
-      <AdminHeader/>
-      <div className="max-w-7xl mx-auto p-8" id="admin-report-container">
+    <motion.div 
+      className="min-h-screen" 
+      style={{ backgroundColor: '#F5EFE6' }}
+      initial="hidden"
+      animate="visible"
+      variants={pageVariants}
+    >
+      <motion.div variants={headerVariants}>
+        <AdminHeader/>
+      </motion.div>
+      <motion.div 
+        className="max-w-7xl mx-auto p-8" 
+        id="admin-report-container"
+        variants={containerVariants}
+      >
         {/* Organization Details */}
-        <div className="bg-white p-6 rounded-xl shadow-md mb-8">
+        <motion.div 
+          className="bg-white p-6 rounded-xl shadow-md mb-8"
+          variants={sectionVariants}
+          whileHover="hover"
+        >
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <Building className="text-blue-600" />
+            <motion.h2 
+              className="text-xl font-bold flex items-center gap-2"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <motion.div variants={iconVariants} whileHover="hover">
+                <Building className="text-blue-600" />
+              </motion.div>
               {editMode ? (
                 <input
                   type="text"
@@ -159,7 +300,7 @@ const AdminReports = () => {
               ) : (
                 orgDetails.name
               )}
-            </h2>
+            </motion.h2>
             <button 
               onClick={() => setEditMode(!editMode)}
               className="text-blue-600 hover:text-blue-800 flex items-center gap-1"
@@ -202,10 +343,14 @@ const AdminReports = () => {
               </div>
             </div>
           )}
-        </div>
+        </motion.div>
 
         {/* Control Panel */}
-        <div className="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <motion.div 
+          className="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+          variants={sectionVariants}
+          whileHover={hoverEffect}
+        >
           <div className="flex flex-col md:flex-row gap-4 md:items-center">
             {/* Classes */}
             <div>
@@ -296,15 +441,31 @@ const AdminReports = () => {
               )}
             </PDFDownloadLink>
           </div>
-        </div>
+        </motion.div>
 
         {/* Report Sections */}
         {/* A. Institutional Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
+          variants={containerVariants}
+        >
           {/* Key Metrics */}
-          <div className="bg-white p-6 rounded-xl shadow-md flex flex-col items-center">
-            <BarChart2 size={32} className="text-blue-600 mb-2" />
-            <h2 className="text-lg font-semibold mb-2">Key Metrics</h2>
+          <motion.div 
+            className="bg-white p-6 rounded-xl shadow-md flex flex-col items-center"
+            variants={cardVariants}
+            whileHover="hover"
+          >
+            <motion.div variants={iconVariants} whileHover="hover">
+              <BarChart2 size={32} className="text-blue-600 mb-2" />
+            </motion.div>
+            <motion.h2 
+              className="text-lg font-semibold mb-2"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              Key Metrics
+            </motion.h2>
             <div className="w-full">
               <div className="flex justify-between text-sm mb-1">
                 <span>Avg. Score</span>
@@ -319,11 +480,22 @@ const AdminReports = () => {
                 <span className="font-bold text-green-600">124</span>
               </div>
             </div>
-          </div>
+          </motion.div>
           
           {/* Top Courses */}
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <h2 className="text-lg font-semibold mb-2">Top Courses</h2>
+          <motion.div 
+            className="bg-white p-6 rounded-xl shadow-md"
+            variants={cardVariants}
+            whileHover="hover"
+          >
+            <motion.h2 
+              className="text-lg font-semibold mb-2"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              Top Courses
+            </motion.h2>
             {mockCourses
               .sort((a, b) => b.avgScore - a.avgScore)
               .slice(0, 2)
@@ -333,11 +505,22 @@ const AdminReports = () => {
                   <span className="font-bold text-blue-700">{course.avgScore}%</span>
                 </div>
               ))}
-          </div>
+          </motion.div>
           
           {/* Bottom Courses */}
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <h2 className="text-lg font-semibold mb-2">Bottom Courses</h2>
+          <motion.div 
+            className="bg-white p-6 rounded-xl shadow-md"
+            variants={cardVariants}
+            whileHover="hover"
+          >
+            <motion.h2 
+              className="text-lg font-semibold mb-2"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              Bottom Courses
+            </motion.h2>
             {mockCourses
               .sort((a, b) => a.avgScore - b.avgScore)
               .slice(0, 2)
@@ -347,11 +530,15 @@ const AdminReports = () => {
                   <span className="font-bold text-red-500">{course.avgScore}%</span>
                 </div>
               ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* B. Student Performance Matrix */}
-        <div className="bg-white p-6 rounded-xl shadow-md mb-8">
+        <motion.div 
+          className="bg-white p-6 rounded-xl shadow-md mb-8"
+          variants={sectionVariants}
+          whileHover={hoverEffect}
+        >
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold">Student Performance</h2>
             <button
@@ -456,13 +643,27 @@ const AdminReports = () => {
               </button>
             </div>
           )}
-        </div>
+        </motion.div>
 
         {/* C. Content Analysis */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"
+          variants={containerVariants}
+        >
           {/* Lecture Effectiveness */}
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Lecture Effectiveness</h2>
+          <motion.div 
+            className="bg-white p-6 rounded-xl shadow-md"
+            variants={cardVariants}
+            whileHover="hover"
+          >
+            <motion.h2 
+              className="text-lg font-semibold mb-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+            >
+              Lecture Effectiveness
+            </motion.h2>
             {mockLectures.map((lec, idx) => (
               <div key={idx} className="flex justify-between items-center mb-3">
                 <span className="flex items-center gap-2">
@@ -480,15 +681,28 @@ const AdminReports = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
           
           {/* Rewatch Heatmap */}
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <h2 className="text-lg font-semibold mb-4">Rewatch Hotspots</h2>
+          <motion.div 
+            className="bg-white p-6 rounded-xl shadow-md"
+            variants={cardVariants}
+            whileHover="hover"
+          >
+            <motion.h2 
+              className="text-lg font-semibold mb-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+            >
+              Rewatch Hotspots
+            </motion.h2>
             {mockHeatmap.map((vid, idx) => (
               <div key={idx} className="mb-4">
                 <div className="font-medium mb-2 flex items-center gap-2">
-                  <Video size={16} className="text-blue-600" />
+                  <motion.div variants={iconVariants} whileHover="hover">
+                    <Video size={16} className="text-blue-600" />
+                  </motion.div>
                   {vid.video}
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -503,10 +717,10 @@ const AdminReports = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 
