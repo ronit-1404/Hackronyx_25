@@ -1,6 +1,6 @@
 from collections import defaultdict
-from .core import StudentUser, ContentItem, process_text_for_keywords_and_topics
-from .content_extractors import extract_youtube_transcript, extract_blog_text
+from core import StudentUser, ContentItem, process_text_for_keywords_and_topics
+from content_extractors import extract_youtube_transcript, extract_blog_text
 
 class RecommendationEngine:
     def __init__(self):

@@ -198,8 +198,8 @@ import time
 import os
 from datetime import datetime
 # Import recommendation engine components
-from .engine import RecommendationEngine
-from .llm_recommender import generate_gemini_recommendations, build_user_profile_string, build_content_list_string
+from engine import RecommendationEngine
+from llm_recommender import generate_gemini_recommendations, build_user_profile_string, build_content_list_string
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 CORS(app)  # Enable CORS for all routes
@@ -473,4 +473,4 @@ def reset_user():
 
 if __name__ == '__main__':
     import re  # Make sure to import re for regex matching
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=8080)

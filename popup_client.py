@@ -12,7 +12,8 @@ class PopupClient:
         self.content_path = os.path.join(os.path.dirname(__file__), 'ml', 'data', 'content.json')
         self.shown_recommendations = set()
         self.current_popup = None
-        self.check_interval = 30  # seconds
+        self.check_interval = 5  # seconds - reduced for faster response
+        self.last_check_time = 0  # Track when we last checked the file
         
         # Start the scheduler in a background thread
         self.scheduler_thread = Thread(target=self.run_scheduler, daemon=True)
@@ -54,17 +55,40 @@ class PopupClient:
         print(f"Checking file: {self.content_path}")
         print(f"File exists: {os.path.exists(self.content_path)}")
         
+        # Check if file was modified since last check
+        try:
+            file_mtime = os.path.getmtime(self.content_path) if os.path.exists(self.content_path) else 0
+            if file_mtime <= self.last_check_time:
+                print("File not modified since last check")
+                return
+            self.last_check_time = file_mtime
+        except Exception as e:
+            print(f"Error checking file modification time: {e}")
+        
         content_data = self.load_content()
         print(f"Found {len(content_data)} entries in content.json")
+        
+        if content_data:
+            print("Sample of content structure:")
+            for i, item in enumerate(content_data[:2]):  # Show first 2 items
+                print(f"Item {i}: {json.dumps(item, indent=2)[:200]}...")
         
         # Check if we have new recommendations
         found_new = False
         if content_data and len(content_data) > 0:
             for recommendation in reversed(content_data):  # Start with most recent
-                # Create a unique ID for this recommendation to avoid showing duplicates
-                rec_id = recommendation.get('context', {}).get('user_id', '') + '_' + \
-                         recommendation.get('popup', {}).get('title', '') + '_' + \
-                         str(recommendation.get('context', {}).get('trigger', {}).get('type', ''))
+                # Create a unique ID for this recommendation
+                # Handle different data structures in content.json
+                context = recommendation.get('context', {})
+                popup_data = recommendation.get('popup', {})
+                
+                # Create more robust ID
+                user_id = context.get('user_id', 'unknown')
+                title = popup_data.get('title', 'No Title')
+                trigger = context.get('trigger', 'unknown')
+                timestamp = recommendation.get('timestamp', str(time.time()))
+                
+                rec_id = f"{user_id}_{title}_{trigger}_{timestamp}"
                 
                 if rec_id not in self.shown_recommendations:
                     # New recommendation found
@@ -74,12 +98,12 @@ class PopupClient:
                     found_new = True
                     break
         
-        # If no new recommendations were found, show a message popup
         if not found_new:
             print("No new recommendations found")
-            self.show_info_popup("No New Recommendations", 
-                               "No new recommendations are available at this time.\n\n" +
-                               "The system will continue checking automatically.")
+            # Don't show info popup every time - it's annoying
+            # self.show_info_popup("No New Recommendations", 
+            #                    "No new recommendations are available at this time.\n\n" +
+            #                    "The system will continue checking automatically.")
     
     def show_info_popup(self, title, message):
         # Create a simple info popup
@@ -135,19 +159,43 @@ class PopupClient:
         message = popup_data.get('message', '')
         fun_fact = popup_data.get('fun_fact', '')
         
-        # Primary recommendation
+        # Primary recommendation - handle different data structures
         primary_rec = popup_data.get('recommendation', {})
         primary_type = primary_rec.get('type', 'RESOURCE')
-        primary_title = primary_rec.get('title', '')
-        primary_desc = primary_rec.get('description', '')
+        primary_title = primary_rec.get('title', 'Recommended Resource')
+        primary_desc = primary_rec.get('description', 'Check out this helpful resource!')
         primary_url = primary_rec.get('url', '')
+        
+        # If primary recommendation is missing key data, try to extract from URL
+        if not primary_title and primary_url:
+            if 'youtube.com' in primary_url:
+                primary_title = "YouTube Video Recommendation"
+                primary_type = "VIDEO"
+            elif any(domain in primary_url for domain in ['blog.', 'medium.', 'dev.to']):
+                primary_title = "Article Recommendation"
+                primary_type = "ARTICLE"
+            else:
+                primary_title = "Web Resource"
+                primary_type = "RESOURCE"
         
         # Alternative recommendation
         alt_rec = popup_data.get('alternative', {})
         alt_type = alt_rec.get('type', 'RESOURCE')
-        alt_title = alt_rec.get('title', '')
-        alt_desc = alt_rec.get('description', '')
+        alt_title = alt_rec.get('title', 'Alternative Resource')
+        alt_desc = alt_rec.get('description', 'Try this alternative approach!')
         alt_url = alt_rec.get('url', '')
+        
+        # Handle alternative with same logic
+        if not alt_title and alt_url:
+            if 'youtube.com' in alt_url:
+                alt_title = "Alternative YouTube Video"
+                alt_type = "VIDEO"
+            elif any(domain in alt_url for domain in ['blog.', 'medium.', 'dev.to']):
+                alt_title = "Alternative Article"
+                alt_type = "ARTICLE"
+            else:
+                alt_title = "Alternative Resource"
+                alt_type = "RESOURCE"
         
         # Create the UI elements
         # Title
@@ -200,32 +248,33 @@ class PopupClient:
                             font=("Segoe UI", 9), cursor="hand2", bd=0, padx=10, pady=5)
         rec_url_btn.pack(anchor='w', pady=(10, 0))
         
-        # Alternative Recommendation
-        alt_frame = tk.Frame(popup, bg='#fef9e7', padx=10, pady=10)
-        alt_frame.pack(pady=10, padx=20, fill='x')
-        
-        alt_type_label = tk.Label(alt_frame, text=alt_type.upper(), 
-                                font=("Segoe UI", 8), bg='#fef9e7', fg='#f1c40f')
-        alt_type_label.pack(anchor='w')
-        
-        alt_title_label = tk.Label(alt_frame, text=alt_title, 
-                                font=("Segoe UI", 12, "bold"), bg='#fef9e7')
-        alt_title_label.pack(anchor='w')
-        
-        if alt_desc:
-            alt_desc_label = tk.Label(alt_frame, text=alt_desc, 
-                                    font=("Segoe UI", 10), bg='#fef9e7',
-                                    wraplength=340, justify='left')
-            alt_desc_label.pack(anchor='w', pady=(5, 0))
-        
-        def open_alt_url():
-            if alt_url and alt_url != '#':
-                webbrowser.open(alt_url)
-        
-        alt_url_btn = tk.Button(alt_frame, text="Open Alternative", 
-                            command=open_alt_url, bg='#f1c40f', fg='white',
-                            font=("Segoe UI", 9), cursor="hand2", bd=0, padx=10, pady=5)
-        alt_url_btn.pack(anchor='w', pady=(10, 0))
+        # Alternative Recommendation - only show if we have valid data
+        if alt_url and alt_url != '#':
+            alt_frame = tk.Frame(popup, bg='#fef9e7', padx=10, pady=10)
+            alt_frame.pack(pady=10, padx=20, fill='x')
+            
+            alt_type_label = tk.Label(alt_frame, text=alt_type.upper(), 
+                                    font=("Segoe UI", 8), bg='#fef9e7', fg='#f1c40f')
+            alt_type_label.pack(anchor='w')
+            
+            alt_title_label = tk.Label(alt_frame, text=alt_title, 
+                                    font=("Segoe UI", 12, "bold"), bg='#fef9e7')
+            alt_title_label.pack(anchor='w')
+            
+            if alt_desc:
+                alt_desc_label = tk.Label(alt_frame, text=alt_desc, 
+                                        font=("Segoe UI", 10), bg='#fef9e7',
+                                        wraplength=340, justify='left')
+                alt_desc_label.pack(anchor='w', pady=(5, 0))
+            
+            def open_alt_url():
+                if alt_url and alt_url != '#':
+                    webbrowser.open(alt_url)
+            
+            alt_url_btn = tk.Button(alt_frame, text="Open Alternative", 
+                                command=open_alt_url, bg='#f1c40f', fg='white',
+                                font=("Segoe UI", 9), cursor="hand2", bd=0, padx=10, pady=5)
+            alt_url_btn.pack(anchor='w', pady=(10, 0))
         
         # Action buttons
         button_frame = tk.Frame(popup, bg='white')
@@ -246,6 +295,11 @@ class PopupClient:
         
         # Auto-close after 5 minutes if not interacted with
         popup.after(300000, lambda: popup.destroy() if popup.winfo_exists() else None)
+    
+    def clear_shown_recommendations(self):
+        """Clear the list of shown recommendations so they can be displayed again"""
+        self.shown_recommendations.clear()
+        print("Cleared shown recommendations history")
 
 if __name__ == "__main__":
     client = PopupClient()
@@ -267,7 +321,7 @@ if __name__ == "__main__":
                       cursor="hand2", bd=0, padx=15, pady=8)
     check_btn.pack(fill='x')
     
-    status_label = tk.Label(frame, text="Checking automatically every 30 seconds", 
+    status_label = tk.Label(frame, text="Checking automatically every 5 seconds", 
                         font=("Segoe UI", 9), fg='#7f8c8d')
     status_label.pack(pady=(10, 0))
     
@@ -305,6 +359,20 @@ if __name__ == "__main__":
                       command=show_test_popup,
                       bg='#9b59b6', fg='white', font=("Segoe UI", 10),
                       cursor="hand2", bd=0, padx=15, pady=8)
-    test_btn.pack(fill='x', pady=(0, 15))
+    test_btn.pack(fill='x', pady=(0, 10))
+    
+    # Add button to clear shown recommendations
+    clear_btn = tk.Button(frame, text="Clear History & Show All", 
+                      command=client.clear_shown_recommendations,
+                      bg='#e74c3c', fg='white', font=("Segoe UI", 10),
+                      cursor="hand2", bd=0, padx=15, pady=8)
+    clear_btn.pack(fill='x', pady=(0, 15))
+    
+    # Add a button to clear shown recommendations
+    clear_btn = tk.Button(frame, text="Clear Shown Recommendations", 
+                      command=client.clear_shown_recommendations,
+                      bg='#e74c3c', fg='white', font=("Segoe UI", 10),
+                      cursor="hand2", bd=0, padx=15, pady=8)
+    clear_btn.pack(fill='x', pady=(0, 10))
     
     root.mainloop()
