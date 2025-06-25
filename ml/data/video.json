@@ -6810,5 +6810,421 @@
       "focused": 0.14438363909721375
     },
     "timestamp": "2025-06-24T15:59:56.586566"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:16.899652"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.0007639258983545005,
+      "confused": 0.0019735125824809074,
+      "frustrated": 0.00039160228334367275,
+      "focused": 0.9968709349632263
+    },
+    "timestamp": "2025-06-25T21:40:17.865778"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.0005024087731726468,
+      "confused": 0.0005482038250193,
+      "frustrated": 8.70094881975092e-05,
+      "focused": 0.9988623857498169
+    },
+    "timestamp": "2025-06-25T21:40:18.829708"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:19.788904"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:20.789260"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:21.788789"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:22.787893"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:23.779818"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 0.045106783509254456,
+      "confused": 0.17609377205371857,
+      "frustrated": 0.08707660436630249,
+      "focused": 0.6917227506637573
+    },
+    "timestamp": "2025-06-25T21:40:24.812148"
+  },
+  {
+    "userId": "unknown",
+    "attentive": true,
+    "emotion": "focused",
+    "engagement_score": 0.75,
+    "emotions_data": {
+      "bored": 8.196273847715929e-05,
+      "confused": 0.00027136056451126933,
+      "frustrated": 0.0001960688387043774,
+      "focused": 0.9994507431983948
+    },
+    "timestamp": "2025-06-25T21:40:25.808994"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:26.785434"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:27.786922"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:28.786369"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:29.787444"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:30.781675"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:31.780709"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:32.781506"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:40:33.780056"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:09.848907"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:11.723570"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:12.706720"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:13.710586"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:14.713646"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:15.704953"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:16.709262"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:17.711004"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:18.707628"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:18.898937"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:19.845198"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:20.845054"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:21.849487"
+  },
+  {
+    "userId": "unknown",
+    "attentive": false,
+    "emotion": "unknown",
+    "engagement_score": 0.0,
+    "emotions_data": {
+      "bored": 0.0,
+      "confused": 0.0,
+      "frustrated": 0.0,
+      "focused": 0.0
+    },
+    "timestamp": "2025-06-25T21:41:22.848363"
   }
 ]

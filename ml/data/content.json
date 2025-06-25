@@ -1,43 +1,19 @@
 [
   {
     "popup": {
-      "title": "Time to Refocus!",
-      "message": "Hey there! It looks like you've been browsing for a bit.  Let's get you back on track with your coding project! Take a short break and then dive back in.",
+      "title": "Refocus and Conquer!",
+      "message": "Hey there!  Looks like you've been browsing for a bit.  Let's get you back on track with your coding!  Take a short break and then dive back into building amazing things.",
       "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?",
       "recommendation": {
         "type": "video",
-        "title": "React Fundamentals Tutorial for Beginners",
-        "description": "Learn the basics of React.js, a popular JavaScript library for building user interfaces. This tutorial covers components, JSX, state, and props.",
-        "url": "https://www.youtube.com/watch?v=hQAHSlTtO-Y"
-      },
-      "alternative": {
-        "type": "article",
-        "title": "Understanding React Components",
-        "description": "A comprehensive guide to React components, explaining their structure, lifecycle methods, and best practices for efficient development.",
-        "url": "https://reactjs.org/docs/components-and-props.html"
-      }
-    },
-    "context": {
-      "trigger": "focus",
-      "user_id": "student_001",
-      "idle_time": 0.300843167
-    }
-  },
-  {
-    "popup": {
-      "title": "Refocus and Recharge!",
-      "message": "Hey there!  It looks like you've been working on your Vite + React project for a bit.  Taking short breaks can actually boost your productivity. Let's get you back on track!",
-      "fun_fact": "Did you know that the word 'React' in React.js is a reference to how the user interface reacts to changes in data?",
-      "recommendation": {
-        "type": "video",
-        "title": "React Fundamentals Tutorial for Beginners",
-        "description": "Learn the core concepts of React, including components, JSX, and state management, in this beginner-friendly tutorial. Perfect for getting back in the flow of your project.",
-        "url": "https://www.youtube.com/watch?v=hqaJsjE7K-I"
+        "title": "React 18 Crash Course - Full Tutorial for Beginners",
+        "description": "This video provides a comprehensive introduction to React 18, covering fundamental concepts and advanced topics. Perfect for getting back into the groove of your project.",
+        "url": "https://www.youtube.com/watch?v=i697kP2m028"
       },
       "alternative": {
         "type": "article",
         "title": "Understanding React's Virtual DOM",
-        "description": "Deep dive into the Virtual DOM, a key component of React's performance optimization. This article explains how it works and why it's so important for efficient rendering.",
+        "description": "Learn how React's Virtual DOM significantly improves performance in web applications.  This article provides a clear explanation of its inner workings and benefits.",
         "url": "https://blog.logrocket.com/understanding-reacts-virtual-dom/"
       }
     },
@@ -49,20 +25,44 @@
   },
   {
     "popup": {
-      "title": "Refocus and Recharge!",
-      "message": "Hey there!  It looks like you've been taking a quick break. Let's get back to building amazing things! Here's something to help refocus your energy on your Vite + React project.",
-      "fun_fact": "Did you know that the term \"React\" in React.js comes from the way the library's components \"react\" to changes in data, triggering updates to the user interface?",
+      "title": "Time for a Refocus!",
+      "message": "Hey there!  It looks like you've been browsing for a bit.  Take a short break and recharge before diving back into your coding! ",
+      "fun_fact": "Did you know that the first computer bug was actually a moth found stuck in a relay of the Harvard Mark II computer in 1947?",
       "recommendation": {
         "type": "video",
-        "title": "React 18 Crash Course - Full Tutorial for Beginners",
-        "description": "Learn React from scratch in this comprehensive tutorial. Covers fundamentals, hooks, and advanced concepts.",
-        "url": "https://www.youtube.com/watch?v=w7ejDZ8EVwo"
+        "title": "React Fundamentals for Beginners",
+        "description": "A concise and informative video explaining the core concepts of React.js, ideal for beginners and those looking for a refresher.",
+        "url": "https://www.youtube.com/watch?v=hqaJsj9_X-s"
       },
       "alternative": {
         "type": "article",
-        "title": "Understanding React's Virtual DOM",
-        "description": "A deep dive into React's Virtual DOM and how it efficiently updates the UI, a key concept for understanding React's performance.",
-        "url": "https://reactjs.org/docs/reconciliation.html"
+        "title": "Understanding React Components",
+        "description": "A helpful article explaining the building blocks of React applications: components, props and state.  Great for reinforcing your learning.",
+        "url": "https://reactjs.org/docs/components-and-props.html"
+      }
+    },
+    "context": {
+      "trigger": "focus",
+      "user_id": "student_001",
+      "idle_time": 0.300843167
+    }
+  },
+  {
+    "popup": {
+      "title": "Refocus and Reconnect!",
+      "message": "Hey there!  It looks like you've been browsing for a bit.  Let's get you back on track with your coding project.  Here's something to help you refocus and refresh your knowledge of React!",
+      "fun_fact": "Did you know that React, the JavaScript library you're using, was initially created by Facebook (now Meta) and is now maintained by a large community of developers?",
+      "recommendation": {
+        "type": "video",
+        "title": "React Crash Course for Beginners",
+        "description": "A fast-paced introduction to React covering the fundamentals such as components, JSX, props, and state.",
+        "url": "https://www.youtube.com/watch?v=Ke90Tje7VS0"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Understanding React Components: A Comprehensive Guide",
+        "description": "A detailed article explaining React components, their lifecycle, and best practices for building reusable UI elements.",
+        "url": "https://reactjs.org/docs/components-and-props.html"
       }
     },
     "context": {
@@ -74,18 +74,42 @@
   {
     "popup": {
       "title": "Time for a Quick Break!",
-      "message": "Hey there!  It looks like you've been focusing on your Vite + React project for a while.  Let's take a short break to recharge and come back refreshed.  You've got this!",
-      "fun_fact": "Did you know that the word \"debug\" originated from a moth causing a malfunction in an early computer?  It's a testament to the sometimes unpredictable nature of programming!",
+      "message": "Hey there!  It looks like you've been focused on your Vite + React project for a while.  Take a short break to refresh your mind before diving back in. You've got this!",
+      "fun_fact": "Did you know that the word 'JavaScript' was initially called 'Mocha' before being renamed to avoid confusion with a Sun Microsystems trademark?",
       "recommendation": {
         "type": "video",
-        "title": "React 18 Tutorial for Beginners",
-        "description": "Learn the basics of React 18 in this comprehensive tutorial. Perfect for beginners, this video covers setting up your environment, JSX, components, and state management.",
-        "url": "https://www.youtube.com/watch?v=h3X0f9jB_bI"
+        "title": "React 18: What's New?",
+        "description": "Learn about the new features and improvements in React 18, including automatic batching, new concurrent features, and more.  This video provides a concise overview.",
+        "url": "https://www.youtube.com/watch?v=y1k0o6bJ000"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Understanding React's Concurrent Mode",
+        "description": "A deep dive into React's Concurrent Mode, explaining how it improves performance and user experience.  Great for solidifying your understanding of React's inner workings.",
+        "url": "https://reactjs.org/docs/concurrent-mode.html"
+      }
+    },
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 0.300843167
+    }
+  },
+  {
+    "popup": {
+      "title": "Time for a Quick Break!",
+      "message": "Hey there!  It looks like you've been focusing intensely on your Vite + React project.  Taking short breaks can actually boost your productivity. Let's recharge before getting back to it!",
+      "fun_fact": "Did you know that the word 'React' in React.js is a reference to how the library updates the user interface by reacting to changes in data?",
+      "recommendation": {
+        "type": "video",
+        "title": "React 18: Everything You Need to Know",
+        "description": "This comprehensive video covers the key features and improvements in React 18. Learn about new features and best practices for building efficient and scalable applications.",
+        "url": "https://www.youtube.com/watch?v=hG_22d5o3o8"
       },
       "alternative": {
         "type": "article",
         "title": "Understanding React's Virtual DOM",
-        "description": "Dive deeper into React's performance optimization with this insightful article explaining the Virtual DOM and how it enhances efficiency in web development.",
+        "description": "A concise explanation of React's Virtual DOM and how it contributes to efficient updates and performance optimizations.",
         "url": "https://blog.logrocket.com/understanding-react-virtual-dom/"
       }
     },
@@ -97,44 +121,20 @@
   },
   {
     "popup": {
-      "title": "Time for a Quick Break!",
-      "message": "It looks like you've been focusing intently on your Vite + React project.  Take a short break to recharge!  A quick stretch or a fun game can help boost your productivity.",
-      "fun_fact": "Did you know that the first website was created in 1989? It's hard to imagine the internet without React now!",
+      "title": "Feeling Stuck? Let's Get You Unconfused!",
+      "message": "It's okay to feel confused when learning something new!  Programming can be challenging, but you've got this. Take a short break and check out this helpful resource to get back on track.",
+      "fun_fact": "Did you know that the first computer bug was actually a moth found stuck in a relay of the Harvard Mark II computer in 1947?  It literally caused a malfunction!",
       "recommendation": {
         "type": "video",
-        "title": "React 18 Crash Course - Full Tutorial",
-        "description": "Learn React 18 from the ground up in this comprehensive tutorial.  This video will guide you through the basics of components, props, state, and hooks.",
-        "url": "https://www.youtube.com/watch?v=O1u0mD7x96c"
+        "title": "Vite.js Tutorial for Beginners: Build Fast React Apps",
+        "description": "Learn the basics of Vite.js and how to use it to build blazing-fast React applications. This video covers setting up a project, using components, and deploying your app.",
+        "url": "https://www.youtube.com/watch?v=Y_p-5c7B4-8"
       },
       "alternative": {
         "type": "article",
-        "title": "Understanding React Hooks",
-        "description": "A detailed article explaining the core concepts of React Hooks, including useState, useEffect, and useContext.  Perfect for deepening your understanding of functional components.",
-        "url": "https://reactjs.org/docs/hooks-intro.html"
-      }
-    },
-    "context": {
-      "trigger": "break",
-      "user_id": "student_001",
-      "idle_time": 0.300843167
-    }
-  },
-  {
-    "popup": {
-      "title": "Feeling Stuck with Vite + React?",
-      "message": "Don't worry, many developers find Vite + React challenging at first!  Take a deep breath, and let's get you back on track. We've got some resources that might help clear things up.",
-      "fun_fact": "Did you know that Vite, the tool you're using, is known for its incredibly fast development server? This speed is partly due to its use of native ES modules, skipping the traditional bundling process that often slows things down.",
-      "recommendation": {
-        "type": "video",
-        "title": "Vite.js Tutorial for Beginners (2024)",
-        "description": "This tutorial provides a comprehensive introduction to Vite.js and its usage with React, covering setup, routing, state management, and more. Perfect for beginners!",
-        "url": "https://www.youtube.com/watch?v=7CwlG-8Zv28"
-      },
-      "alternative": {
-        "type": "article",
-        "title": "Vite + React: A Practical Guide",
-        "description": "This article provides a step-by-step guide on setting up and using Vite with React, focusing on practical examples and best practices. It's a great complement to the video.",
-        "url": "https://vitejs.dev/guide/features.html"
+        "title": "Understanding Vite's Build Process",
+        "description": "A detailed explanation of how Vite's development server and build process work, including code splitting, rollup optimizations and more.",
+        "url": "https://vitejs.dev/guide/features.html#build"
       }
     },
     "context": {
@@ -146,19 +146,19 @@
   {
     "popup": {
       "title": "Feeling Stuck? Let's Get You Back on Track!",
-      "message": "It's okay to hit a snag in your programming journey.  Take a short break, watch something inspiring, and then dive back in with fresh perspective. You've got this!",
-      "fun_fact": "Did you know that the first computer bug was actually a moth found stuck in a relay of the Harvard Mark II computer in 1947?  It literally stopped the machine!",
+      "message": "It sounds like you're hitting a snag in your programming journey.  Don't worry, everyone faces challenges! Take a short break to recharge and watch this video for some inspiration and practical tips.",
+      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?  Debugging has come a long way!",
       "recommendation": {
         "type": "video",
-        "title": "Debugging Techniques for React Developers",
-        "description": "Learn practical strategies to efficiently identify and resolve common errors in your React projects. This video covers debugging tools, common pitfalls, and best practices.",
-        "url": "https://www.youtube.com/watch?v=BNaK_uG-2mI"
+        "title": "Debugging in React: A Practical Guide",
+        "description": "Learn effective debugging techniques for React applications. This video covers common errors, browser developer tools, and debugging strategies for a smoother development process.",
+        "url": "https://www.youtube.com/watch?v=r8O-e3-t9gQ"
       },
       "alternative": {
         "type": "article",
-        "title": "10 Common Mistakes to Avoid When Using React",
-        "description": "This article covers 10 of the most frequent errors React developers encounter and offers solutions, saving you time and frustration.",
-        "url": "https://www.freecodecamp.org/news/10-common-mistakes-to-avoid-when-using-react/"
+        "title": "Top 5 React Debugging Tools and Techniques",
+        "description": "A comprehensive guide to the best tools and techniques for debugging React applications, covering Chrome DevTools, React Developer Tools, and other helpful resources.",
+        "url": "https://blog.logrocket.com/debugging-react-applications-common-errors-and-how-to-solve-them/"
       }
     },
     "context": {
@@ -170,91 +170,91 @@
   {
     "popup": {
       "title": "Time for a Quick Break!",
-      "message": "It looks like you've been focusing on your programming for a while.  Take a short break to recharge before diving back in!  A quick game or fun fact might do the trick.",
-      "fun_fact": "Did you know that the first computer bug was literally a bug\u2014a moth found stuck in a relay of the Harvard Mark II computer in 1947?",
+      "message": "Hey there!  It looks like you've been focused on your programming for a while.  Taking short breaks can actually boost your productivity.  Check out this fun fact, then choose a relaxing video or article to help you refocus.",
+      "fun_fact": "Did you know that the first computer bug was actually a moth found trapped in a relay of the Harvard Mark II Aiken relay calculator in 1947?",
       "recommendation": {
         "type": "video",
-        "title": "React 18 for Beginners: Learn React Hooks (2024)",
-        "description": "A comprehensive introduction to React 18, covering essential concepts and practical examples.  Great for beginners and those looking to brush up on their skills.",
-        "url": "https://www.youtube.com/watch?v=h6Y68fXgW9Y"
+        "title": "React 18 Fundamentals - Learn React in 2024",
+        "description": "This video provides a comprehensive introduction to React 18, covering its key features and updates. Perfect for refreshing your knowledge or catching up on new functionalities.",
+        "url": "https://www.youtube.com/watch?v=LnJ-323Yj6o"
       },
       "alternative": {
         "type": "article",
-        "title": "Understanding React's Component Lifecycle",
-        "description": "A detailed explanation of the React component lifecycle, including mounting, updating, and unmounting. This article will help you grasp the fundamental processes that govern how your React components behave.",
-        "url": "https://www.freecodecamp.org/news/react-component-lifecycle/"
+        "title": "Understanding React's useState Hook",
+        "description": "A concise article explaining React's useState hook, a fundamental concept for managing component state.  Perfect for a quick knowledge refresh.",
+        "url": "https://www.freecodecamp.org/news/react-usestate-hook/"
+      },
+      "context": {
+        "trigger": "break",
+        "user_id": "student_001",
+        "idle_time": 0.753367792
       }
-    },
-    "context": {
-      "trigger": "break",
-      "user_id": "student_001",
-      "idle_time": 0.753367792
     }
   },
   {
     "popup": {
       "title": "Time for a Quick Break!",
-      "message": "Hey there!  It looks like you've been focusing intensely on your programming.  Taking short breaks can actually boost your productivity.  Let's refresh your mind before you dive back in!",
-      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II Aiken Relay Calculator in 1947?",
+      "message": "It looks like you've been focusing intensely on your programming.  Take a short break to refresh your mind before continuing!  Even a few minutes can make a big difference in your productivity.",
+      "fun_fact": "Did you know that the first computer bug was actually a moth found trapped in a relay of the Harvard Mark II computer in 1947?  It's where the term 'debugging' originated!",
       "recommendation": {
         "type": "video",
-        "title": "React 18: What's New - Full Overview",
-        "description": "Learn about the major updates and improvements in React 18, including Concurrent Rendering, Automatic Batching, and the new Suspense component.",
-        "url": "https://www.youtube.com/watch?v=s7yN9P4E69w"
+        "title": "React Fundamentals: A Beginner's Guide",
+        "description": "This video provides a comprehensive introduction to React, covering essential concepts like components, JSX, and state management. Perfect for beginners and those looking to solidify their foundation.",
+        "url": "https://www.youtube.com/watch?v=hQAHSlTtZ9U"
       },
       "alternative": {
         "type": "article",
-        "title": "Understanding React's Concurrent Mode",
-        "description": "A deep dive into React's Concurrent Mode, explaining its benefits and how it improves the user experience.",
-        "url": "https://reactjs.org/blog/2022/03/29/react-v18"
+        "title": "Understanding React's Component Lifecycle",
+        "description": "A detailed article explaining the different phases of a React component's lifecycle, including mounting, updating, and unmounting.  Learn how to optimize your components for performance and efficiency.",
+        "url": "https://reactjs.org/docs/react-component.html#component-lifecycle"
+      },
+      "context": {
+        "trigger": "break",
+        "user_id": "student_001",
+        "idle_time": 0.468662625
       }
-    },
-    "context": {
-      "trigger": "break",
-      "user_id": "student_001",
-      "idle_time": 0.468662625
     }
   },
   {
     "popup": {
       "title": "Feeling Stuck? Let's Get You Back on Track!",
-      "message": "It's okay to hit a snag while programming.  Take a short break to recharge and refocus.  We've got something to help boost your mood and inspire you to keep coding!",
-      "fun_fact": "Did you know that the first computer bug was literally a bug?  In 1947, a moth got stuck in a relay of the Harvard Mark II Aiken relay calculator, causing a malfunction.  The term 'debugging' was born!",
+      "message": "It's okay to hit a snag while programming.  Take a short break to recharge and refocus.  Here's something to boost your mood and inspire you!",
+      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II Aiken relay calculator in 1947?  It's a reminder that even in tech, things can get... buggy!",
       "recommendation": {
         "type": "video",
-        "title": "JavaScript Fundamentals for Beginners",
-        "description": "A comprehensive introduction to the basics of JavaScript, covering variables, data types, operators, and control flow. Perfect for beginners or those looking to solidify their foundations.",
-        "url": "https://www.youtube.com/watch?v=PkZNo7MFNFg"
+        "title": "Debugging Techniques for React Developers",
+        "description": "Learn effective strategies to identify and fix common issues in your React projects. This video covers debugging tools, common errors, and best practices for maintaining a clean codebase.",
+        "url": "https://www.youtube.com/watch?v=BHxO9-pG590"
       },
       "alternative": {
         "type": "article",
-        "title": "10 Tips to Improve Your JavaScript Debugging Skills",
-        "description": "Learn practical techniques to effectively debug your JavaScript code, saving you time and frustration. This article covers common debugging strategies and tools.",
-        "url": "https://www.freecodecamp.org/news/javascript-debugging-techniques/"
+        "title": "Mastering React State Management with Context API",
+        "description": "A comprehensive guide to effectively manage state in your React applications using the Context API, covering best practices and advanced techniques.",
+        "url": "https://www.freecodecamp.org/news/react-context-api-tutorial-and-best-practices/"
       }
     },
     "context": {
       "trigger": "motivation",
       "user_id": "student_001",
-      "idle_time": 0.468662625
+      "idle_time": 127
     }
   },
   {
     "popup": {
       "title": "Time for a Quick Break!",
-      "message": "It looks like you've been focused on your programming for a while.  Taking short breaks can actually boost your productivity! Let's refresh your mind with a fun fact and a quick video.",
-      "fun_fact": "Did you know that the first computer bug was an actual moth found stuck in a relay of the Harvard Mark II computer in 1947?",
+      "message": "Hey there!  It looks like you've been focusing intensely on your programming.  Take a short break to recharge – you'll be more productive afterwards!",
+      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?",
       "recommendation": {
         "type": "video",
-        "title": "React Fundamentals - Full Course for Beginners",
-        "description": "Learn the basics of React, a popular JavaScript library for building user interfaces. This comprehensive course covers components, JSX, state management, and more.",
+        "title": "React Fundamentals: Mastering the Basics",
+        "description": "This video provides a comprehensive overview of React's core concepts, perfect for solidifying your understanding or getting started.  It covers components, JSX, and state management, explained clearly for beginners.",
         "url": "https://www.youtube.com/watch?v=Ke90Tje7VS0"
       },
       "alternative": {
         "type": "article",
-        "title": "Understanding React Components",
-        "description": "A helpful article explaining the core concept of components in React and how they contribute to building reusable and maintainable UI elements.",
-        "url": "https://reactjs.org/docs/components-and-props.html"
+        "title": "Understanding React Hooks",
+        "description": "A helpful article explaining React Hooks, a key feature for managing state and side effects in functional components.  Learn about useState, useEffect, and other essential hooks.",
+        "url": "https://reactjs.org/docs/hooks-intro.html"
       }
     },
     "context": {
@@ -266,19 +266,19 @@
   {
     "popup": {
       "title": "Time for a Quick Break!",
-      "message": "It looks like you've been focusing intensely on your programming.  Taking short breaks can actually boost your productivity!  Let's recharge with a fun fact and a quick video, then get back to building awesome things.",
-      "fun_fact": "Did you know that the first computer bug was literally a bug\u2014a moth trapped in a relay of the Harvard Mark II computer in 1947?",
+      "message": "It looks like you've been focusing intensely on your programming.  Take a short break to recharge!  A quick game or fun fact can help you come back refreshed and ready to tackle those coding challenges.",
+      "fun_fact": "Did you know that the first computer bug was actually a moth found trapped in a relay of the Harvard Mark II computer in 1947?  It was literally a bug!",
       "recommendation": {
         "type": "video",
-        "title": "React 18: What's New?",
-        "description": "A concise overview of the new features and improvements in React 18, focusing on performance and developer experience.  Perfect for a quick refresh or to learn something new.",
-        "url": "https://www.youtube.com/watch?v=K77sL6oQ86Y"
+        "title": "React Fundamentals Tutorial for Beginners - Full Course",
+        "description": "A comprehensive tutorial covering the basics of React, ideal for refreshing your knowledge or solidifying your understanding of core concepts.",
+        "url": "https://www.youtube.com/watch?v=Ke90Tje7VS0"
       },
       "alternative": {
         "type": "article",
-        "title": "Understanding React's Concurrent Mode",
-        "description": "A helpful article explaining React's Concurrent Mode, its benefits, and how it improves application performance.  Dive deeper into the concepts behind React 18.",
-        "url": "https://react.dev/blog/concurrent-mode-intro"
+        "title": "Understanding React State and Props",
+        "description": "A concise article explaining the essential concepts of state and props in React, crucial for building dynamic and interactive user interfaces.",
+        "url": "https://reactjs.org/docs/state-and-lifecycle.html"
       }
     },
     "context": {
@@ -290,19 +290,19 @@
   {
     "popup": {
       "title": "Feeling Stuck? Take a Break!",
-      "message": "It's okay to feel frustrated sometimes, especially when tackling complex coding problems.  Take a deep breath, and remember that every challenge is an opportunity to learn and grow. You've got this!",
-      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II Aiken relay calculator in 1947?",
+      "message": "It's okay to feel frustrated sometimes, especially when tackling complex code.  Take a few minutes to breathe and clear your head. You've got this!",
+      "fun_fact": "Did you know that the first computer bug was actually a moth found trapped in a relay of the Harvard Mark II computer in 1947?  It's a testament to the fact that even the most seasoned programmers encounter unexpected hurdles!",
       "recommendation": {
         "type": "video",
-        "title": "React Fundamentals: A Comprehensive Guide",
-        "description": "This video provides a complete introduction to React, covering essential concepts such as components, JSX, props, and state.  Ideal for beginners and those looking to solidify their understanding.",
-        "url": "https://www.youtube.com/watch?v=sBws8MSXN7A"
+        "title": "React Fundamentals - Full Course for Beginners",
+        "description": "A comprehensive beginner-friendly tutorial covering the fundamentals of React.js.",
+        "url": "https://www.youtube.com/watch?v=bMknfKXIFA8"
       },
       "alternative": {
         "type": "article",
-        "title": "Understanding React State Management with Context API",
-        "description": "Learn how to manage state effectively in React applications using the Context API. This article explains the core principles and provides practical examples to help you build more robust and scalable React apps.",
-        "url": "https://blog.logrocket.com/managing-state-in-react-with-the-context-api/"
+        "title": "Understanding React's Component Lifecycle",
+        "description": "A detailed article explaining the different stages in a React component's lifecycle, helping you troubleshoot and optimize your code.",
+        "url": "https://reactjs.org/docs/react-component.html#lifecycle-methods"
       }
     },
     "context": {
@@ -314,91 +314,91 @@
   {
     "popup": {
       "title": "Feeling Stuck? Take a Break!",
-      "message": "It's okay to feel frustrated sometimes, especially when learning something new.  Remember that progress isn't always linear \u2013 keep up the great work!  Take a short break to clear your head and come back refreshed.",
-      "fun_fact": "Did you know that the first computer bug was actually a moth found trapped in a relay of the Harvard Mark II computer in 1947?",
+      "message": "It's okay to feel frustrated sometimes, especially when learning something new.  Take a deep breath and remember that progress, not perfection, is the key. You've got this!",
+      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?  It's a reminder that even in programming, unexpected things happen!",
       "recommendation": {
         "type": "video",
-        "title": "React 18 Fundamentals - Full Course for Beginners",
-        "description": "Learn the fundamentals of React 18. This course covers everything from setting up a project to advanced concepts like Context API and useReducer hook.",
-        "url": "https://www.youtube.com/watch?v=i94opQuG4wY"
+        "title": "Understanding React's Virtual DOM",
+        "description": "This video explains the concept of the Virtual DOM in React, a key component of React's performance and efficiency.  It's a great way to refresh your understanding or fill in any knowledge gaps.",
+        "url": "https://www.youtube.com/watch?v=Abv-a0f-X_g"
       },
       "alternative": {
         "type": "article",
-        "title": "Understanding Vite and its Advantages for React Development",
-        "description": "A comprehensive article explaining Vite's benefits for React developers, covering performance improvements, development speed, and best practices.",
-        "url": "https://vitejs.dev/guide/"
+        "title": "React 18's New Features: A Deep Dive",
+        "description": "This article provides a comprehensive overview of the improvements and new features introduced in React 18, including concurrent rendering and automatic batching. A great resource for staying up-to-date with the framework.",
+        "url": "https://blog.logrocket.com/react-18-new-features-a-deep-dive/"
       }
     },
     "context": {
       "trigger": "chatbot",
       "user_id": "student_001",
       "idle_time": 0.004337292
+    }
+  },
+  {
+    "popup": {
+      "title": "Feeling Stuck? Take a Break!",
+      "message": "It's okay to feel frustrated sometimes!  Remember, progress isn't always linear. Take a deep breath, and let's get you back on track.",
+      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?  Debugging has come a long way since then!",
+      "recommendation": {
+        "type": "video",
+        "title": "React 18 Crash Course - Full Tutorial",
+        "description": "A comprehensive tutorial on React 18, covering the fundamentals and key updates.  Great for solidifying your understanding of React concepts!",
+        "url": "https://www.youtube.com/watch?v=i61b-nZfZ2I"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Understanding Vite.js and its Benefits",
+        "description": "Learn about Vite.js, a build tool that significantly speeds up your development workflow for React (and other frameworks). This article will cover its core features and advantages.",
+        "url": "https://vitejs.dev/"
+      },
+      "context": {
+        "trigger": "chatbot",
+        "user_id": "student_001",
+        "idle_time": 0.004337292
+      }
     }
   },
   {
     "popup": {
       "title": "Feeling Stuck? Take a Break!",
       "message": "It's okay to feel frustrated sometimes, especially when learning something new.  Take a deep breath, and remember that progress, not perfection, is the key. You've got this!",
-      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II Aiken Relay Calculator in 1947?",
+      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?  It's a reminder that even in the world of programming, unexpected things happen!",
       "recommendation": {
         "type": "video",
-        "title": "React 18 Crash Course - Full Tutorial",
-        "description": "A comprehensive tutorial covering the basics and advanced features of React 18.  Great for refreshing your skills or learning new concepts.",
-        "url": "https://www.youtube.com/watch?v=i83-vE_7o4s"
-      },
-      "alternative": {
-        "type": "article",
-        "title": "Understanding Vite and its benefits for React development",
-        "description": "A detailed article explaining the advantages of using Vite as a build tool for React projects, addressing performance improvements and developer experience.",
-        "url": "https://vitejs.dev/guide/"
-      }
-    },
-    "context": {
-      "trigger": "chatbot",
-      "user_id": "student_001",
-      "idle_time": 0.004337292
-    }
-  },
-  {
-    "popup": {
-      "title": "Feeling Stuck? Take a Break!",
-      "message": "It's okay to feel frustrated sometimes, especially when learning something new.  Remember that progress isn't always linear. Take a short break to clear your head, and then come back with fresh eyes. You've got this!",
-      "fun_fact": "Did you know that the first computer bug was literally a bug \u2013 a moth trapped in a relay of the Harvard Mark II computer in 1947?",
-      "recommendation": {
-        "type": "video",
-        "title": "React 18 Crash Course - Full Tutorial",
-        "description": "Learn the fundamentals of React 18 in this comprehensive tutorial.  Perfect for beginners and experienced developers alike.",
-        "url": "https://www.youtube.com/watch?v=bMknfKXIFA8"
-      },
-      "alternative": {
-        "type": "article",
-        "title": "Understanding Vite and its benefits for React Development",
-        "description": "A detailed article explaining the advantages of using Vite as a build tool for React projects, covering performance improvements and developer experience.",
-        "url": "https://vitejs.dev/guide/"
-      }
-    },
-    "context": {
-      "trigger": "chatbot",
-      "user_id": "student_001",
-      "idle_time": 0.004337292
-    }
-  },
-  {
-    "popup": {
-      "title": "Feeling Stuck? Take a Break!",
-      "message": "It's okay to feel frustrated sometimes.  Remember that progress isn't always linear. Take a short break to clear your head, and then come back to it with fresh eyes. You've got this!",
-      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?  Debugging has come a long way!",
-      "recommendation": {
-        "type": "video",
-        "title": "React Fundamentals: A Beginner's Guide",
-        "description": "A comprehensive introduction to React concepts, perfect for beginners. This video covers components, JSX, and state management, helping to solidify your understanding of the framework.",
+        "title": "React Fundamentals Tutorial for Beginners",
+        "description": "This tutorial covers the basics of React, including JSX, components, and state management, perfect for getting back on track with your project.",
         "url": "https://www.youtube.com/watch?v=Ke90Tje7VS0"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Understanding React Components",
+        "description": "A helpful article explaining the building blocks of React applications.  Deepen your understanding of components and state for smoother coding.",
+        "url": "https://reactjs.org/docs/components-and-props.html"
+      }
+    },
+    "context": {
+      "trigger": "chatbot",
+      "user_id": "student_001",
+      "idle_time": 0.004337292
+    }
+  },
+  {
+    "popup": {
+      "title": "Feeling Stuck? Take a Break!",
+      "message": "It's okay to feel frustrated sometimes, especially when learning something new.  Take a deep breath and remember that progress, not perfection, is the goal.  You've got this!",
+      "fun_fact": "Did you know that the first computer bug was literally a bug—a moth found trapped in a relay of the Harvard Mark II computer in 1947?",
+      "recommendation": {
+        "type": "video",
+        "title": "React 18 Fundamentals - Full Course",
+        "description": "Learn the basics of React 18 in this comprehensive course, covering components, JSX, and state management.",
+        "url": "https://www.youtube.com/watch?v=j9G61v4P-lU"
       },
       "alternative": {
         "type": "article",
         "title": "Understanding React's Virtual DOM",
-        "description": "Learn how React's Virtual DOM efficiently updates the UI, optimizing performance and leading to smoother user experiences. This article dives into the intricacies of this crucial concept.",
-        "url": "https://blog.bitsrc.io/understanding-react-virtual-dom-b1c900331458"
+        "description": "A deep dive into React's Virtual DOM, explaining how it efficiently updates the UI and improves performance.",
+        "url": "https://blog.logrocket.com/understanding-reacts-virtual-dom/"
       }
     },
     "context": {
@@ -410,43 +410,67 @@
   {
     "popup": {
       "title": "Feeling Stuck? Take a Break!",
-      "message": "It's okay to feel frustrated sometimes, especially when learning something new.  Remember, progress isn't always linear. Take a short break, clear your head, and come back refreshed. You've got this!",
-      "fun_fact": "Did you know that the first computer bug was literally a bug\u2014a moth found trapped in a relay of the Harvard Mark II computer in 1947?",
+      "message": "It's okay to feel frustrated sometimes, especially when tackling complex coding problems.  Remember that progress isn't always linear. Take a deep breath and let's refocus.",
+      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?",
+      "recommendation": {
+        "type": "video",
+        "title": "React 18 Crash Course - Full Tutorial",
+        "description": "Learn the fundamentals of React 18 from scratch in this comprehensive tutorial.  It covers components, JSX, hooks, and more.",
+        "url": "https://www.youtube.com/watch?v=bMknfKXIFA8"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Understanding Vite.js for Faster React Development",
+        "description": "This article explores the benefits of Vite.js for React development and shows how it can significantly speed up your workflow.",
+        "url": "https://vitejs.dev/guide/"
+      }
+    },
+    "context": {
+      "trigger": "chatbot",
+      "user_id": "student_001",
+      "idle_time": 0.004337292
+    }
+  },
+  {
+    "popup": {
+      "title": "Feeling Stuck? Take a Break!",
+      "message": "It's okay to feel frustrated sometimes, especially when learning something new.  Take a deep breath, and remember that progress isn't always linear. You've got this!",
+      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?  It's a reminder that even in the world of programming, things can get a little buggy!",
       "recommendation": {
         "type": "video",
         "title": "React Fundamentals Tutorial for Beginners",
-        "description": "Learn the basics of React, a popular JavaScript library for building user interfaces.  This tutorial covers components, JSX, and state management.",
-        "url": "https://www.youtube.com/watch?v=Ke90Tje7VS0"
+        "description": "This tutorial provides a clear introduction to React concepts, covering components, JSX, and state management.  Perfect for beginners to build a strong foundation.",
+        "url": "https://www.youtube.com/watch?v=DLX62G4lc4w"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Understanding React's Virtual DOM",
+        "description": "Learn about React's Virtual DOM, a key concept for understanding React's performance and efficiency. This article explains how it works and its benefits.",
+        "url": "https://blog.logrocket.com/a-beginners-guide-to-the-react-virtual-dom/"
+      }
+    },
+    "context": {
+      "trigger": "chatbot",
+      "user_id": "student_001",
+      "idle_time": 0.056469416
+    }
+  },
+  {
+    "popup": {
+      "title": "Feeling Stuck? Take a Break!",
+      "message": "It's okay to feel frustrated sometimes!  Programming can be challenging, but you're making progress. Take a deep breath, and let's get you back on track. This short break might be just what you need.",
+      "fun_fact": "Did you know that the first computer bug was literally a bug—a moth trapped in a relay of the Harvard Mark II computer in 1947?",
+      "recommendation": {
+        "type": "video",
+        "title": "React Tutorial for Beginners - Build a Simple App",
+        "description": "A beginner-friendly tutorial showing you the basics of React.js, covering components, JSX, and state management. Perfect for getting back into the groove.",
+        "url": "https://www.youtube.com/watch?v=4K0hZ_Cq_14"
       },
       "alternative": {
         "type": "article",
         "title": "Understanding React's Component Lifecycle",
-        "description": "Dive deeper into React by exploring the lifecycle methods of components. Learn how to manage component mounting, updating, and unmounting effectively.",
-        "url": "https://reactjs.org/docs/state-and-lifecycle.html"
-      }
-    },
-    "context": {
-      "trigger": "chatbot",
-      "user_id": "student_001",
-      "idle_time": 0.004337292
-    }
-  },
-  {
-    "popup": {
-      "title": "Feeling Stuck? Take a Break!",
-      "message": "It's okay to feel frustrated sometimes, especially when learning something new.  Take a deep breath, you've got this!  Even a short break can make a big difference.",
-      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?",
-      "recommendation": {
-        "type": "video",
-        "title": "React 18 Fundamentals - Full Course for Beginners",
-        "description": "Learn the fundamentals of React 18, including components, JSX, hooks, and more.  This comprehensive course is perfect for beginners and covers everything you need to get started building React applications.",
-        "url": "https://www.youtube.com/watch?v=j1o-2f9jY5c"
-      },
-      "alternative": {
-        "type": "article",
-        "title": "Understanding React's useState Hook",
-        "description": "A detailed explanation of React's useState hook, explaining its function, usage, and common pitfalls.",
-        "url": "https://www.freecodecamp.org/news/react-usestate-hook/"
+        "description": "A comprehensive article explaining the different stages of a React component's lifecycle, including mounting, updating, and unmounting. This will help solidify your understanding of React fundamentals.",
+        "url": "https://reactjs.org/docs/react-component.html#lifecycle-methods"
       }
     },
     "context": {
@@ -458,19 +482,19 @@
   {
     "popup": {
       "title": "Feeling Stuck? Take a Break!",
-      "message": "It's okay to feel frustrated sometimes, especially when learning something new.  Take a few deep breaths and remember that progress, not perfection, is the key. You've got this!",
-      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?",
+      "message": "It's okay to feel frustrated sometimes, especially when learning something new.  Take a deep breath, and remember that progress, not perfection, is the key. You've got this!",
+      "fun_fact": "Did you know that the first computer bug was literally a moth found stuck in a relay of the Harvard Mark II computer in 1947?  Debugging has come a long way since then!",
       "recommendation": {
         "type": "video",
-        "title": "React Fundamentals: Building Your First App",
-        "description": "A beginner-friendly tutorial covering the basics of React, perfect for getting back on track with your Vite + React project. Learn how to set up your project, create components, and handle events.",
-        "url": "https://www.youtube.com/watch?v=sBws8MSln34"
+        "title": "React 18 Fundamentals",
+        "description": "A concise and informative video covering the essential concepts of React 18, including new features and best practices. Perfect for boosting your understanding and overcoming challenges.",
+        "url": "https://www.youtube.com/watch?v=hQe85i0_v9w"
       },
       "alternative": {
         "type": "article",
-        "title": "Understanding React State Management with Context API",
-        "description": "A comprehensive guide explaining how to manage state in your React application efficiently using the Context API.  This article provides practical examples and best practices.",
-        "url": "https://www.freecodecamp.org/news/react-context-api-tutorial/"
+        "title": "Understanding React's Virtual DOM",
+        "description": "This article explains how React's Virtual DOM enhances performance and simplifies updates.  It's a great resource for clarifying some of the underlying mechanisms you're working with.",
+        "url": "https://blog.logrocket.com/understanding-react-virtual-dom/"
       }
     },
     "context": {
@@ -478,5 +502,80 @@
       "user_id": "student_001",
       "idle_time": 0.056469416
     }
+  },
+  {
+    "popup": {
+      "title": "Time for a Quick Break!",
+      "message": "Hey there!  It looks like you've been focusing on your Vite + React project for a while.  Taking a short break can actually boost your productivity.  Check out this fun fact, and then choose something to refresh your mind before diving back in!",
+      "fun_fact": "Did you know that the first website was created in 1989?  It was a simple text-based site, quite different from the dynamic web applications we build today!",
+      "recommendation": {
+        "type": "video",
+        "title": "React 18 Crash Course - Learn in 10 mins",
+        "description": "A fast-paced video overview of the key features in React 18, perfect for a quick refresh or to learn something new.",
+        "url": "https://www.youtube.com/watch?v=r18e3mJ-a8E"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Understanding React Hooks",
+        "description": "A concise article explaining the basics of React Hooks, useful for solidifying your understanding of functional components.",
+        "url": "https://reactjs.org/docs/hooks-intro.html"
+      }
+    },
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": "0.5"
+    },
+    "timestamp": "2025-06-25T22:06:36.394912"
+  },
+  {
+    "popup": {
+      "title": "Stuck on React?  We've got you!",
+      "message": "It's okay to feel a little confused when learning something new!  Take a deep breath, and let's get you back on track. We have some great resources to help clarify things.",
+      "fun_fact": "Did you know that React's virtual DOM significantly improves performance by minimizing direct manipulations of the actual DOM? This is why React applications are so fast and efficient!",
+      "recommendation": {
+        "type": "video",
+        "title": "React Tutorial for Beginners - Full Course",
+        "description": "Learn the fundamentals of React from scratch with this comprehensive tutorial.  Covers JSX, components, state, props, and more. Perfect for beginners!",
+        "url": "https://www.youtube.com/watch?v=Ke90Tje7VS0"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Understanding React Components",
+        "description": "A clear and concise explanation of React components, including functional and class components, and how to use them effectively in your projects.",
+        "url": "https://reactjs.org/docs/components-and-props.html"
+      }
+    },
+    "context": {
+      "trigger": "help",
+      "user_id": "student_001",
+      "idle_time": "0.5"
+    },
+    "timestamp": "2025-06-25T22:06:39.297283"
+  },
+  {
+    "popup": {
+      "title": "Feeling Stuck? Take a Break!",
+      "message": "It's okay to feel frustrated sometimes, especially when tackling complex coding problems.  Don't give up! Take a short break to clear your head and come back refreshed. You've got this!",
+      "fun_fact": "Did you know that the first computer bug was actually a moth found stuck in a relay of the Harvard Mark II computer in 1947?",
+      "recommendation": {
+        "type": "video",
+        "title": "React Fundamentals: A Beginner's Guide",
+        "description": "This comprehensive video tutorial covers the essential concepts of React, from setting up your environment to building complex components. Perfect for solidifying your understanding!",
+        "url": "https://www.youtube.com/watch?v=hqaZs0StR-s"
+      },
+      "alternative": {
+        "type": "article",
+        "title": "Understanding and Fixing Common React Errors",
+        "description": "A helpful article outlining common errors encountered while working with React, along with solutions and explanations.  This might be helpful in resolving your current Stack Overflow issue.",
+        "url": "https://blog.logrocket.com/common-react-errors-and-how-to-fix-them/"
+      }
+    },
+    "context": {
+      "trigger": "motivation",
+      "user_id": "student_001",
+      "idle_time": 0.5
+    },
+    "timestamp": "2025-06-25T22:06:42.133842"
   }
 ]

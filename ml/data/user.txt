@@ -1,9 +1,7 @@
-user_id: student_001
-Attentive Topics: {"browsing": 5, "programming": 4}
-Preferred Content Types: {"video": 3, "article": 2}
-Average Active Time: 0.0
-Average Idle Time: 0.0
-Engaged Apps: {"WhatsApp": 5, "Google Chrome": 4}
-Historical Attentiveness Scores: []
-Last Sentiment: positive
-Last Recommended: {context: programming, video_url: https://www.youtube.com/watch?v=cKxRv-98Rj0, blog_url: https://builtin.com/artificial-intelligence/machine-learning-guide}
+User ID: student_001
+Attentive Topics: {'programming': 5, 'browsing': 2}
+Preferred Content Types: {'video': 3, 'article': 2}
+Engaged Apps: {'Chrome': 8, 'VS Code': 10}
+Last Sentiment: neutral
+Average Active Time: 45.5
+Average Idle Time: 12.3
