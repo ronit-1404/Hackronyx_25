@@ -18,7 +18,7 @@
       }
     },
     "user_id": "unknown",
-    "timestamp": "2025-06-25T21:40:18.829708",
+    "timestamp": "2025-06-25T21:40:17.865778",
     "trigger": {
       "type": "none",
       "message": "No action needed at this time. No intervention required."
@@ -27,9 +27,9 @@
   {
     "outputs": {
       "video": {
-        "emotion": "unknown",
-        "attentive": false,
-        "engagement_score": 0.0
+        "emotion": "focused",
+        "attentive": true,
+        "engagement_score": 0.75
       },
       "audio": {
         "emotion": "neutral"
@@ -43,10 +43,10 @@
       }
     },
     "user_id": "unknown",
-    "timestamp": "2025-06-25T21:40:19.788904",
+    "timestamp": "2025-06-25T21:40:18.829708",
     "trigger": {
       "type": "break",
-      "message": "The user is inattentive. Recommend a short break, a game, or a fun fact. Also, suggest a summary or helpful article."
+      "message": "The user has been inactive for a while. Recommend a break or stretching exercise. Also, suggest a summary or helpful article."
     }
   },
   {
@@ -68,7 +68,7 @@
       }
     },
     "user_id": "unknown",
-    "timestamp": "2025-06-25T21:40:20.789260",
+    "timestamp": "2025-06-25T21:40:19.788904",
     "trigger": {
       "type": "break",
       "message": "The user is inattentive. Recommend a short break, a game, or a fun fact. Also, suggest a summary or helpful article."
@@ -93,7 +93,7 @@
       }
     },
     "user_id": "unknown",
-    "timestamp": "2025-06-25T21:40:21.788789",
+    "timestamp": "2025-06-25T21:40:20.789260",
     "trigger": {
       "type": "break",
       "message": "The user is inattentive. Recommend a short break, a game, or a fun fact. Also, suggest a summary or helpful article."
@@ -118,7 +118,7 @@
       }
     },
     "user_id": "unknown",
-    "timestamp": "2025-06-25T21:40:22.787893",
+    "timestamp": "2025-06-25T21:40:21.788789",
     "trigger": {
       "type": "break",
       "message": "The user is inattentive. Recommend a short break, a game, or a fun fact. Also, suggest a summary or helpful article."
