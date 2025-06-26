@@ -1,6 +1,9 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+// OLD IMPORT - Without useLocation
+// import { useNavigate } from "react-router-dom";
+// NEW IMPORT - With useLocation for context awareness
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   ResponsiveContainer,
   LineChart,

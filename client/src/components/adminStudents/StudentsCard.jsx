@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, XCircle, Loader } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function StudentCards() {
+  const navigate = useNavigate();
+  
   // Sample student data as fallback
   const sampleStudents = [
     {
@@ -89,13 +92,23 @@ export default function StudentCards() {
   };
 
   const handleViewAnalytics = (studentId, studentName) => {
-    if (usingApiData) {
-      console.log(`Redirecting to analytics for student ID: ${studentId}`);
-      // This would typically use React Router navigation
-      //navigate(`/admin/students/${studentId}/learner/analytics`);
-    } else {
-      alert(`Viewing analytics for ${studentName} (sample data)`);
-    }
+    // OLD CODE - Original implementation with API check and alert
+    // if (usingApiData) {
+    //   console.log(`Redirecting to analytics for student ID: ${studentId}`);
+    //   // This would typically use React Router navigation
+    //   //navigate(`/admin/students/${studentId}/learner/analytics`);
+    // } else {
+    //   alert(`Viewing analytics for ${studentName} (sample data)`);
+    // }
+
+    // NEW CODE - Dynamic navigation with student ID and name (works for both API and sample data)
+    console.log(`Redirecting to analytics for student: ${studentName} (ID: ${studentId})`);
+    console.log(`Data source: ${usingApiData ? 'API' : 'Sample Data'}`);
+    
+    // Format student name for URL (replace spaces with hyphens, make lowercase)
+    const formattedName = studentName.toLowerCase().replace(/\s+/g, '-');
+    // Navigate to the dynamic route with student ID and name
+    navigate(`/admin/students/${studentId}/${formattedName}/learner/analytics`);
   };
 
   if (loading) {
@@ -123,7 +136,29 @@ export default function StudentCards() {
       
       {usingApiData && (
         <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-800 rounded-lg">
-          <p>✅ Connected to API - Displaying real student data</p>
+          <div className="flex justify-between items-center">
+            <p>✅ Connected to API - Displaying real student data (includes new registrations)</p>
+            <button
+              onClick={fetchStudents}
+              className="text-xs bg-green-100 hover:bg-green-200 px-3 py-1 rounded-full transition-colors"
+            >
+              🔄 Refresh
+            </button>
+          </div>
+        </div>
+      )}
+      
+      {!usingApiData && (
+        <div className="mb-4 p-3 bg-blue-50 border border-blue-200 text-blue-800 rounded-lg">
+          <div className="flex justify-between items-center">
+            <p>📝 Using sample data - API not available. New student registrations won't appear here.</p>
+            <button
+              onClick={fetchStudents}
+              className="text-xs bg-blue-100 hover:bg-blue-200 px-3 py-1 rounded-full transition-colors"
+            >
+              🔄 Try API
+            </button>
+          </div>
         </div>
       )}
       

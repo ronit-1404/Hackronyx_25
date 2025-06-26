@@ -107,6 +107,13 @@ function AppContent() {
             <LearnerAnalytics />
         } 
       />
+      
+      <Route 
+        path="/admin/students/:studentId/:studentName/learner/analytics" 
+        element={
+            <LearnerAnalytics />
+        } 
+      />
       <Route 
         path="/learner/resources" 
         element={
