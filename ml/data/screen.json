@@ -1,13 +1,5 @@
 [
   {
-    "context": "programming",
-    "chrome_title": "Vite + React",
-    "chrome_url": "http://localhost:5173",
-    "sentiment": "neutral",
-    "idle_time": "0.5",
-    "timestamp": "2025-06-25T22:06:21.286715"
-  },
-  {
     "context": "video_lecture",
     "chrome_title": "Machine Learning Crash Course - YouTube",
     "chrome_url": "https://www.youtube.com/watch?v=Gv9_4yMHFhI",
@@ -47,6 +39,4 @@
     "idle_time": "3.0",
     "timestamp": "2025-06-26T12:10:30.000000"
   }
-
-
 ]
