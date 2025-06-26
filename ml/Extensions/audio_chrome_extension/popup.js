@@ -44,6 +44,9 @@ chrome.storage.sync.get(['audioEngagementSettings'], function(result) {
     document.getElementById('sensitivity').value = settings.sensitivity || 0.7;
     document.getElementById('sensitivity-value').textContent = settings.sensitivity || 0.7;
     document.getElementById('notification-toggle').checked = settings.showNotifications;
+    if (document.getElementById('server-url')) {
+      document.getElementById('server-url').value = settings.serverUrl || 'http://localhost:5002';
+    }
   }
 });
 
@@ -142,20 +145,58 @@ let emotionDetector = null;
 
 async function processAudio(audioBlob) {
   try {
-    // Initialize the detector if it doesn't exist
-    if (!emotionDetector) {
-      emotionDetector = new AudioEmotionDetector();
+    // Get server URL from settings
+    const settings = await new Promise(resolve => {
+      chrome.storage.sync.get(['audioEngagementSettings'], function(result) {
+        resolve(result.audioEngagementSettings || {
+          serverUrl: 'http://localhost:5002', // Updated to match your API port
+          updateInterval: 3,
+          showNotifications: true,
+          sensitivity: 0.7
+        });
+      });
+    });
+    
+    // Convert blob to base64
+    const reader = new FileReader();
+    const base64Data = await new Promise(resolve => {
+      reader.onloadend = () => resolve(reader.result.split(',')[1]); // Get base64 part
+      reader.readAsDataURL(audioBlob);
+    });
+    
+    // Prepare the API request
+    const response = await fetch(`${settings.serverUrl}/predict_emotion`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        audio_data: base64Data,
+        file_format: 'wav',
+        userId: 'extension_user' // You can add user identification if needed
+      })
+    });
+    
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
     }
     
-    // Process the audio blob locally
-    const result = await emotionDetector.processAudioBlob(audioBlob);
+    const result = await response.json();
+    console.log('API response:', result);
     
-    console.log('Audio analysis result:', result);
-    
-    // Update the UI with the engagement result
-    if (result && result.engagement) {
-      updateEngagementDisplay(result.engagement);
+    // Map the API response to the engagement format expected by the UI
+    let engagementStatus = 'Unknown';
+    if (result.success) {
+      if (result.emotion === 'engaged') {
+        engagementStatus = 'Engaged';
+      } else if (result.emotion === 'distracted') {
+        engagementStatus = 'Not Engaged';
+      }
     }
+    
+    // Update the UI
+    updateEngagementDisplay(engagementStatus);
+    
   } catch (error) {
     console.error('Error processing audio:', error);
     statusElement.textContent = 'Error: ' + error.message;
@@ -469,6 +510,7 @@ saveSettingsButton.addEventListener('click', function() {
   settings.updateInterval = parseInt(document.getElementById('update-interval').value);
   settings.sensitivity = parseFloat(document.getElementById('sensitivity').value);
   settings.showNotifications = document.getElementById('notification-toggle').checked;
+  settings.serverUrl = document.getElementById('server-url').value;
   
   // Update the emotion detector if it exists
   if (emotionDetector) {
@@ -488,6 +530,7 @@ cancelSettingsButton.addEventListener('click', function() {
   document.getElementById('sensitivity').value = settings.sensitivity || 0.7;
   document.getElementById('sensitivity-value').textContent = settings.sensitivity || 0.7;
   document.getElementById('notification-toggle').checked = settings.showNotifications;
+  document.getElementById('server-url').value = settings.serverUrl || 'http://localhost:5002';
   
   settingsPanel.classList.remove('visible');
 });
