@@ -248,41 +248,41 @@ def write_to_json_file(data_type, data):
         return False
 
 # Add sample content
-engine.add_content(
-    title="Python Loops Tutorial",
-    url="https://youtube.com/python-loops",
-    content_type="YouTube Video",
-    description="A beginner's guide to loops in Python.",
-    transcript_or_text="Learn about loops, variables, and Python programming in this tutorial.",
-    length_minutes=10
-)
+# engine.add_content(
+#     title="Python Loops Tutorial",
+#     url="https://youtube.com/python-loops",
+#     content_type="YouTube Video",
+#     description="A beginner's guide to loops in Python.",
+#     transcript_or_text="Learn about loops, variables, and Python programming in this tutorial.",
+#     length_minutes=10
+# )
 
-engine.add_content(
-    title="Understanding Algebraic Equations",
-    url="https://blog.com/algebra-equations",
-    content_type="Blog Post",
-    description="A blog post on solving algebraic equations.",
-    transcript_or_text="This blog post discusses algebra, equations, and statistics in mathematics.",
-    readability_score=70.0
-)
+# engine.add_content(
+#     title="Understanding Algebraic Equations",
+#     url="https://blog.com/algebra-equations",
+#     content_type="Blog Post",
+#     description="A blog post on solving algebraic equations.",
+#     transcript_or_text="This blog post discusses algebra, equations, and statistics in mathematics.",
+#     readability_score=70.0
+# )
 
-engine.add_content(
-    title="Biology Basics: The Cell",
-    url="https://youtube.com/biology-cell",
-    content_type="YouTube Video",
-    description="An engaging video about cell biology.",
-    transcript_or_text="Explore biology, cells, and experiments in this science video.",
-    length_minutes=8
-)
+# engine.add_content(
+#     title="Biology Basics: The Cell",
+#     url="https://youtube.com/biology-cell",
+#     content_type="YouTube Video",
+#     description="An engaging video about cell biology.",
+#     transcript_or_text="Explore biology, cells, and experiments in this science video.",
+#     length_minutes=8
+# )
 
-engine.add_content(
-    title="Getting Started with Data Science",
-    url="https://blog.com/data-science-intro",
-    content_type="Blog Post",
-    description="Introduction to data science concepts.",
-    transcript_or_text="Data science, machine learning, and statistics are covered in this post.",
-    readability_score=65.0
-)
+# engine.add_content(
+#     title="Getting Started with Data Science",
+#     url="https://blog.com/data-science-intro",
+#     content_type="Blog Post",
+#     description="Introduction to data science concepts.",
+#     transcript_or_text="Data science, machine learning, and statistics are covered in this post.",
+#     readability_score=65.0
+# )
 
 @app.route('/')
 def index():

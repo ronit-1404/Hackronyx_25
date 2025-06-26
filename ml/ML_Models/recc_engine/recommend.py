@@ -192,123 +192,76 @@ def main():
             pass
     # Load triggers
     triggers = read_json_file(TRIGGERS_PATH)
-    # Load screen context for each trigger
-    screens = read_json_file(SCREEN_JSON_PATH)
-    # For each actionable trigger, generate a popup using the LLM
+    # Load existing content.json as a list
     contents = read_json_file(CONTENT_JSON_PATH)
+    if not isinstance(contents, list):
+        contents = []
     for trig in triggers:
         trigger = trig.get('trigger', {})
-        if trigger.get('type') and trigger['type'] != 'none':
-            outputs = trig.get('outputs', {})
-            # Find the closest screen context by timestamp if available
-            screen_context = {}
-            trig_time = trig.get('timestamp')
-            if trig_time and screens:
-                from datetime import datetime
-                def parse_time(t):
-                    try:
-                        return datetime.fromisoformat(t)
-                    except Exception:
-                        return None
-                trig_dt = parse_time(trig_time)
-                min_diff = None
-                for s in screens:
-                    s_time = s.get('timestamp')
-                    s_dt = parse_time(s_time) if s_time else None
-                    if trig_dt and s_dt:
-                        diff = abs((trig_dt - s_dt).total_seconds())
-                        if min_diff is None or diff < min_diff:
-                            min_diff = diff
-                            screen_context = s
-            # Compose prompt for LLM
-            prompt = f"""
-You are a smart popup and content recommender. Given the following trigger:
+        trig_type = trigger.get('type')
+        print(f'Processing trigger type: {trig_type}')
+        if trig_type == 'none':
+            print('Skipping trigger with type "none".')
+            continue
+        outputs = trig.get('outputs', {})
+        # Compose prompt for LLM
+        prompt = f"""
+You are a smart content recommender. Given the following trigger:
 - Trigger Type: {trigger['type']}
 - Trigger Message: {trigger['message']}
 
 User context:
 {json.dumps(outputs, indent=2)}
 
-Screen analyzer data (most relevant to this event):
-{json.dumps(screen_context, indent=2)}
-
 User profile:
 {json.dumps(user, indent=2)}
 
 The user's preferred content type is: {pref_type.upper()}
 
-Generate a JSON object for a popup with:
-- A motivational message for the user
-- A fun fact related to the user's context or interests
-- A recommended {pref_type} (with title, description, and a real, relevant, and currently accessible URL. Only use {pref_type}s that are available online and not behind a paywall or deleted/private. The recommendation must be relevant to the topic the student is currently studying, as indicated by the screen analyzer context.)
-- An alternative recommendation of the other type (video if main is article, article if main is video)
-Base your recommendations on the user's context, preferences, the trigger, and the topic from the screen analyzer. Do not use placeholders. Respond in JSON with keys: popup.title, popup.message, popup.fun_fact, popup.recommendation (type, title, description, url), popup.alternative (type, title, description, url), and context (trigger, user_id, idle_time if available).
+Generate a JSON object with:
+- recommendation (type, title, description, url)
+- summary (for YouTube, use transcript if possible, else 'no summary')
+- context (trigger, user_id, idle_time if available)
+Respond in JSON with these keys only.
 """
-            data = {"contents": [{"parts": [{"text": prompt}]}]}
-            resp = requests.post(GEMINI_API_URL, json=data)
-            print('Gemini API status:', resp.status_code)
+        data = {"contents": [{"parts": [{"text": prompt}]}]}
+        resp = requests.post(GEMINI_API_URL, json=data)
+        print('Gemini API status:', resp.status_code)
+        try:
+            print('Gemini API response:', resp.json())
+        except Exception as e:
+            print('Error reading Gemini API response:', e)
+        if resp.status_code == 200:
             try:
-                print('Gemini API response:', resp.json())
-            except Exception as e:
-                print('Error reading Gemini API response:', e)
-            # --- Custom filtering and summary logic ---
-            webdev_keywords = [
-                'vite', 'react', 'javascript', 'html', 'css', 'webdev', 'frontend', 'backend', 'node', 'express', 'tailwind', 'nextjs', 'angular', 'vue', 'svelte', 'webpack', 'babel', 'typescript', 'api', 'rest', 'graphql', 'redux', 'mui', 'chakra', 'bootstrap', 'material-ui', 'npm', 'yarn', 'pnpm', 'astro', 'remix', 'gatsby', 'storybook', 'eslint', 'prettier', 'sass', 'less', 'scss', 'pug', 'handlebars', 'jquery', 'ajax', 'json', 'fetch', 'axios', 'http', 'websocket', 'socket.io', 'chrome extension', 'browser extension'
-            ]
-            def is_webdev_related(text):
-                if not text:
-                    return False
-                text = text.lower()
-                return any(kw in text for kw in webdev_keywords)
-
-            # Check for webdev in trigger, context, or available content
-            skip = False
-            if is_webdev_related(trigger.get('type')) or is_webdev_related(trigger.get('message')):
-                skip = True
-            if not skip:
-                for k, v in outputs.items():
-                    if is_webdev_related(str(v)):
-                        skip = True
-                        break
-            if not skip:
-                for c in contents:
-                    for v in c.values():
-                        if is_webdev_related(str(v)):
-                            skip = True
-                            break
-                    if skip:
-                        break
-            if skip:
-                print('Webdev-related context detected, skipping recommendation.')
-                continue
-            if resp.status_code == 200:
-                try:
-                    text = resp.json()['candidates'][0]['content']['parts'][0]['text']
-                    import re
-                    import json as pyjson
-                    match = re.search(r'\{.*\}', text, re.DOTALL)
-                    if match:
-                        popup_obj = pyjson.loads(match.group(0))
-                        # --- Add summary section logic ---
-                        def get_youtube_summary(obj):
-                            url = ''
-                            if 'recommendation' in obj and 'url' in obj['recommendation']:
-                                url = obj['recommendation']['url']
-                            elif 'alternative' in obj and 'url' in obj['alternative']:
-                                url = obj['alternative']['url']
-                            if 'youtube.com' in url or 'youtu.be' in url:
-                                transcript = fetch_youtube_transcript(url)
-                                if transcript:
-                                    return summarize_text(transcript)
-                                else:
-                                    return 'no summary'
-                            return 'no summary'
-                        popup_obj['summary'] = get_youtube_summary(popup_obj)
-                        contents.append(popup_obj)
-                        write_json_file(CONTENT_JSON_PATH, contents)
-                        print('Popup appended to content.json')
-                except Exception as ex:
-                    print('Error parsing Gemini response:', ex)
+                text = resp.json()['candidates'][0]['content']['parts'][0]['text']
+                import re
+                import json as pyjson
+                # Remove markdown code block if present
+                text = re.sub(r'^```json|^```|```$', '', text.strip(), flags=re.MULTILINE).strip()
+                match = re.search(r'\{.*\}', text, re.DOTALL)
+                if match:
+                    rec_obj = pyjson.loads(match.group(0))
+                    # --- Always generate summary from YouTube video in trigger ---
+                    def get_youtube_summary_from_trigger(outputs):
+                        url = ''
+                        # Try to get YouTube URL from screen context
+                        screen = outputs.get('screen', {})
+                        url = screen.get('chrome_url', '')
+                        if 'youtube.com' in url or 'youtu.be' in url:
+                            transcript = fetch_youtube_transcript(url)
+                            if transcript:
+                                return summarize_text(transcript)
+                            else:
+                                return 'no summary'
+                        return 'no summary'
+                    rec_obj['summary'] = get_youtube_summary_from_trigger(outputs)
+                    contents.append(rec_obj)
+                    print('Recommendation appended:', json.dumps(rec_obj, indent=2))
+            except Exception as ex:
+                print('Error parsing Gemini response:', ex)
+    print('Writing to content.json:', json.dumps(contents, indent=2))
+    write_json_file(CONTENT_JSON_PATH, contents)
+    print('Recommendations written to content.json.')
     print('All actionable triggers processed.')
 
 if __name__ == '__main__':
