@@ -63,7 +63,7 @@ Learner Lane is an innovative platform for real-time, multi-modal learning engag
 ## 🏆 Recognition
 - 99%+ model accuracy (internal tests)
 - <100ms real-time analytics latency
-- Awarded for EdTech innovation
+
 
 ---
 
