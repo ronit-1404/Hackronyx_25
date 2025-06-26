@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '../components/DashboardLayout';
 import AudioAnalyzer from '../components/AudioAnalyzer';
 import EngagementAnalyzer from '../components/EngagementAnalyzer';
@@ -6,6 +7,7 @@ import ContextAnalyzer from '../components/ContextAnalyzer';
 import ScreenAnalyzer from '../components/ScreenAnalyzer';
 
 const AnalysisPage = () => {
+  const navigate = useNavigate();
   const [emotion, setEmotion] = useState('');
   const [engagementScore, setEngagementScore] = useState(0);
   const [context, setContext] = useState('');
@@ -17,8 +19,25 @@ const AnalysisPage = () => {
     setIsAnalyzing(!isAnalyzing);
   };
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="min-h-screen bg-[#F5EFE6] flex flex-col items-center py-10 px-2">
+      {/* Back Button */}
+      <div className="w-full max-w-6xl mb-4">
+        <button 
+          onClick={handleGoBack}
+          className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm hover:bg-gray-50 text-gray-700 font-medium transition-colors duration-150"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+          </svg>
+          Back
+        </button>
+      </div>
+      
       {/* Header Bar */}
       <div className="w-full max-w-6xl bg-white rounded-xl shadow-md border border-gray-200 mb-8 flex flex-col md:flex-row items-center justify-between px-8 py-6">
         <div>

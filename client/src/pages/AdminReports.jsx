@@ -23,8 +23,6 @@ import {
 import AdminHeader from '../components/headers/AdminHeader';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import AdminReportPDF from './AdminReportPDF';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import AdminReportPDF from './AdminReportPDF';
 
 // Mock data
 const mockClasses = ['Cohort A', 'Cohort B', 'Cohort C', 'Cohort D'];
