@@ -10,18 +10,118 @@
         "emotion": "neutral"
       },
       "screen": {
-        "context": "programming",
-        "chrome_title": "Vite + React",
-        "chrome_url": "http://localhost:5173",
-        "sentiment": "neutral",
-        "idle_time": 30
+        "context": "video_lecture",
+        "chrome_title": "Machine Learning Crash Course - YouTube",
+        "chrome_url": "https://www.youtube.com/watch?v=Gv9_4yMHFhI",
+        "sentiment": "positive",
+        "idle_time": 10
       }
     },
     "user_id": "unknown",
-    "timestamp": "2025-06-24T00:13:17.384432",
+    "timestamp": "2025-06-25T21:40:18.829708",
     "trigger": {
       "type": "none",
       "message": "No action needed at this time. No intervention required."
+    }
+  },
+  {
+    "outputs": {
+      "video": {
+        "emotion": "unknown",
+        "attentive": false,
+        "engagement_score": 0.0
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "reading_article",
+        "chrome_title": "A Beginner\u2019s Guide to Machine Learning | Towards Data Science",
+        "chrome_url": "https://towardsdatascience.com/a-beginners-guide-to-machine-learning-2df4b8b8a0da",
+        "sentiment": "positive",
+        "idle_time": 168
+      }
+    },
+    "user_id": "unknown",
+    "timestamp": "2025-06-25T21:40:19.788904",
+    "trigger": {
+      "type": "break",
+      "message": "The user is inattentive. Recommend a short break, a game, or a fun fact. Also, suggest a summary or helpful article."
+    }
+  },
+  {
+    "outputs": {
+      "video": {
+        "emotion": "unknown",
+        "attentive": false,
+        "engagement_score": 0.0
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "social_media",
+        "chrome_title": "Twitter / Home",
+        "chrome_url": "https://twitter.com/home",
+        "sentiment": "neutral",
+        "idle_time": 66
+      }
+    },
+    "user_id": "unknown",
+    "timestamp": "2025-06-25T21:40:20.789260",
+    "trigger": {
+      "type": "break",
+      "message": "The user is inattentive. Recommend a short break, a game, or a fun fact. Also, suggest a summary or helpful article."
+    }
+  },
+  {
+    "outputs": {
+      "video": {
+        "emotion": "unknown",
+        "attentive": false,
+        "engagement_score": 0.0
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "email",
+        "chrome_title": "Inbox (5) - siya@gmail.com - Gmail",
+        "chrome_url": "https://mail.google.com/mail/u/0/#inbox",
+        "sentiment": "neutral",
+        "idle_time": 42
+      }
+    },
+    "user_id": "unknown",
+    "timestamp": "2025-06-25T21:40:21.788789",
+    "trigger": {
+      "type": "break",
+      "message": "The user is inattentive. Recommend a short break, a game, or a fun fact. Also, suggest a summary or helpful article."
+    }
+  },
+  {
+    "outputs": {
+      "video": {
+        "emotion": "unknown",
+        "attentive": false,
+        "engagement_score": 0.0
+      },
+      "audio": {
+        "emotion": "neutral"
+      },
+      "screen": {
+        "context": "news",
+        "chrome_title": "AI beats humans at StarCraft II - BBC News",
+        "chrome_url": "https://www.bbc.com/news/technology-51248666",
+        "sentiment": "positive",
+        "idle_time": 180
+      }
+    },
+    "user_id": "unknown",
+    "timestamp": "2025-06-25T21:40:22.787893",
+    "trigger": {
+      "type": "break",
+      "message": "The user is inattentive. Recommend a short break, a game, or a fun fact. Also, suggest a summary or helpful article."
     }
   }
 ]

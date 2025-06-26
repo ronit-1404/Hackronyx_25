@@ -2,6 +2,7 @@ import os
 import json
 import requests
 from dotenv import load_dotenv
+import re
 
 # Load environment variables
 env_path = os.path.join(os.path.dirname(__file__), '.env')
@@ -149,6 +150,32 @@ def write_json_file(path, data):
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2)
 
+try:
+    from youtube_transcript_api import YouTubeTranscriptApi
+except ImportError:
+    YouTubeTranscriptApi = None
+
+def fetch_youtube_transcript(youtube_url):
+    if not YouTubeTranscriptApi:
+        return None
+    # Extract video ID
+    match = re.search(r'(?:v=|youtu.be/)([\w-]{11})', youtube_url)
+    if not match:
+        return None
+    video_id = match.group(1)
+    try:
+        transcript = YouTubeTranscriptApi.get_transcript(video_id)
+        # Join transcript text
+        return ' '.join([seg['text'] for seg in transcript])
+    except Exception as e:
+        print('Transcript fetch error:', e)
+        return None
+
+def summarize_text(text):
+    # Simple extractive summary: first 2-3 sentences
+    sentences = re.split(r'(?<=[.!?]) +', text)
+    return ' '.join(sentences[:3]) if sentences else text[:200]
+
 def main():
     # Load user profile (old key-value format)
     user_txt = read_file(USER_JSON_PATH)
@@ -168,7 +195,7 @@ def main():
     # Load screen context for each trigger
     screens = read_json_file(SCREEN_JSON_PATH)
     # For each actionable trigger, generate a popup using the LLM
-    contents = []
+    contents = read_json_file(CONTENT_JSON_PATH)
     for trig in triggers:
         trigger = trig.get('trigger', {})
         if trigger.get('type') and trigger['type'] != 'none':
@@ -224,6 +251,36 @@ Base your recommendations on the user's context, preferences, the trigger, and t
                 print('Gemini API response:', resp.json())
             except Exception as e:
                 print('Error reading Gemini API response:', e)
+            # --- Custom filtering and summary logic ---
+            webdev_keywords = [
+                'vite', 'react', 'javascript', 'html', 'css', 'webdev', 'frontend', 'backend', 'node', 'express', 'tailwind', 'nextjs', 'angular', 'vue', 'svelte', 'webpack', 'babel', 'typescript', 'api', 'rest', 'graphql', 'redux', 'mui', 'chakra', 'bootstrap', 'material-ui', 'npm', 'yarn', 'pnpm', 'astro', 'remix', 'gatsby', 'storybook', 'eslint', 'prettier', 'sass', 'less', 'scss', 'pug', 'handlebars', 'jquery', 'ajax', 'json', 'fetch', 'axios', 'http', 'websocket', 'socket.io', 'chrome extension', 'browser extension'
+            ]
+            def is_webdev_related(text):
+                if not text:
+                    return False
+                text = text.lower()
+                return any(kw in text for kw in webdev_keywords)
+
+            # Check for webdev in trigger, context, or available content
+            skip = False
+            if is_webdev_related(trigger.get('type')) or is_webdev_related(trigger.get('message')):
+                skip = True
+            if not skip:
+                for k, v in outputs.items():
+                    if is_webdev_related(str(v)):
+                        skip = True
+                        break
+            if not skip:
+                for c in contents:
+                    for v in c.values():
+                        if is_webdev_related(str(v)):
+                            skip = True
+                            break
+                    if skip:
+                        break
+            if skip:
+                print('Webdev-related context detected, skipping recommendation.')
+                continue
             if resp.status_code == 200:
                 try:
                     text = resp.json()['candidates'][0]['content']['parts'][0]['text']
@@ -232,6 +289,21 @@ Base your recommendations on the user's context, preferences, the trigger, and t
                     match = re.search(r'\{.*\}', text, re.DOTALL)
                     if match:
                         popup_obj = pyjson.loads(match.group(0))
+                        # --- Add summary section logic ---
+                        def get_youtube_summary(obj):
+                            url = ''
+                            if 'recommendation' in obj and 'url' in obj['recommendation']:
+                                url = obj['recommendation']['url']
+                            elif 'alternative' in obj and 'url' in obj['alternative']:
+                                url = obj['alternative']['url']
+                            if 'youtube.com' in url or 'youtu.be' in url:
+                                transcript = fetch_youtube_transcript(url)
+                                if transcript:
+                                    return summarize_text(transcript)
+                                else:
+                                    return 'no summary'
+                            return 'no summary'
+                        popup_obj['summary'] = get_youtube_summary(popup_obj)
                         contents.append(popup_obj)
                         write_json_file(CONTENT_JSON_PATH, contents)
                         print('Popup appended to content.json')
