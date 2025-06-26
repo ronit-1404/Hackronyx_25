@@ -1,22 +1,12 @@
 [
   {
-    "popup": {
-      "title": "Time for a Quick Break!",
-      "message": "It looks like you've been focusing intensely on Machine Learning!  Take a short break to refresh your mind before diving back in.  You've got this!",
-      "fun_fact": "Did you know that the first self-learning program, written in 1952, was able to learn to play checkers better than its creator?",
-      "recommendation": {
-        "type": "video",
-        "title": "Machine Learning for Beginners - A Simple Explanation",
-        "description": "This short video provides a clear and concise overview of the core concepts of machine learning, perfect for reinforcing what you've learned.",
-        "url": "https://www.youtube.com/watch?v=l-6eE31u238"
-      },
-      "alternative": {
-        "type": "article",
-        "title": "Understanding Machine Learning Algorithms: A Practical Guide",
-        "description": "This article provides a deeper dive into popular machine learning algorithms, with practical examples and code snippets.",
-        "url": "https://www.analyticsvidhya.com/blog/2021/02/top-10-machine-learning-algorithms-with-python-implementation/"
-      }
+    "recommendation": {
+      "type": "video",
+      "title": "Machine Learning for Beginners in 5 Minutes",
+      "description": "A short, engaging video explaining the core concepts of machine learning.",
+      "url": "https://www.example.com/ml_beginner_video"
     },
+    "summary": "no summary",
     "context": {
       "trigger": "break",
       "user_id": "student_001",
@@ -24,75 +14,45 @@
     }
   },
   {
-    "popup": {
-      "title": "Time for a Quick Break!",
-      "message": "It looks like you've been focusing on Machine Learning for a while.  Take a short break to recharge!  A quick game or fun fact might help you come back refreshed and ready to learn.",
-      "fun_fact": "Did you know that the first machine learning algorithm was developed in the 1950s, long before the internet existed?",
-      "recommendation": {
-        "type": "video",
-        "title": "Intuitive Guide to Neural Networks",
-        "description": "A clear and concise explanation of neural networks, fundamental to machine learning. Perfect for refreshing your understanding.",
-        "url": "https://www.youtube.com/watch?v=aircAruvnKk"
-      },
-      "alternative": {
-        "type": "article",
-        "title": "Understanding Backpropagation",
-        "description": "A helpful article explaining backpropagation, a key algorithm in training neural networks.  Read this to solidify your knowledge.",
-        "url": "https://towardsdatascience.com/backpropagation-explained-step-by-step-876971d0c532"
-      }
+    "recommendation": {
+      "type": "video",
+      "title": "Short Coding Break: Funny Cat Compilation",
+      "description": "A short and funny video of cats doing silly things to help you relax and refocus.  Perfect for a quick break!",
+      "url": "https://www.youtube.com/watch?v=jNQXAC9IVRw"
     },
+    "summary": "All right, so here we are, in front of the\nelephants the cool thing about these guys is that they\nhave really... really really long trunks and that's cool (baaaaaaaaaaahhh!!) and that's pretty much all there is to\nsay",
     "context": {
       "trigger": "break",
       "user_id": "student_001",
-      "idle_time": "10.2"
+      "idle_time": 66
     }
   },
   {
-    "popup": {
-      "title": "Time for a Quick Break!",
-      "message": "It looks like you've been focusing on Machine Learning for a while.  Take a short break to recharge!  A quick game or fun fact might help you refocus before diving back in.",
-      "fun_fact": "Did you know that the first computer bug was literally a bug \u2013 a moth found trapped in a relay of the Harvard Mark II computer in 1947?",
-      "recommendation": {
-        "type": "video",
-        "title": "Intuitive Guide to Backpropagation (Neural Networks)",
-        "description": "A clear and concise explanation of backpropagation, a fundamental concept in training neural networks.  This video uses visual aids to make complex ideas easier to understand.",
-        "url": "https://www.youtube.com/watch?v=Ilg3gGewQ5U"
-      },
-      "alternative": {
-        "type": "article",
-        "title": "Understanding Backpropagation Algorithm",
-        "description": "A comprehensive article explaining the backpropagation algorithm, including its mathematical foundations and practical applications in deep learning. Ideal for a deeper dive into the topic.",
-        "url": "https://towardsdatascience.com/understanding-backpropagation-algorithm-7bb3aa10f687"
-      }
+    "recommendation": {
+      "type": "video",
+      "title": "Short Coding Break: Fun with Binary Trees",
+      "description": "A quick, engaging 2-minute video explaining binary trees in a fun, visual way. Perfect for a short break!",
+      "url": "https://www.example.com/codingbreakvideo"
     },
+    "summary": "no summary",
     "context": {
       "trigger": "break",
       "user_id": "student_001",
-      "idle_time": "10.2"
+      "idle_time": 42
     }
   },
   {
-    "popup": {
-      "title": "Time for a Quick Break!",
-      "message": "It looks like you've been focusing on Machine Learning for a while.  Let's give your brain a short rest before diving back in! Take a few minutes to relax, then return refreshed and ready to learn.",
-      "fun_fact": "Did you know that the first self-learning algorithm was created in 1959 by Arthur Samuel? It was a checkers-playing program that learned from its mistakes, paving the way for modern AI!",
-      "recommendation": {
-        "type": "video",
-        "title": "What is Machine Learning? | AI for Everyone",
-        "description": "Andrew Ng, pioneer in the field of Machine Learning, gives a concise and understandable overview of the subject.  It's perfect for clarifying core concepts!",
-        "url": "https://www.youtube.com/watch?v=i94OvYb6noo"
-      },
-      "alternative": {
-        "type": "article",
-        "title": "Machine Learning Basics: A Beginner's Guide",
-        "description": "This article provides a fundamental introduction to machine learning concepts, techniques and applications, perfect for building your foundational understanding. ",
-        "url": "https://www.simplilearn.com/tutorials/machine-learning-tutorial/what-is-machine-learning"
-      }
+    "recommendation": {
+      "type": "video",
+      "title": "StarCraft II: AI vs. Human Highlights",
+      "description": "Short, exciting compilation of key moments from AI's victory against human StarCraft II players.  A fun break from news articles!",
+      "url": "https://www.youtube.com/watch?v=ExampleVideoID_AIvsHumanStarcraft"
     },
+    "summary": "no summary",
     "context": {
       "trigger": "break",
       "user_id": "student_001",
-      "idle_time": "10.2"
+      "idle_time": 180
     }
   }
 ]
