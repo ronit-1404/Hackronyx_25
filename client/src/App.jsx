@@ -25,6 +25,10 @@ import SignOut from "./SignOut";
 import AnalysisPage from "./pages/AnalysisPage";
 import AdminAuth from "./pages/adminauth/AdminAuth";
 
+import ParentDashboard from "./pages/ParentDashboard";
+import ParentStudent from "./pages/ParentStudentReport";
+import ParentSettings from "./pages/ParentSetting";
+
 // Protected Route component
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { isAuthenticated, user, loading } = useAuth();
@@ -75,8 +79,8 @@ function AppContent() {
       navigate('/signup');
     } else if (selectedRole === 'admin') {
       navigate('/admin/login');
-    } else {
-      navigate('/signup');
+    } else  {
+      navigate('/parent/dashboard');
     }
   };
 
@@ -174,9 +178,11 @@ function AppContent() {
 
       <Route path="/signout" element={<SignOut/>} />
 
-      {/* Parent Routes */}
-      {/* <Route path="/parent/dashboard" element={<ParentDashboard />} />
-      <Route path="/parent/settings" element={<ParentSettings />} /> */}Add commentMore actions
+      {/* Parents Route */}
+      <Route path="/parent/dashboard" element={<ParentDashboard />} />
+      <Route path="/parent/settings" element={<ParentSettings />} />
+      <Route path="/parent/student" element={<ParentStudent />} />
+      {/* <Route path="/parent/settings" element={<ParentSettings />} /> */}
     </Routes>
   );
 }

@@ -465,7 +465,7 @@ function OptikkaLanding({ onSelectPortal }) {
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {/* Student Card */}
             <motion.div
               className={`bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-orange-100/50 p-10 cursor-pointer transition-all duration-300 group hover:shadow-2xl hover:shadow-orange-200/40 ${
@@ -552,6 +552,49 @@ function OptikkaLanding({ onSelectPortal }) {
                 </motion.div>
               </div>
             </motion.div>
+            
+            {/* Parent Portal */}
+            <motion.div
+              className={`bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-orange-100/50 p-10 cursor-pointer transition-all duration-300 group hover:shadow-2xl hover:shadow-orange-200/40 ${
+                selectedCard === "parent"
+                  ? "ring-4 ring-orange-300 scale-105"
+                  : "hover:scale-105 hover:-translate-y-2"
+              }`}
+              onClick={() => handlePortalSelection("parent")}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              custom={1}
+              whileHover={{
+                scale: 1.06,
+                y: -8,
+                boxShadow: "0 8px 32px 0 rgba(255, 186, 120, 0.18)",
+              }}
+            >
+              <div className="text-center">
+                <motion.div
+                  className="w-24 h-24 mx-auto mb-8 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 bg-gradient-to-br from-orange-400 via-pink-400 to-purple-400 shadow-xl shadow-orange-200/50"
+                  whileHover={{ rotate: 8, scale: 1.12 }}
+                >
+                  <Users className="w-12 h-12 text-white" />
+                </motion.div>
+                <h3 className="text-3xl font-bold text-gray-900 mb-6 group-hover:text-orange-600 transition-colors duration-300">
+                  Parent Portal
+                </h3>
+                <p className="text-gray-600 mb-8 leading-relaxed text-lg">
+                  Access your child's courses, monitor their learning progress, and explore interactive content designed to enrich their educational journey.
+                </p>
+                <motion.div
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1 bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-xl shadow-orange-200/50 hover:shadow-orange-300/60"
+                  whileHover={{ scale: 1.08, x: 6 }}
+                >
+                  Access Parent Portal
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                </motion.div>
+              </div>
+            </motion.div>
+              
           </div>
         </div>
       </section>
