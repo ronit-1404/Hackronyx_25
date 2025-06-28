@@ -109,7 +109,7 @@ const Header = () => {
         <select
           value={selectedTimeRange}
           onChange={(e) => setSelectedTimeRange(e.target.value)}
-          className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F67280] focus:border-transparent"
+          className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#659287] focus:border-transparent"
         >
           <option value="today">Today</option>
           <option value="week">This Week</option>
@@ -118,7 +118,7 @@ const Header = () => {
         {/* <button 
           onClick={() => navigate('/learner/analytics')}
           className="flex items-center space-x-2 py-2 px-4 rounded-lg text-white font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
-          style={{ backgroundColor: '#F67280' }}
+          style={{ backgroundColor: '#659287' }}
         >
           <BarChart2 className="w-5 h-5" />
           <span>Advance Analytics</span>
@@ -141,7 +141,7 @@ const Header = () => {
           <div className="flex flex-col h-full p-6">
             <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-200">
               <h2 className="text-xl font-bold text-gray-900 flex items-center">
-                <Brain className="w-6 h-6 mr-2" style={{ color: '#F67280' }} />
+                <Brain className="w-6 h-6 mr-2" style={{ color: '#659287' }} />
                 Navigation
               </h2>
               <button 

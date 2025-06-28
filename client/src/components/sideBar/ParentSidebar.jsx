@@ -81,7 +81,7 @@ const SideBar = () => {
   };
 
   const getEmotionIcon = (emotion) => {
-    const iconProps = { className: "w-8 h-8", style: { color: '#F67280' } };
+    const iconProps = { className: "w-8 h-8", style: { color: '#659287' } };
     switch (emotion) {
       case 'happy':
         return <Smile {...iconProps} />;
@@ -103,7 +103,7 @@ const SideBar = () => {
       {/* Sidebar Header */}
       <div className="p-6 border-b border-gray-100 shrink-0">
         <div className="flex items-center space-x-3 mb-4">
-          <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg" style={{ backgroundColor: '#F67280' }}>
+          <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg" style={{ backgroundColor: '#659287' }}>
             <Brain className="w-7 h-7 text-white" />
           </div>
           <div>
@@ -141,7 +141,7 @@ const SideBar = () => {
                   className="h-1 rounded-full transition-all duration-500"
                   style={{ 
                     width: `${focusScore}%`,
-                    backgroundColor: '#F67280'
+                    backgroundColor: '#659287'
                   }}
                 ></div>
               </div>

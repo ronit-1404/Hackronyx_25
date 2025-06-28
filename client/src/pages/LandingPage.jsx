@@ -531,20 +531,20 @@ function OptikkaLanding({ onSelectPortal }) {
             >
               <div className="text-center">
                 <motion.div
-                  className="w-24 h-24 mx-auto mb-8 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-xl shadow-gray-200/50"
+                  className="w-24 h-24 mx-auto mb-8 bg-gradient-to-br from-blue-500 via-blue-800 to-blue-900 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-xl shadow-gray-200/50"
                   whileHover={{ rotate: 8, scale: 1.12 }}
                 >
                   <Settings className="w-12 h-12 text-white" />
                 </motion.div>
-                <h3 className="text-3xl font-bold text-gray-900 mb-6 group-hover:text-gray-700 transition-colors duration-300">
+                <h3 className="text-3xl font-bold text-blue-900 mb-6 group-hover:text-blue-700 transition-colors duration-300">
                   Administrator Portal
-                </h3>
+                </h3> 
                 <p className="text-gray-600 mb-8 leading-relaxed text-lg">
                   Manage system settings, monitor student engagement, view
                   analytics, and oversee the entire learning platform ecosystem.
                 </p>
                 <motion.div
-                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-xl font-semibold text-lg transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1 shadow-xl shadow-gray-200/50 hover:shadow-gray-300/60"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-700 to-blue-900 text-white rounded-xl font-semibold text-lg transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1 shadow-xl shadow-gray-200/50 hover:shadow-gray-300/60"
                   whileHover={{ scale: 1.08, x: 6 }}
                 >
                   Access Admin Portal
@@ -574,19 +574,19 @@ function OptikkaLanding({ onSelectPortal }) {
             >
               <div className="text-center">
                 <motion.div
-                  className="w-24 h-24 mx-auto mb-8 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 bg-gradient-to-br from-orange-400 via-pink-400 to-purple-400 shadow-xl shadow-orange-200/50"
+                  className="w-24 h-24 mx-auto mb-8 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 bg-[#659287] shadow-xl shadow-teal-200/50"
                   whileHover={{ rotate: 8, scale: 1.12 }}
                 >
                   <Users className="w-12 h-12 text-white" />
                 </motion.div>
-                <h3 className="text-3xl font-bold text-gray-900 mb-6 group-hover:text-orange-600 transition-colors duration-300">
+                <h3 className="text-3xl font-bold text-teal-900 mb-6 group-hover:text-teal-600 transition-colors duration-300">
                   Parent Portal
                 </h3>
                 <p className="text-gray-600 mb-8 leading-relaxed text-lg">
                   Access your child's courses, monitor their learning progress, and explore interactive content designed to enrich their educational journey.
                 </p>
                 <motion.div
-                  className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1 bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-xl shadow-orange-200/50 hover:shadow-orange-300/60"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1 bg-[#659287] text-white shadow-xl shadow-teal-200/50 hover:shadow-green-300/60"
                   whileHover={{ scale: 1.08, x: 6 }}
                 >
                   Access Parent Portal
