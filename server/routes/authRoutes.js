@@ -12,6 +12,7 @@ router.get('/profile',  userController.getProfile);
 router.put('/preferences',  userController.updatePreferences);
 router.post('/admin/signup',adminController.adminLogin)
 router.post('/admin/register',adminController.adminSignup)
+
 // Extension authentication
 router.post('/extension/authenticate', extensionController.authenticate);
 

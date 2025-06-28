@@ -28,6 +28,7 @@ import AdminAuth from "./pages/adminauth/AdminAuth";
 import ParentDashboard from "./pages/ParentDashboard";
 import ParentStudent from "./pages/ParentStudentReport";
 import ParentSettings from "./pages/ParentSetting";
+import ParentAuth from "./pages/parentauth/ParentAuth";
 
 // Protected Route component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -79,8 +80,11 @@ function AppContent() {
       navigate('/signup');
     } else if (selectedRole === 'admin') {
       navigate('/admin/login');
-    } else  {
-      navigate('/parent/dashboard');
+    } else if( selectedRole === 'parent') {
+      navigate('/parent/login');
+    }
+    else {
+      navigate('/signup');
     }
   };
 
@@ -179,6 +183,11 @@ function AppContent() {
       <Route path="/signout" element={<SignOut/>} />
 
       {/* Parents Route */}
+      <Route 
+        path="/parent/login" 
+        element={
+            <ParentAuth />
+        }/>
       <Route path="/parent/dashboard" element={<ParentDashboard />} />
       <Route path="/parent/settings" element={<ParentSettings />} />
       <Route path="/parent/student" element={<ParentStudent />} />
