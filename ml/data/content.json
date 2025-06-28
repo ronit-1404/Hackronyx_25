@@ -4,7 +4,20 @@
       "type": "video",
       "title": "Machine Learning for Beginners in 5 Minutes",
       "description": "A short, engaging video explaining the core concepts of machine learning.",
-      "url": "https://www.example.com/ml_beginner_video"
+      "url": "https://youtu.be/yN7ypxC7838?feature=shared"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 168
+    }
+  },
+  {"recommendation": {
+      "type": "video",
+      "title": "Machine Learning for Beginners in 5 Minutes",
+      "description": "A short, engaging video explaining the core concepts of machine learning.",
+      "url": "https://youtu.be/yN7ypxC7838?feature=shared"
     },
     "summary": "no summary",
     "context": {
@@ -47,6 +60,272 @@
       "title": "StarCraft II: AI vs. Human Highlights",
       "description": "Short, exciting compilation of key moments from AI's victory against human StarCraft II players.  A fun break from news articles!",
       "url": "https://www.youtube.com/watch?v=ExampleVideoID_AIvsHumanStarcraft"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 180
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Quick Mindfulness Exercise for Focus",
+      "description": "Take a 2-minute guided mindfulness break to refresh your mind and improve concentration.",
+      "url": "https://www.youtube.com/watch?v=mindfulness_example"
+    },
+    "summary": "A short mindfulness video to help you regain focus.",
+    "context": {
+      "trigger": "focus",
+      "user_id": "student_001",
+      "idle_time": 120
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Stretch and Move: Desk Yoga Routine",
+      "description": "Follow along with this quick desk yoga routine to relieve tension and boost energy.",
+      "url": "https://www.youtube.com/watch?v=deskyoga_example"
+    },
+    "summary": "A quick yoga break for desk workers.",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 90
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Motivational Coding Quotes",
+      "description": "Get inspired with these top 5 motivational quotes for programmers.",
+      "url": "https://www.youtube.com/watch?v=motivation_example"
+    },
+    "summary": "Motivational quotes to keep you coding.",
+    "context": {
+      "trigger": "motivation",
+      "user_id": "student_001",
+      "idle_time": 30
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Brain Teaser: Logic Puzzle Challenge",
+      "description": "Solve this quick logic puzzle to give your brain a fun workout during your study break.",
+      "url": "https://www.youtube.com/watch?v=logictest_example"
+    },
+    "summary": "A fun logic puzzle for a quick brain break.",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 75
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Quick Stretches for Desk Workers | 5 Minute Break Routine",
+      "description": "Simple and effective stretches to relieve tension and improve posture after long periods of sitting or reading. Perfect for a quick break!",
+      "url": "https://www.example.com/stretchvideo"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 168
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Short Coding Break: Funny Programming Fails Compilation",
+      "description": "A short and funny compilation of programming fails to help you relax and recharge. Perfect for a quick break from coding or social media!",
+      "url": "https://www.youtube.com/watch?v=example_programming_fails"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 66
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Short Coding Break: Funny Programming Fails Compilation",
+      "description": "A short and funny compilation of programming fails to lighten your mood and refresh your mind. Perfect for a quick break!",
+      "url": "https://www.youtube.com/watch?v=example_programming_fails"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 42
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "StarCraft II AI: How DeepMind's AlphaStar Conquered the Game",
+      "description": "A short, engaging video explaining how DeepMind's AlphaStar AI achieved superhuman performance in StarCraft II, connecting to the user's current news article.  Includes game footage and interviews with developers.",
+      "url": "https://www.youtube.com/watch?v=some_relevant_video_id"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 180
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Quick Stretches for Desk Workers",
+      "description": "Simple stretches to relieve tension and improve posture after long periods of sitting or reading.",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 168
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Short Coding Break: Learn about the history of the internet in 60 seconds!",
+      "description": "A fun and engaging video about the history of the internet, perfect for a quick break.",
+      "url": "https://www.example.com/coding_break_video"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 42
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "StarCraft II: AI vs. Human Highlights",
+      "description": "A short, engaging video showcasing highlights from the AI's victory against human StarCraft II players.  Perfect for a quick break!",
+      "url": "https://www.youtube.com/watch?v=example_video_id"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 180
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Quick Stretches for Desk Workers",
+      "description": "Short and effective stretches to relieve tension and improve posture after long periods of sitting or reading.",
+      "url": "https://www.youtube.com/watch?v=example_stretch_video"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 168
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Fun Fact: Did you know about the history of the internet?",
+      "description": "A short, engaging video explaining surprising facts about the internet's development. Perfect for a quick break!",
+      "url": "https://www.youtube.com/watch?v=example_fun_fact_video"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 66
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "StarCraft II AI: How DeepMind's AlphaStar Conquered the Game",
+      "description": "A short, engaging video explaining how DeepMind's AlphaStar AI achieved superhuman performance in StarCraft II,  connecting to the news article the user was reading.",
+      "url": "https://www.youtube.com/watch?v=some_relevant_video_id"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 180
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Short Coding Break: Fun with Python Turtles!",
+      "description": "A quick and engaging 5-minute video showing off cool things you can do with Python's turtle graphics library. Perfect for a short break!",
+      "url": "https://www.example.com/coding_break_video"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 42
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "5-Minute Desk Stretches for Improved Focus",
+      "description": "Simple stretches to relieve tension and improve posture after long periods of reading or coding.  Perfect for a quick break!",
+      "url": "https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 168
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Short Coding Challenge: FizzBuzz in 60 Seconds",
+      "description": "A quick and fun programming challenge to re-engage your brain.  Solve the classic FizzBuzz problem in under a minute!",
+      "url": "https://www.youtube.com/watch?v=XXXXXXXXX"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 66
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "Short Coding Break: Funny Programming Fails Compilation",
+      "description": "A short and funny compilation of programming fails to lighten the mood and take a quick break from emails.",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    "summary": "no summary",
+    "context": {
+      "trigger": "break",
+      "user_id": "student_001",
+      "idle_time": 42
+    }
+  },
+  {
+    "recommendation": {
+      "type": "video",
+      "title": "StarCraft II: AI vs. Human Highlights",
+      "description": "A short, engaging video showcasing highlights of the AI victory over human players in StarCraft II.  Great for a quick break and learning something new!",
+      "url": "https://www.youtube.com/watch?v=placeholder_for_actual_video_url"
     },
     "summary": "no summary",
     "context": {

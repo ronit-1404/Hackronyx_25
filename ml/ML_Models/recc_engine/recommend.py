@@ -1,268 +1,163 @@
-import os
 import json
-import requests
-from dotenv import load_dotenv
-import re
+import os
+import time
+import tkinter as tk
+from tkinter import ttk
+import webbrowser
+from threading import Thread
 
-# Load environment variables
-env_path = os.path.join(os.path.dirname(__file__), '.env')
-if os.path.exists(env_path):
-    load_dotenv(env_path)
+class PopupClient:
+    def __init__(self):
+        self.content_path = os.path.join(os.path.dirname(__file__), 'ml', 'data', 'content.json')
+        self.check_interval = 5  # seconds
+        self.last_mtime = 0
+        self.content_data = []
+        self.current_index = 0
+        self.current_popup = None
 
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-# Use latest Gemini API endpoint and supported model name
-GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=' + GEMINI_API_KEY
+    def start(self):
+        Thread(target=self.run_schedule, daemon=True).start()
+        self.run_tk()
 
-# File paths (point to ml/data, not ML_Models/data)
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ML_DIR = os.path.abspath(os.path.join(BASE_DIR, '..', '..'))
-DATA_DIR = os.path.join(ML_DIR, 'data')
-USER_JSON_PATH = os.path.join(DATA_DIR, 'user.txt')
-SCREEN_JSON_PATH = os.path.join(DATA_DIR, 'screen.json')
-CONTENT_JSON_PATH = os.path.join(DATA_DIR, 'content.json')
-TRIGGERS_PATH = os.path.join(DATA_DIR, 'triggers.json')
+    def run_schedule(self):
+        while True:
+            self.check_for_recommendations()
+            time.sleep(self.check_interval)
 
-# Read files
-def read_file(path):
-    with open(path, 'r', encoding='utf-8') as f:
-        return f.read()
+    def check_for_recommendations(self):
+        if not os.path.exists(self.content_path):
+            print(f"File not found: {self.content_path}")
+            return
 
-def write_file(path, content):
-    with open(path, 'w', encoding='utf-8') as f:
-        f.write(content)
+        mtime = os.path.getmtime(self.content_path)
+        if mtime == self.last_mtime:
+            # File not modified since last check
+            return
 
-def parse_output_txt(text):
-    # Extract last context, sentiment, and app
-    blocks = [b for b in text.split('=========================================') if b.strip()]
-    if not blocks:
-        return None
-    last_block = blocks[-1]
-    context = None
-    sentiment = None
-    app = None
-    for line in last_block.splitlines():
-        if 'Detected Context:' in line:
-            context = line.split(':', 1)[1].strip()
-        if 'Sentiment:' in line:
-            sentiment = line.split(':', 1)[1].strip()
-        if 'Active App:' in line:
-            app = line.split(':', 1)[1].strip()
-    return {'context': context, 'sentiment': sentiment, 'app': app}
+        self.last_mtime = mtime
 
-def parse_content_txt(text):
-    # Parse content blocks
-    contents = []
-    for block in text.strip().split('---'):
-        if not block.strip():
-            continue
-        item = {}
-        for line in block.strip().splitlines():
-            if ':' in line:
-                key, val = line.split(':', 1)
-                item[key.strip()] = val.strip()
-        if item:
-            contents.append(item)
-    return contents
-
-def parse_user_txt(text):
-    # Parse user profile as key-value pairs
-    user = {}
-    for line in text.strip().splitlines():
-        if ':' in line:
-            key, val = line.split(':', 1)
-            user[key.strip()] = val.strip()
-    return user
-
-def update_user_profile(user, context, sentiment, app):
-    # Update user attentiveness and engaged apps
-    from collections import defaultdict
-    import ast
-    # Update context
-    att_topics = user.get('Attentive Topics', '{}')
-    try:
-        att_topics = ast.literal_eval(att_topics)
-    except Exception:
-        att_topics = {}
-    if context:
-        att_topics[context] = att_topics.get(context, 0) + 1
-    user['Attentive Topics'] = str(att_topics)
-    # Update engaged apps
-    engaged_apps = user.get('Engaged Apps', '{}')
-    try:
-        engaged_apps = ast.literal_eval(engaged_apps)
-    except Exception:
-        engaged_apps = {}
-    if app:
-        engaged_apps[app] = engaged_apps.get(app, 0) + 1
-    user['Engaged Apps'] = str(engaged_apps)
-    # Update sentiment
-    user['Last Sentiment'] = sentiment or user.get('Last Sentiment', '')
-    return user
-
-def gemini_recommendation(context, sentiment, app, contents, user):
-    # Compose prompt
-    prompt = f"""
-You are a smart content recommender. Given the user's recent activity:
-- Context: {context}
-- Sentiment: {sentiment}
-- App: {app}
-
-And the following available content:
-{json.dumps(contents, indent=2)}
-
-And the user profile:
-{json.dumps(user, indent=2)}
-
-Recommend the most relevant content (Title and URL) for the user. Respond in JSON: {{"Title": ..., "URL": ...}}. Only recommend one item.
-"""
-    data = {
-        "contents": [{"parts": [{"text": prompt}]}]
-    }
-    resp = requests.post(GEMINI_API_URL, json=data)
-    print('Gemini API status:', resp.status_code)
-    try:
-        print('Gemini API response:', resp.json())
-    except Exception as e:
-        print('Error reading Gemini API response:', e)
-    if resp.status_code == 200:
         try:
-            text = resp.json()['candidates'][0]['content']['parts'][0]['text']
-            # Try to extract JSON from response
-            import re
-            import json as pyjson
-            match = re.search(r'\{.*\}', text, re.DOTALL)
-            if match:
-                return pyjson.loads(match.group(0))
-        except Exception as ex:
-            print('Error parsing Gemini response:', ex)
-    return None
-
-def read_json_file(path):
-    if not os.path.exists(path) or os.stat(path).st_size == 0:
-        return []
-    with open(path, 'r', encoding='utf-8') as f:
-        try:
-            return json.load(f)
-        except Exception:
-            return []
-
-def write_json_file(path, data):
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2)
-
-try:
-    from youtube_transcript_api import YouTubeTranscriptApi
-except ImportError:
-    YouTubeTranscriptApi = None
-
-def fetch_youtube_transcript(youtube_url):
-    if not YouTubeTranscriptApi:
-        return None
-    # Extract video ID
-    match = re.search(r'(?:v=|youtu.be/)([\w-]{11})', youtube_url)
-    if not match:
-        return None
-    video_id = match.group(1)
-    try:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id)
-        # Join transcript text
-        return ' '.join([seg['text'] for seg in transcript])
-    except Exception as e:
-        print('Transcript fetch error:', e)
-        return None
-
-def summarize_text(text):
-    # Simple extractive summary: first 2-3 sentences
-    sentences = re.split(r'(?<=[.!?]) +', text)
-    return ' '.join(sentences[:3]) if sentences else text[:200]
-
-def main():
-    # Load user profile (old key-value format)
-    user_txt = read_file(USER_JSON_PATH)
-    user = parse_user_txt(user_txt)
-    # Determine user preference (video or article)
-    pref_type = 'article'
-    if 'Preferred Content Types' in user:
-        import ast
-        try:
-            prefs = ast.literal_eval(user['Preferred Content Types'])
-            if isinstance(prefs, dict):
-                pref_type = max(prefs, key=prefs.get)
-        except Exception:
-            pass
-    # Load triggers
-    triggers = read_json_file(TRIGGERS_PATH)
-    # Load existing content.json as a list
-    contents = read_json_file(CONTENT_JSON_PATH)
-    if not isinstance(contents, list):
-        contents = []
-    for trig in triggers:
-        trigger = trig.get('trigger', {})
-        trig_type = trigger.get('type')
-        print(f'Processing trigger type: {trig_type}')
-        if trig_type == 'none':
-            print('Skipping trigger with type "none".')
-            continue
-        outputs = trig.get('outputs', {})
-        # Compose prompt for LLM
-        prompt = f"""
-You are a smart content recommender. Given the following trigger:
-- Trigger Type: {trigger['type']}
-- Trigger Message: {trigger['message']}
-
-User context:
-{json.dumps(outputs, indent=2)}
-
-User profile:
-{json.dumps(user, indent=2)}
-
-The user's preferred content type is: {pref_type.upper()}
-
-Generate a JSON object with:
-- recommendation (type, title, description, url)
-- summary (for YouTube, use transcript if possible, else 'no summary')
-- context (trigger, user_id, idle_time if available)
-Respond in JSON with these keys only.
-"""
-        data = {"contents": [{"parts": [{"text": prompt}]}]}
-        resp = requests.post(GEMINI_API_URL, json=data)
-        print('Gemini API status:', resp.status_code)
-        try:
-            print('Gemini API response:', resp.json())
+            with open(self.content_path, 'r') as f:
+                self.content_data = json.load(f)
         except Exception as e:
-            print('Error reading Gemini API response:', e)
-        if resp.status_code == 200:
-            try:
-                text = resp.json()['candidates'][0]['content']['parts'][0]['text']
-                import re
-                import json as pyjson
-                # Remove markdown code block if present
-                text = re.sub(r'^```json|^```|```$', '', text.strip(), flags=re.MULTILINE).strip()
-                match = re.search(r'\{.*\}', text, re.DOTALL)
-                if match:
-                    rec_obj = pyjson.loads(match.group(0))
-                    # --- Always generate summary from YouTube video in trigger ---
-                    def get_youtube_summary_from_trigger(outputs):
-                        url = ''
-                        # Try to get YouTube URL from screen context
-                        screen = outputs.get('screen', {})
-                        url = screen.get('chrome_url', '')
-                        if 'youtube.com' in url or 'youtu.be' in url:
-                            transcript = fetch_youtube_transcript(url)
-                            if transcript:
-                                return summarize_text(transcript)
-                            else:
-                                return 'no summary'
-                        return 'no summary'
-                    rec_obj['summary'] = get_youtube_summary_from_trigger(outputs)
-                    contents.append(rec_obj)
-                    print('Recommendation appended:', json.dumps(rec_obj, indent=2))
-            except Exception as ex:
-                print('Error parsing Gemini response:', ex)
-    print('Writing to content.json:', json.dumps(contents, indent=2))
-    write_json_file(CONTENT_JSON_PATH, contents)
-    print('Recommendations written to content.json.')
-    print('All actionable triggers processed.')
+            print(f"Error reading content.json: {e}")
+            return
 
-if __name__ == '__main__':
-    main()
+        if not isinstance(self.content_data, list):
+            print("content.json is not a list.")
+            return
+
+        self.current_index = 0
+        if self.content_data:
+            self.display_popup(self.content_data[self.current_index])
+
+    def display_popup(self, recommendation):
+        # Close previous popup if open
+        if self.current_popup and self.current_popup.winfo_exists():
+            self.current_popup.destroy()
+
+        popup = tk.Toplevel()
+        popup.title("Study Assistant")
+        popup.geometry("400x650")
+        popup.configure(bg='white')
+        popup.attributes('-topmost', True)
+        screen_width = popup.winfo_screenwidth()
+        screen_height = popup.winfo_screenheight()
+        popup.geometry(f"+{screen_width - 420}+{screen_height - 650}")
+
+        # --- Support both 'popup' and 'recommendation' structures ---
+        popup_data = recommendation.get('popup')
+        context = recommendation.get('context', {})
+
+        if popup_data:
+            # Old/test structure
+            title = popup_data.get('title', 'Study Assistant')
+            message = popup_data.get('message', '')
+            fun_fact = popup_data.get('fun_fact', '')
+            primary_rec = popup_data.get('recommendation', {})
+            alt_rec = popup_data.get('alternative', {})
+        else:
+            # New LLM structure
+            rec = recommendation.get('recommendation', {})
+            title = rec.get('title', 'Study Assistant')
+            message = rec.get('description', '')
+            fun_fact = ""
+            primary_rec = rec
+            alt_rec = {}
+
+        # Get trigger information
+        trigger_info = context.get('trigger', {})
+        trigger_type = "Unknown"
+        trigger_message = ""
+        if isinstance(trigger_info, dict):
+            trigger_type = trigger_info.get('type', 'Unknown')
+            trigger_message = trigger_info.get('message', '')
+        elif isinstance(trigger_info, str):
+            trigger_type = trigger_info
+
+        # Primary recommendation fields
+        primary_type = primary_rec.get('type', 'RESOURCE')
+        primary_title = primary_rec.get('title', 'Recommended Resource')
+        primary_desc = primary_rec.get('description', 'Check out this helpful resource!')
+        primary_url = primary_rec.get('url', '')
+
+        # --- Build the popup UI ---
+        frame = ttk.Frame(popup, padding=20)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        # Live message at the top
+        ttk.Label(frame, text="We analysed your emotions, try this to enhance productivity", 
+                  font=("Helvetica", 11, "italic"), foreground="#0077cc").pack(pady=(0, 12))
+
+        ttk.Label(frame, text=title, font=("Helvetica", 16, "bold")).pack(pady=(0, 10))
+        if message:
+            ttk.Label(frame, text=message, wraplength=360, font=("Helvetica", 12)).pack(pady=(0, 10))
+
+        if fun_fact:
+            ttk.Label(frame, text="Fun Fact:", font=("Helvetica", 12, "bold")).pack(anchor="w", pady=(10, 0))
+            ttk.Label(frame, text=fun_fact, wraplength=360, font=("Helvetica", 11, "italic")).pack(anchor="w", pady=(0, 10))
+
+        # Show the main recommendation
+        ttk.Label(frame, text="Recommendation:", font=("Helvetica", 13, "bold")).pack(anchor="w", pady=(10, 0))
+        ttk.Label(frame, text=primary_title, font=("Helvetica", 12, "bold")).pack(anchor="w")
+        ttk.Label(frame, text=primary_desc, wraplength=360, font=("Helvetica", 11)).pack(anchor="w")
+        if primary_url:
+            def open_url(url=primary_url):
+                webbrowser.open(url)
+            ttk.Button(frame, text="Open Resource", command=open_url).pack(anchor="w", pady=(5, 0))
+
+        # Show trigger info if available
+        if trigger_type and trigger_type != "Unknown":
+            ttk.Label(frame, text=f"Trigger: {trigger_type}", font=("Helvetica", 10, "italic")).pack(anchor="w", pady=(10, 0))
+        if trigger_message:
+            ttk.Label(frame, text=trigger_message, font=("Helvetica", 10, "italic")).pack(anchor="w")
+
+        # --- Static exercise/rest section ---
+        ttk.Separator(frame, orient='horizontal').pack(fill='x', pady=15)
+        ttk.Label(frame, text="Or, take a 5-minute break!", font=("Helvetica", 12, "bold"), foreground="#228B22").pack(pady=(0, 5))
+        ttk.Label(frame, text="Stand up, stretch, or try this quick exercise:", font=("Helvetica", 11)).pack()
+        ttk.Label(frame, text="• Stand and reach for the sky\n• Roll your shoulders\n• Walk around your room", font=("Helvetica", 10, "italic")).pack(pady=(0, 10))
+
+        # --- Buttons ---
+        btn_frame = ttk.Frame(frame)
+        btn_frame.pack(pady=(20, 0))
+
+        def on_refresh():
+            if not self.content_data:
+                return
+            self.current_index = (self.current_index + 1) % len(self.content_data)
+            self.display_popup(self.content_data[self.current_index])
+
+        ttk.Button(btn_frame, text="Refresh (Next Recommendation)", command=on_refresh).pack(side=tk.LEFT, padx=5)
+        ttk.Button(btn_frame, text="Close", command=popup.destroy).pack(side=tk.LEFT, padx=5)
+
+        self.current_popup = popup
+
+    def run_tk(self):
+        root = tk.Tk()
+        root.withdraw()  # Hide the root window
+        root.mainloop()
+
+if __name__ == "__main__":
+    client = PopupClient()
+    client.start()
