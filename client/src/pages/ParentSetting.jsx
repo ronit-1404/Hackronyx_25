@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Settings, 
@@ -106,15 +107,62 @@ const UserSettings = () => {
     }
   }, [newPassword, confirmPassword]);
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    setIsSaving(true);
-    setTimeout(() => {
-      setIsSaving(false);
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 2000);
-    }, 1000);
+  // ...existing code...
+
+// Remove Authorization and sToken from the axios call
+React.useEffect(() => {
+  axios.get('http://localhost:5001/api/user/parent/settings')
+    .then(res => {
+      if (res.data.success) {
+        const s = res.data.settings;
+        setFirstName(s.firstName || "");
+        setLastName(s.lastName || "");
+        setEmail(s.email || "");
+        setPhone(s.phone || "");
+        // Set other fields as needed
+      }
+    })
+    .catch(err => {
+      // Optionally handle error
+      console.error('Failed to fetch settings', err);
+    });
+}, []);
+
+
+  // ...existing code...
+
+const handleSave = (e) => {
+  e.preventDefault();
+  setIsSaving(true);
+
+  // Prepare the data to send
+  const data = {
+    firstName,
+    lastName,
+    email,
+    phone,
+    // Add other fields as needed
+    // Example:
+    // dateOfBirth,
+    // address,
+    // preferences: { ... }
   };
+
+  axios.put('http://localhost:5001/api/user/parent/update/settings', data)
+    .then(res => {
+      if (res.data.success) {
+        setSaveSuccess(true);
+        setTimeout(() => setSaveSuccess(false), 2000);
+      }
+    })
+    .catch(err => {
+      // Optionally handle error
+      console.error('Failed to update settings', err);
+    })
+    .finally(() => {
+      setIsSaving(false);
+    });
+};
 
   const handleReset = () => {
     setFirstName("Imran");
@@ -396,31 +444,6 @@ const UserSettings = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="Enter your phone number"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="block font-semibold text-gray-700">Date of Birth</label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="date"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    value={dateOfBirth}
-                    onChange={(e) => setDateOfBirth(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="block font-semibold text-gray-700">Address</label>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="text"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    placeholder="Enter your address"
                   />
                 </div>
               </div>

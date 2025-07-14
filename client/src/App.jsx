@@ -5,6 +5,7 @@ import { useAuth } from "./context/AuthContext";
 
 //Landing  Page
 import OptikkaLanding from "./pages/LandingPage";
+import Generator from "./pages/student/generator";
 
 // Learner Pages
 import LearnerHome from "./pages/LearnerHome";
@@ -29,6 +30,7 @@ import ParentDashboard from "./pages/ParentDashboard";
 import ParentStudent from "./pages/ParentStudentReport";
 import ParentSettings from "./pages/ParentSetting";
 import ParentAuth from "./pages/parentauth/ParentAuth";
+import Chatbot from "./pages/Chatbot";
 
 // Protected Route component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -115,7 +117,7 @@ function AppContent() {
             <LearnerAnalytics />
         } 
       />
-      
+      <Route path='/generator' element={<Generator />} />
       <Route 
         path="/admin/students/:studentId/:studentName/learner/analytics" 
         element={
@@ -134,6 +136,7 @@ function AppContent() {
             <LearnerSettings />
         } 
       />
+      <Route path="/learner/chatbot" element={<Chatbot />} />
       <Route 
         path="/learner/reports" 
         element={

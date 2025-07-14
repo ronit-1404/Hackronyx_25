@@ -13,11 +13,12 @@
       "idle_time": 168
     }
   },
-  {"recommendation": {
+  {
+    "recommendation": {
       "type": "video",
-      "title": "Machine Learning for Beginners in 5 Minutes",
-      "description": "A short, engaging video explaining the core concepts of machine learning.",
-      "url": "https://youtu.be/yN7ypxC7838?feature=shared"
+      "title": "Machine Learning Advice for Beginners",
+      "description": "A short advice for beginners in machine learning, explaining where to start.",
+      "url": "https://youtube.com/shorts/xe9W0V12sgY?feature=shared"
     },
     "summary": "no summary",
     "context": {
